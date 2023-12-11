@@ -38,11 +38,11 @@ informative:
 
 --- abstract
 
-Status Attestations act as evidence that a specific credential or token, 
-whether in JSON Web Tokens (JWT) {{RFC7519}} or CBOR Web Tokens (CWT) format {{RFC8392}}, 
-has not been revoked and is still valid. Status Attestations are designed to be short-lived, 
-periodically provided to their owners and provided by these latter to the verifiers, 
-eliminating the need for verifiers to obtain additional information from 
+Status Attestations act as evidence that a specific credential or token,
+whether in JSON Web Tokens (JWT) {{RFC7519}} or CBOR Web Tokens (CWT) format {{RFC8392}},
+has not been revoked and is still valid. Status Attestations are designed to be short-lived,
+periodically provided to their owners and provided by these latter to the verifiers,
+eliminating the need for verifiers to obtain additional information from
 third-party systems about a token or a digital credential.
 
 
@@ -50,21 +50,21 @@ third-party systems about a token or a digital credential.
 
 # Introduction
 
-Status Attestations play a crucial role in maintaining the integrity and 
+Status Attestations play a crucial role in maintaining the integrity and
 trustworthiness of token and digital credentials.
-Status Attestations serve as proof that a particular digital credential or token, 
-whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT) format, 
+Status Attestations serve as proof that a particular digital credential or token,
+whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT) format,
 has not been revoked and is still valid.
 
-In many scenarios, a digital credential may be presented to a verifier long after it has been issued. 
-During this interval, the credential could potentially be invalidated for various reasons. 
-To ensure the credential's validity, the issuer provides a short-lived Status Attestation to the credential's Holder. 
-This attestation is bound to the credential and can be presented to a verifier, 
+In many scenarios, a digital credential may be presented to a verifier long after it has been issued.
+During this interval, the credential could potentially be invalidated for various reasons.
+To ensure the credential's validity, the issuer provides a short-lived Status Attestation to the credential's Holder.
+This attestation is bound to the credential and can be presented to a verifier,
 along with the credential itself, as proof of the credential's non-revocation status.
 
-Status Attestations are designed to be privacy-preserving and secure. 
-These attestations are essential for enabling offline use cases and ensuring the 
-security of the digital credential system. 
+Status Attestations are designed to be privacy-preserving and secure.
+These attestations are essential for enabling offline use cases and ensuring the
+security of the digital credential system.
 They provide a balance between scalability, security, and privacy by minimizing the status information.
 
 
@@ -137,8 +137,8 @@ The Status Attestation:
 
 # Status Attestation Request
 
-The Issuer provides the Wallet Instance with a Status Attestation, bound 
-to a Credential so that the Wallet Instance can present it to a Verifier, 
+The Issuer provides the Wallet Instance with a Status Attestation, bound
+to a Credential so that the Wallet Instance can present it to a Verifier,
 along with the Credential itself, as a proof of non-revocation status of the Credential.
 
 The following diagram shows the Wallet Instance requesting a Status Attestation
@@ -197,7 +197,7 @@ Below a non-normative example of a Credential PoP is given by the following JWT 
     "iss": "0b434530-e151-4c40-98b7-74c75a5ef760",
     "aud": "https://issuer.example.org/",
     "iat": 1698744039,
-    "exp": 1698744139, 
+    "exp": 1698744139,
     "jti": "6f204f7e-e453-4dfd-814e-9d155319408c",
     "format": "vc+sd-jwt",
     "credential": $Issuer-Signed-JWT
