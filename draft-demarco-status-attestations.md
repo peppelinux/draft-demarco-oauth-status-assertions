@@ -67,7 +67,7 @@ This attestation is bound to the credential and can be presented to a verifier,
 along with the credential itself, as proof of the credential's non-revocation status.
 
 Status Attestations are designed to preserve privacy and are essential for
-enabling offline use cases, thereby ensuring the security of the
+enabling offline use cases, where both the wallet and the verifier are not connected to internet during the presentation phase, thereby ensuring the security of the
 digital credential system.
 Status Attestations provide a balance between scalability, security, and
 privacy by minimizing the status information.
@@ -108,10 +108,6 @@ Verifier:
 Wallet Instance:
 : Entity that represents the digital Wallet in control of a User. Also known as Wallet or Holder, it is responsible for storing and managing the User's digital Credentials. It can present Credentials to Verifiers and request Status Attestations from Issuers.
 
-Attestation Owner:
-: Entity that owns an attestation, typically the holder of the Digital Credential. Also known as Wallet or Holder, it is responsible for presenting the attestation, along with the Digital Credential, to the Verifier.
-
-
 # Rationale
 
 OAuth Status Lists [@!I-D.looker-oauth-jwt-cwt-status-list] are suitable for specific scenarios, especially when the Verifier needs to verify the status of a Credential at a later time after the User has presented the Digital Credential. However, there are cases where the Verifier only needs to check the revocation status of a Digital Credential at the time of presentation, or situations where the Verifier should not be allowed to check the status of a credential over time due to some privacy constraints, in compliance to national privacy regulations.
@@ -125,7 +121,7 @@ Status Attestations differ significantly from Status Lists in several ways:
 
 1. **Privacy**: Status Attestations are designed to be privacy-preserving. They do not require the Verifier to gather any additional information from third-party systems, thus preventing potential privacy leaks.
 
-2. **Static Verification**: Status Attestations are designed to be statically provided to Verifiers by Wallet Instance (Attestation Owner). Once an Attestation is issued, it can be verified without any further communication with the Issuer or any other party.
+2. **Static Verification**: Status Attestations are designed to be statically provided to Verifiers by Wallet Instance. Once an Attestation is issued, it can be verified without any further communication with the Issuer or any other party.
 
 3. **Token Formats**: Status Attestations are agnostic from the token or digital credential format to which they are bound.
 
