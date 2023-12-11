@@ -24,7 +24,7 @@ author:
     email: gi.demarco@innovazione.gov.it
  -
     fullname: Francesco Marino
-    organization: Istituo Poligrafico e Zecca dello Stato
+    organization: Istituto Poligrafico e Zecca dello Stato
     email: fa.marino@ipzs.it
 
 normative:
@@ -36,7 +36,7 @@ informative:
 
 --- abstract
 
-Status Attestations play a vital role in affirming the validity of digital credentials or tokens, supporting privacy preservation and offline use cases. Status Attestations act as evidence that a specific credential or token, whether in JSON Web Tokens (JWT) {{RFC7519}} or CBOR Web Tokens (CWT) format {{RFC8392}}, has not been revoked and remains valid. These attestations are designed to be statically provided to verifiers, eliminating the need for verifiers to obtain additional information from third-party systems.
+Status Attestations play a vital role in affirming the validity of digital credentials or tokens, supporting privacy preservation and offline use cases. Status Attestations act as evidence that a specific credential or token, whether in JSON Web Tokens (JWT) {{RFC7519}} or CBOR Web Tokens (CWT) format {{RFC8392}}, has not been revoked and remains valid. These attestations are designed to be short-lived and statically provided to verifiers, eliminating the need for verifiers to obtain additional information from third-party systems.
 
 
 --- middle
@@ -46,7 +46,7 @@ Status Attestations play a vital role in affirming the validity of digital crede
 Status Attestations play a crucial role in maintaining the integrity and trustworthiness of token and digital credentials.
 Status Attestations serve as proof that a particular digital credential or token, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT) format, has not been revoked and is still valid.
 
-In many scenarios, a digital credential may be presented to a verifier long after it has been issued. During this interval, the credential could potentially be invalidated for various reasons. To ensure the credential's validity, the issuer provides a Status Attestation to the credential's Holder. This attestation is bound to the credential and can be presented to a verifier, along with the credential itself, as proof of the credential's non-revocation status.
+In many scenarios, a digital credential may be presented to a verifier long after it has been issued. During this interval, the credential could potentially be invalidated for various reasons. To ensure the credential's validity, the issuer provides a short-lived Status Attestation to the credential's Holder. This attestation is bound to the credential and can be presented to a verifier, along with the credential itself, as proof of the credential's non-revocation status.
 
 Status Attestations are designed to be privacy-preserving and secure. These attestations are essential for enabling offline use cases and ensuring the security of the digital credential system. They provide a balance between scalability, security, and privacy by minimizing the status information.
 
