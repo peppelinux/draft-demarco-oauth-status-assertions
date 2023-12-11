@@ -28,6 +28,7 @@ author:
     email: fa.marino@ipzs.it
 
 normative:
+  RFC7515: RFC7515
   RFC7516: RFC7516
   RFC7517: RFC7517
   RFC7519: RFC7519
@@ -98,16 +99,17 @@ privacy by minimizing the status information.
 # Terminology
 
 Issuer:
-: An entity that ...
+: Entity that is responsible for the issuance of the Digital Credentials.
+This includes the lifecycle of the Credentials, their issuance, and their validity status.
 
 Relying Party:
-: An entity that.... Also known as Verifier.
+: Entity that relies on the validity of the digital credentials presented to it. This entity, also known as a Verifier, needs to verify the authenticity and validity of the Credentials, including their revocation status, before accepting them.
 
 Wallet Instance:
-: An entity that.... Also known as Wallet.
+: Entity that represents the digital Wallet of a User. Also known as Wallet or Holder, it is responsible for storing and managing the User's digital credentials. It can present Credentials to Verifiers and request Status Attestations from Issuers.
 
 Attestation Owner:
-: An entity that.... Also known as Wallet.
+: Entity that owns an attestation, typically the Holder of the Digital Credential. Also known as Wallet or Holder, it is responsible for presenting the attestation, along with the Digital Credential, to the Verifier.
 
 
 # Rationale
