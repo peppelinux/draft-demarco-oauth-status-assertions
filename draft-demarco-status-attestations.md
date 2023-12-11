@@ -14,8 +14,8 @@ keyword:
  - status list
  - revocation
 venue:
-  github: "peppelinux/draft-demarco-oauth-non-revocation-attestations"
-  latest: "https://peppelinux.github.io/draft-demarco-oauth-non-revocation-attestations/draft-demarco-status-attestations.html"
+  github: "peppelinux/draft-demarco-status-attestations"
+  latest: "https://peppelinux.github.io/draft-demarco-status-attestations/draft-demarco-status-attestations.html"
 
 author:
  -
