@@ -43,7 +43,7 @@ informative:
 --- abstract
 
 Status Attestations are verifiable proofs about the validity status of a  digital credential or token,
-in the form of JSON Web Tokens (JWT) [RFC7519] or CBOR Web Tokens (CWT) format [RFC8392].
+in the form of JSON Web Tokens (JWT) [RFC7519] or CBOR Web Tokens (CWT) [RFC8392].
 Status Attestations are designed to be short-lived and
 periodically supplied to their holders.
 The holders then present the attestations, along with the associated digital credentials, to the verifiers.
@@ -62,16 +62,16 @@ Status Attestations serve as proof that a particular digital credential or token
 whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT) format,
 has not been revoked and is still valid.
 
-In many scenarios, a digital credential may be presented to a verifier long after it has been issued.
+A digital credential may be presented to a verifier long after it has been issued.
 During this interval, the credential could potentially be invalidated for various reasons.
-To ensure the credential's validity, the issuer provides a short-lived Status Attestation to the credential's Holder.
+To ensure the credential's validity, the issuer provides a short-lived Status Attestation to the credential's holder.
 This attestation is bound to the credential and can be presented to a verifier,
 along with the credential itself, as proof of the credential's non-revocation status.
 
-Status Attestations are designed to be privacy-preserving and secure.
-These attestations are essential for enabling offline use cases and ensuring the
-security of the digital credential system.
-They provide a balance between scalability, security, and
+Status Attestations are designed to preserve privacy and are essential for
+enabling offline use cases, thereby ensuring the security of the
+digital credential system.
+Status Attestations provide a balance between scalability, security, and
 privacy by minimizing the status information.
 
 
@@ -210,14 +210,14 @@ Below a non-normative example of a Credential PoP is given by the following JWT 
 ~~~
 {
     "alg": "ES256",
-    "typ": "revocation-request+jwt",
+    "typ": "status-attestation-request+jwt",
     "kid": $WIA-CNF-JWKID
 
 }
 .
 {
     "iss": "0b434530-e151-4c40-98b7-74c75a5ef760",
-    "aud": "https://issuer.example.org/status-attestation",
+    "aud": "https://issuer.example.org/status-attestation-endpoint",
     "iat": 1698744039,
     "exp": 1698744139,
     "jti": "6f204f7e-e453-4dfd-814e-9d155319408c",
@@ -229,32 +229,34 @@ Below a non-normative example of a Credential PoP is given by the following JWT 
 The Credential Proof of Possession in the previous non-normative example is a signed JWT without applying encoding and signature, for better readability.
 When the JWT format is used, the JWT MUST contain the parameters (JOSE Header and claims) as defined in the following table.
 
-| JOSE header | Description | Reference |
+| JOSE Header | Description | Reference |
 | --- | --- | --- |
 | **typ** | It MUST be set to `status-attestation-request+jwt` | {{RFC7516}} Section 4.1.1 |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
 | **kid** | Unique identifier of the JWK used for the signature of the Status Attestation Request, it MUST match the one contained in the Credential `cnf.jwk`. | {{RFC7515}} |
 
-| Claim | Description | Reference |
+| JOSE Payload | Description | Reference |
 | --- | --- | --- |
 | **iss** | Wallet identifier. | {{RFC9126}} and {{RFC7519}} |
 | **aud** | It MUST be set to the identifier of the Credential Issuer. | {{RFC9126}} and {{RFC7519}} |
 | **exp** | UNIX Timestamp with the expiration time of the JWT. | {{RFC9126}} and {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}} and {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
-| **format** | The data format of the Credential. Eg: `vc+sd-jwt` for SD-JWT, `vc+mdoc` for ISO/IEC 18013-5 MDOC CBOR | |
-| **credential** | It MUST contain the Credential according to the data format given in the `format` claim. | |
+| **format** | The data format of the Credential. Eg: `vc+sd-jwt` for SD-JWT, `vc+mdoc` for ISO/IEC 18013-5 MDOC CBOR | see OpenID4VCI |
+| **credential** | It MUST contain the Credential according to the data format given in the `format` claim. | this specification |
 
 
 # Status Attestation
 
-The Issuer checks the status of the Credential and creates a Status Attestation bound to it.
-The Issuer creates a new Status Attestation, which a non-normative example is given below.
+When a Status Attestation is requested to an Issuer, the
+Issuer checks the status of the Credential and creates a Status Attestation bound to it.
+
+If the Credential is valid, the Issuer creates a new Status Attestation, which a non-normative example is given below.
 
 ~~~
 {
     "alg": "ES256",
-    "typ": "non-revocation-attestation+jwt",
+    "typ": "status-attestation+jwt",
     "kid": $ISSUER-JWKID
 }
 .
@@ -278,7 +280,7 @@ The Status Attestation MUST contain the following claims when the JWT format is 
 | **typ** | It MUST be set to `status-attestation+jwt`. | {{RFC7515}}, {{RFC7517}} and this specification |
 | **kid** | Unique identifier of the Issuer JWK. | {{RFC7515}} |
 
-| Claim | Description | Reference |
+| JOSE Payload | Description | Reference |
 | --- | --- | --- |
 | **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}} and {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of there Status Attestation issuance. | {{RFC9126}} and {{RFC7519}} |
@@ -290,7 +292,12 @@ The Status Attestation MUST contain the following claims when the JWT format is 
 
 # Status Attestation Response
 
-The Issuer then returns the Status Attestation to the Wallet Instance, as in the following non-normative example.
+If the Status Attestation is requested for a non-existent, expired, revoked or invalid Credential, the
+Credential Issuer MUST respond with an HTTP Response with the status code set to
+404.
+
+If the Credential is valid, the Issuer then returns the Status Attestation to the Wallet Instance,
+as in the following non-normative example.
 
 ~~~
 HTTP/1.1 201 OK
@@ -309,8 +316,79 @@ TODO Security
 
 # IANA Considerations
 
-This document has no IANA actions.
+## JSON Web Token Claims Registration
 
+This specification requests registration of the following Claims in the
+IANA "JSON Web Token Claims" registry [@IANA.JWT] established by [@!RFC7519].
+
+*  Claim Name: `credential`
+*  Claim Description: The Digital Credential the Status Attestation is bound to.
+*  Change Controller: IETF
+*  Specification Document(s):  [[ (#digital-credential-proof-of-possession) of this specification ]]
+
+<br/>
+
+*  Claim Name: `credential_hash`
+*  Claim Description: Hash value of the Digital Credential the Status Attestation is bound to.
+*  Change Controller: IETF
+*  Specification Document(s):  [[ (#status-attestation) of this specification ]]
+
+<br/>
+
+*  Claim Name: `credential_hash_alg`
+*  Claim Description: The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound.
+*  Change Controller: IETF
+*  Specification Document(s):  [[ (#status-attestation) of this specification ]]
+
+## Media Type Registration
+
+This section requests registration of the following media types [@RFC2046] in
+the "Media Types" registry [@IANA.MediaTypes] in the manner described
+in [@RFC6838].
+
+To indicate that the content is an JWT-based Status List:
+
+  * Type name: application
+  * Subtype name: status-attestation-request+jwt
+  * Required parameters: n/a
+  * Optional parameters: n/a
+  * Encoding considerations: binary; A JWT-based Status Attestation Request object is a JWT; JWT values are encoded as a series of base64url-encoded values (some of which may be the empty string) separated by period ('.') characters.
+  * Security considerations: See (#Security) of [[ this specification ]]
+  * Interoperability considerations: n/a
+  * Published specification: [[ this specification ]]
+  * Applications that use this media type: Applications using [[ this specification ]] for updated status information of tokens
+  * Fragment identifier considerations: n/a
+  * Additional information:
+    * File extension(s): n/a
+    * Macintosh file type code(s): n/a
+  * Person &amp; email address to contact for further information: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Intended usage: COMMON
+  * Restrictions on usage: none
+  * Author: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Change controller: IETF
+  * Provisional registration? No
+
+To indicate that the content is an CWT-based Status List:
+
+  * Type name: application
+  * Subtype name: status-attestation+jwt
+  * Required parameters: n/a
+  * Optional parameters: n/a
+  * Encoding considerations: binary
+  * Security considerations: See (#Security) of [[ this specification ]]
+  * Interoperability considerations: n/a
+  * Published specification: [[ this specification ]]
+  * Applications that use this media type: Applications using [[ this specification ]] for status attestation of tokens and Digital Credentials
+  * Fragment identifier considerations: n/a
+  * Additional information:
+    * File extension(s): n/a
+    * Macintosh file type code(s): n/a
+  * Person &amp; email address to contact for further information: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Intended usage: COMMON
+  * Restrictions on usage: none
+  * Author: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Change controller: IETF
+  * Provisional registration? No
 
 --- back
 
