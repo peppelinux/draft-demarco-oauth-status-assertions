@@ -239,10 +239,10 @@ When the JWT format is used, the JWT MUST contain the parameters (JOSE Header an
 
 | JOSE Payload | Description | Reference |
 | --- | --- | --- |
-| **iss** | Wallet identifier. | {{RFC9126}} and {{RFC7519}} |
-| **aud** | It MUST be set to the identifier of the Credential Issuer. | {{RFC9126}} and {{RFC7519}} |
-| **exp** | UNIX Timestamp with the expiration time of the JWT. | {{RFC9126}} and {{RFC7519}} |
-| **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}} and {{RFC7519}} |
+| **iss** | Wallet identifier. | {{RFC9126}}, {{RFC7519}} |
+| **aud** | It MUST be set to the identifier of the Credential Issuer. | {{RFC9126}}, {{RFC7519}} |
+| **exp** | UNIX Timestamp with the expiration time of the JWT. | {{RFC9126}}, {{RFC7519}} |
+| **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
 | **format** | The data format of the Credential. Eg: `vc+sd-jwt` for SD-JWT, `vc+mdoc` for ISO/IEC 18013-5 MDOC CBOR | see OpenID4VCI |
 | **credential** | It MUST contain the Credential according to the data format given in the `format` claim. | this specification |
@@ -284,9 +284,9 @@ The Status Attestation MUST contain the following claims when the JWT format is 
 
 | JOSE Payload | Description | Reference |
 | --- | --- | --- |
-| **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}} and {{RFC7519}} |
-| **iat** | UNIX Timestamp with the time of there Status Attestation issuance. | {{RFC9126}} and {{RFC7519}} |
-| **exp** | UNIX Timestamp with the expiry time of the Status Attestation. | {{RFC9126}} and {{RFC7519}} |
+| **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}}, {{RFC7519}} |
+| **iat** | UNIX Timestamp with the time of there Status Attestation issuance. | {{RFC9126}}, {{RFC7519}} |
+| **exp** | UNIX Timestamp with the expiry time of the Status Attestation. | {{RFC9126}}, {{RFC7519}} |
 | **credential_hash** | Hash value of the Credential the Status Attestation is bound to. | This specification |
 | **credential_hash_alg** | The Algorithm used of hashing the Credential to which the Status Attestation is bound. The value SHOULD be set to `S256`. | This specification |
 | **cnf** | JSON object containing the cryptographic key binding. The cnf jwk value MUST match with the one provided within the related Credential. | {{RFC7800}} Section 3.1 |
