@@ -42,14 +42,16 @@ informative:
 
 --- abstract
 
-Status Attestations are verifiable proofs about the validity status of a  digital credential or token,
-in the form of JSON Web Tokens (JWT) [RFC7519] or CBOR Web Tokens (CWT) [RFC8392].
-Status Attestations are designed to be short-lived and
-periodically supplied to their holders.
-The holders then present the attestations, along with the associated digital credentials, to the verifiers.
-The approach defined in this document, using the Status Attestations,
-eliminates the need for verifiers to seek additional information
-about a token or digital credential from third-party systems.
+Status Attestations demonstrate the validity status of a
+digital credential or token, such as its non-revocation status.
+These attestations are designed to be ephemeral and are periodically provided
+to digital credential holders, enabling them to present these attestations, along
+with the corresponding digital credentials, to verifiers.
+The approach outlined in this document, which utilizes Status Attestations,
+makes the verifiers able to obtain information about a token or digital
+credential validity, without requiring any further information from third-party systems,
+giving particular benefits in the offline use cases and for the levels of
+privacy of the solution.
 
 
 --- middle
