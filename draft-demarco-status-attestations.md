@@ -29,7 +29,10 @@ author:
 
 normative:
   RFC7516: RFC7516
+  RFC7517: RFC7517
   RFC7519: RFC7519
+  RFC7638: RFC7638
+  RFC7800: RFC7800
   RFC8392: RFC8392
   RFC9126: RFC9126
 
@@ -38,12 +41,12 @@ informative:
 
 --- abstract
 
-Status Attestations are verifiable proofs that a digital credential or token,
-whether in JSON Web Tokens (JWT) {{RFC7519}} or CBOR Web Tokens (CWT) format {{RFC8392}},
-has not been revoked and is still valid. Status Attestations are designed to be short-lived,
-periodically provided to their owners and presented by these latter to the verifiers,
-eliminating the need for verifiers to obtain additional information from
-third-party systems about a token or a digital credential.
+Status Attestations are verifiable proofs about the validity status of a  digital credential or token,
+in the form of JSON Web Tokens (JWT) [RFC7519] or CBOR Web Tokens (CWT) format [RFC8392].
+Status Attestations are designed to be short-lived,
+periodically supplied to their holders who then present them to verifiers.
+This approach eliminates the need for verifiers to seek additional information
+about a token or digital credential from third-party systems.
 
 
 --- middle
@@ -65,7 +68,8 @@ along with the credential itself, as proof of the credential's non-revocation st
 Status Attestations are designed to be privacy-preserving and secure.
 These attestations are essential for enabling offline use cases and ensuring the
 security of the digital credential system.
-They provide a balance between scalability, security, and privacy by minimizing the status information.
+They provide a balance between scalability, security, and
+privacy by minimizing the status information.
 
 
 ~~~ ascii-art
@@ -136,6 +140,12 @@ The Status Attestation:
 - MUST contain the expiration datetime after which the Digital Credential MUST NOT be considered valid anymore.
 - enables offline use cases as it MUST be statically validated using the cryptographic signature of the Issuer.
 
+Note that in this specification the examples and the normative properties
+of attestations are reported in accordance with the JWT standard, while
+for the purposes of this specification, any credential or attestation
+format format may be used, as long as all attributes and requirements
+of the attributes are satisfied.
+
 
 # Status Attestation Request
 
@@ -155,7 +165,7 @@ related to a specific Credential, to the Issuer.
 +--------+----------+                         +----------+---------+
          |                                               |
          | HTTP POST /status                             |
-         |  credential_proof = $CredentialPoPJWT         |
+         |  credential_pop = $CredentialPoPJWT           |
          +----------------------------------------------->
          |                                               |
          |  Response with Status Attestation JWT         |
@@ -180,7 +190,8 @@ Content-Type: application/x-www-form-urlencoded
 credential_pop=$CredentialPoPJWT
 ~~~
 
-The Issuer verifies the signature of the PoP JWTs using the public key contained in the `client_assertion` and the Credential, which is the proof that the Wallet Instance owns the private keys associated with the Wallet Instance Attestation and Credential. Therefore the Wallet Instance is entitled to request its Status Attestation.
+The Issuer verifies the signature of the PoP using the public key contained in the `client_assertion` and the Credential, which is the proof that the Wallet Instance owns the private keys associated with the Digital Credential. Therefore the Wallet Instance is entitled to request its Status Attestation.
+
 
 ## Digital Credential Proof of Possession
 
@@ -199,7 +210,7 @@ Below a non-normative example of a Credential PoP is given by the following JWT 
 .
 {
     "iss": "0b434530-e151-4c40-98b7-74c75a5ef760",
-    "aud": "https://issuer.example.org/",
+    "aud": "https://issuer.example.org",
     "iat": 1698744039,
     "exp": 1698744139,
     "jti": "6f204f7e-e453-4dfd-814e-9d155319408c",
@@ -251,18 +262,35 @@ The Issuer creates a new Status Attestation, which a non-normative example is gi
 }
 ~~~
 
+The Status Attestation MUST contain the following claims when the JWT format is used.
+
+| JOSE Header | Description | Reference |
+| --- | --- | --- |
+| **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or to a symmetric algorithm (MAC) identifier. | {{RFC7515}}, {{RFC7517}} |
+| **typ** | It MUST be set to `status-attestation+jwt`. | {{RFC7515}}, {{RFC7517}}, this specification |
+| **kid** | Unique identifier of the Issuer jwk. | {{RFC7638}} Section 3 |
+
+| Claim | Description | Reference |
+| --- | --- | --- |
+| **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}} and {{RFC7519}} |
+| **iat** | UNIX Timestamp with the time of there Status Attestation issuance. | {{RFC9126}} and {{RFC7519}} |
+| **exp** | UNIX Timestamp with the expiry time of the Status Attestation. | {{RFC9126}} and {{RFC7519}} |
+| **credential_hash** | Hash value of the Credential the Status Attestation is bound to. | This specification |
+| **credential_hash_alg** | The Algorithm used of hashing the Credential to which the Status Attestation is bound. The value SHOULD be set to `S256`. | This specification |
+| **cnf** | JSON object containing the cryptographic key binding. The cnf jwk value MUST match with the one provided within the related Credential. | {{RFC7800}} Section 3.1 |
+
 
 # Status Attestation Response
 
 The Issuer then returns the Status Attestation to the Wallet Instance, as in the following non-normative example.
 
 ~~~
-    HTTP/1.1 201 OK
-    Content-Type: application/json
+HTTP/1.1 201 OK
+Content-Type: application/json
 
-    {
-        "non_revocation_attestation": "eyJhbGciOiJFUzI1NiIsInR5cCI6IndhbGxldC1...",
-    }
+{
+    "non_revocation_attestation": "eyJhbGciOiJFUzI1Ni ...",
+}
 ~~~
 
 
