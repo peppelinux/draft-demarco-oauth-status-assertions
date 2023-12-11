@@ -47,7 +47,8 @@ in the form of JSON Web Tokens (JWT) [RFC7519] or CBOR Web Tokens (CWT) format [
 Status Attestations are designed to be short-lived and
 periodically supplied to their holders.
 The holders then present the attestations, along with the associated digital credentials, to the verifiers.
-This approach eliminates the need for verifiers to seek additional information
+The approach defined in this document, using the Status Attestations,
+eliminates the need for verifiers to seek additional information
 about a token or digital credential from third-party systems.
 
 
@@ -115,24 +116,24 @@ Attestation Owner:
 
 # Rationale
 
-OAuth Status Lists [@!I-D.looker-oauth-jwt-cwt-status-list] are suitable for specific scenarios, especially when the Verifier needs to verify the status of a Credential at a later time after the User has presented the Digital Credential. However, there are instances where the Verifier only needs to check the revocation status of a Digital Credential at the time of presentation, or situations where the Verifier should not be able to check the status of a credential over time due to privacy requirements.
+OAuth Status Lists [@!I-D.looker-oauth-jwt-cwt-status-list] are suitable for specific scenarios, especially when the Verifier needs to verify the status of a Credential at a later time after the User has presented the Digital Credential. However, there are cases where the Verifier only needs to check the revocation status of a Digital Credential at the time of presentation, or situations where the Verifier should not be able to check the status of a credential over time due to some privacy constraints, in compliance of some national regulations.
 
 In scenarios where the Verifier, Credential Issuer, and Status List Provider are all part of the same domain or operate within a context where a high level of trust exists between them and the End-User, the OAuth Status List is the optimal solution. Other cases may expose the following privacy risks when using OAuth Status List [@!I-D.looker-oauth-jwt-cwt-status-list]:
 
-- A Status List provider might be aware of the association between a specific list and a Credential Issuer, especially if the latter only issues a single type of Credential. This could inadvertently reveal to the Status List provider which list corresponds to which Credential.
-- A Verifier retrieves a Status List by establishing a TCP/IP connection with a Status List provider. This allows the Status List provider to obtain the IP address of the Verifier and potentially link it to a specific Credential type and Issuer associated with that Status List. A malicious Status List provider could exploit internet diagnostic tools, such as Whois or GeoIP lookup, to gather additional information about the requestor. This could inadvertently disclose to the Status List provider which Credential the requestor is using and from which Credential Issuer, information that in some cases should remain confidential.
+- A Status List provider might known the association between a specific list and a Credential Issuer, especially if the latter only issues a single type of Credential. This could inadvertently reveal to the Status List provider which list corresponds to which Credential.
+- A Verifier retrieves a Status List by establishing a TCP/IP connection with a Status List provider. This allows the Status List provider to obtain the IP address of the Verifier and potentially link it to a specific Credential type and Issuer associated with that Status List. A malicious Status List provider could use internet diagnostic tools, such as Whois or GeoIP lookup, to gather additional information about the Verifier. This could inadvertently disclose to the Status List provider which Credential the requestor is using and from which Credential Issuer, information that should remain confidential.
 
 However, Status Attestations differ significantly from Status Lists in several ways:
 
 1. **Privacy**: Status Attestations are designed to be privacy-preserving. They do not require the Verifier to gather any additional information from third-party systems, thus preventing potential privacy leaks.
 
-2. **Static Verification**: Status Attestations are designed to be statically provided to Verifiers by Wallet Instance (Attestation Owner). This means that once an Attestation is issued, it can be verified without any further communication with the Issuer or any other party.
+2. **Static Verification**: Status Attestations are designed to be statically provided to Verifiers by Wallet Instance (Attestation Owner). Once an Attestation is issued, it can be verified without any further communication with the Issuer or any other party.
 
-3. **Token Formats**: Status Attestations are suitable for both JSON Web Tokens (JWT) and CBOR Web Tokens (CWT), making them versatile for different use cases.
+3. **Token Formats**: Status Attestations are agnostic from the token or digital credential format to which they are bound.
 
-4. **Trust Model**: Status Attestations operate under a model where the Verifier trusts the Issuer to provide accurate status information. In contrast, Status Lists operate under a model where the Verifier trusts the Status List Provider to maintain an accurate and up-to-date list of token statuses.
+4. **Trust Model**: Status Attestations operate under a model where the Verifier trusts the Issuer to provide accurate status information. Differently, Status Lists operate under a model where the Verifier trusts the Status List Provider to maintain an accurate and up-to-date list of token statuses.
 
-5. **Offline flow**: A Status List can be accessed by a Verifier when an internet connection is present. Differently OAuth Status List defines how to provide a static Status List Token, to be included within a Digital Credential. This requires the Wallet Instance to acquire a new Digital Credential for a specific presentation. Even if similar to the Status List Token, the Status Attestations enable the User to persistently use their preexistent Digital Credentials, as long as the linked Status Attestation is provisioned, presented to the Verifier, and not expired.
+5. **Offline flow**: A Status List can be accessed by a Verifier when an internet connection is present. Differently, OAuth Status List defines how to provide a static Status List Token, to be included within a Digital Credential. This requires the Wallet Instance to acquire a new Digital Credential for a specific presentation. Even if similar to the Status List Token, the Status Attestations enable the User to persistently use their preexistent Digital Credentials, as long as the linked Status Attestation is available and presented to the Verifier, and not expired.
 
 
 # Requirements
@@ -140,21 +141,21 @@ However, Status Attestations differ significantly from Status Lists in several w
 The Status Attestation:
 
 - MUST be presented in conjunction with the Digital Credential. The Status Attestation MUST be timestamped with its issuance datetime, always referring to a previous period.
-- MUST contain the expiration datetime after which the Digital Credential MUST NOT be considered valid anymore.
+- MUST contain the expiration datetime after which the Digital Credential MUST NOT be considered valid anymore. The expiration datetime MUST be superior of the issuance datetime.
 - enables offline use cases as it MUST be statically validated using the cryptographic signature of the Issuer.
 
 Note that in this specification the examples and the normative properties
 of attestations are reported in accordance with the JWT standard, while
 for the purposes of this specification, any credential or attestation
 format format may be used, as long as all attributes and requirements
-of the attributes are satisfied.
+of them are satisfied, even using equivalent names or values.
 
 
 # Status Attestation Request
 
-The Issuer provides the Wallet Instance with a Status Attestation, bound
-to a Credential so that the Wallet Instance can present it to a Verifier,
-along with the Credential itself, as a proof of non-revocation status of the Credential.
+The Issuer provides the Wallet Instance with a Status Attestation, which is bound to a Credential.
+This allows the Wallet Instance to present it, along with the Credential itself,
+to a Verifier as proof of the Credential's non-revocation status.
 
 The following diagram shows the Wallet Instance requesting a Status Attestation
 related to a specific Credential, to the Issuer.
@@ -182,8 +183,8 @@ related to a specific Credential, to the Issuer.
 ~~~
 
 The Wallet Instance sends the Status Attestation Request to the Issuer.
-The request MUST contain the Credential which is intended to obtain the Status Attestation
-and a Proof of Possession of it, signed  with the private key related to the public key contained within the Credential.
+The request MUST contain the Credential for which the Status Attestation is intended, along with a Proof of Possession.
+The request MUST be signed with the private key corresponding to the public key attested by Issuer within the Credential.
 
 ~~~
 POST /status HTTP/1.1
@@ -193,7 +194,10 @@ Content-Type: application/x-www-form-urlencoded
 credential_pop=$CredentialPoPJWT
 ~~~
 
-The Issuer verifies the signature of the PoP using the public key contained in the `client_assertion` and the Credential, which is the proof that the Wallet Instance owns the private keys associated with the Digital Credential. Therefore the Wallet Instance is entitled to request its Status Attestation.
+The Issuer verifies the signature of the `credential_pop` object using the public key contained in the Credential.
+Therefore the Wallet Instance is entitled to request its Status Attestation.
+
+the technical details and requirements on the `credential_pop` object is defined below, in the next section.
 
 
 ## Digital Credential Proof of Possession
@@ -213,7 +217,7 @@ Below a non-normative example of a Credential PoP is given by the following JWT 
 .
 {
     "iss": "0b434530-e151-4c40-98b7-74c75a5ef760",
-    "aud": "https://issuer.example.org",
+    "aud": "https://issuer.example.org/status-attestation",
     "iat": 1698744039,
     "exp": 1698744139,
     "jti": "6f204f7e-e453-4dfd-814e-9d155319408c",
@@ -222,13 +226,14 @@ Below a non-normative example of a Credential PoP is given by the following JWT 
 }
 ~~~
 
-The Credential Proof of Possession MUST be a JWT that MUST contain the parameters (JOSE Header and claims) in the following table.
+The Credential Proof of Possession in the previous non-normative example is a signed JWT without applying encoding and signature, for better readability.
+When the JWT format is used, the JWT MUST contain the parameters (JOSE Header and claims) as defined in the following table.
 
 | JOSE header | Description | Reference |
 | --- | --- | --- |
-| **typ** | It MUST be set to revocation-request+jwt | {{RFC7516}} Section 4.1.1 |
+| **typ** | It MUST be set to `status-attestation-request+jwt` | {{RFC7516}} Section 4.1.1 |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
-| **kid** | Unique identifier of the jwk, as used for the key binding of the Credential. he JWT MUST be signed with the private key whihc the public key is contained in the Credential. |  |
+| **kid** | Unique identifier of the JWK used for the signature of the Status Attestation Request, it MUST match the one contained in the Credential `cnf.jwk`. | {{RFC7515}} |
 
 | Claim | Description | Reference |
 | --- | --- | --- |
@@ -270,8 +275,8 @@ The Status Attestation MUST contain the following claims when the JWT format is 
 | JOSE Header | Description | Reference |
 | --- | --- | --- |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or to a symmetric algorithm (MAC) identifier. | {{RFC7515}}, {{RFC7517}} |
-| **typ** | It MUST be set to `status-attestation+jwt`. | {{RFC7515}}, {{RFC7517}}, this specification |
-| **kid** | Unique identifier of the Issuer jwk. | {{RFC7638}} Section 3 |
+| **typ** | It MUST be set to `status-attestation+jwt`. | {{RFC7515}}, {{RFC7517}} and this specification |
+| **kid** | Unique identifier of the Issuer JWK. | {{RFC7515}} |
 
 | Claim | Description | Reference |
 | --- | --- | --- |
