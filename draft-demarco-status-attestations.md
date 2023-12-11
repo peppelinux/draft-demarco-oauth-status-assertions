@@ -55,8 +55,8 @@ makes the verifiers able to check the non-revocation of a digital credential wit
 # Introduction
 
 Status Attestations play a crucial role in maintaining the integrity and
-trustworthiness of digital credentials.
-Status Attestations serve as proof that a particular digital credential,
+trustworthiness of digital credentials,
+since these serve as proof that a particular digital credential,
 whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT) format,
 has not been revoked and is still valid.
 
