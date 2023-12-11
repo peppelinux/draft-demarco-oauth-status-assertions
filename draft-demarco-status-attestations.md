@@ -121,7 +121,7 @@ In scenarios where the Verifier, Credential Issuer, and Status List Provider are
 - A Status List provider might known the association between a specific list and a Credential Issuer, especially if the latter only issues a single type of Credential. This could inadvertently reveal to the Status List provider which list corresponds to which Credential.
 - A Verifier retrieves a Status List by establishing a TCP/IP connection with a Status List provider. This allows the Status List provider to obtain the IP address of the Verifier and potentially link it to a specific Credential type and Issuer associated with that Status List. A malicious Status List provider could use internet diagnostic tools, such as Whois or GeoIP lookup, to gather additional information about the Verifier. This could inadvertently disclose to the Status List provider which Credential the requestor is using and from which Credential Issuer, information that should remain confidential.
 
-However, Status Attestations differ significantly from Status Lists in several ways:
+Status Attestations differ significantly from Status Lists in several ways:
 
 1. **Privacy**: Status Attestations are designed to be privacy-preserving. They do not require the Verifier to gather any additional information from third-party systems, thus preventing potential privacy leaks.
 
@@ -138,7 +138,7 @@ However, Status Attestations differ significantly from Status Lists in several w
 
 The Status Attestation:
 
-- MUST be presented in conjunction with the Digital Credential. The Status Attestation MUST be timestamped with its issuance datetime, always referring to a previous period.
+- MUST be presented in conjunction with the Digital Credential. The Status Attestation MUST be timestamped with its issuance datetime, always referring to a previous period to the presentation time.
 - MUST contain the expiration datetime after which the Digital Credential MUST NOT be considered valid anymore. The expiration datetime MUST be superior of the issuance datetime.
 - enables offline use cases as it MUST be statically validated using the cryptographic signature of the Issuer.
 
@@ -146,7 +146,7 @@ Note that in this specification the examples and the normative properties
 of attestations are reported in accordance with the JWT standard, while
 for the purposes of this specification, any credential or attestation
 format format may be used, as long as all attributes and requirements
-of them are satisfied, even using equivalent names or values.
+defined in this specification are satisfied, even using equivalent names or values.
 
 
 # Status Attestation Request
@@ -155,8 +155,8 @@ The Issuer provides the Wallet Instance with a Status Attestation, which is boun
 This allows the Wallet Instance to present it, along with the Credential itself,
 to a Verifier as proof of the Credential's non-revocation status.
 
-The following diagram shows the Wallet Instance requesting a Status Attestation
-related to a specific Credential, to the Issuer.
+The following diagram shows the Wallet Instance requesting a Status Attestation to an Issuer,
+related to a specific Credential issued by the same Issuer.
 
 
 ~~~ ascii-art
@@ -181,8 +181,8 @@ related to a specific Credential, to the Issuer.
 ~~~
 
 The Wallet Instance sends the Status Attestation Request to the Issuer.
-The request MUST contain the Credential, for which the Status Attestation is intended, enveloped in a signed object as proof of possession.
-The proof of possession MUST be signed with the private key corresponding to the public key attested by Issuer within the Credential.
+The request MUST contain the Credential, for which the Status Attestation is requested, and enveloped in a signed object as proof of possession.
+The proof of possession MUST be signed with the private key corresponding to the public key attested by the Issuer within the Credential.
 
 ~~~
 POST /status HTTP/1.1
@@ -193,9 +193,12 @@ credential_pop=$CredentialPoPJWT
 ~~~
 
 The Issuer verifies the signature of the `credential_pop` object using the public key contained in the Credential.
+
+It MUST also verify that it is the legitimate Issuer of the Credential.
+
 Therefore the Wallet Instance is entitled to request its Status Attestation.
 
-The technical details and requirements on the `credential_pop` object is defined below, in the next section.
+The technical details and requirements on the `credential_pop` object are defined in the next section.
 
 
 ## Digital Credential Proof of Possession
@@ -203,7 +206,7 @@ The technical details and requirements on the `credential_pop` object is defined
 The Wallet that holds a Digital Credential, when requests a Status Attestation,
 MUST give the proof of possession of the Credential to the Credential Issuer.
 
-Below a non-normative example of a Credential proof of possession is given by the following JWT headers and payload:
+Below a non-normative example of a Credential proof of possession with the JWT headers and payload represented without applying signature and encoding, for better readability:
 
 ~~~
 {
@@ -224,8 +227,8 @@ Below a non-normative example of a Credential proof of possession is given by th
 }
 ~~~
 
-The Credential Proof of Possession in the previous non-normative example is a signed JWT without applying encoding and signature, for better readability.
-When the JWT format is used, the JWT MUST contain the parameters (JOSE Header and claims) as defined in the following table.
+
+When the JWT format is used, the JWT MUST contain the parameters defined in the following table.
 
 | JOSE Header | Description | Reference |
 | --- | --- | --- |
@@ -281,18 +284,17 @@ The Status Attestation MUST contain the following claims when the JWT format is 
 | JOSE Payload | Description | Reference |
 | --- | --- | --- |
 | **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}}, {{RFC7519}} |
-| **iat** | UNIX Timestamp with the time of there Status Attestation issuance. | {{RFC9126}}, {{RFC7519}} |
+| **iat** | UNIX Timestamp with the time of the Status Attestation issuance. | {{RFC9126}}, {{RFC7519}} |
 | **exp** | UNIX Timestamp with the expiry time of the Status Attestation. | {{RFC9126}}, {{RFC7519}} |
-| **credential_hash** | Hash value of the Credential the Status Attestation is bound to. | This specification |
-| **credential_hash_alg** | The Algorithm used of hashing the Credential to which the Status Attestation is bound. The value SHOULD be set to `S256`. | This specification |
-| **cnf** | JSON object containing the cryptographic key binding. The cnf jwk value MUST match with the one provided within the related Credential. | {{RFC7800}} Section 3.1 |
+| **credential_hash** | Hash value of the Credential the Status Attestation is bound to. | this specification |
+| **credential_hash_alg** | The Algorithm used of hashing the Credential to which the Status Attestation is bound. The value SHOULD be set to `S256`. | this specification |
+| **cnf** | JSON object containing the cryptographic key binding. The `cnf.jwk` value MUST match with the one provided within the related Credential. | {{RFC7800}} Section 3.1 |
 
 
 # Status Attestation Response
 
 If the Status Attestation is requested for a non-existent, expired, revoked or invalid Credential, the
-Credential Issuer MUST respond with an HTTP Response with the status code set to
-404.
+Credential Issuer MUST respond with an HTTP Response with the status code set to 404.
 
 If the Credential is valid, the Issuer then returns the Status Attestation to the Wallet Instance,
 as in the following non-normative example.
@@ -302,7 +304,7 @@ HTTP/1.1 201 OK
 Content-Type: application/json
 
 {
-    "non_revocation_attestation": "eyJhbGciOiJFUzI1Ni ...",
+    "status_attestation": "eyJhbGciOiJFUzI1Ni ...",
 }
 ~~~
 
