@@ -42,14 +42,13 @@ informative:
 
 --- abstract
 
-Status Attestations demonstrate the validity status of a signed object, such as a
-digital credential or token.
-These attestations are designed to be ephemeral and periodically provided
-to digital credential holders. Status Attestations should be presented to verifiers along
+Status Attestations are signed objects that demonstrate the validity status of a
+digital credential.
+These attestations are ephemeral and periodically provided
+to digital credential holders. Status Attestations can be presented to verifiers along
 with the corresponding digital credentials.
 The approach outlined in this document
-makes the verifiers able to obtain the validity of a token without requiring any further information from third-party systems,
-giving particular benefits in the offline use cases.
+makes the verifiers able to obtain the validity of a digital credential without requiring any further information from third-party systems.
 
 --- middle
 
