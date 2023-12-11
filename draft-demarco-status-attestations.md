@@ -73,7 +73,6 @@ They provide a balance between scalability, security, and privacy by minimizing 
 |                 | Requests Status Attestation |                   |
 |                 |---------------------------->|                   |
 | Wallet Instance |                             | Credential Issuer |
-|                 |                             |    (JWT or CWT)   |
 |                 | Status Attestation          |                   |
 |                 |<----------------------------|                   |
 +-----------------+                             +-------------------+
@@ -147,6 +146,7 @@ along with the Credential itself, as a proof of non-revocation status of the Cre
 The following diagram shows the Wallet Instance requesting a Status Attestation
 related to a specific Credential, to the Issuer.
 
+
 ~~~ ascii-art
 +-------------------+                         +--------------------+
 |                   |                         |                    |
@@ -166,10 +166,11 @@ related to a specific Credential, to the Issuer.
 |  Wallet Instance  |                         | Credential Issuer  |
 |                   |                         |                    |
 +-------------------+                         +--------------------+
-
 ~~~
 
-**Step 1 (Status Attestation Request)**: The Wallet Instance sends the Status Attestation Request to the Issuer. The request MUST contain the Wallet Instance Attestation with its Proof of Possession and a Credential Proof of Possession JWT, signed  with the private key related to the public key contained within the Credential.
+The Wallet Instance sends the Status Attestation Request to the Issuer.
+The request MUST contain the Credential which is intended to obtain the Status Attestation
+and a Proof of Possession of it, signed  with the private key related to the public key contained within the Credential.
 
 ~~~
 POST /status HTTP/1.1
@@ -211,19 +212,19 @@ The Credential Proof of Possession MUST be a JWT that MUST contain the parameter
 
 | JOSE header | Description | Reference |
 | --- | --- | --- |
-| typ | It MUST be set to revocation-request+jwt | {{RFC7516}} Section 4.1.1 |
-| alg | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
-| kid | Unique identifier of the jwk, as used for the key binding of the Credential. he JWT MUST be signed with the private key whihc the public key is contained in the Credential. |  |
+| **typ** | It MUST be set to revocation-request+jwt | {{RFC7516}} Section 4.1.1 |
+| **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
+| **kid** | Unique identifier of the jwk, as used for the key binding of the Credential. he JWT MUST be signed with the private key whihc the public key is contained in the Credential. |  |
 
 | Claim | Description | Reference |
 | --- | --- | --- |
-| iss | Wallet identifier. | {{RFC9126}} and {{RFC7519}} |
-| aud | It MUST be set to the identifier of the Credential Issuer. | {{RFC9126}} and {{RFC7519}} |
-| exp | UNIX Timestamp with the expiration time of the JWT. | {{RFC9126}} and {{RFC7519}} |
-| iat | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}} and {{RFC7519}} |
-| jti | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
-| format | The data format of the Credential. Eg: `vc+sd-jwt` for SD-JWT, `vc+mdoc` for ISO/IEC 18013-5 MDOC CBOR | |
-| credential | It MUST contain the Credential according to the data format given in the `format` claim. | |
+| **iss** | Wallet identifier. | {{RFC9126}} and {{RFC7519}} |
+| **aud** | It MUST be set to the identifier of the Credential Issuer. | {{RFC9126}} and {{RFC7519}} |
+| **exp** | UNIX Timestamp with the expiration time of the JWT. | {{RFC9126}} and {{RFC7519}} |
+| **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}} and {{RFC7519}} |
+| **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
+| **format** | The data format of the Credential. Eg: `vc+sd-jwt` for SD-JWT, `vc+mdoc` for ISO/IEC 18013-5 MDOC CBOR | |
+| **credential** | It MUST contain the Credential according to the data format given in the `format` claim. | |
 
 
 # Status Attestation
@@ -256,7 +257,6 @@ The Issuer creates a new Status Attestation, which a non-normative example is gi
 The Issuer then returns the Status Attestation to the Wallet Instance, as in the following non-normative example.
 
 ~~~
-
     HTTP/1.1 201 OK
     Content-Type: application/json
 
