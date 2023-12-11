@@ -38,10 +38,10 @@ informative:
 
 --- abstract
 
-Status Attestations act as evidence that a specific credential or token,
+Status Attestations are verifiable proofs that a digital credential or token,
 whether in JSON Web Tokens (JWT) {{RFC7519}} or CBOR Web Tokens (CWT) format {{RFC8392}},
 has not been revoked and is still valid. Status Attestations are designed to be short-lived,
-periodically provided to their owners and provided by these latter to the verifiers,
+periodically provided to their owners and presented by these latter to the verifiers,
 eliminating the need for verifiers to obtain additional information from
 third-party systems about a token or a digital credential.
 
@@ -69,27 +69,28 @@ They provide a balance between scalability, security, and privacy by minimizing 
 
 
 ~~~ ascii-art
-+---------------------+                             +-------------------+
-|                     | Requests Status Attestation |                   |
-|                     |---------------------------->|                   |
-|   Wallet Instance   |                             | Credential Issuer |
-| (Holds credentials) |                             |    (JWT or CWT)   |
-|                     | Status Attestation          |                   |
-|                     |<----------------------------|                   |
-+---------------------+                             +-------------------+
++-----------------+                             +-------------------+
+|                 | Requests Status Attestation |                   |
+|                 |---------------------------->|                   |
+| Wallet Instance |                             | Credential Issuer |
+|                 |                             |    (JWT or CWT)   |
+|                 | Status Attestation          |                   |
+|                 |<----------------------------|                   |
++-----------------+                             +-------------------+
 
 
-+---------------------+                             +----------+
-|                     | Presents credential and     |          |
-|   Wallet Instance   | Status Attestation          | Verifier |
-|                     |---------------------------->|          |
-+---------------------+                             +----------+
++-- ----------------+                             +----------+
+|                   | Presents credential and     |          |
+|  Wallet Instance  | Status Attestation          | Verifier |
+|                   |---------------------------->|          |
++-------------------+                             +----------+
 ~~~
 
 
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
+
 
 # Terminology
 
@@ -104,6 +105,7 @@ Wallet Instance:
 
 Attestation Owner:
 : An entity that.... Also known as Wallet.
+
 
 # Rationale
 
@@ -125,6 +127,7 @@ However, Status Attestations differ significantly from Status Lists in several w
 4. **Trust Model**: Status Attestations operate under a model where the Verifier trusts the Issuer to provide accurate status information. In contrast, Status Lists operate under a model where the Verifier trusts the Status List Provider to maintain an accurate and up-to-date list of token statuses.
 
 5. **Offline flow**: A Status List can be accessed by a Verifier when an internet connection is present. Differently OAuth Status List defines how to provide a static Status List Token, to be included within a Digital Credential. This requires the Wallet Instance to acquire a new Digital Credential for a specific presentation. Even if similar to the Status List Token, the Status Attestations enable the User to persistently use their preexistent Digital Credentials, as long as the linked Status Attestation is provisioned, presented to the Verifier, and not expired.
+
 
 # Requirements
 
@@ -222,6 +225,7 @@ The Credential Proof of Possession MUST be a JWT that MUST contain the parameter
 | format | The data format of the Credential. Eg: `vc+sd-jwt` for SD-JWT, `vc+mdoc` for ISO/IEC 18013-5 MDOC CBOR | |
 | credential | It MUST contain the Credential according to the data format given in the `format` claim. | |
 
+
 # Status Attestation
 
 The Issuer checks the status of the Credential and creates a Status Attestation bound to it.
@@ -273,6 +277,7 @@ This document has no IANA actions.
 
 
 --- back
+
 
 # Acknowledgments
 {:numbered="false"}
