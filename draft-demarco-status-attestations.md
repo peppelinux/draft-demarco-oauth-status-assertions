@@ -444,7 +444,7 @@ The Verifier that receives a Digital Credential supporting the Status Attestatio
 SHOULD:
 
 - Decode and validate the Digital Credential;
-- check the presence of `status.status_attestation` in the Digital Credential. If true, the Verifier MUST:
+- check the presence of `status.status_attestation` in the Digital Credential. If true, the Verifier SHOULD:
   - produce the hash of the Digital Credential using the hashing algorithm defined in `status.status_attestation`;
   - decode all the Status Attestations provided in the presentation, by matching the JWS Header parameter `typ` set to `status-attestation+jwt` and looking for the `credential_hash` value that matches with the hash produced at the previous point;
   - evaluate the validity of the Status Attestation.
