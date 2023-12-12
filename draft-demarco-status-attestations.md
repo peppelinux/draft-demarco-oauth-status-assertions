@@ -446,8 +446,15 @@ SHOULD:
 - Decode and validate the Digital Credential;
 - check the presence of `status.status_attestation` in the Digital Credential. If true, the Verifier MUST:
   - produce the hash of the Digital Credential using the hashing algorithm defined in `status.status_attestation`;
-  - decode all the Status Attestations provided in the presentation, by matching the JWS Header parameter `typ` set to `status-attestation+jwt` and looking for the `credential_hash` value that match with the hash produced at the previous point;
+  - decode all the Status Attestations provided in the presentation, by matching the JWS Header parameter `typ` set to `status-attestation+jwt` and looking for the `credential_hash` value that matches with the hash produced at the previous point;
   - evaluate the validity of the Status Attestation.
+
+Please note: The importance of checking the revocation status of Digital Credentials as a 'SHOULD' rather than a 'MUST' for a Verifier 
+who gets Status Attestation for the Digital Credential stems from the fact that the decision of a Verifier to check the revocation status 
+of Digital Credentials is not absolute and can be influenced by numerous variables. Consider as an example the case of age-over x; 
+even if it has expired, it may still perform its intended purpose. As a result, the expiration status alone does not render it invalid. 
+The adaptability recognizes that the need to verify revocation status may not always coincide with the actual usability of a Digital Credential, 
+allowing Verifiers to examine and make educated conclusions based on a variety of scenarios.
 
 
 # Security Considerations
