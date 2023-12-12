@@ -448,7 +448,6 @@ SHOULD:
 
 TODO Security
 
---- back
 
 # IANA Considerations
 
@@ -533,6 +532,7 @@ To indicate that the content is an CWT-based Status List:
   * Change controller: IETF
   * Provisional registration? No
 
+--- back
 
 # Acknowledgments
 {:numbered="false"}
