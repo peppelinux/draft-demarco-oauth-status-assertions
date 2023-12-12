@@ -433,7 +433,7 @@ an SD-JWT VC is shown below.
 # Presenting Status Attestations
 
 The Wallet Instance that provides the Status Attestations MUST include in the
-`vp_token` JSON array, as defined in [@OpenID4VP], the Status Attestation along with the
+`vp_token` JSON array, as defined in [OpenID4VP], the Status Attestation along with the
 related Digital Credential.
 
 The Verifier that receive a Digital Credential supporting the Status Attestation,
