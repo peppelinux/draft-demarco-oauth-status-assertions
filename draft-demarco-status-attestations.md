@@ -600,27 +600,6 @@ To indicate that the content is an CWT-based Status List:
         </front>
 </reference>
 
-<reference anchor="OpenID4VP" target="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html">
-      <front>
-        <title>OpenID for Verifiable Presentations</title>
-        <author initials="O." surname="Terbu" fullname="Oliver Terbu">
-         <organization>ConsenSys Mesh</organization>
-        </author>
-        <author initials="T." surname="Lodderstedt" fullname="Torsten Lodderstedt">
-          <organization>yes.com</organization>
-        </author>
-        <author initials="K." surname="Yasuda" fullname="Kristina Yasuda">
-          <organization>Microsoft</organization>
-        </author>
-        <author initials="A." surname="Lemmon" fullname="Adam Lemmon">
-          <organization>Convergence.tech</organization>
-        </author>
-        <author initials="T." surname="Looker" fullname="Tobias Looker">
-          <organization>Mattr</organization>
-        </author>
-       <date day="20" month="June" year="2022"/>
-      </front>
-</reference>
 
 # Acknowledgments
 {:numbered="false"}
