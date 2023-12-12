@@ -103,7 +103,7 @@ privacy by minimizing the status information.
 
 This specification uses the terms "End-User", "Entity" as defined by
 OpenID Connect Core [@OpenID.Core], the term "JSON Web Token (JWT)"
-defined by JSON Web Token (JWT) [@!RFC7519].
+defined by JSON Web Token (JWT) {{RFC7519}}.
 
 Issuer:
 : Entity that is responsible for the issuance of the Digital Credentials.
@@ -450,71 +450,6 @@ SHOULD:
 
 TODO Security
 
-
-# References
-
-<reference anchor="OpenID4VP" target="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html">
-      <front>
-        <title>OpenID for Verifiable Presentations</title>
-        <author initials="O." surname="Terbu" fullname="Oliver Terbu">
-         <organization>ConsenSys Mesh</organization>
-        </author>
-        <author initials="T." surname="Lodderstedt" fullname="Torsten Lodderstedt">
-          <organization>yes.com</organization>
-        </author>
-        <author initials="K." surname="Yasuda" fullname="Kristina Yasuda">
-          <organization>Microsoft</organization>
-        </author>
-        <author initials="A." surname="Lemmon" fullname="Adam Lemmon">
-          <organization>Convergence.tech</organization>
-        </author>
-        <author initials="T." surname="Looker" fullname="Tobias Looker">
-          <organization>Mattr</organization>
-        </author>
-       <date day="20" month="June" year="2022"/>
-      </front>
-</reference>
-
-<reference anchor="OpenID.Core" target="http://openid.net/specs/openid-connect-core-1_0.html">
-  <front>
-    <title>OpenID Connect Core 1.0 incorporating errata set 1</title>
-    <author initials="N." surname="Sakimura" fullname="Nat Sakimura">
-      <organization>NRI</organization>
-    </author>
-    <author initials="J." surname="Bradley" fullname="John Bradley">
-      <organization>Ping Identity</organization>
-    </author>
-    <author initials="M." surname="Jones" fullname="Michael B. Jones">
-      <organization>Microsoft</organization>
-    </author>
-    <author initials="B." surname="de Medeiros" fullname="Breno de Medeiros">
-      <organization>Google</organization>
-    </author>
-    <author initials="C." surname="Mortimore" fullname="Chuck Mortimore">
-      <organization>Salesforce</organization>
-    </author>
-   <date day="8" month="Nov" year="2014"/>
-  </front>
-</reference>
-
-<reference anchor="IANA.JOSE.ALGS" target="https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms">
-        <front>
-          <title>JSON Web Signature and Encryption Algorithms</title>
-          <author>
-            <organization>IANA</organization>
-          </author>
-        </front>
-</reference>
-
-<reference anchor="IANA.COSE.ALGS" target="https://www.iana.org/assignments/cose/cose.xhtml#algorithms">
-        <front>
-          <title>COSE Algorithms</title>
-          <author>
-            <organization>IANA</organization>
-          </author>
-        </front>
-</reference>
-{backmatter}
 --- back
 
 # IANA Considerations
@@ -522,7 +457,7 @@ TODO Security
 ## JSON Web Token Claims Registration
 
 This specification requests registration of the following Claims in the
-IANA "JSON Web Token Claims" registry [@IANA.JWT] established by [RFC7519].
+IANA "JSON Web Token Claims" registry [@IANA.JWT] established by {{RFC7519}}.
 
 *  Claim Name: `credential_format`
 *  Claim Description: The Digital Credential format the Status Attestation is bound to.
