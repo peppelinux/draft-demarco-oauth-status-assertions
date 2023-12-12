@@ -620,6 +620,7 @@ To indicate that the content is an CWT-based Status List:
         </author>
        <date day="20" month="June" year="2022"/>
       </front>
+</reference>
 
 # Acknowledgments
 {:numbered="false"}
