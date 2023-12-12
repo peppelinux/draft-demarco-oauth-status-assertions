@@ -384,7 +384,7 @@ Content-Type: application/json
 
 The Issuers that uses the Status Attestations MUST include in their
 OpenID4VCI [@!OpenID.VCI] metadata the claim `status_attestation_endpoint`,
-which its value MUST be an HTTPs URL, indicating the endpoint where
+which its value MUST be an HTTPs URL indicating the endpoint where
 the Wallet Instances can request Status Attestations.
 
 
@@ -438,7 +438,7 @@ The Verifier that receive a Digital Credential supporting the Status Attestation
 SHOULD:
 
 - Decode and validate the Digital Credential;
-- check the presence of `status.status_attestation`, if present the Verifier SHOULD:
+- check the presence of `status.status_attestation` in the Digital Credential. If true, the Verifier SHOULD:
   - produce the hash of the Digital Credential using the hashing algoritm defined in `status.status_attestation`;
   - decode all the Status Attestations provided in the presentation, by mathing the JWS Header parameter `typ` set to `status-attestation+jwt` and looking for the `credential_hash` value that match with the hash produced at the previous point;
   - evaluate the validity of the Status Attestation.
@@ -536,7 +536,13 @@ To indicate that the content is an CWT-based Status List:
 
 # Acknowledgments
 
-TODO acknowledge.
+We would like to thank:
+
+- Paul Bastien
+- Riccardo Iaconelli
+- Victor Näslund
+- Giada Sciarretta
+- Amir Sharif
 
 
 # Document History
