@@ -40,38 +40,39 @@ informative:
 
 --- abstract
 
-Status Attestations are signed objects that demonstrate the validity status of a
+Status Attestation is a signed object that demonstrates the validity status of a
 digital credential.
 These attestations are ephemeral and periodically provided
-to digital credential holders, that can present these to verifiers along
+to holders, who can present these to Verifiers along
 with the corresponding digital credentials.
 The approach outlined in this document
 makes the verifiers able to check the non-revocation of a digital credential
-without requiring to query any third-party systems.
+without requiring to query any third-party entities.
 
 --- middle
 
 # Introduction
 
-Status Attestations play a crucial role in maintaining the integrity and
+Status Attestation plays a crucial role in maintaining the integrity and
 trustworthiness of digital credentials,
 since these serve as proof that a particular digital credential,
 whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT) format,
 has not been revoked and is still valid.
 
 A digital credential may be presented to a verifier long after it has been issued.
-During this interval, the credential could potentially be invalidated for various reasons.
-To ensure the credential's validity, the issuer provides a short-lived
-Status Attestation to the credential's holder.
-This attestation is bound to the credential and can be presented to a verifier,
-along with the credential itself, as proof of the credential's non-revocation status.
+During this interval, the digital credential could potentially be invalidated for various reasons (e.g., due to the device lost or holder fraud).
+To ensure the digital credential's validity, the issuer provides a short-lived
+Status Attestation to the holder.
+This attestation is bound to the digital credential and can be provided to a verifier, 
+together with the digital credential, as evidence of the digital credential's non-revocation status.
 
-Status Attestations are designed to preserve privacy and are essential for
-enabling offline use cases, where both the wallet and the verifier are
-not connected to internet during the presentation phase, thereby
-ensuring the security of the digital credential system.
-Status Attestations provide a balance between scalability, security, and
-privacy by minimizing the status information.
+
+Status Attestation safeguards privacy and is essential in facilitating offline scenarios.
+In these circumstances, both the wallet and the verifier work without internet connectivity during the presentation phase; 
+nonetheless, Status Attestation provides a method to statically validate the validity of the digital credentials, 
+thus increasing the security of the digital credential system. By limiting the disclosure of status information, 
+Status Attestation strikes a balance between scalability, security, and privacy.
+
 
 
 ~~~ ascii-art
@@ -85,8 +86,8 @@ privacy by minimizing the status information.
 
 
 +-- ----------------+                             +----------+
-|                   | Presents credential and     |          |
-|  Wallet Instance  | Status Attestation          | Verifier |
+|                   | Presents Digital Credential |          |
+|  Wallet Instance  | and Status Attestation      | Verifier |
 |                   |---------------------------->|          |
 +-------------------+                             +----------+
 ~~~
@@ -103,33 +104,38 @@ This specification uses the terms "End-User", "Entity" as defined by
 OpenID Connect Core [@OpenID.Core], the term "JSON Web Token (JWT)"
 defined by JSON Web Token (JWT) {{RFC7519}}.
 
-Issuer:
+Digital Credential:
+: A set of one or more claims about a subject made by a Credential Issuer. 
+
+Credential Issuer:
 : Entity that is responsible for the issuance of the Digital Credentials.
-The Issuer is responsible about the lifecycle of their issued Credentials
+The Issuer is responsible for the lifecycle of their issued Digital Credentials
 and their validity status.
 
 Verifier:
 : Entity that relies on the validity of the Digital Credentials presented to it.
 This Entity, also known as a Relying Party, needs to verify the authenticity and
-validity of the Credentials, including their revocation status, before accepting them.
+validity of the Digital Credentials, including their revocation status, before accepting them.
 
 Wallet Instance:
 : The digital Wallet in control of a User, also known as Wallet or Holder.
-It securly stores the User's digital Credentials. It can present Credentials to Verifiers
+It securely stores the User's Digital Credentials. It can present Digital Credentials to Verifiers
 and request Status Attestations from Issuers under the control of the User.
 
 # Rationale
 
 OAuth Status Lists [@!I-D.looker-oauth-jwt-cwt-status-list] are suitable
 for specific scenarios, especially when the Verifier needs to verify the
-status of a Credential at a later time after the User has presented the
+status of a Digital Credential at a later time after the User has presented the
 Digital Credential.
 
 However, there are cases where the Verifier only needs
 to check the revocation status of a Digital Credential at the time of
 presentation, or situations where the Verifier should not be allowed to
-check the status of a credential over time due to some privacy constraints,
-in compliance to national privacy regulations.
+check the status of a Digital Credential over time due to some privacy constraints,
+in compliance with national privacy regulations.
+
+TODO: Add an example of national privacy constraints to give the reader some intuition. 
 
 In scenarios where the Verifier, Credential Issuer, and OAuth Status List
 Provider are all part of the same domain or operate within a context where
@@ -138,36 +144,36 @@ Status List is the optimal solution; while there might be other cases
 where the OAuth Status List facilitates the exposure to the following
 privacy risks:
 
-- An OAuth Status List provider might known the association between a specific
+- An OAuth Status List Provider might know the association between a specific
 list and a Credential Issuer, especially if the latter issues a
-single type of Credential. This could inadvertently reveal to the
-Status List provider which list corresponds to which Credential.
+single type of Digital Credential. This could inadvertently reveal the
+Status List Provider which list corresponds to which Digital Credential.
 - A Verifier retrieves an OAuth Status List by establishing a TCP/IP connection
-with an OAuth Status List provider. This allows the OAuth Status List provider to
+with an OAuth Status List Provider. This allows the OAuth Status List Provider to
 obtain the IP address of the Verifier and potentially link it to a specific
-Credential type and Issuer associated with that OAuth Status List. A malicious
-OAuth Status List provider could use internet diagnostic tools, such as Whois
+Digital Credential type and Credential Issuer associated with that OAuth Status List. 
+A malicious OAuth Status List Provider could use internet diagnostic tools, such as Whois
 or GeoIP lookup, to gather additional information about the Verifier.
-This could inadvertently disclose to the OAuth Status List provider which
-Credential the requestor is using and from which Credential Issuer,
+This could inadvertently disclose to the OAuth Status List Provider which
+Digital Credential the requester is using and from which Credential Issuer,
 information that should remain confidential.
 
 Status Attestations differ significantly from OAuth Status Lists in several ways:
 
 1. **Privacy**: Status Attestations are designed to be privacy-preserving.
 They do not require the Verifier to gather any additional information
-from third-party systems, thus preventing potential privacy leaks.
+from third-party entities, thus preventing potential privacy leaks.
 
 2. **Static Verification**: Status Attestations are designed to be
 statically provided to Verifiers by Wallet Instance.
-Once an Attestation is issued, it can be verified without any further
-communication with the Issuer or any other party.
+Once a Status Attestation is issued, it can be verified without any further
+communication with the Credential Issuer or any other party.
 
 3. **Digital Credentials Formats**: Status Attestations are agnostic from the
 Digital Credential format to which they are bound.
 
 4. **Trust Model**: Status Attestations operate under a model where
-the Verifier trusts the Issuer to provide accurate status information,
+the Verifier trusts the Credential Issuer to provide accurate status information,
 while the OAuth Status Lists operate under a model where the Verifier
 trusts the Status List Provider to maintain an accurate and up-to-date
 list of statuses.
@@ -186,36 +192,36 @@ Verifier, and not expired.
 
 # Requirements
 
-In this section are listed the general requirements that must be satisfied
-when the Status Attestation are implemented. The Status Attestation:
+The general requirements for the implementation of Status Attestation are listed in this section.  
+The Status Attestation:
 
 - MUST be presented in conjunction with the Digital Credential.
 The Status Attestation MUST be timestamped with its issuance datetime,
 always referring to a previous period to the presentation time.
 - MUST contain the expiration datetime after which the Digital Credential
 MUST NOT be considered valid anymore. The expiration datetime MUST be
-superior of the issuance datetime.
+superior to the issuance datetime.
 - enables offline use cases as it MUST be validated using
-cryptographic signature and the cryptographic public key of the Issuer.
+a cryptographic signature and the cryptographic public key of the Credential Issuer.
 
 Please note: in this specification the examples and the normative properties
-of attestations are reported in accordance with the JWT standard, while
-for the purposes of this specification any credential or attestation
-format format may be used, as long as all attributes and requirements
+of Attestations are reported in accordance with the JWT standard, while
+for the purposes of this specification any Digital Credential or Attestation
+format may be used, as long as all attributes and requirements
 defined in this specification are satisfied, even using equivalent names
 or values.
 
 
 # Status Attestation Request
 
-The Issuer provides the Wallet Instance with a Status Attestation,
-which is bound to a Credential.
-This allows the Wallet Instance to present it, along with the Credential itself,
-to a Verifier as proof of the Credential's non-revocation status.
+The Credential Issuer provides the Wallet Instance with a Status Attestation,
+which is bound to a Digital Credential.
+This allows the Wallet Instance to present it, along with the Digital Credential itself,
+to a Verifier as proof of the Digital Credential's non-revocation status.
 
 The following diagram shows the Wallet Instance requesting a
-Status Attestation to an Issuer,
-related to a specific Credential issued by the same Issuer.
+Status Attestation to a Credential Issuer,
+related to a specific Credential issued by the same Credential Issuer.
 
 
 ~~~ ascii-art
@@ -239,11 +245,11 @@ related to a specific Credential issued by the same Issuer.
 +-------------------+                         +--------------------+
 ~~~
 
-The Wallet Instance sends the Status Attestation request to the Issuer.
+The Wallet Instance sends the Status Attestation request to the Credential Issuer.
 The request MUST contain the Digital Credential, for which the Status Attestation
 is requested, and enveloped in a signed object as proof of possession.
 The proof of possession MUST be signed with the private key corresponding
-to the public key attested by the Issuer and contained within the Credential.
+to the public key attested by the Credential Issuer and contained within the Digital Credential.
 
 ~~~
 POST /status HTTP/1.1
@@ -254,11 +260,11 @@ credential_pop=$CredentialPoPJWT
 ~~~
 
 To validate that the Wallet Instance is entitled to request its Status Attestation,
-the following requirements must be satisfied:
+the following requirements MUST be satisfied:
 
-- The Issuer verifies the signature of the `credential_pop` object using
-the public key contained in the Credential;
-- the Issuer MUST verify that it is the legitimate Issuer of the Credential.
+- The Credential Issuer MUST verify the signature of the `credential_pop` object using
+the public key contained in the Digital Credential;
+- the Credential Issuer MUST verify that it is the legitimate Issuer.
 
 The technical and details about the `credential_pop` object
 are defined in the next section.
@@ -266,14 +272,14 @@ are defined in the next section.
 
 ## Digital Credential Proof of Possession
 
-The Wallet that holds a Digital Credential, when requests a Status Attestation,
-MUST demonstrate the proof of possession of the Credential to the Credential Issuer.
+The Wallet Instance that holds a Digital Credential, when requests a Status Attestation,
+MUST demonstrate the proof of possession of the Digital Credential to the Credential Issuer.
 
-Ther proof of possession is made by enclosing the Credential in an
-object (JWT) signed with the key referenced in the Credential.
+The proof of possession is made by enclosing the Digital Credential in an
+object (JWT) signed with the private key that its related public key is referenced in the Digital Credential.
 
-Below a non-normative example of a Credential proof of possession with
-the JWT headers and payload represented without applying signature and
+Below is a non-normative example of a Credential proof of possession with
+the JWT headers and payload are represented without applying signature and
 encoding, for better readability:
 
 ~~~
@@ -317,10 +323,10 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 
 # Status Attestation
 
-When a Status Attestation is requested to an Issuer, the
-Issuer checks the status of the Credential and creates a Status Attestation bound to it.
+When a Status Attestation is requested to a Credential Issuer, the
+Issuer checks the status of the Digital Credential and creates a Status Attestation bound to it.
 
-If the Credential is valid, the Issuer creates a new Status Attestation, which a non-normative example is given below.
+If the Digital Credential is valid, the Credential Issuer creates a new Status Attestation, which a non-normative example is given below.
 
 ~~~
 {
@@ -354,17 +360,17 @@ The Status Attestation MUST contain the following claims when the JWT format is 
 | **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}}, {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of the Status Attestation issuance. | {{RFC9126}}, {{RFC7519}} |
 | **exp** | UNIX Timestamp with the expiry time of the Status Attestation. | {{RFC9126}}, {{RFC7519}} |
-| **credential_hash** | Hash value of the Credential the Status Attestation is bound to. | this specification |
-| **credential_hash_alg** | The Algorithm used of hashing the Credential to which the Status Attestation is bound. The value SHOULD be set to `S256`. | this specification |
-| **cnf** | JSON object containing the cryptographic key binding. The `cnf.jwk` value MUST match with the one provided within the related Credential. | {{RFC7800}} Section 3.1 |
+| **credential_hash** | Hash value of the Digital Credential the Status Attestation is bound to. | this specification |
+| **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound. The value SHOULD be set to `S256`. | this specification |
+| **cnf** | JSON object containing the cryptographic key binding. The `cnf.jwk` value MUST match with the one provided within the related Digital Credential. | {{RFC7800}} Section 3.1 |
 
 
 # Status Attestation Response
 
-If the Status Attestation is requested for a non-existent, expired, revoked or invalid Credential, the
+If the Status Attestation is requested for a non-existent, expired, revoked or invalid Digital Credential, the
 Credential Issuer MUST respond with an HTTP Response with the status code set to 404.
 
-If the Credential is valid, the Issuer then returns the Status Attestation to the Wallet Instance,
+If the Digital Credential is valid, the Credential Issuer then returns the Status Attestation to the Wallet Instance,
 as in the following non-normative example.
 
 ~~~
@@ -377,25 +383,25 @@ Content-Type: application/json
 ~~~
 
 
-# Issuers Supporting Status Attestations
+# Credential Issuers Supporting Status Attestations
 
 
-## Issuer Metadata
+## Credential Issuer Metadata
 
-The Issuers that uses the Status Attestations MUST include in their
+The Credential Issuers that uses the Status Attestations MUST include in their
 OpenID4VCI [@!OpenID.VCI] metadata the claim `status_attestation_endpoint`,
 which its value MUST be an HTTPs URL indicating the endpoint where
 the Wallet Instances can request Status Attestations.
 
 
-## Issued Credentials
+## Issued Digital Credentials
 
-The Issuers that uses the Status Attestations SHOULD include in the
-issued Credentials the object `status` with the
+The Credential Issuers that uses the Status Attestations SHOULD include in the
+issued Digital Credentials the object `status` with the
 JSON member `status_attestation` set to a JSON Object containing the following
 member:
 
-- `credential_hash_alg`. REQUIRED. The Algorithm used of hashing the Credential to which the Status Attestation is bound. The value SHOULD be set to `S256`.
+- `credential_hash_alg`. REQUIRED. The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound. The value SHOULD be set to `S256`.
 
 
 The non-normative example of an unsecured payload of
@@ -430,18 +436,25 @@ an SD-JWT VC is shown below.
 
 # Presenting Status Attestations
 
-The Wallet Instance that provides the Status Attestations MUST include in the
+The Wallet Instance that provides the Status Attestations SHOULD be included in the
 `vp_token` JSON array, as defined in [@OpenID4VP], the Status Attestation along with the
 related Digital Credential.
 
-The Verifier that receive a Digital Credential supporting the Status Attestation,
+The Verifier that receives a Digital Credential supporting the Status Attestation,
 SHOULD:
 
 - Decode and validate the Digital Credential;
 - check the presence of `status.status_attestation` in the Digital Credential. If true, the Verifier SHOULD:
-  - produce the hash of the Digital Credential using the hashing algoritm defined in `status.status_attestation`;
-  - decode all the Status Attestations provided in the presentation, by mathing the JWS Header parameter `typ` set to `status-attestation+jwt` and looking for the `credential_hash` value that match with the hash produced at the previous point;
+  - produce the hash of the Digital Credential using the hashing algorithm defined in `status.status_attestation`;
+  - decode all the Status Attestations provided in the presentation, by matching the JWS Header parameter `typ` set to `status-attestation+jwt` and looking for the `credential_hash` value that matches with the hash produced at the previous point;
   - evaluate the validity of the Status Attestation.
+
+Please note: The importance of checking the revocation status of Digital Credentials as a 'SHOULD' rather than a 'MUST' for a Verifier 
+who gets Status Attestation for the Digital Credential stems from the fact that the decision of a Verifier to check the revocation status 
+of Digital Credentials is not absolute and can be influenced by numerous variables. Consider as an example the case of age-over x; 
+even if it has expired, it may still perform its intended purpose. As a result, the expiration status alone does not render it invalid. 
+The adaptability recognizes that the need to verify revocation status may not always coincide with the actual usability of a Digital Credential, 
+allowing Verifiers to examine and make educated conclusions based on a variety of scenarios.
 
 
 # Security Considerations
