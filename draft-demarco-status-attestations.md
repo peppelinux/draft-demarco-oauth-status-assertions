@@ -102,7 +102,7 @@ privacy by minimizing the status information.
 # Terminology
 
 This specification uses the terms "End-User", "Entity" as defined by
-OpenID Connect Core [OpenID.Core], the term "JSON Web Token (JWT)"
+OpenID Connect Core [@OpenID.Core], the term "JSON Web Token (JWT)"
 defined by JSON Web Token (JWT) [@!RFC7519].
 
 Issuer:
@@ -313,7 +313,7 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 | **exp** | UNIX Timestamp with the expiration time of the JWT. | {{RFC9126}}, {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
-| **credential_format** | The data format of the Credential. Eg: `vc+sd-jwt` for SD-JWT, `vc+mdoc` for ISO/IEC 18013-5 MDOC CBOR | this specification |
+| **credential_format** | The data format of the Credential. Eg: `vc+sd-jwt` for SD-JWT, `vc+mdoc` for ISO/IEC 18013-5 MDOC CBOR [@ISO.18013-5] | this specification |
 | **credential** | It MUST contain the Credential according to the data format given in the `format` claim. | this specification |
 
 
@@ -433,7 +433,7 @@ an SD-JWT VC is shown below.
 # Presenting Status Attestations
 
 The Wallet Instance that provides the Status Attestations MUST include in the
-`vp_token` JSON array, as defined in [OpenID4VP], the Status Attestation along with the
+`vp_token` JSON array, as defined in [@OpenID4VP], the Status Attestation along with the
 related Digital Credential.
 
 The Verifier that receive a Digital Credential supporting the Status Attestation,
@@ -450,6 +450,8 @@ SHOULD:
 
 TODO Security
 
+
+# References
 
 <reference anchor="OpenID4VP" target="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html">
       <front>
@@ -512,7 +514,8 @@ TODO Security
           </author>
         </front>
 </reference>
-
+{backmatter}
+--- back
 
 # IANA Considerations
 
@@ -597,10 +600,13 @@ To indicate that the content is an CWT-based Status List:
   * Change controller: IETF
   * Provisional registration? No
 
---- back
-
 
 # Acknowledgments
 {:numbered="false"}
 
 TODO acknowledge.
+
+
+# Document History
+
+TODO changelog.
