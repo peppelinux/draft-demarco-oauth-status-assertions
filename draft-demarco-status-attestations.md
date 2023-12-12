@@ -379,6 +379,57 @@ Content-Type: application/json
 ~~~
 
 
+# Issuers Supporting Status Attestations
+
+
+## Issuer Metadata
+
+The Issuers that uses the Status Attestations MUST include in their
+OpenID4VCI [@!OpenID.VCI] metadata the claim `status_attestation_endpoint`,
+which its value MUST be an HTTPs URL, indicating the endpoint where
+the Wallet Instances can request Status Attestations.
+
+
+## Issued Credentials
+
+The Issuers that uses the Status Attestations SHOULD include in the
+issued Credentials the object `status` with the
+JSON member `status_attestation` set to `true`, as
+the non-normative example of an unsecured payload of
+an SD-JWT VC is shown below. When the `status_attestation` is not present,
+it defaults to `false`.
+
+> TODO: alignments with the OAuth2 Status List schema and IANA registration.
+
+~~~
+{
+ "vct": "https://credentials.example.com/identity_credential",
+ "given_name": "John",
+ "family_name": "Doe",
+ "email": "johndoe@example.com",
+ "phone_number": "+1-202-555-0101",
+ "address": {
+   "street_address": "123 Main St",
+   "locality": "Anytown",
+   "region": "Anystate",
+   "country": "US"
+ },
+ "birthdate": "1940-01-01",
+ "is_over_18": true,
+ "is_over_21": true,
+ "is_over_65": true,
+ "status": {
+    "status_attestation": true
+ }
+}
+~~~
+
+# Presenting Status Attestations
+
+
+TBD.
+
+
 # Security Considerations
 
 TODO Security
