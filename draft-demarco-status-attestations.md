@@ -535,7 +535,6 @@ To indicate that the content is an CWT-based Status List:
 --- back
 
 # Acknowledgments
-{:numbered="false"}
 
 TODO acknowledge.
 
