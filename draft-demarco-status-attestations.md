@@ -102,7 +102,7 @@ privacy by minimizing the status information.
 # Terminology
 
 This specification uses the terms "End-User", "Entity" as defined by
-OpenID Connect Core [@!OpenID.Core], the term "JSON Web Token (JWT)"
+OpenID Connect Core [OpenID.Core], the term "JSON Web Token (JWT)"
 defined by JSON Web Token (JWT) [@!RFC7519].
 
 Issuer:
@@ -394,10 +394,14 @@ the Wallet Instances can request Status Attestations.
 
 The Issuers that uses the Status Attestations SHOULD include in the
 issued Credentials the object `status` with the
-JSON member `status_attestation` set to `true`, as
-the non-normative example of an unsecured payload of
-an SD-JWT VC is shown below. When the `status_attestation` is not present,
-it defaults to `false`.
+JSON member `status_attestation` set to a JSON Object containing the following
+member:
+
+- `credential_hash_alg`. REQUIRED. The Algorithm used of hashing the Credential to which the Status Attestation is bound. The value SHOULD be set to `S256`.
+
+
+The non-normative example of an unsecured payload of
+an SD-JWT VC is shown below.
 
 > TODO: alignments with the OAuth2 Status List schema and IANA registration.
 
@@ -419,15 +423,27 @@ it defaults to `false`.
  "is_over_21": true,
  "is_over_65": true,
  "status": {
-    "status_attestation": true
+    "status_attestation": {
+        "credential_hash_alg": "S256",
+    }
  }
 }
 ~~~
 
 # Presenting Status Attestations
 
+The Wallet Instance that provides the Status Attestations MUST include in the
+`vp_token` JSON array, as defined in [@OpenID4VP], the Status Attestation along with the
+related Digital Credential.
 
-TBD.
+The Verifier that receive a Digital Credential supporting the Status Attestation,
+SHOULD:
+
+- Decode and validate the Digital Credential;
+- check the presence of `status.status_attestation`, if present the Verifier SHOULD:
+  - produce the hash of the Digital Credential using the hashing algoritm defined in `status.status_attestation`;
+  - decode all the Status Attestations provided in the presentation, by mathing the JWS Header parameter `typ` set to `status-attestation+jwt` and looking for the `credential_hash` value that match with the hash produced at the previous point;
+  - evaluate the validity of the Status Attestation.
 
 
 # Security Considerations
@@ -440,7 +456,7 @@ TODO Security
 ## JSON Web Token Claims Registration
 
 This specification requests registration of the following Claims in the
-IANA "JSON Web Token Claims" registry [@IANA.JWT] established by [@!RFC7519].
+IANA "JSON Web Token Claims" registry [@IANA.JWT] established by [RFC7519].
 
 *  Claim Name: `credential_format`
 *  Claim Description: The Digital Credential format the Status Attestation is bound to.
@@ -520,6 +536,90 @@ To indicate that the content is an CWT-based Status List:
 
 --- back
 
+# References
+
+<reference anchor="OpenID4VP" target="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html">
+      <front>
+        <title>OpenID for Verifiable Presentations</title>
+        <author initials="O." surname="Terbu" fullname="Oliver Terbu">
+         <organization>ConsenSys Mesh</organization>
+        </author>
+        <author initials="T." surname="Lodderstedt" fullname="Torsten Lodderstedt">
+          <organization>yes.com</organization>
+        </author>
+        <author initials="K." surname="Yasuda" fullname="Kristina Yasuda">
+          <organization>Microsoft</organization>
+        </author>
+        <author initials="A." surname="Lemmon" fullname="Adam Lemmon">
+          <organization>Convergence.tech</organization>
+        </author>
+        <author initials="T." surname="Looker" fullname="Tobias Looker">
+          <organization>Mattr</organization>
+        </author>
+       <date day="20" month="June" year="2022"/>
+      </front>
+</reference>
+
+<reference anchor="OpenID.Core" target="http://openid.net/specs/openid-connect-core-1_0.html">
+  <front>
+    <title>OpenID Connect Core 1.0 incorporating errata set 1</title>
+    <author initials="N." surname="Sakimura" fullname="Nat Sakimura">
+      <organization>NRI</organization>
+    </author>
+    <author initials="J." surname="Bradley" fullname="John Bradley">
+      <organization>Ping Identity</organization>
+    </author>
+    <author initials="M." surname="Jones" fullname="Michael B. Jones">
+      <organization>Microsoft</organization>
+    </author>
+    <author initials="B." surname="de Medeiros" fullname="Breno de Medeiros">
+      <organization>Google</organization>
+    </author>
+    <author initials="C." surname="Mortimore" fullname="Chuck Mortimore">
+      <organization>Salesforce</organization>
+    </author>
+   <date day="8" month="Nov" year="2014"/>
+  </front>
+</reference>
+
+<reference anchor="IANA.JOSE.ALGS" target="https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms">
+        <front>
+          <title>JSON Web Signature and Encryption Algorithms</title>
+          <author>
+            <organization>IANA</organization>
+          </author>
+        </front>
+</reference>
+
+<reference anchor="IANA.COSE.ALGS" target="https://www.iana.org/assignments/cose/cose.xhtml#algorithms">
+        <front>
+          <title>COSE Algorithms</title>
+          <author>
+            <organization>IANA</organization>
+          </author>
+        </front>
+</reference>
+
+<reference anchor="OpenID4VP" target="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html">
+      <front>
+        <title>OpenID for Verifiable Presentations</title>
+        <author initials="O." surname="Terbu" fullname="Oliver Terbu">
+         <organization>ConsenSys Mesh</organization>
+        </author>
+        <author initials="T." surname="Lodderstedt" fullname="Torsten Lodderstedt">
+          <organization>yes.com</organization>
+        </author>
+        <author initials="K." surname="Yasuda" fullname="Kristina Yasuda">
+          <organization>Microsoft</organization>
+        </author>
+        <author initials="A." surname="Lemmon" fullname="Adam Lemmon">
+          <organization>Convergence.tech</organization>
+        </author>
+        <author initials="T." surname="Looker" fullname="Tobias Looker">
+          <organization>Mattr</organization>
+        </author>
+       <date day="20" month="June" year="2022"/>
+      </front>
 
 # Acknowledgments
 {:numbered="false"}
