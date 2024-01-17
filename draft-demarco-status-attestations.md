@@ -3,7 +3,7 @@ title: "OAuth Status Attestations"
 abbrev: "OAuth Status Attestations"
 category: info
 
-docname: draft-demarco-status-attestations-latest
+docname: draft-demarco-status-attestations
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
@@ -60,17 +60,18 @@ whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT) format,
 has not been revoked and is still valid.
 
 A digital credential may be presented to a verifier long after it has been issued.
-During this interval, the digital credential could potentially be invalidated for various reasons (e.g., due to the device lost or holder fraud).
+During this interval, the digital credential could potentially be invalidated for
+various reasons (e.g., due to the device lost or holder fraud).
 To ensure the digital credential's validity, the issuer provides a short-lived
 Status Attestation to the holder.
-This attestation is bound to the digital credential and can be provided to a verifier, 
+This attestation is bound to the digital credential and can be provided to a verifier,
 together with the digital credential, as evidence of the digital credential's non-revocation status.
 
 
 Status Attestation safeguards privacy and is essential in facilitating offline scenarios.
-In these circumstances, both the wallet and the verifier work without internet connectivity during the presentation phase; 
-nonetheless, Status Attestation provides a method to statically validate the validity of the digital credentials, 
-thus increasing the security of the digital credential system. By limiting the disclosure of status information, 
+In these circumstances, both the wallet and the verifier work without internet connectivity during the presentation phase;
+nonetheless, Status Attestation provides a method to statically validate the validity of the digital credentials,
+thus increasing the security of the digital credential system. By limiting the disclosure of status information,
 Status Attestation strikes a balance between scalability, security, and privacy.
 
 
@@ -105,7 +106,7 @@ OpenID Connect Core [@OpenID.Core], the term "JSON Web Token (JWT)"
 defined by JSON Web Token (JWT) {{RFC7519}}.
 
 Digital Credential:
-: A set of one or more claims about a subject made by a Credential Issuer. 
+: A set of one or more claims about a subject made by a Credential Issuer.
 
 Credential Issuer:
 : Entity that is responsible for the issuance of the Digital Credentials.
@@ -135,7 +136,7 @@ presentation, or situations where the Verifier should not be allowed to
 check the status of a Digital Credential over time due to some privacy constraints,
 in compliance with national privacy regulations.
 
-TODO: Add an example of national privacy constraints to give the reader some intuition. 
+TODO: Add an example of national privacy constraints to give the reader some intuition.
 
 In scenarios where the Verifier, Credential Issuer, and OAuth Status List
 Provider are all part of the same domain or operate within a context where
@@ -151,7 +152,7 @@ Status List Provider which list corresponds to which Digital Credential.
 - A Verifier retrieves an OAuth Status List by establishing a TCP/IP connection
 with an OAuth Status List Provider. This allows the OAuth Status List Provider to
 obtain the IP address of the Verifier and potentially link it to a specific
-Digital Credential type and Credential Issuer associated with that OAuth Status List. 
+Digital Credential type and Credential Issuer associated with that OAuth Status List.
 A malicious OAuth Status List Provider could use internet diagnostic tools, such as Whois
 or GeoIP lookup, to gather additional information about the Verifier.
 This could inadvertently disclose to the OAuth Status List Provider which
@@ -192,7 +193,7 @@ Verifier, and not expired.
 
 # Requirements
 
-The general requirements for the implementation of Status Attestation are listed in this section.  
+The general requirements for the implementation of Status Attestation are listed in this section.
 The Status Attestation:
 
 - MUST be presented in conjunction with the Digital Credential.
@@ -449,11 +450,11 @@ SHOULD:
   - decode all the Status Attestations provided in the presentation, by matching the JWS Header parameter `typ` set to `status-attestation+jwt` and looking for the `credential_hash` value that matches with the hash produced at the previous point;
   - evaluate the validity of the Status Attestation.
 
-Please note: The importance of checking the revocation status of Digital Credentials as a 'SHOULD' rather than a 'MUST' for a Verifier 
-who gets Status Attestation for the Digital Credential stems from the fact that the decision of a Verifier to check the revocation status 
-of Digital Credentials is not absolute and can be influenced by numerous variables. Consider as an example the case of age-over x; 
-even if it has expired, it may still perform its intended purpose. As a result, the expiration status alone does not render it invalid. 
-The adaptability recognizes that the need to verify revocation status may not always coincide with the actual usability of a Digital Credential, 
+Please note: The importance of checking the revocation status of Digital Credentials as a 'SHOULD' rather than a 'MUST' for a Verifier
+who gets Status Attestation for the Digital Credential stems from the fact that the decision of a Verifier to check the revocation status
+of Digital Credentials is not absolute and can be influenced by numerous variables. Consider as an example the case of age-over x;
+even if it has expired, it may still perform its intended purpose. As a result, the expiration status alone does not render it invalid.
+The adaptability recognizes that the need to verify revocation status may not always coincide with the actual usability of a Digital Credential,
 allowing Verifiers to examine and make educated conclusions based on a variety of scenarios.
 
 
