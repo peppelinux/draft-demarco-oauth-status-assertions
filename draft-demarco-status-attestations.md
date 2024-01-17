@@ -3,7 +3,7 @@ title: "OAuth Status Attestations"
 abbrev: "OAuth Status Attestations"
 category: info
 
-docname: draft-demarco-status-attestations-00
+docname: draft-demarco-status-attestations-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
