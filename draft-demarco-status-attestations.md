@@ -23,6 +23,10 @@ author:
     organization: Dipartimento per la trasformazione digitale
     email: gi.demarco@innovazione.gov.it
  -
+    fullname: Orie Steele
+    organization: Transmute
+    email: orie@transmute.industries
+ -
     fullname: Francesco Marino
     organization: Istituto Poligrafico e Zecca dello Stato
     email: fa.marino@ipzs.it
@@ -66,7 +70,6 @@ To ensure the digital credential's validity, the issuer provides a short-lived
 Status Attestation to the holder.
 This attestation is bound to the digital credential and can be provided to a verifier,
 together with the digital credential, as evidence of the digital credential's non-revocation status.
-
 
 Status Attestation safeguards privacy and is essential in facilitating offline scenarios.
 In these circumstances, both the wallet and the verifier work without internet connectivity during the presentation phase;
