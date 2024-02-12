@@ -250,7 +250,7 @@ related to a specific Credential issued by the same Credential Issuer.
 ~~~
 
 The Wallet Instance sends the Status Attestation request to the Credential Issuer.
-The request MUST contain the Digital Credential, for which the Status Attestation
+The request MUST contain the hash value of the Digital Credential, for which the Status Attestation
 is requested, and enveloped in a signed object as proof of possession.
 The proof of possession MUST be signed with the private key corresponding
 to the public key attested by the Credential Issuer and contained within the Digital Credential.
@@ -290,8 +290,7 @@ encoding, for better readability:
 {
     "alg": "ES256",
     "typ": "status-attestation-request+jwt",
-    "kid": $WIA-CNF-JWKID
-
+    "kid": $CREDENTIAL-CNF-JWKID
 }
 .
 {
@@ -301,7 +300,8 @@ encoding, for better readability:
     "exp": 1698834139,
     "jti": "6f204f7e-e453-4dfd-814e-9d155319408c",
     "credential_format": "vc+sd-jwt",
-    "credential": $Issuer-Signed-JWT
+    "credential_hash": $Issuer-Signed-JWT-Hash
+    "credential_hash_alg": "sha-256",
 }
 ~~~
 
@@ -322,7 +322,8 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 | **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
 | **credential_format** | The data format of the Credential. Eg: `vc+sd-jwt` for SD-JWT, `vc+mdoc` for ISO/IEC 18013-5 MDOC CBOR [@ISO.18013-5] | this specification |
-| **credential** | It MUST contain the Credential according to the data format given in the `format` claim. | this specification |
+| **credential_hash** | It MUST contain the hash value of the Credential. | this specification |
+| **credential_hash_alg** | The Algorithm used of hashing the Digital Credential. The value SHOULD be set to `S256`. | this specification |
 
 
 # Status Attestation
@@ -393,9 +394,10 @@ Content-Type: application/json
 ## Credential Issuer Metadata
 
 The Credential Issuers that uses the Status Attestations MUST include in their
-OpenID4VCI [@!OpenID.VCI] metadata the claim `status_attestation_endpoint`,
-which its value MUST be an HTTPs URL indicating the endpoint where
-the Wallet Instances can request Status Attestations.
+OpenID4VCI [@!OpenID.VCI] metadata the claims:
+
+- `status_attestation_endpoint`. REQUIRED. It MUST be an HTTPs URL indicating the endpoint where the Wallet Instances can request Status Attestations.
+- `credential_hash_alg_supported`. REQUIRED. The supported Algorithm used by the Wallet Instance to hash the Digital Credential for which the Status Attestation is requested. The value SHOULD be set to `S256`.
 
 
 ## Issued Digital Credentials
@@ -405,7 +407,7 @@ issued Digital Credentials the object `status` with the
 JSON member `status_attestation` set to a JSON Object containing the following
 member:
 
-- `credential_hash_alg`. REQUIRED. The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound. The value SHOULD be set to `S256`.
+- `credential_hash_alg`. REQUIRED. The Algorithm used for hashing the Digital Credential to which the Status Attestation is bound. The value SHOULD be set to `S256`.
 
 
 The non-normative example of an unsecured payload of
