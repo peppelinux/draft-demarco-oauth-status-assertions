@@ -465,6 +465,27 @@ allowing Verifiers to examine and make educated conclusions based on a variety o
 
 TODO Security
 
+# Privacy Considerations
+
+In the design and implementation of Status Attestations, particular attention has been paid to privacy considerations to ensure that the system is respectful of user privacy and compliant with relevant regulations.
+
+## Privacy Consideration: Status Attestation Request Opacity
+
+The request for a status attestation does not carry the digital credential for which the status is being attested, but an opqaue proof of possession of it, evaluable only by the credential issuer that has issued the digital credential where the status attestation is requested for. This design choice is crucial for preventing the possibility of a bogus request being made with the intention of misleading or providing sensitive information to an unintended audience. By decoupling the digital credential from the status attestation request, the system ensures that the request itself does not inadvertently reveal any information about the digital credential or its holder. This approach enhances the privacy and security of the system by ensuring that the attestation process cannot be exploited to gather information about digital credentials or their holders through fabricated requests.
+
+## Privacy Consideration: Opacity of Status Attestation Content
+
+Another key privacy consideration is the design of the status attestation to ensure that it does not contain any information regarding the user or the holder of the digital credential. The status attestation is structured to provide only the necessary information to verify the non-revocation status of a digital credential without disclosing the identity of the holder or any personal information. This is achieved by focusing the attestation content on the credential's status and the verification process, rather than on the credential's holder. This design choice is instrumental in preserving the anonymity of the user, ensuring that the status attestation can be used in a wide range of verification scenarios without compromising the privacy of the individuals involved.
+
+## Unlinkability between Verifiers
+
+Status Attestations enhance privacy by ensuring that verifiers operate independently of each other without the need to interact with or disclose information to third-party entities or other verifiers. This design choice is crucial for maintaining unlinkability between verifiers, meaning that actions performed by one verifier cannot be correlated or linked to actions performed by another verifier. This independence is achieved by enabling verifiers to validate the status of a digital credential directly through the Status Attestation, without external communication. Such a mechanism is instrumental in preserving the privacy of the individuals whose credentials are being verified, as it minimizes the risk of tracking or profiling based on verification activities across different services.
+
+## Untrackability by Digital Credential Issuers
+
+Another cornerstone of the privacy-preserving features of Status Attestations is the prevention of tracking by digital credential issuers. Unlike models that require verifiers to query a central status list or the issuer directly, Status Attestations contain all necessary information for verification within the attestation itself. This approach ensures that the credential issuer cannot monitor when or where a digital credential is verified, thus significantly enhancing the privacy of the credential holder. By eliminating the need for real-time communication with the issuer for status checks, Status Attestations ensure that verification activities remain untrackable by the issuer, further solidifying the system's commitment to user privacy.
+
+These privacy considerations are integral to the design of Status Attestations and reflect a deliberate effort to balance security and privacy needs in the digital credential ecosystem. By adhering to these principles, Status Attestations contribute to a more secure and privacy-respecting digital world.
 
 # IANA Considerations
 
