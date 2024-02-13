@@ -71,7 +71,9 @@ Status Attestation to the holder.
 This attestation is bound to the digital credential and can be provided to a verifier,
 together with the digital credential, as evidence of the digital credential's non-revocation status.
 
-Status Attestation safeguards privacy and is essential in facilitating offline scenarios.
+Status Attestations introduce a mechanism akin to OCSP Stapling in the context of digital credential verification. Just as OCSP Stapling allows a server to present a time-stamped OCSP response to prove the validity of its SSL/TLS certificates, thereby reducing the need for clients to contact the Certificate Authority (CA), Status Attestations enable a wallet instance to present a time-stamped attestation issued by the Credential Issuer. This attestation confirms the non-revocation status of a digital credential without requiring verifiers to query the issuer or any third-party entity directly. This approach enhances privacy, reduces latency, and allows for offline verification scenarios, mirroring the benefits of OCSP Stapling in the domain of digital credentials.
+
+Status Attestation are essential in facilitating offline scenarios.
 In these circumstances, both the wallet and the verifier work without internet connectivity during the presentation phase;
 nonetheless, Status Attestation provides a method to statically validate the validity of the digital credentials,
 thus increasing the security of the digital credential system. By limiting the disclosure of status information,
@@ -87,15 +89,22 @@ Status Attestation strikes a balance between scalability, security, and privacy.
 |                 | Status Attestation          |                   |
 |                 |<----------------------------|                   |
 +-----------------+                             +-------------------+
+~~~
+Figure 1: Status Attestation Issuance Flow
+
+This figure illustrates the process by which a Wallet Instance requests a Status Attestation from the Credential Issuer and subsequently receives it. 
 
 
+~~~ ascii-art
 +-- ----------------+                             +----------+
 |                   | Presents Digital Credential |          |
 |  Wallet Instance  | and Status Attestation      | Verifier |
 |                   |---------------------------->|          |
 +-------------------+                             +----------+
 ~~~
+Figure 2: Status Attestation Presentation Flow
 
+The Status Attestation is presented along with its digital credential, to prove the non-revocation status of a digital credential to a Verifier.
 
 # Conventions and Definitions
 
