@@ -215,6 +215,16 @@ format may be used, as long as all attributes and requirements
 defined in this specification are satisfied, even using equivalent names
 or values.
 
+# Proof of Possession of a Credential
+
+The concept of Proof of Possession (PoP) of a Credential within the framework of the Status Attestation specification encompasses a broader perspective than merely possessing the digital bytes of the credential. It involves demonstrating rightful control or ownership over the credential, which can manifest in various forms depending on the technology employed and the nature of the digital credential itself. For instance, a credential could be presented visually (de-visu) with a personal portrait serving as a binding element.
+
+While this specification does not prescribe any additional methods for the PoP of the credential, it aims to offer guidance for concrete implementations utilizing common PoP mechanisms. This includes, but is not limited to:
+
+1. Having the digital representation of the credential (the bytes).
+2. Controlling a private key that corresponds to a public key associated with the credential, often indicated within the credential's cnf (confirmation) claim or through a similar mechanism.
+
+The essence of requiring control over the private key and its demonstration through a cryptographic operation (e.g., signing a challenge or a token) is to ensure that the entity in possession of the credential can execute actions exclusively reserved for the legitimate owner. This dual-layered approach not only reinforces the security and integrity of the status attestation process but also affirms that the entity requesting a status attestation is the authentic holder of the credential.
 
 # Status Attestation Request
 
