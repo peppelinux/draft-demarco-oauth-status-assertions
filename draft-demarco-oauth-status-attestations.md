@@ -92,7 +92,7 @@ Status Attestation strikes a balance between scalability, security, and privacy.
 ~~~
 Figure 1: Status Attestation Issuance Flow
 
-This figure illustrates the process by which a Wallet Instance requests a Status Attestation from the Credential Issuer and subsequently receives it. 
+This figure illustrates the process by which a Wallet Instance requests a Status Attestation from the Credential Issuer and subsequently receives it.
 
 
 ~~~ ascii-art
