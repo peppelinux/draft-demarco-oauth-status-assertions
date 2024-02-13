@@ -485,6 +485,14 @@ Status Attestations enhance privacy by ensuring that verifiers operate independe
 
 Another cornerstone of the privacy-preserving features of Status Attestations is the prevention of tracking by digital credential issuers. Unlike models that require verifiers to query a central status list or the issuer directly, Status Attestations contain all necessary information for verification within the attestation itself. This approach ensures that the credential issuer cannot monitor when or where a digital credential is verified, thus significantly enhancing the privacy of the credential holder. By eliminating the need for real-time communication with the issuer for status checks, Status Attestations ensure that verification activities remain untrackable by the issuer, further solidifying the system's commitment to user privacy.
 
+## Minimization of Data Exposure
+
+The Status Attestations are desing around the data minimization principle. Data minimization ensures that only the necessary information required for the scope of attesting the non revocation status of the digital credential. This minimizes the exposure of potentially sensitive data.
+
+## Resistance to Enumeration Attacks
+
+The design of Status Attestations incorporates measures to resist enumeration attacks, where an adversary attempts to gather information by systematically verifying different combinations of data. By implementing robust cryptographic techniques and limiting the information contained in status attestations, the system reduces the feasibility of such attacks. This consideration is vital for safeguarding the privacy of the credential holders and for ensuring the integrity of the verification process.
+
 These privacy considerations are integral to the design of Status Attestations and reflect a deliberate effort to balance security and privacy needs in the digital credential ecosystem. By adhering to these principles, Status Attestations contribute to a more secure and privacy-respecting digital world.
 
 # IANA Considerations
