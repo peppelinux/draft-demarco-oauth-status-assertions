@@ -224,7 +224,7 @@ While this specification does not prescribe any additional methods for the PoP o
 1. Having the digital representation of the credential (the bytes).
 2. Controlling a private key that corresponds to a public key associated with the credential, often indicated within the credential's cnf (confirmation) claim or through a similar mechanism.
 
-The essence of requiring control over the private key and its demonstration through a cryptographic operation (e.g., signing a challenge or a token) is to ensure that the entity in possession of the credential can execute actions exclusively reserved for the legitimate owner. This dual-layered approach not only reinforces the security and integrity of the status attestation process but also affirms that the entity requesting a status attestation is the authentic holder of the credential.
+The essence of requiring control over the private key and its demonstration through a cryptographic operation (e.g., signing a challenge or a token) is to ensure that the entity in possession of the credential can execute actions exclusively reserved for the legitimate owner. The dual-layered approach of requiring both possession of the credential and control over the corresponding private key indeed reinforces the security and integrity of the status attestation process. It also ensures that the entity requesting a status attestation is indeed the same entity to which the credential was originally issued, affirming the authenticity and rightful ownership of the credential.
 
 # Status Attestation Request
 
