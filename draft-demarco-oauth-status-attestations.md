@@ -139,7 +139,7 @@ presentation, or situations where the Verifier should not be allowed to
 check the status of a Digital Credential over time due to some privacy constraints,
 in compliance with national privacy regulations.
 
-TODO: Add an example of national privacy constraints to give the reader some intuition.
+For instance, consider a scenario under the European Union's General Data Protection Regulation (GDPR), where a Verifier's repeated access to a Status List to check the revocation status of a Digital Credential could be deemed as excessive monitoring of the End-User's activities. This could potentially infringe upon the End-User's right to privacy, as outlined in Article 8 of the European Convention on Human Rights, by creating a detailed profile of the End-User's interactions and credential usage without explicit consent for such continuous surveillance.
 
 In scenarios where the Verifier, Credential Issuer, and OAuth Status List
 Provider are all part of the same domain or operate within a context where
@@ -273,6 +273,24 @@ the public key contained in the Digital Credential;
 The technical and details about the `credential_pop` object
 are defined in the next section.
 
+## Status Attestation Request Errors
+
+In cases where a Status Attestation request is made for a Digital Credential that does not exist, has expired, been revoked, or is in any way invalid, or if the HTTP Request is compromised by missing or incorrect parameters, the Credential Issuer is required to respond with an HTTP Response. This response should have a status code of `400` and use `application/json` as the content type, including the following parameters:
+
+- `error`, REQUIRED. The value must be assigned one of the error types as specified in the OAuth 2.0 RFC [Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2);
+- `error_description`, OPTIONAL. Text in human-readable form that offers more details to clarify the nature of the error encountered (for instance, changes in some attributes, reasons for revocation, other).
+
+Below a non-normative example of an HTTP Response with an error.
+
+~~~
+  HTTP/1.1 400 Bad Request
+  Content-Type: application/json;charset=UTF-8
+
+  {
+    "error":"invalid_request"
+    "error_description": "The signature of credential_pop JWT is not valid"
+  }
+~~~
 
 ## Digital Credential Proof of Possession
 
