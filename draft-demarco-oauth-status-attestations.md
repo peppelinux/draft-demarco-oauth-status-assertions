@@ -483,6 +483,37 @@ allowing Verifiers to examine and make educated conclusions based on a variety o
 
 TODO Security
 
+# Privacy Considerations
+
+In the design and implementation of Status Attestations, particular attention has been paid to privacy considerations to ensure that the system is respectful of user privacy and compliant with relevant regulations.
+
+## Privacy Consideration: Status Attestation Request Opacity
+
+The request for a status attestation does not transmit the digital credential for which the status is being attested. Instead, it includes a proof of possession (PoP) of the credential that is only interpretable by the credential issuer who issued the digital credential for which the status attestation is requested. This PoP can be achieved through a cryptographic signature using the public key contained within the digital credential over the request. This method is essential for preventing the potential for fraudulent requests intended to mislead or disclose sensitive information to unintended parties. By separating the digital credential from the status attestation request, the system ensures that the request does not inadvertently disclose any information about the digital credential or its holder. This strategy significantly enhances the privacy and security of the system by preventing the attestation process from being used to collect information about digital credentials or their holders through deceptive requests.
+
+## Privacy Consideration: Opacity of Status Attestation Content
+
+An important privacy consideration is how the status attestation is structured to ensure it does not reveal any information about the user or the holder of the digital credential. The status attestation is crafted to prove only the vital information needed to verify the current state of a digital credential, moving beyond simple revocation or suspension checks. This is done by focusing the attestation content on the credential's present condition and the method for its verification, rather than on the identity of the credential's holder. This approach is key in keeping the user's anonymity intact, making sure that the status attestation can be applied in various verification situations without risking the privacy of the people involved.
+
+## Unlinkability and Reusability of Status Attestations
+
+Status Attestations are designed to uphold privacy by allowing verifiers to operate independently, without the need for interaction or information disclosure to third-party entities or other verifiers. This design is pivotal in ensuring unlinkability between verifiers, where actions taken by one verifier cannot be correlated or linked to actions taken by another. Verifiers can directly validate the status of a digital credential through the Status Attestation, eliminating the need for external communication. This mechanism is key in protecting the privacy of individuals whose credentials are being verified, as it significantly reduces the risk of tracking or profiling based on verification activities across various services.
+
+While Status Attestations facilitate unlinkability, they are not inherently "single use." The specification accommodates the batch issuance of multiple status attestations, which can be single-use. However, particularly for offline interactions, a single attestation may be utilized by numerous verifiers. This flexibility ensures that Status Attestations can support a wide range of verification scenarios, from one-time validations to repeated checks by different entities, without compromising the privacy or security of the credential holder.
+
+## Untrackability by Digital Credential Issuers and the "Phone Home" Problem
+
+A fundamental aspect of the privacy-preserving attributes of Status Attestations is their ability to address the "phone home" problem, which is the prevention of tracking by digital credential issuers. Traditional models often require verifiers to query a central status list or contact the issuer directly, a process that can inadvertently allow issuers to track when and where a digital credential is verified. Status Attestations, however, encapsulate all necessary verification information within the attestation itself. This design choice ensures that credential issuers are unable to monitor the verification activities of their issued digital credentials, thereby significantly enhancing the privacy of the credential holder. By removing the need for real-time communication with the issuer for status checks, Status Attestations effectively prevent the issuer from tracking verification activities, further reinforcing the system's dedication to protecting user privacy.
+
+## Minimization of Data Exposure
+
+The Status Attestations are designed around the data minimization principle. Data minimization ensures that only the necessary information required for the scope of attesting the non revocation status of the digital credential. This minimizes the exposure of potentially sensitive data.
+
+## Resistance to Enumeration Attacks
+
+The design of Status Attestations incorporates measures to resist enumeration attacks, where an adversary attempts to gather information by systematically verifying different combinations of data. By implementing robust cryptographic techniques and limiting the information contained in status attestations, the system reduces the feasibility of such attacks. This consideration is vital for safeguarding the privacy of the credential holders and for ensuring the integrity of the verification process.
+
+These privacy considerations are integral to the design of Status Attestations and reflect a deliberate effort to balance security and privacy needs in the digital credential ecosystem. By adhering to these principles, Status Attestations contribute to a more secure and privacy-respecting digital world.
 
 # IANA Considerations
 
