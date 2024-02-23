@@ -250,7 +250,7 @@ related to a specific Credential issued by the same Credential Issuer.
 ~~~
 
 The Wallet Instance sends the Status Attestation request to the Credential Issuer.
-The request MUST contain the hash value of the Digital Credential, for which the Status Attestation
+The request MUST contain the base64url hash value of the Digital Credential, for which the Status Attestation
 is requested, and enveloped in a signed object as proof of possession.
 The proof of possession MUST be signed with the private key corresponding
 to the public key attested by the Credential Issuer and contained within the Digital Credential.
