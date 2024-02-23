@@ -58,7 +58,7 @@ without requiring to query any third-party entities.
 # Introduction
 
 Status Attestations ensure the integrity and trustworthiness of digital credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT) format, certifying their validity and non-revocation status. They function similarly to OCSP Stapling, allowing wallet instances to present time-stamped attestations from the Credential Issuer.
-This process verifies credentials without direct queries to the issuer, enhancing privacy, reducing latency, and enabling offline verification. Essential for offline scenarios, Status Attestations validate digital credentials' validity, balancing scalability, security, and privacy without internet connectivity.
+The approach defined in this specification allows the verification of credentials against any revocation, without direct queries to the issuer, enhancing privacy, reducing latency, and enabling offline verification. Essential for offline scenarios, Status Attestations validate digital credentials' validity, balancing scalability, security, and privacy without internet connectivity.
 
 
 ~~~ ascii-art
