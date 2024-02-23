@@ -299,7 +299,6 @@ encoding, for better readability:
     "iat": 1698744039,
     "exp": 1698834139,
     "jti": "6f204f7e-e453-4dfd-814e-9d155319408c",
-    "credential_format": "vc+sd-jwt",
     "credential_hash": $Issuer-Signed-JWT-Hash
     "credential_hash_alg": "sha-256",
 }
