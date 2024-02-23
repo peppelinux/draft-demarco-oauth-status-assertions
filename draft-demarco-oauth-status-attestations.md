@@ -321,7 +321,7 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 | **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
 | **credential_hash** | It MUST contain the hash value of the Credential. | this specification |
-| **credential_hash_alg** |  The hash value of a Digital Credential is derived by computing the base64url encoded hash of the Digital Credential. | this specification |
+| **credential_hash_alg** |  The hash value of a Digital Credential, derived by computing the base64url encoded hash of the Digital Credential. | this specification |
 
 
 # Status Attestation
@@ -405,7 +405,7 @@ issued Digital Credentials the object `status` with the
 JSON member `status_attestation` set to a JSON Object containing the following
 member:
 
-- `credential_hash_alg`. REQUIRED.  The hash value of a Digital Credential is derived by computing the base64url encoded hash of the Digital Credential using one of the hash algorithms listed in the [IANA - Named Information Hash Algorithm Registry](https://www.iana.org/assignments/named-information/named-information.xhtml#hash-alg). Among the hash algorithms, `sha-256` is recommended and SHOULD be implemented by all systems.
+- `credential_hash_alg`. REQUIRED. The hash value of a Digital Credential is derived by computing the base64url encoded hash of the Digital Credential using one of the hash algorithms listed in the [IANA - Named Information Hash Algorithm Registry](https://www.iana.org/assignments/named-information/named-information.xhtml#hash-alg). Among the hash algorithms, `sha-256` is recommended and SHOULD be implemented by all systems.
 
 
 The non-normative example of an unsecured payload of
