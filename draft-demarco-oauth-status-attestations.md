@@ -127,8 +127,9 @@ and their validity status.
 
 Verifier:
 : Entity that relies on the validity of the Digital Credentials presented to it.
-This Entity, also known as a Relying Party, needs to verify the authenticity and
-validity of the Digital Credentials, including their revocation status, before accepting them.
+This Entity, also known as a Relying Party, verifies the authenticity and
+validity of the Digital Credentials, including their revocation status,
+before accepting them.
 
 Wallet Instance:
 : The digital Wallet in control of a User, also known as Wallet or Holder.
@@ -415,6 +416,7 @@ Content-Type: application/json
 
 # Credential Issuers Supporting Status Attestations
 
+This section outlines how Credential Issuers support Status Attestations, detailing the necessary metadata and practices to integrate into their systems.
 
 ## Credential Issuer Metadata
 
@@ -438,8 +440,6 @@ member:
 The non-normative example of an unsecured payload of
 an SD-JWT VC is shown below.
 
-> TODO: alignments with the OAuth2 Status List schema and IANA registration.
-
 ~~~
 {
  "vct": "https://credentials.example.com/identity_credential",
@@ -459,11 +459,15 @@ an SD-JWT VC is shown below.
  "is_over_65": true,
  "status": {
     "status_attestation": {
-        "credential_hash_alg": "S256",
+        "credential_hash_alg": "sha-256",
     }
  }
 }
 ~~~
+
+### Credential Issuer Implementation Considerations
+
+When the Digital Credential is issued, the Credential Issuer SHOULD calculate the hash value using the algorithm specified in `status.status_attestation.credential_hash_alg` and store this information in its database. This practice enhances efficiency by allowing the Credential Issuer to quickly compare the requested `credential_hash with the pre-calculated one, when processing Status Attestation requests made by Holders.
 
 # Presenting Status Attestations
 
@@ -476,7 +480,7 @@ SHOULD:
 
 - Decode and validate the Digital Credential;
 - check the presence of `status.status_attestation` in the Digital Credential. If true, the Verifier SHOULD:
-  - produce the hash of the Digital Credential using the hashing algorithm defined in `status.status_attestation`;
+  - produce the hash of the Digital Credential using the hashing algorithm configured in `status.status_attestation.credential_hash_alg`;
   - decode all the Status Attestations provided in the presentation, by matching the JWS Header parameter `typ` set to `status-attestation+jwt` and looking for the `credential_hash` value that matches with the hash produced at the previous point;
   - evaluate the validity of the Status Attestation.
 
