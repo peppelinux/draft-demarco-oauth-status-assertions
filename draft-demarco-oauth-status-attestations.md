@@ -395,7 +395,7 @@ The Credential Issuers that uses the Status Attestations MUST include in their
 OpenID4VCI [@!OpenID.VCI] metadata the claims:
 
 - `status_attestation_endpoint`. REQUIRED. It MUST be an HTTPs URL indicating the endpoint where the Wallet Instances can request Status Attestations.
-- `credential_hash_alg_supported`. REQUIRED. The supported Algorithm used by the Wallet Instance to hash the Digital Credential for which the Status Attestation is requested. The value SHOULD be set to `S256`.
+- `credential_hash_alg_supported`. REQUIRED. The supported Algorithm used by the Wallet Instance to hash the Digital Credential for which the Status Attestation is requested,  using one of the hash algorithms listed in the [IANA - Named Information Hash Algorithm Registry](https://www.iana.org/assignments/named-information/named-information.xhtml#hash-alg).
 
 
 ## Issued Digital Credentials
