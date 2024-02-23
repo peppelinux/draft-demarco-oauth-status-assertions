@@ -414,7 +414,7 @@ issued Digital Credentials the object `status` with the
 JSON member `status_attestation` set to a JSON Object containing the following
 member:
 
-- `credential_hash_alg`. REQUIRED. The hash value of a Digital Credential is derived by computing the base64url encoded hash of the Digital Credential using one of the hash algorithms listed in the [IANA - Named Information Hash Algorithm Registry](https://www.iana.org/assignments/named-information/named-information.xhtml#hash-alg). Among the hash algorithms, `sha-256` is recommended and SHOULD be implemented by all systems.
+- `credential_hash_alg`. REQUIRED. The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound, using one of the hash algorithms listed in the [IANA - Named Information Hash Algorithm Registry](https://www.iana.org/assignments/named-information/named-information.xhtml#hash-alg). Among the hash algorithms, `sha-256` is recommended and SHOULD be implemented by all systems.
 
 
 The non-normative example of an unsecured payload of
