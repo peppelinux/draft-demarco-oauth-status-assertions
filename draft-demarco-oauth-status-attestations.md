@@ -46,7 +46,7 @@ informative:
 
 Status Attestation is a signed object that demonstrates the validity status of a
 digital credential.
-These attestations are ephemeral and periodically provided
+These attestations are periodically provided
 to holders, who can present these to Verifiers along
 with the corresponding digital credentials.
 The approach outlined in this document
@@ -57,28 +57,8 @@ without requiring to query any third-party entities.
 
 # Introduction
 
-Status Attestation plays a crucial role in maintaining the integrity and
-trustworthiness of digital credentials,
-since these serve as proof that a particular digital credential,
-whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT) format,
-has not been revoked and is still valid.
-
-A digital credential may be presented to a verifier long after it has been issued.
-During this interval, the digital credential could potentially be invalidated for
-various reasons (e.g., due to the device lost or holder fraud).
-To ensure the digital credential's validity, the issuer provides a short-lived
-Status Attestation to the holder.
-This attestation is bound to the digital credential and can be provided to a verifier,
-together with the digital credential, as evidence of the digital credential's non-revocation status.
-
-Status Attestations introduce a mechanism akin to OCSP Stapling in the context of digital credential verification. Just as OCSP Stapling allows a server to present a time-stamped OCSP response to prove the validity of its SSL/TLS certificates, thereby reducing the need for clients to contact the Certificate Authority (CA), Status Attestations enable a wallet instance to present a time-stamped attestation issued by the Credential Issuer. This attestation confirms the non-revocation status of a digital credential without requiring verifiers to query the issuer or any third-party entity directly. This approach enhances privacy, reduces latency, and allows for offline verification scenarios, mirroring the benefits of OCSP Stapling in the domain of digital credentials.
-
-Status Attestation are essential in facilitating offline scenarios.
-In these circumstances, both the wallet and the verifier work without internet connectivity during the presentation phase;
-nonetheless, Status Attestation provides a method to statically validate the validity of the digital credentials,
-thus increasing the security of the digital credential system. By limiting the disclosure of status information,
-Status Attestation strikes a balance between scalability, security, and privacy.
-
+Status Attestations ensure the integrity and trustworthiness of digital credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT) format, certifying their validity and non-revocation status. They function similarly to OCSP Stapling, allowing wallet instances to present time-stamped attestations from the Credential Issuer.
+The approach defined in this specification allows the verification of credentials against any revocation, without direct queries to the issuer, enhancing privacy, reducing latency, and enabling offline verification. Essential for offline scenarios, Status Attestations validate digital credentials' validity, balancing scalability, security, and privacy without internet connectivity.
 
 
 ~~~ ascii-art
@@ -348,8 +328,8 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 | **exp** | UNIX Timestamp with the expiration time of the JWT. | {{RFC9126}}, {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
-| **credential_hash** | It MUST contain the hash value of the Credential. | this specification |
-| **credential_hash_alg** |  The hash value of a Digital Credential, derived by computing the base64url encoded hash of the Digital Credential. | this specification |
+| **credential_hash** | Hash value of the Digital Credential the Status Attestation is bound to. | this specification |
+| **credential_hash_alg** |  The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound. The value SHOULD be set to `sha-256`. | this specification |
 
 
 # Status Attestation
@@ -392,7 +372,7 @@ The Status Attestation MUST contain the following claims when the JWT format is 
 | **iat** | UNIX Timestamp with the time of the Status Attestation issuance. | {{RFC9126}}, {{RFC7519}} |
 | **exp** | UNIX Timestamp with the expiry time of the Status Attestation. | {{RFC9126}}, {{RFC7519}} |
 | **credential_hash** | Hash value of the Digital Credential the Status Attestation is bound to. | this specification |
-| **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound. The value SHOULD be set to `S256`. | this specification |
+| **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound. The value SHOULD be set to `sha-256`. | this specification |
 | **cnf** | JSON object containing the cryptographic key binding. The `cnf.jwk` value MUST match with the one provided within the related Digital Credential. | {{RFC7800}} Section 3.1 |
 
 
