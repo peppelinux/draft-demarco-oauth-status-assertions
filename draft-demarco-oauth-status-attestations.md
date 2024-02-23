@@ -127,8 +127,9 @@ and their validity status.
 
 Verifier:
 : Entity that relies on the validity of the Digital Credentials presented to it.
-This Entity, also known as a Relying Party, needs to verify the authenticity and
-validity of the Digital Credentials, including their revocation status, before accepting them.
+This Entity, also known as a Relying Party, verifies the authenticity and
+validity of the Digital Credentials, including their revocation status,
+before accepting them.
 
 Wallet Instance:
 : The digital Wallet in control of a User, also known as Wallet or Holder.
@@ -259,7 +260,7 @@ related to a specific Credential issued by the same Credential Issuer.
 ~~~
 
 The Wallet Instance sends the Status Attestation request to the Credential Issuer.
-The request MUST contain the Digital Credential, for which the Status Attestation
+The request MUST contain the base64url hash value of the Digital Credential, for which the Status Attestation
 is requested, and enveloped in a signed object as proof of possession.
 The proof of possession MUST be signed with the private key corresponding
 to the public key attested by the Credential Issuer and contained within the Digital Credential.
@@ -317,8 +318,7 @@ encoding, for better readability:
 {
     "alg": "ES256",
     "typ": "status-attestation-request+jwt",
-    "kid": $WIA-CNF-JWKID
-
+    "kid": $CREDENTIAL-CNF-JWKID
 }
 .
 {
@@ -327,8 +327,8 @@ encoding, for better readability:
     "iat": 1698744039,
     "exp": 1698834139,
     "jti": "6f204f7e-e453-4dfd-814e-9d155319408c",
-    "credential_format": "vc+sd-jwt",
-    "credential": $Issuer-Signed-JWT
+    "credential_hash": $Issuer-Signed-JWT-Hash
+    "credential_hash_alg": "sha-256",
 }
 ~~~
 
@@ -348,8 +348,8 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 | **exp** | UNIX Timestamp with the expiration time of the JWT. | {{RFC9126}}, {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
-| **credential_format** | The data format of the Credential. Eg: `vc+sd-jwt` for SD-JWT, `vc+mdoc` for ISO/IEC 18013-5 MDOC CBOR [@ISO.18013-5] | this specification |
-| **credential** | It MUST contain the Credential according to the data format given in the `format` claim. | this specification |
+| **credential_hash** | It MUST contain the hash value of the Credential. | this specification |
+| **credential_hash_alg** |  The hash value of a Digital Credential, derived by computing the base64url encoded hash of the Digital Credential. | this specification |
 
 
 # Status Attestation
@@ -416,13 +416,15 @@ Content-Type: application/json
 
 # Credential Issuers Supporting Status Attestations
 
+This section outlines how Credential Issuers support Status Attestations, detailing the necessary metadata and practices to integrate into their systems.
 
 ## Credential Issuer Metadata
 
 The Credential Issuers that uses the Status Attestations MUST include in their
-OpenID4VCI [@!OpenID.VCI] metadata the claim `status_attestation_endpoint`,
-which its value MUST be an HTTPs URL indicating the endpoint where
-the Wallet Instances can request Status Attestations.
+OpenID4VCI [@!OpenID.VCI] metadata the claims:
+
+- `status_attestation_endpoint`. REQUIRED. It MUST be an HTTPs URL indicating the endpoint where the Wallet Instances can request Status Attestations.
+- `credential_hash_alg_supported`. REQUIRED. The supported Algorithm used by the Wallet Instance to hash the Digital Credential for which the Status Attestation is requested,  using one of the hash algorithms listed in the [IANA - Named Information Hash Algorithm Registry](https://www.iana.org/assignments/named-information/named-information.xhtml#hash-alg).
 
 
 ## Issued Digital Credentials
@@ -432,13 +434,11 @@ issued Digital Credentials the object `status` with the
 JSON member `status_attestation` set to a JSON Object containing the following
 member:
 
-- `credential_hash_alg`. REQUIRED. The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound. The value SHOULD be set to `S256`.
+- `credential_hash_alg`. REQUIRED. The hash value of a Digital Credential is derived by computing the base64url encoded hash of the Digital Credential using one of the hash algorithms listed in the [IANA - Named Information Hash Algorithm Registry](https://www.iana.org/assignments/named-information/named-information.xhtml#hash-alg). Among the hash algorithms, `sha-256` is recommended and SHOULD be implemented by all systems.
 
 
 The non-normative example of an unsecured payload of
 an SD-JWT VC is shown below.
-
-> TODO: alignments with the OAuth2 Status List schema and IANA registration.
 
 ~~~
 {
@@ -459,15 +459,19 @@ an SD-JWT VC is shown below.
  "is_over_65": true,
  "status": {
     "status_attestation": {
-        "credential_hash_alg": "S256",
+        "credential_hash_alg": "sha-256",
     }
  }
 }
 ~~~
 
+### Credential Issuer Implementation Considerations
+
+When the Digital Credential is issued, the Credential Issuer SHOULD calculate the hash value using the algorithm specified in `status.status_attestation.credential_hash_alg` and store this information in its database. This practice enhances efficiency by allowing the Credential Issuer to quickly compare the requested `credential_hash with the pre-calculated one, when processing Status Attestation requests made by Holders.
+
 # Presenting Status Attestations
 
-The Wallet Instance that provides the Status Attestations SHOULD be included in the
+The Wallet Instance that provides the Status Attestations using [@OpenID4VP], SHOULD include in the
 `vp_token` JSON array, as defined in [@OpenID4VP], the Status Attestation along with the
 related Digital Credential.
 
@@ -476,7 +480,7 @@ SHOULD:
 
 - Decode and validate the Digital Credential;
 - check the presence of `status.status_attestation` in the Digital Credential. If true, the Verifier SHOULD:
-  - produce the hash of the Digital Credential using the hashing algorithm defined in `status.status_attestation`;
+  - produce the hash of the Digital Credential using the hashing algorithm configured in `status.status_attestation.credential_hash_alg`;
   - decode all the Status Attestations provided in the presentation, by matching the JWS Header parameter `typ` set to `status-attestation+jwt` and looking for the `credential_hash` value that matches with the hash produced at the previous point;
   - evaluate the validity of the Status Attestation.
 
