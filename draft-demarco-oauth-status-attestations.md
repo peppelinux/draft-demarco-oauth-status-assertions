@@ -328,7 +328,7 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 | **exp** | UNIX Timestamp with the expiration time of the JWT. | {{RFC9126}}, {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
-| **credential_hash** | The hash value of the Credential. | this specification |
+| **credential_hash** | Hash value of the Digital Credential the Status Attestation is bound to. | this specification |
 | **credential_hash_alg** |  The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound. The value SHOULD be set to `sha-256`. | this specification |
 
 
