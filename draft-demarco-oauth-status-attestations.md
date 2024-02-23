@@ -320,7 +320,6 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 | **exp** | UNIX Timestamp with the expiration time of the JWT. | {{RFC9126}}, {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
-| **credential_format** | The data format of the Credential. Eg: `vc+sd-jwt` for SD-JWT, `vc+mdoc` for ISO/IEC 18013-5 MDOC CBOR [@ISO.18013-5] | this specification |
 | **credential_hash** | It MUST contain the hash value of the Credential. | this specification |
 | **credential_hash_alg** | The Algorithm used of hashing the Digital Credential. The value SHOULD be set to `S256`. | this specification |
 
