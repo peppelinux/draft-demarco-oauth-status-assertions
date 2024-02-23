@@ -471,7 +471,7 @@ When the Digital Credential is issued, the Credential Issuer SHOULD calculate th
 
 # Presenting Status Attestations
 
-The Wallet Instance that provides the Status Attestations SHOULD be included in the
+The Wallet Instance that provides the Status Attestations using [@OpenID4VP], SHOULD include in the
 `vp_token` JSON array, as defined in [@OpenID4VP], the Status Attestation along with the
 related Digital Credential.
 
