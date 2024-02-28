@@ -516,7 +516,7 @@ The Status Attestations are designed around the data minimization principle. Dat
 
 The design of Status Attestations incorporates measures to resist enumeration attacks, where an adversary attempts to gather information by systematically verifying different combinations of data. By implementing robust cryptographic techniques and limiting the information contained in status attestations, the system reduces the feasibility of such attacks. This consideration is vital for safeguarding the privacy of the credential holders and for ensuring the integrity of the verification process.
 
-These privacy considerations are integral to the design of Status Attestations and reflect a deliberate effort to balance security and privacy needs in the digital credential ecosystem. By adhering to these principles, Status Attestations contribute to a more secure and privacy-respecting digital world.
+Status Attestations are based on a privacy-by-design approach, reflecting a deliberate effort to balance security and privacy needs in the Digital Credential ecosystem.
 
 # IANA Considerations
 
