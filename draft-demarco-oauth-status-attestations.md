@@ -324,7 +324,7 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 | JOSE Payload | Description | Reference |
 | --- | --- | --- |
 | **iss** | Wallet identifier. | {{RFC9126}}, {{RFC7519}} |
-| **aud** | It MUST be set to the identifier of the Credential Issuer. | {{RFC9126}}, {{RFC7519}} |
+| **aud** | It MUST be set with the Credential Issuer Status Attestation endpoint URL as value that identify the intended audience | {{RFC9126}}, {{RFC7519}} |
 | **exp** | UNIX Timestamp with the expiration time of the JWT. | {{RFC9126}}, {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
