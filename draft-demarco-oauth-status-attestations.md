@@ -391,7 +391,7 @@ The Status Attestation MUST contain the following claims when the JWT format is 
 If the Status Attestation is requested for a non-existent, expired, revoked or invalid Digital Credential, the
 Credential Issuer MUST respond with an HTTP Response with the status code set to 404.
 
-If the Digital Credential is valid, the Credential Issuer MUST return an HTTP status code of 201 (Created), with the content type set to application/json. The response MUST include a JSON object with a member named `status_attestation`, which contains the Status Attestation for the Wallet Instance, as illustrated in the following non-normative example:
+If the Digital Credential is valid, the Credential Issuer MUST return an HTTP status code of 201 (Created), with the content type set to `application/json`. The response MUST include a JSON object with a member named `status_attestation`, which contains the Status Attestation for the Wallet Instance, as illustrated in the following non-normative example:
 
 ~~~
 HTTP/1.1 201 Created
