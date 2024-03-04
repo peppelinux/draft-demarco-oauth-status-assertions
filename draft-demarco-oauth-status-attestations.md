@@ -607,6 +607,7 @@ To indicate that the content is an CWT-based Status List:
 We would like to thank:
 
 - Paul Bastien
+- Emanuele De Cupis
 - Riccardo Iaconelli
 - Victor Näslund
 - Giada Sciarretta
