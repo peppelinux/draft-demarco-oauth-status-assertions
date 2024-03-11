@@ -205,6 +205,16 @@ format may be used, as long as all attributes and requirements
 defined in this specification are satisfied, even using equivalent names
 or values.
 
+# Proof of Possession of a Credential
+
+The concept of Proof of Possession (PoP) of a Credential within the framework of the Status Attestation specification encompasses a broader perspective than merely possessing the digital bytes of the Credential. It involves demonstrating rightful control or ownership over the Credential, which can manifest in various forms depending on the technology employed and the nature of the digital Credential itself. For instance, a Credential could be presented visually (de-visu) with a personal portrait serving as a binding element.
+
+While this specification does not prescribe any additional methods for the proof of possession of the Credential, it aims to offer guidance for concrete implementations utilizing common proof of possession mechanisms. This includes, but is not limited to:
+
+1. Having the digital representation of the credential (the bytes).
+2. Controlling a private key that corresponds to a public key associated with the Credential, often indicated within the Credential's cnf (confirmation) claim or through a similar mechanism.
+
+The essence of requiring control over the private key and its demonstration through a cryptographic operation (e.g., signing a challenge or a token) is to ensure that the entity in possession of the Credential can execute actions exclusively reserved for the legitimate subject. The dual-layered approach of requiring both possession of the Credential and control over the corresponding private key indeed reinforces the security and integrity of the status attestation process. It also ensures that the entity requesting a Status Attestation is indeed the same entity to which the Credential was originally issued, affirming the authenticity and rightful possession of the Credential.
 
 # Status Attestation Request
 
@@ -381,11 +391,10 @@ The Status Attestation MUST contain the following claims when the JWT format is 
 If the Status Attestation is requested for a non-existent, expired, revoked or invalid Digital Credential, the
 Credential Issuer MUST respond with an HTTP Response with the status code set to 404.
 
-If the Digital Credential is valid, the Credential Issuer then returns the Status Attestation to the Wallet Instance,
-as in the following non-normative example.
+If the Digital Credential is valid, the Credential Issuer MUST return an HTTP status code of 201 (Created), with the content type set to `application/json`. The response MUST include a JSON object with a member named `status_attestation`, which contains the Status Attestation for the Wallet Instance, as illustrated in the following non-normative example:
 
 ~~~
-HTTP/1.1 201 OK
+HTTP/1.1 201 Created
 Content-Type: application/json
 
 {
@@ -506,7 +515,7 @@ The Status Attestations are designed around the data minimization principle. Dat
 
 The design of Status Attestations incorporates measures to resist enumeration attacks, where an adversary attempts to gather information by systematically verifying different combinations of data. By implementing robust cryptographic techniques and limiting the information contained in status attestations, the system reduces the feasibility of such attacks. This consideration is vital for safeguarding the privacy of the credential holders and for ensuring the integrity of the verification process.
 
-These privacy considerations are integral to the design of Status Attestations and reflect a deliberate effort to balance security and privacy needs in the digital credential ecosystem. By adhering to these principles, Status Attestations contribute to a more secure and privacy-respecting digital world.
+Status Attestations are based on a privacy-by-design approach, reflecting a deliberate effort to balance security and privacy needs in the Digital Credential ecosystem.
 
 # IANA Considerations
 
@@ -598,6 +607,7 @@ To indicate that the content is an CWT-based Status List:
 We would like to thank:
 
 - Paul Bastien
+- Emanuele De Cupis
 - Riccardo Iaconelli
 - Victor Näslund
 - Giada Sciarretta
