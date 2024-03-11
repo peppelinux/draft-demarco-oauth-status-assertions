@@ -70,7 +70,7 @@ The approach defined in this specification allows the verification of credential
 |                 |<----------------------------|                   |
 +-----------------+                             +-------------------+
 ~~~
-Figure 1: Status Attestation Issuance Flow
+**Figure 1**: Status Attestation Issuance Flow
 
 This figure illustrates the process by which a Wallet Instance requests a Status Attestation from the Credential Issuer and subsequently receives it.
 
@@ -82,7 +82,7 @@ This figure illustrates the process by which a Wallet Instance requests a Status
 |                   |---------------------------->|          |
 +-------------------+                             +----------+
 ~~~
-Figure 2: Status Attestation Presentation Flow
+**Figure 2**: Status Attestation Presentation Flow
 
 The Status Attestation is presented along with its digital credential, to prove the non-revocation status of a digital credential to a Verifier.
 
@@ -315,13 +315,13 @@ encoding, for better readability:
 
 When the JWT format is used, the JWT MUST contain the parameters defined in the following table.
 
-| JOSE Header | Description | Reference |
+| Header | Description | Reference |
 | --- | --- | --- |
 | **typ** | It MUST be set to `status-attestation-request+jwt` | {{RFC7516}} Section 4.1.1 |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
 | **kid** | Unique identifier of the JWK used for the signature of the Status Attestation Request, it MUST match the one contained in the Credential `cnf.jwk`. | {{RFC7515}} |
 
-| JOSE Payload | Description | Reference |
+| Payload | Description | Reference |
 | --- | --- | --- |
 | **iss** | Wallet identifier. | {{RFC9126}}, {{RFC7519}} |
 | **aud** | It MUST be set with the Credential Issuer Status Attestation endpoint URL as value that identify the intended audience | {{RFC9126}}, {{RFC7519}} |
