@@ -315,7 +315,7 @@ encoding, for better readability:
     "iss": "0b434530-e151-4c40-98b7-74c75a5ef760",
     "aud": "https://issuer.example.org/status-attestation-endpoint",
     "iat": 1698744039,
-    "exp": 1698834139,
+    "exp": 1698830439,
     "jti": "6f204f7e-e453-4dfd-814e-9d155319408c",
     "credential_hash": $Issuer-Signed-JWT-Hash
     "credential_hash_alg": "sha-256",
@@ -325,9 +325,9 @@ encoding, for better readability:
 
 When the JWT format is used, the JWT MUST contain the parameters defined in the following table.
 
-| JOSE Header | Description | Reference |
+| JOSE Header Parameter | Description | Reference |
 | --- | --- | --- |
-| **typ** | It MUST be set to `status-attestation-request+jwt` | {{RFC7516}} Section 4.1.1 |
+| **typ** | It MUST be set to `status-attestation-request+jwt` or `status-attestation-request+cwt`| {{RFC7516}} Section 4.1.1 |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
 | **kid** | Unique identifier of the JWK used for the signature of the Status Attestation Request, it MUST match the one contained in the Credential `cnf.jwk`. | {{RFC7515}} |
 
@@ -335,7 +335,7 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 | --- | --- | --- |
 | **iss** | Wallet identifier. | {{RFC9126}}, {{RFC7519}} |
 | **aud** | It MUST be set with the Credential Issuer Status Attestation endpoint URL as value that identify the intended audience | {{RFC9126}}, {{RFC7519}} |
-| **exp** | UNIX Timestamp with the expiration time of the JWT. | {{RFC9126}}, {{RFC7519}} |
+| **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be superior to the value set for `iat`  . | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
 | **credential_hash** | Hash value of the Digital Credential the Status Attestation is bound to. | this specification |
@@ -373,7 +373,7 @@ The Status Attestation MUST contain the following claims when the JWT format is 
 | JOSE Header | Description | Reference |
 | --- | --- | --- |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or to a symmetric algorithm (MAC) identifier. | {{RFC7515}}, {{RFC7517}} |
-| **typ** | It MUST be set to `status-attestation+jwt`. | {{RFC7515}}, {{RFC7517}} and this specification |
+| **typ** | It MUST be set to `status-attestation+jwt`or `status-attestation+cwt`. | {{RFC7515}}, {{RFC7517}} and this specification |
 | **kid** | Unique identifier of the Issuer JWK. | {{RFC7515}} |
 
 | JOSE Payload | Description | Reference |
@@ -464,6 +464,7 @@ The Wallet Instance that provides the Status Attestations using [@OpenID4VP], SH
 `vp_token` JSON array, as defined in [@OpenID4VP], the Status Attestation along with the
 related Digital Credential.
 
+Since the Wallet may request one or more Status Attestations, issued by the same Credential Issuer, the `credential_pop` object MUST be an array.
 The Verifier that receives a Digital Credential supporting the Status Attestation,
 SHOULD:
 
