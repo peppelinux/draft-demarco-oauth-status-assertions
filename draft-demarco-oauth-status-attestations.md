@@ -464,7 +464,7 @@ The Wallet Instance that provides the Status Attestations using [@OpenID4VP], SH
 `vp_token` JSON array, as defined in [@OpenID4VP], the Status Attestation along with the
 related Digital Credential.
 
-In a scenario where a Verifier requests one or more "Status Attestations" issued by the same "Credential Issuer" or any other party, there is a requirement for the credential_pop to include all the "Status Attestations" associated with the same issuer. Therefore, by default, the credential_pop object MUST be an array.
+Since the Wallet may request one or more Status Attestations, issued by the same Credential Issuer, the `credential_pop` object MUST be an array.
 The Verifier that receives a Digital Credential supporting the Status Attestation,
 SHOULD:
 
