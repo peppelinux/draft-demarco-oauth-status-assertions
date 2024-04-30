@@ -335,7 +335,7 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 | --- | --- | --- |
 | **iss** | Wallet identifier. | {{RFC9126}}, {{RFC7519}} |
 | **aud** | It MUST be set with the Credential Issuer Status Attestation endpoint URL as value that identify the intended audience | {{RFC9126}}, {{RFC7519}} |
-| **exp** | UNIX Timestamp with the expiration time of the JWT; it MUST be superior to issuance date time (iat)  . | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
+| **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be superior to the value set for `iat`  . | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
 | **credential_hash** | Hash value of the Digital Credential the Status Attestation is bound to. | this specification |
