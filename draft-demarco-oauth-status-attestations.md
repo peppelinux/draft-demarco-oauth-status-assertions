@@ -327,7 +327,7 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 
 | JOSE Header | Description | Reference |
 | --- | --- | --- |
-| **typ** | It MUST be set to `status-attestation-request+jwt` | {{RFC7516}} Section 4.1.1 |
+| **typ** | It MUST be set to `status-attestation-request+jwt` or `status-attestation-request+cwt`| {{RFC7516}} Section 4.1.1 |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
 | **kid** | Unique identifier of the JWK used for the signature of the Status Attestation Request, it MUST match the one contained in the Credential `cnf.jwk`. | {{RFC7515}} |
 
@@ -373,7 +373,7 @@ The Status Attestation MUST contain the following claims when the JWT format is 
 | JOSE Header | Description | Reference |
 | --- | --- | --- |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or to a symmetric algorithm (MAC) identifier. | {{RFC7515}}, {{RFC7517}} |
-| **typ** | It MUST be set to `status-attestation+jwt`. | {{RFC7515}}, {{RFC7517}} and this specification |
+| **typ** | It MUST be set to `status-attestation+jwt`or `status-attestation+cwt`. | {{RFC7515}}, {{RFC7517}} and this specification |
 | **kid** | Unique identifier of the Issuer JWK. | {{RFC7515}} |
 
 | JOSE Payload | Description | Reference |
@@ -463,6 +463,7 @@ When the Digital Credential is issued, the Credential Issuer SHOULD calculate th
 The Wallet Instance that provides the Status Attestations using [@OpenID4VP], SHOULD include in the
 `vp_token` JSON array, as defined in [@OpenID4VP], the Status Attestation along with the
 related Digital Credential.
+
 In a scenario where a Verifier requests one or more "Status Attestations" issued by the same "Credential Issuer" or any other party, there is a requirement for the credential_pop to include all the "Status Attestations" associated with the same issuer. Therefore, by default, the credential_pop object MUST be an array.
 The Verifier that receives a Digital Credential supporting the Status Attestation,
 SHOULD:
