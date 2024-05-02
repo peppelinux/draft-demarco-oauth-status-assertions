@@ -275,7 +275,8 @@ are defined in the next section.
 
 ## Credential_pop
 
-Since the Wallet may request one or more Status Attestations, issued by the same Credential Issuer, the `credential_pop` object MUST be an array. 
+Since the Wallet may request one or more Status Attestations, issued by the same Credential Issuer, the `credential_pop` object MUST be an array.
+
 For each array element, the JWT contained into `credential_pop` object, MUST include the parameters defined in the following table.
 
 | JOSE Header | Description | Reference |
