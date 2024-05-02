@@ -229,24 +229,24 @@ related to a specific Credential issued by the same Credential Issuer.
 
 
 ~~~ ascii-art
-+-------------------+                         +--------------------+
-|                   |                         |                    |
-|  Wallet Instance  |                         | Credential Issuer  |
-|                   |                         |                    |
-+--------+----------+                         +----------+---------+
-         |                                               |
-         | HTTP POST /status                             |
-         |  credential_pop = [$CredentialPoPJWT]         |
-         +----------------------------------------------->
-         |                                               |
-         |  Response with Status Attestation JWT         |
-         <-----------------------------------------------+
-         |                                               |
-+--------+----------+                         +----------+---------+
-|                   |                         |                    |
-|  Wallet Instance  |                         | Credential Issuer  |
-|                   |                         |                    |
-+-------------------+                         +--------------------+
++-------------------+                             +--------------------+
+|                   |                             |                    |
+|  Wallet Instance  |                             | Credential Issuer  |
+|                   |                             |                    |
++--------+----------+                             +----------+---------+
+         |                                                   |
+         | HTTP POST /status                                 |
+         |  credential_pop = [$CredentialPoPJWT]             |
+         +--------------------------------------------------->
+         |                                                   |
+         |  Response with Status Attestation JWT             |
+         <---------------------------------------------------+
+         |                                                   |
++--------+----------+                             +----------+---------+
+|                   |                             |                    |
+|  Wallet Instance  |                             | Credential Issuer  |
+|                   |                             |                    |
++-------------------+                             +--------------------+
 ~~~
 
 The Wallet Instance sends the Status Attestation request to the Credential Issuer.
@@ -266,14 +266,33 @@ credential_pop = [$CredentialPoPJWT]
 To validate that the Wallet Instance is entitled to request its Status Attestation,
 the following requirements MUST be satisfied:
 
-- The Credential Issuer MUST verify the signature of the `credential_pop` object using
-the public key contained in the Digital Credential;
-- the Credential Issuer MUST verify that it is the legitimate Issuer.
+- The Credential Issuer MUST verify the signature of each `credential_pop` object using
+the public key contained in each Digital Credential;
+- The Credential Issuer MUST verify that it is the legitimate Issuer.
 
 The technical and details about the `credential_pop` object
 are defined in the next section.
 
-*TODO CREDENTIAL_POP DEFINITION*
+## Credential_pop
+
+Since the Wallet may request one or more Status Attestations, issued by the same Credential Issuer, the `credential_pop` object MUST be an array. 
+For each array element, the JWT contained into `credential_pop` object, MUST include the parameters defined in the following table.
+
+| JOSE Header | Description | Reference |
+| --- | --- | --- |
+| **typ** | It MUST be set to `status-attestation-request+jwt` | {{RFC7516}} Section 4.1.1 |
+| **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
+| **kid** | Unique identifier of the JWK used for the signature of the Status Attestation Request, it MUST match the one contained in the Credential `cnf.jwk`. | {{RFC7515}} |
+
+| JOSE Payload | Description | Reference |
+| --- | --- | --- |
+| **iss** | Wallet identifier. | {{RFC9126}}, {{RFC7519}} |
+| **aud** | It MUST be set with the Credential Issuer Status Attestation endpoint URL as value that identify the intended audience | {{RFC9126}}, {{RFC7519}} |
+| **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be superior to the value set for `iat`. | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
+| **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
+| **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
+| **credential_hash** | Hash value of the Digital Credential the Status Attestation is bound to. | this specification |
+| **credential_hash_alg** |  The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound. The value SHOULD be set to `sha-256`. | this specification |
 
 ## Status Attestation Request Errors
 
@@ -466,8 +485,6 @@ When the Digital Credential is issued, the Credential Issuer SHOULD calculate th
 The Wallet Instance that provides the Status Attestations using [@OpenID4VP], SHOULD include in the
 `vp_token` JSON array, as defined in [@OpenID4VP], the Status Attestation along with the
 related Digital Credential.
-
-Since the Wallet may request one or more Status Attestations, issued by the same Credential Issuer, the `credential_pop` object MUST be an array.
 
 The Verifier that receives a Digital Credential supporting the Status Attestation,
 SHOULD:
