@@ -263,8 +263,8 @@ Content-Type: application/x-www-form-urlencoded
 credential_pop=[$CredentialPoPJWT]
 ~~~
 
-Since the Wallet may request one or more Status Attestations, issued by the same Credential Issuer, the credential_pop object MUST adhere to the following specification:
-- `credential_pop`. REQUIRED. By default, it MUST be an array of strings (array[string]).
+Given that the Wallet may request one or more Status Attestations from the same Credential Issuer, the `credential_pop` parameter is subject to the following specification:
+- credential_pop: REQUIRED. It MUST be implemented as an array of strings, where each string represents a Digital Credential proof of possession.
 
 To validate that the Wallet Instance is entitled to request its Status Attestation,
 the following requirements MUST be satisfied:
