@@ -400,7 +400,7 @@ HTTP/1.1 201 Created
 Content-Type: application/json
 
 {
-    "status_attestation": ["eyJhbGciOiJFUzI1Ni ...", "..."],
+    "status_attestations": ["eyJhbGciOiJFUzI1Ni ...", "..."],
 }
 ~~~
 
