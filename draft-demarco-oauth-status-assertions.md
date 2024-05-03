@@ -63,10 +63,10 @@ The approach defined in this specification allows the verification of credential
 
 ~~~ ascii-art
 +-----------------+                             +-------------------+
-|                 | Requests Status Assertion |                   |
+|                 | Requests Status Assertion   |                   |
 |                 |---------------------------->|                   |
 | Wallet Instance |                             | Credential Issuer |
-|                 | Status Assertion          |                   |
+|                 | Status Assertion            |                   |
 |                 |<----------------------------|                   |
 +-----------------+                             +-------------------+
 ~~~
@@ -78,7 +78,7 @@ This figure illustrates the process by which a Wallet Instance requests a Status
 ~~~ ascii-art
 +-- ----------------+                             +----------+
 |                   | Presents Digital Credential |          |
-|  Wallet Instance  | and Status Assertion      | Verifier |
+|  Wallet Instance  | and Status Assertion        | Verifier |
 |                   |---------------------------->|          |
 +-------------------+                             +----------+
 ~~~
@@ -239,7 +239,7 @@ related to a specific Credential issued by the same Credential Issuer.
          |  credential_pop = [$CredentialPoPJWT]             |
          +--------------------------------------------------->
          |                                                   |
-         |  Response with Status Assertion JWT             |
+         |  Response with Status Assertion JWT               |
          <---------------------------------------------------+
          |                                                   |
 +--------+----------+                             +----------+---------+
