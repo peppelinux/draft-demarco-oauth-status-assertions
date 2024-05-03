@@ -269,8 +269,7 @@ Given that the Wallet may request one or more Status Attestations from the same 
 To validate that the Wallet Instance is entitled to request its Status Attestation,
 the following requirements MUST be satisfied:
 
-- The Credential Issuer MUST verify the signature for all array elements into `credential_pop` object using
-the public key contained in the Digital Credential;
+- The Credential Issuer MUST verify the signature of all elements in the `credential_pop` object using the public key contained within the Digital Credential where the `credential_pop` is referred to;
 - the Credential Issuer MUST verify that it is the legitimate Issuer.
 
 The technical and details about the `credential_pop` object
