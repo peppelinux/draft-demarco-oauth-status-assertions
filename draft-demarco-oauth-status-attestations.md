@@ -47,10 +47,10 @@ informative:
 Status Attestation is a signed object that demonstrates the validity status of a
 digital credential.
 These attestations are periodically provided
-to holders, who can present these to Verifiers along
+to holders, who can present these to verifiers along
 with the corresponding digital credentials.
 The approach outlined in this document
-makes the verifiers able to check the non-revocation of a digital credential
+makes the verifier able to check the non-revocation of a digital credential
 without requiring to query any third-party entities.
 
 --- middle
@@ -58,7 +58,7 @@ without requiring to query any third-party entities.
 # Introduction
 
 Status Attestations ensure the integrity and trustworthiness of digital credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT) format, certifying their validity and non-revocation status. They function similarly to OCSP Stapling, allowing wallet instances to present time-stamped attestations from the Credential Issuer.
-The approach defined in this specification allows the verification of credentials against any revocation, without direct queries to the issuer, enhancing privacy, reducing latency, and enabling offline verification. Essential for offline scenarios, Status Attestations validate digital credentials' validity, balancing scalability, security, and privacy without internet connectivity.
+The approach defined in this specification allows the verification of credentials against any revocation, without direct queries to the issuer, enhancing privacy, reducing latency, and enabling offline verification.
 
 
 ~~~ ascii-art
@@ -236,7 +236,7 @@ related to a specific Credential issued by the same Credential Issuer.
 +--------+----------+                         +----------+---------+
          |                                               |
          | HTTP POST /status                             |
-         |  credential_pop = $CredentialPoPJWT           |
+         |  credential_pop = [$CredentialPoPJWT]         |
          +----------------------------------------------->
          |                                               |
          |  Response with Status Attestation JWT         |
@@ -260,13 +260,16 @@ POST /status HTTP/1.1
 Host: issuer.example.org
 Content-Type: application/x-www-form-urlencoded
 
-credential_pop=$CredentialPoPJWT
+credential_pop=[$CredentialPoPJWT]
 ~~~
+
+Since the Wallet may request one or more Status Attestations, issued by the same Credential Issuer, the credential_pop object MUST adhere to the following specification:
+- `credential_pop`. REQUIRED. By default, it MUST be an array of strings (array[string]).
 
 To validate that the Wallet Instance is entitled to request its Status Attestation,
 the following requirements MUST be satisfied:
 
-- The Credential Issuer MUST verify the signature of the `credential_pop` object using
+- The Credential Issuer MUST verify the signature for all array elements into `credential_pop` object using
 the public key contained in the Digital Credential;
 - the Credential Issuer MUST verify that it is the legitimate Issuer.
 
@@ -287,7 +290,7 @@ Below a non-normative example of an HTTP Response with an error.
   Content-Type: application/json;charset=UTF-8
 
   {
-    "error":"invalid_request"
+    "error": "invalid_request"
     "error_description": "The signature of credential_pop JWT is not valid"
   }
 ~~~
@@ -315,7 +318,7 @@ encoding, for better readability:
     "iss": "0b434530-e151-4c40-98b7-74c75a5ef760",
     "aud": "https://issuer.example.org/status-attestation-endpoint",
     "iat": 1698744039,
-    "exp": 1698834139,
+    "exp": 1698830439,
     "jti": "6f204f7e-e453-4dfd-814e-9d155319408c",
     "credential_hash": $Issuer-Signed-JWT-Hash
     "credential_hash_alg": "sha-256",
@@ -325,7 +328,7 @@ encoding, for better readability:
 
 When the JWT format is used, the JWT MUST contain the parameters defined in the following table.
 
-| JOSE Header | Description | Reference |
+| JOSE Header Parameter | Description | Reference |
 | --- | --- | --- |
 | **typ** | It MUST be set to `status-attestation-request+jwt` | {{RFC7516}} Section 4.1.1 |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
@@ -335,7 +338,7 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 | --- | --- | --- |
 | **iss** | Wallet identifier. | {{RFC9126}}, {{RFC7519}} |
 | **aud** | It MUST be set with the Credential Issuer Status Attestation endpoint URL as value that identify the intended audience | {{RFC9126}}, {{RFC7519}} |
-| **exp** | UNIX Timestamp with the expiration time of the JWT. | {{RFC9126}}, {{RFC7519}} |
+| **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be superior to the value set for `iat`  . | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
 | **credential_hash** | Hash value of the Digital Credential the Status Attestation is bound to. | this specification |
@@ -359,7 +362,7 @@ If the Digital Credential is valid, the Credential Issuer creates a new Status A
 {
     "iss": "https://issuer.example.org",
     "iat": 1504699136,
-    "exp": 1504700136,
+    "exp": 1504785536,
     "credential_hash": $CREDENTIAL-HASH,
     "credential_hash_alg": "sha-256",
     "cnf": {
@@ -370,7 +373,7 @@ If the Digital Credential is valid, the Credential Issuer creates a new Status A
 
 The Status Attestation MUST contain the following claims when the JWT format is used.
 
-| JOSE Header | Description | Reference |
+| JOSE Header Parameter | Description | Reference |
 | --- | --- | --- |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or to a symmetric algorithm (MAC) identifier. | {{RFC7515}}, {{RFC7517}} |
 | **typ** | It MUST be set to `status-attestation+jwt`. | {{RFC7515}}, {{RFC7517}} and this specification |
@@ -380,7 +383,7 @@ The Status Attestation MUST contain the following claims when the JWT format is 
 | --- | --- | --- |
 | **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}}, {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of the Status Attestation issuance. | {{RFC9126}}, {{RFC7519}} |
-| **exp** | UNIX Timestamp with the expiry time of the Status Attestation. | {{RFC9126}}, {{RFC7519}} |
+| **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be superior to the value set for `iat`  . | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **credential_hash** | Hash value of the Digital Credential the Status Attestation is bound to. | this specification |
 | **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound. The value SHOULD be set to `sha-256`. | this specification |
 | **cnf** | JSON object containing the cryptographic key binding. The `cnf.jwk` value MUST match with the one provided within the related Digital Credential. | {{RFC7800}} Section 3.1 |
@@ -398,10 +401,12 @@ HTTP/1.1 201 Created
 Content-Type: application/json
 
 {
-    "status_attestation": "eyJhbGciOiJFUzI1Ni ...",
+    "status_attestation": ["eyJhbGciOiJFUzI1Ni ...", "..."],
 }
 ~~~
 
+The status_attestation object MUST adhere to the following specification:
+- `status_attestation`. REQUIRED. By default, it MUST be an array of strings (array[string]).
 
 # Credential Issuers Supporting Status Attestations
 
