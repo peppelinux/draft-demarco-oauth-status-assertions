@@ -95,7 +95,8 @@ The Status Attestation is presented along with its digital credential, to prove 
 
 This specification uses the terms "End-User", "Entity" as defined by
 OpenID Connect Core [@OpenID.Core], the term "JSON Web Token (JWT)"
-defined by JSON Web Token (JWT) {{RFC7519}}.
+defined by JSON Web Token (JWT) {{RFC7519}}, the term "CBOR Web Token (CWT)"
+defined by CBOR Web Token (CWT) {{RFC8392}}.
 
 Digital Credential:
 : A set of one or more claims about a subject made by a Credential Issuer.
@@ -327,9 +328,9 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 
 | JOSE Header | Description | Reference |
 | --- | --- | --- |
-| **typ** | It MUST be set to `status-attestation-request+jwt` | {{RFC7516}} Section 4.1.1 |
+| **typ** | It MUST be set to `status-attestation-request+jwt` or `status-attestation-request+cwt` | {{RFC7516}} Section 4.1.1 |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
-| **kid** | Unique identifier of the JWK used for the signature of the Status Attestation Request, it MUST match the one contained in the Credential `cnf.jwk`. | {{RFC7515}} |
+| **kid** | Unique identifier of the JWK used for the signature of the Status Attestation Request. It MUST match the one contained in the Credential `cnf.jwk`. | {{RFC7515}} |
 
 | JOSE Payload | Description | Reference |
 | --- | --- | --- |
@@ -373,7 +374,7 @@ The Status Attestation MUST contain the following claims when the JWT format is 
 | JOSE Header | Description | Reference |
 | --- | --- | --- |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or to a symmetric algorithm (MAC) identifier. | {{RFC7515}}, {{RFC7517}} |
-| **typ** | It MUST be set to `status-attestation+jwt`. | {{RFC7515}}, {{RFC7517}} and this specification |
+| **typ** | It MUST be set to `status-attestation+jwt` or `status-attestation-request+cwt`. | {{RFC7515}}, {{RFC7517}} and this specification |
 | **kid** | Unique identifier of the Issuer JWK. | {{RFC7515}} |
 
 | JOSE Payload | Description | Reference |
