@@ -37,8 +37,8 @@ normative:
   RFC7517: RFC7517
   RFC7519: RFC7519
   RFC7800: RFC7800
-  RFC9126: RFC9126
   RFC8392: RFC8392
+  RFC9126: RFC9126
 
 informative:
 
@@ -379,7 +379,7 @@ The Status Attestation MUST contain the following claims when the JWT format is 
 
 | JOSE Payload | Description | Reference |
 | --- | --- | --- |
-| **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}}, {{}} |
+| **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}}, {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of the Status Attestation issuance. | {{RFC9126}}, {{RFC7519}} |
 | **exp** | UNIX Timestamp with the expiry time of the Status Attestation. | {{RFC9126}}, {{RFC7519}} |
 | **credential_hash** | Hash value of the Digital Credential the Status Attestation is bound to. | this specification |
