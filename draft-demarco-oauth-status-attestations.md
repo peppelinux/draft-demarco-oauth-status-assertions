@@ -38,6 +38,7 @@ normative:
   RFC7519: RFC7519
   RFC7800: RFC7800
   RFC9126: RFC9126
+  RFC8392: RFC8392
 
 informative:
 
@@ -95,8 +96,7 @@ The Status Attestation is presented along with its digital credential, to prove 
 
 This specification uses the terms "End-User", "Entity" as defined by
 OpenID Connect Core [@OpenID.Core], the term "JSON Web Token (JWT)"
-defined by JSON Web Token (JWT) {{RFC7519}}, the term "CBOR Web Token (CWT)"
-defined by CBOR Web Token (CWT) {{RFC8392}}.
+defined by JSON Web Token (JWT) {{RFC7519}}, the term "CBOR Web Token (CWT)" defined by CBOR Web Token (CWT) {{RFC8392}}.
 
 Digital Credential:
 : A set of one or more claims about a subject made by a Credential Issuer.
@@ -328,7 +328,7 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 
 | JOSE Header | Description | Reference |
 | --- | --- | --- |
-| **typ** | It MUST be set to `status-attestation-request+jwt` or `status-attestation-request+cwt` | {{RFC7516}} Section 4.1.1 |
+| **typ** | It MUST be set to `status-attestation-request+jwt` or `status-attestation-request+cwt`. | {{RFC7516}} Section 4.1.1 |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
 | **kid** | Unique identifier of the JWK used for the signature of the Status Attestation Request. It MUST match the one contained in the Credential `cnf.jwk`. | {{RFC7515}} |
 
@@ -379,7 +379,7 @@ The Status Attestation MUST contain the following claims when the JWT format is 
 
 | JOSE Payload | Description | Reference |
 | --- | --- | --- |
-| **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}}, {{RFC7519}} |
+| **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}}, {{}} |
 | **iat** | UNIX Timestamp with the time of the Status Attestation issuance. | {{RFC9126}}, {{RFC7519}} |
 | **exp** | UNIX Timestamp with the expiry time of the Status Attestation. | {{RFC9126}}, {{RFC7519}} |
 | **credential_hash** | Hash value of the Digital Credential the Status Attestation is bound to. | this specification |
