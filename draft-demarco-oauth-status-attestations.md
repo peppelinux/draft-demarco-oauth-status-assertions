@@ -404,8 +404,6 @@ Content-Type: application/json
 }
 ~~~
 
-The status_attestations object MUST adhere to the following specification:
-- `status_attestations`. REQUIRED. By default, it MUST be an array of strings (array[string]).
 
 # Credential Issuers Supporting Status Attestations
 
