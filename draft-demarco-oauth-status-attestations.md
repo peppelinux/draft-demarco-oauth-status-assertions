@@ -96,7 +96,7 @@ The Status Attestation is presented along with its digital credential, to prove 
 
 This specification uses the terms "End-User", "Entity" as defined by
 OpenID Connect Core [@OpenID.Core], the term "JSON Web Token (JWT)"
-defined by JSON Web Token (JWT) {{RFC7519}}, the term "CBOR Web Token (CWT)" defined by CBOR Web Token (CWT) {{RFC8392}}.
+defined by JSON Web Token (JWT) {{RFC7519}}, the term "CBOR Web Token (CWT)" defined in {{RFC8392}}.
 
 Digital Credential:
 : A set of one or more claims about a subject made by a Credential Issuer.
