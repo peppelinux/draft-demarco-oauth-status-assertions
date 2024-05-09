@@ -616,6 +616,7 @@ We would like to thank:
 
 # Document History
 
-| Version | Date | Description |
-| --- | --- | --- |
-| **02** | 2024-05-09 | Name of the draft changed from `OAuth Status Attestations` to `OAuth Status Assertions` |
+
+-02
+
+* Name of the draft changed from `OAuth Status Attestations` to `OAuth Status Assertions`
