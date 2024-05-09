@@ -259,9 +259,9 @@ to the public key attested by the Credential Issuer and contained within the Dig
 ~~~
 POST /status HTTP/1.1
 Host: issuer.example.org
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 
-credential_pop=$CredentialPoPJWT
+{ "credentials_pop" : [$CredentialPoPJWT, $CredentialPoPCWT, ... ] }
 ~~~
 
 To validate that the Wallet Instance is entitled to request its Status Attestation,
