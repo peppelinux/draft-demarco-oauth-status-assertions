@@ -1,6 +1,6 @@
-# OAuth Status Attestations
+# OAuth Status Assertions
 
-This is the working area for the individual Internet-Draft, "OAuth Status Attestations".
+This is the working area for the individual Internet-Draft, "OAuth Status Assertions".
 
 * [Editor's Copy](https://peppelinux.github.io/draft-demarco-oauth-status-attestations/#go.draft-demarco-oauth-status-attestations.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-demarco-oauth-status-attestations)
