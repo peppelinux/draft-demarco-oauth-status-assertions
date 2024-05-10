@@ -60,7 +60,7 @@ without requiring to query any third-party entities.
 Status Assertions ensure the integrity and trustworthiness of digital credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT) format, certifying their validity and non-revocation status. They function similarly to OCSP Stapling, allowing wallet instances to present time-stamped assertions from the Credential Issuer.
 The approach defined in this specification allows the verification of credentials against any revocation, without direct queries to the issuer, enhancing privacy, reducing latency, and enabling offline verification. Essential for offline scenarios, Status Assertions validate digital credentials' validity, balancing scalability, security, and privacy without internet connectivity.
 
-
+Figure 1 illustrates the process by which a Wallet Instance requests a Status Assertion from the Credential Issuer and subsequently receives it.
 ~~~ ascii-art
 +-----------------+                             +-------------------+
 |                 | Requests Status Assertion   |                   |
@@ -72,8 +72,8 @@ The approach defined in this specification allows the verification of credential
 ~~~
 Figure 1: Status Assertion Issuance Flow
 
-This figure illustrates the process by which a Wallet Instance requests a Status Assertion from the Credential Issuer and subsequently receives it.
 
+Figure 2 illustrates the process by which a Wallet Instance presents the Status Assertion along with the corresponding digital credential, to prove the non-revocation status of the digital credential to a Verifier.
 
 ~~~ ascii-art
 +-- ----------------+                             +----------+
@@ -84,7 +84,6 @@ This figure illustrates the process by which a Wallet Instance requests a Status
 ~~~
 Figure 2: Status Assertion Presentation Flow
 
-The Status Assertion is presented along with its digital credential, to prove the non-revocation status of a digital credential to a Verifier.
 
 # Conventions and Definitions
 
@@ -104,6 +103,9 @@ Credential Issuer:
 : Entity that is responsible for the issuance of the Digital Credentials.
 The Issuer is responsible for the lifecycle of their issued Digital Credentials
 and their validity status.
+
+Holder: 
+: An entity that receives Verifiable Credentials and has control over them to present them to the Verifiers as Verifiable Presentations.
 
 Verifier:
 : Entity that relies on the validity of the Digital Credentials presented to it.
@@ -129,7 +131,7 @@ presentation, or situations where the Verifier should not be allowed to
 check the status of a Digital Credential over time due to some privacy constraints,
 in compliance with national privacy regulations.
 
-For instance, consider a scenario under the European Union's General Data Protection Regulation (GDPR), where a Verifier's repeated access to a Status List to check the revocation status of a Digital Credential could be deemed as excessive monitoring of the End-User's activities. This could potentially infringe upon the End-User's right to privacy, as outlined in Article 8 of the European Convention on Human Rights, by creating a detailed profile of the End-User's interactions and credential usage without explicit consent for such continuous surveillance.
+For instance, consider a scenario where a Verifier's repeated access to a Status List to check the revocation status of a Digital Credential could be deemed as excessive monitoring of the End-User's activities. This could potentially infringe upon the End-User's right to privacy, as outlined in Article 8 of the European Convention on Human Rights and in the the European Union's General Data Protection Regulation (GDPR), by creating a detailed profile of the End-User's interactions and credential usage without explicit consent for such continuous surveillance.
 
 In scenarios where the Verifier, Credential Issuer, and OAuth Status List
 Provider are all part of the same domain or operate within a context where
@@ -139,9 +141,9 @@ where the OAuth Status List facilitates the exposure to the following
 privacy risks:
 
 - An OAuth Status List Provider might know the association between a specific
-list and a Credential Issuer, especially if the latter issues a
+status list and a Credential Issuer, especially if the latter issues a
 single type of Digital Credential. This could inadvertently reveal the
-Status List Provider which list corresponds to which Digital Credential.
+OAusth Status List Provider information about how a Digital Credential corresponds to a status list.
 - A Verifier retrieves an OAuth Status List by establishing a TCP/IP connection
 with an OAuth Status List Provider. This allows the OAuth Status List Provider to
 obtain the IP address of the Verifier and potentially link it to a specific
@@ -155,13 +157,12 @@ information that should remain confidential.
 Status Assertions differ significantly from OAuth Status Lists in several ways:
 
 1. **Privacy**: Status Assertions are designed to be privacy-preserving.
-They do not require the Verifier to gather any additional information
-from third-party entities, thus preventing potential privacy leaks.
+Verifier exchanges the Status Assertions directly with the Holder, not requiring the Verifier to gather any additional information
+from third-party entities. Once a Status Assertion is issued, it can be verified without any further
+communication with the Credential Issuer or any other party, thus preventing potential privacy leaks.
 
 2. **Static Verification**: Status Assertions are designed to be
 statically provided to Verifiers by Wallet Instance.
-Once a Status Assertion is issued, it can be verified without any further
-communication with the Credential Issuer or any other party.
 
 3. **Digital Credentials Formats**: Status Assertions are agnostic from the
 Digital Credential format to which they are bound.
@@ -183,6 +184,7 @@ persistently use their preexistent Digital Credentials, as long as
 the linked Status Assertion is available and presented to the
 Verifier, and not expired.
 
+6. **Real-time validation**: OAuth Status Lists provide the possibility to do real-time validation of the Digital Credential status. To support the real-time status validation use cases, a Wallet can implement strategy to request a new Status Assertion before sending it to the Verifier.
 
 # Requirements
 
@@ -191,11 +193,11 @@ The Status Assertion:
 
 - MUST be presented in conjunction with the Digital Credential.
 The Status Assertion MUST be timestamped with its issuance datetime,
-always referring to a previous period to the presentation time.
+using a timestamp which is later then the time of presentation issuance;
 - MUST contain the expiration datetime after which the Digital Credential
 MUST NOT be considered valid anymore. The expiration datetime MUST be
-superior to the issuance datetime.
-- enables offline use cases as it MUST be validated using
+superior to the Status Assertion issuance datetime and it MUST end before the expiration of the Credential;
+- MUST enable the offline use cases by employing validation using
 a cryptographic signature and the cryptographic public key of the Credential Issuer.
 
 Please note: in this specification the examples and the normative properties
@@ -249,10 +251,10 @@ related to a specific Credential issued by the same Credential Issuer.
 +-------------------+                         +--------------------+
 ~~~
 
-The Wallet Instance sends the Status Assertion request to the Credential Issuer.
-The request MUST contain the base64url hash value of the Digital Credential, for which the Status Assertion
+The Wallet Instance sends the Status Assertion request to the Credential Issuer, where:
+- The request MUST contain the base64url hash value of the Digital Credential, for which the Status Assertion
 is requested, and enveloped in a signed object as proof of possession.
-The proof of possession MUST be signed with the private key corresponding
+- The proof of possession MUST be signed with the private key corresponding
 to the public key attested by the Credential Issuer and contained within the Digital Credential.
 
 ~~~
@@ -264,11 +266,10 @@ credential_pop=$CredentialPoPJWT
 ~~~
 
 To validate that the Wallet Instance is entitled to request its Status Assertion,
-the following requirements MUST be satisfied:
-
-- The Credential Issuer MUST verify the signature of the `credential_pop` object using
+the Credential Issuer:
+- MUST verify the signature of the `credential_pop` object using
 the public key contained in the Digital Credential;
-- the Credential Issuer MUST verify that it is the legitimate Issuer.
+- MUST verify that it is the legitimate Credential Issuer.
 
 The technical and details about the `credential_pop` object
 are defined in the next section.
@@ -327,16 +328,16 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 
 | JOSE Header | Description | Reference |
 | --- | --- | --- |
-| **typ** | It MUST be set to `status-assertion-request+jwt` | {{RFC7516}} Section 4.1.1 |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
+| **typ** | It MUST be set to `status-assertion-request+jwt` | {{RFC7516}} Section 4.1.1 |
 | **kid** | Unique identifier of the JWK used for the signature of the Status Attestation Request, it MUST match the one contained in the Credential `cnf.jwk`. | {{RFC7515}} |
 
 | JOSE Payload | Description | Reference |
 | --- | --- | --- |
 | **iss** | Wallet identifier. | {{RFC9126}}, {{RFC7519}} |
 | **aud** | It MUST be set with the Credential Issuer Status Assertion endpoint URL as value that identify the intended audience | {{RFC9126}}, {{RFC7519}} |
-| **exp** | UNIX Timestamp with the expiration time of the JWT. | {{RFC9126}}, {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
+| **exp** | UNIX Timestamp with the expiration time of the JWT. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
 | **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
 | **credential_hash_alg** |  The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. The value SHOULD be set to `sha-256`. | this specification |
@@ -403,7 +404,7 @@ Content-Type: application/json
 ~~~
 
 
-# Credential Issuers Supporting Status Assertions
+# Interoperability of Credential Issuers Supporting Status Assertions
 
 This section outlines how Credential Issuers support Status Assertions, detailing the necessary metadata and practices to integrate into their systems.
 
@@ -468,7 +469,7 @@ The Verifier that receives a Digital Credential supporting the Status Assertion,
 SHOULD:
 
 - Decode and validate the Digital Credential;
-- check the presence of `status.status_assertion` in the Digital Credential. If true, the Verifier SHOULD:
+- Check the presence of `status.status_assertion` in the Digital Credential. If true, the Verifier SHOULD:
   - produce the hash of the Digital Credential using the hashing algorithm configured in `status.status_assertion.credential_hash_alg`;
   - decode all the Status Assertions provided in the presentation, by matching the JWS Header parameter `typ` set to `status-assertion+jwt` and looking for the `credential_hash` value that matches with the hash produced at the previous point;
   - evaluate the validity of the Status Assertion.
