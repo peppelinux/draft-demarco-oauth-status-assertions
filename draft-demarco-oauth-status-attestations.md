@@ -371,7 +371,7 @@ If the Digital Credential is valid, the Credential Issuer creates a new Status A
 
 The Status Assertion MUST contain the following claims when the JWT format is used.
 
-| JOSE Header | Description | Reference |
+| Header Parameter Name | Description | Reference |
 | --- | --- | --- |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or to a symmetric algorithm (MAC) identifier. | {{RFC7515}}, {{RFC7517}} |
 | **typ** | It MUST be set to `status-attestation+jwt` or `status-attestation-request+cwt`. | {{RFC7515}}, {{RFC7517}} and this specification |
