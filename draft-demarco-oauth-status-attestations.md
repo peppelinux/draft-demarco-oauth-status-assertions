@@ -377,7 +377,7 @@ The Status Assertion MUST contain the following claims when the JWT format is us
 | **typ** | It MUST be set to `status-attestation+jwt` or `status-attestation-request+cwt`. | {{RFC7515}}, {{RFC7517}} and this specification |
 | **kid** | Unique identifier of the Issuer JWK. | {{RFC7515}} |
 
-| JOSE Payload | Description | Reference |
+| Payload Parameter Name | Description | Reference |
 | --- | --- | --- |
 | **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}}, {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of the Status Assertion issuance. | {{RFC9126}}, {{RFC7519}} |
