@@ -332,7 +332,7 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
 | **kid** | Unique identifier of the JWK used for the signature of the Status Attestation Request. It MUST match the one contained in the Credential `cnf.jwk`. | {{RFC7515}} |
 
-| JOSE Payload | Description | Reference |
+| Payload Parameter Name | Description | Reference |
 | --- | --- | --- |
 | **iss** | Wallet identifier. | {{RFC9126}}, {{RFC7519}} |
 | **aud** | It MUST be set with the Credential Issuer Status Assertion endpoint URL as value that identify the intended audience | {{RFC9126}}, {{RFC7519}} |
