@@ -236,10 +236,10 @@ related to a specific Credential issued by the same Credential Issuer.
 +--------+----------+                         +----------+---------+
          |                                               |
          | HTTP POST /status                             |
-         |  credential_pop = [$CredentialPoPJWT]         |
+         |  parameters_pop = [$CredentialPoP]            |
          +----------------------------------------------->
          |                                               |
-         |  Response with Status Attestation JWT         |
+         |  Response with Status Attestation             |
          <-----------------------------------------------+
          |                                               |
 +--------+----------+                         +----------+---------+
@@ -260,19 +260,19 @@ POST /status HTTP/1.1
 Host: issuer.example.org
 Content-Type: application/json
 
-{ "credential_pop" : [$CredentialPoPJWT, $CredentialPoPCWT, ... ] }
+{ "parameters_pop" : [$CredentialPoPJWT, $CredentialPoPCWT, ... ] }
 ~~~
 
-Given that the Wallet may request one or more Status Attestations from the same Credential Issuer, the `credential_pop` parameter is subject to the following specification:
-- credential_pop: REQUIRED. It MUST be implemented as an array of strings, where each string represents a Digital Credential proof of possession.
+Given that the Wallet may request one or more Status Attestations from the same Credential Issuer, the `parameters_pop` parameter is subject to the following specification:
+- parameters_pop: REQUIRED. It MUST be implemented as an array of strings, where each string represents a Digital Credential proof of possession.
 
 To validate that the Wallet Instance is entitled to request its Status Attestation,
 the following requirements MUST be satisfied:
 
-- The Credential Issuer MUST verify the signature of all elements in the `credential_pop` object using the public key contained within the Digital Credential where the `credential_pop` is referred to;
-- the Credential Issuer MUST verify that it is the legitimate Issuer of the Digital Credential to which the `credential_pop` refers.
+- The Credential Issuer MUST verify the signature of all elements in the `parameters_pop` object using the public key contained within the Digital Credential where the `parameters_pop` is referred to;
+- the Credential Issuer MUST verify that it is the legitimate Issuer of the Digital Credential to which the `parameters_pop` refers.
 
-The technical and details about the `credential_pop` object
+The technical and details about the `parameters_pop` object
 are defined in the next section.
 
 ## Status Attestation Request Errors
