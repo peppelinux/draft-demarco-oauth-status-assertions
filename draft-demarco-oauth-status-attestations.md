@@ -47,7 +47,7 @@ informative:
 Status Assertion is a signed object that demonstrates the validity status of a
 digital credential.
 These assertions are periodically provided
-to holders, who can present these to Verifiers along
+to holders, who can present these to verifier along
 with the corresponding digital credentials.
 The approach outlined in this document
 makes the verifier able to check the non-revocation of a digital credential
@@ -58,7 +58,7 @@ without requiring to query any third-party entities.
 # Introduction
 
 Status Assertions ensure the integrity and trustworthiness of digital credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT) format, certifying their validity and non-revocation status. They function similarly to OCSP Stapling, allowing wallet instances to present time-stamped assertions from the Credential Issuer.
-The approach defined in this specification allows the verification of credentials against any revocation, without direct queries to the issuer, enhancing privacy, reducing latency, and enabling offline verification. Essential for offline scenarios, Status Assertions validate digital credentials' validity, balancing scalability, security, and privacy without internet connectivity.
+The approach defined in this specification allows the verification of credentials against any revocation, without direct queries to the issuer, enhancing privacy, reducing latency, and enabling offline verification.
 
 
 ~~~ ascii-art
@@ -239,7 +239,7 @@ related to a specific Credential issued by the same Credential Issuer.
          |  parameters_pop = [$CredentialPoP]            |
          +----------------------------------------------->
          |                                               |
-         |  Response with Status Assertion JWT           |
+         |  Response with Status Assertion               |
          <-----------------------------------------------+
          |                                               |
 +--------+----------+                         +----------+---------+
