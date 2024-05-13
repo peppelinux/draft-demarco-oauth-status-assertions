@@ -60,7 +60,7 @@ without requiring to query any third-party entities.
 Status Assertions ensure the integrity and trustworthiness of digital credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT) format, certifying their validity and non-revocation status. They function similarly to OCSP Stapling, allowing wallet instances to present time-stamped assertions from the Credential Issuer.
 The approach defined in this specification allows the verification of credentials against any revocation, without direct queries to the issuer, enhancing privacy, reducing latency, and enabling offline verification. Essential for offline scenarios, Status Assertions validate digital credentials' validity, balancing scalability, security, and privacy without internet connectivity.
 
-Figure 1 illustrates the process by which a Wallet Instance requests a Status Assertion from the Credential Issuer and subsequently receives it.
+The figure below illustrates the process by which a Wallet Instance requests a Status Assertion from the Credential Issuer and subsequently receives it.
 ~~~ ascii-art
 +-----------------+                             +-------------------+
 |                 | Requests Status Assertion   |                   |
@@ -185,7 +185,7 @@ persistently use their preexistent Digital Credentials, as long as
 the linked Status Assertion is available and presented to the
 Verifier, and not expired.
 
-6. **Real-time validation**: OAuth Status Lists provide the possibility to do real-time validation of the Digital Credential status. To support the real-time status validation use cases, a Wallet can implement strategy to request a new Status Assertion before sending it to the Verifier.
+6. **Real-time validation**: OAuth Status Lists provide the possibility to do real-time validation of the Digital Credential status. To support the real-time status validation use cases, a Wallet MAY implement strategy to request a new Status Assertion before sending it to the Verifier.
 
 # Requirements
 
