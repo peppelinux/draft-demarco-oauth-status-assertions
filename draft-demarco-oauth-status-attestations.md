@@ -342,25 +342,25 @@ encoding, for better readability:
 ~~~
 
 As exemplified for the JWT format, below is a non-normative example of a Credential proof of possession in CWT format. The CWT headers and payload are presented without applying signature and encoding for improved readability:
+
 ~~~
    [
-	 / protected / << {
-	   / alg / 1: -7 / ES256 /
-	   / typ / 16: -7 / status-attestation-request+cwt /
-	   / kid / 4: h'3132' / $CREDENTIAL-CNF-CWKID /
-	 } >>,
-	 / unprotected / {
-	 },
-	 / payload / << {
-	   / iss    / 1: 0b434530-e151-4c40-98b7-74c75a5ef760 /,
-	   / aud    / 3: https://issuer.example.org/status-attestation-endpoint /,
-	   / iat    / 6: 1698744039 /,
-	   / exp    / 4: 1698830439 /,
-	   / cti    / 7: 6f204f7e-e453-4dfd-814e-9d155319408c /,
-	   / credential_hash / 8: $Issuer-Signed-JWT-Hash /,
-	   / credential_hash_alg / 9: sha-256 /
-	   }
-	 } >>,
+       / protected / << {
+       / alg / 1: -7 / ES256 /
+       / typ / 16: -7 / status-attestation-request+cwt /
+       / kid / 4: h'3132' / $CREDENTIAL-CNF-CWKID /
+     } >>,
+     / unprotected / {
+     },
+     / payload / << {
+       / iss    / 1: 0b434530-e151-4c40-98b7-74c75a5ef760 /,
+       / aud    / 3: https://issuer.example.org/status-attestation-endpoint /,
+       / iat    / 6: 1698744039 /,
+       / exp    / 4: 1698830439 /,
+       / cti    / 7: 6f204f7e-e453-4dfd-814e-9d155319408c /,
+       / credential_hash / 8: $Issuer-Signed-JWT-Hash /,
+       / credential_hash_alg / 9: sha-256 /
+     } >>,
    ]
 ~~~
 
@@ -394,23 +394,23 @@ If the Digital Credential is valid, the Credential Issuer creates a new Status A
 As exemplified for the JWT format, below is a non-normative example of a Credential proof of possession in CWT format. The CWT headers and payload are presented without applying signature and encoding for improved readability:
 ~~~
    {
-	 / protected / << {
-	   / alg / 1: -7 / ES256 /
-	   / typ / 16: -7 / status-attestation-request+cwt /
-	   / kid / 4: h'3132' / $ISSUER-CWKID /
-	 } >>,
-	 / unprotected / {
-	 },
-	 / payload / << {
-	   / iss    / 1: 0b434530-e151-4c40-98b7-74c75a5ef760 /,
-	   / iat    / 6: 1698744039 /,
-	   / exp    / 4: 1698830439 /,
-	   / credential_hash 8: $Issuer-Signed-JWT-Hash /,
-	   / credential_hash_alg 9: sha-256 /,
-	   / cnf:{
-        "COSE_Key":{...}
-	   }
-	 } >>,
+    / protected / << {
+      / alg / 1: -7 / ES256 /
+      / typ / 16: -7 / status-attestation-request+cwt /
+      / kid / 4: h'3132' / $ISSUER-CWKID /
+    } >>,
+    / unprotected / {
+    },
+    / payload / << {
+      / iss    / 1: 0b434530-e151-4c40-98b7-74c75a5ef760 /,
+      / iat    / 6: 1698744039 /,
+      / exp    / 4: 1698830439 /,
+      / credential_hash 8: $Issuer-Signed-JWT-Hash /,
+      / credential_hash_alg 9: sha-256 /,
+      / cnf:{
+          "COSE_Key":{...}
+      }
+    } >>,
    }
 ~~~
 
