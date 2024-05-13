@@ -73,8 +73,7 @@ The approach defined in this specification allows the verification of credential
 ~~~
 Figure 1: Status Assertion Issuance Flow
 
-This figure illustrates the process by which a Wallet Instance requests a Status Assertion from the Credential Issuer and subsequently receives it.
-
+Figure 2 illustrates the process by which a Wallet Instance presents the Status Assertion along with the corresponding digital credential, to prove the non-revocation status of the digital credential to a Verifier.
 
 ~~~ ascii-art
 +-- ----------------+                             +----------+
@@ -85,7 +84,6 @@ This figure illustrates the process by which a Wallet Instance requests a Status
 ~~~
 Figure 2: Status Assertion Presentation Flow
 
-The Status Assertion is presented along with its digital credential, to prove the non-revocation status of a digital credential to a Verifier.
 
 # Conventions and Definitions
 
@@ -97,6 +95,9 @@ The Status Assertion is presented along with its digital credential, to prove th
 This specification uses the terms "End-User", "Entity" as defined by
 OpenID Connect Core [@OpenID.Core], the term "JSON Web Token (JWT)"
 defined by JSON Web Token (JWT) {{RFC7519}}, the term "CBOR Web Token (CWT)" defined in {{RFC8392}}.
+
+Holder:
+: An entity that receives Verifiable Credentials and has control over them to present them to the Verifiers as Verifiable Presentations.
 
 Digital Credential:
 : A set of one or more claims about a subject made by a Credential Issuer.
@@ -130,7 +131,7 @@ presentation, or situations where the Verifier should not be allowed to
 check the status of a Digital Credential over time due to some privacy constraints,
 in compliance with national privacy regulations.
 
-For instance, consider a scenario under the European Union's General Data Protection Regulation (GDPR), where a Verifier's repeated access to a Status List to check the revocation status of a Digital Credential could be deemed as excessive monitoring of the End-User's activities. This could potentially infringe upon the End-User's right to privacy, as outlined in Article 8 of the European Convention on Human Rights, by creating a detailed profile of the End-User's interactions and credential usage without explicit consent for such continuous surveillance.
+For instance, consider a scenario where a Verifier's repeated access to a Status List to check the revocation status of a Digital Credential could be deemed as excessive monitoring of the End-User's activities. This could potentially infringe upon the End-User's right to privacy, as outlined in Article 8 of the European Convention on Human Rights and in the the European Union's General Data Protection Regulation (GDPR), by creating a detailed profile of the End-User's interactions and credential usage without explicit consent for such continuous surveillance.
 
 In scenarios where the Verifier, Credential Issuer, and OAuth Status List
 Provider are all part of the same domain or operate within a context where
