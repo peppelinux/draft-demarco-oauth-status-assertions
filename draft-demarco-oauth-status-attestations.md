@@ -236,7 +236,7 @@ related to a specific Credential issued by the same Credential Issuer.
 +--------+----------+                         +----------+---------+
          |                                               |
          | HTTP POST /status                             |
-         |  parameters_pop = [$CredentialPoP]            |
+         |  credential_pop = [$CredentialPoP]            |
          +----------------------------------------------->
          |                                               |
          |  Response with Status Assertion               |
