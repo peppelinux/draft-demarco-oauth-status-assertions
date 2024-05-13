@@ -104,8 +104,9 @@ Credential Issuer:
 The Issuer is responsible for the lifecycle of their issued Digital Credentials
 and their validity status.
 
-Holder: 
-: An entity that receives Verifiable Credentials and has control over them to present them to the Verifiers as Verifiable Presentations.
+Holder:
+: An entity that receives Verifiable Credentials and has control over
+them to present them to the Verifiers as Verifiable Presentations.
 
 Verifier:
 : Entity that relies on the validity of the Digital Credentials presented to it.
