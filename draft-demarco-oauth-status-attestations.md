@@ -337,7 +337,7 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 | --- | --- | --- |
 | **iss** | Wallet identifier. | {{RFC9126}}, {{RFC7519}} |
 | **aud** | It MUST be set with the Credential Issuer Status Assertion endpoint URL as value that identify the intended audience | {{RFC9126}}, {{RFC7519}} |
-| **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be superior to the value set for `iat`  . | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
+| **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be greater than the value set for `iat`. | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
 | **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
@@ -382,7 +382,7 @@ The Status Assertion MUST contain the following claims when the JWT format is us
 | --- | --- | --- |
 | **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}}, {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of the Status Assertion issuance. | {{RFC9126}}, {{RFC7519}} |
-| **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be superior to the value set for `iat`. | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
+| **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be greater than the value set for `iat`. | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
 | **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. The value SHOULD be set to `sha-256`. | this specification |
 | **cnf** | JSON object containing the cryptographic key binding. The `cnf.jwk` value MUST match with the one provided within the related Digital Credential. | {{RFC7800}} Section 3.1 |
