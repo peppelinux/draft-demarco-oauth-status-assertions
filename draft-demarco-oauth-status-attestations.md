@@ -327,11 +327,7 @@ encoding, for better readability:
 
 When the JWT format is used, the JWT MUST contain the parameters defined in the following table.
 
-<<<<<<< SaraConsoliACN-20240503_1
 | JOSE Header Parameter | Description | Reference |
-=======
-| Header | Description | Reference |
->>>>>>> main
 | --- | --- | --- |
 | **typ** | It MUST be set to `status-assertion-request+jwt` | {{RFC7516}} Section 4.1.1 |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
