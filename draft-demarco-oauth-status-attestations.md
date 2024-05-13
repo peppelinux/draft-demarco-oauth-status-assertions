@@ -237,10 +237,10 @@ related to a specific Credential issued by the same Credential Issuer.
 +--------+----------+                         +----------+---------+
          |                                               |
          | HTTP POST /status                             |
-         |  credential_pop = $CredentialPoPJWT           |
+         |  credential_pop = $CredentialPoP(JWT or CWT)  |
          +----------------------------------------------->
          |                                               |
-         |  Response with Status Assertion JWT           |
+         |  Response with Status Assertion JWT  or CWT   |
          <-----------------------------------------------+
          |                                               |
 +--------+----------+                         +----------+---------+
@@ -299,7 +299,25 @@ The Wallet Instance that holds a Digital Credential, when requests a Status Asse
 MUST demonstrate the proof of possession of the Digital Credential to the Credential Issuer.
 
 The proof of possession is made by enclosing the Digital Credential in an
-object (JWT) signed with the private key that its related public key is referenced in the Digital Credential.
+object (JWT or CWT) signed with the private key that its related public key is referenced in the Digital Credential.
+
+When the JWT or CWT format are used, the JWT/CWT MUST contain the parameters defined in the following table.
+
+| Header Parameter | Description | Reference |
+| --- | --- | --- |
+| **typ** | It MUST be set to `status-attestation+jwt` when JWT format is used. It MUST be set to `status-attestation+cwt` when CWT format is used. | {{RFC7516}} Section 4.1.1 |
+| **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
+| **kid** | Unique identifier of the JWK or CWT used for the signature of the Status Attestation Request, it MUST match the one contained in the Credential. | {{RFC7515}} |
+
+| Payload | Description | Reference |
+| --- | --- | --- |
+| **iss** | Wallet identifier. | {{RFC9126}}, {{RFC7519}} |
+| **aud** | It MUST be set with the Credential Issuer Status Attestation endpoint URL as value that identify the intended audience | {{RFC9126}}, {{RFC7519}} |
+| **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be superior to the value set for `iat`  . | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
+| **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
+| **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
+| **credential_hash** | Hash value of the Digital Credential the Status Attestation is bound to. | this specification |
+| **credential_hash_alg** |  The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound. The value SHOULD be set to `sha-256`. | this specification |
 
 Below is a non-normative example of a Credential proof of possession with
 the JWT headers and payload are represented without applying signature and
@@ -323,24 +341,28 @@ encoding, for better readability:
 }
 ~~~
 
-
-When the JWT format is used, the JWT MUST contain the parameters defined in the following table.
-
-| Header Parameter Name | Description | Reference |
-| --- | --- | --- |
-| **typ** | It MUST be set to `status-attestation-request+jwt` or `status-attestation-request+cwt`. | {{RFC7516}} Section 4.1.1 |
-| **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
-| **kid** | Unique identifier of the JWK used for the signature of the Status Attestation Request. It MUST match the one contained in the Credential `cnf.jwk`. | {{RFC7515}} |
-
-| Payload Parameter Name | Description | Reference |
-| --- | --- | --- |
-| **iss** | Wallet identifier. | {{RFC9126}}, {{RFC7519}} |
-| **aud** | It MUST be set with the Credential Issuer Status Assertion endpoint URL as value that identify the intended audience | {{RFC9126}}, {{RFC7519}} |
-| **exp** | UNIX Timestamp with the expiration time of the JWT. | {{RFC9126}}, {{RFC7519}} |
-| **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
-| **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
-| **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
-| **credential_hash_alg** |  The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. The value SHOULD be set to `sha-256`. | this specification |
+As exemplified for the JWT format, below is a non-normative example of a Credential proof of possession in CWT format. The CWT headers and payload are presented without applying signature and encoding for improved readability:
+~~~
+   [
+	 / protected / << {
+	   / alg / 1: -7 / ES256 /
+	   / typ / 16: -7 / status-attestation-request+cwt /
+	   / kid / 4: h'3132' / $CREDENTIAL-CNF-CWKID /
+	 } >>,
+	 / unprotected / {
+	 },
+	 / payload / << {
+	   / iss    / 1: 0b434530-e151-4c40-98b7-74c75a5ef760 /,
+	   / aud    / 3: https://issuer.example.org/status-attestation-endpoint /,
+	   / iat    / 6: 1698744039 /,
+	   / exp    / 4: 1698830439 /,
+	   / cti    / 7: 6f204f7e-e453-4dfd-814e-9d155319408c /,
+	   / credential_hash / 8: $Issuer-Signed-JWT-Hash /,
+	   / credential_hash_alg / 9: sha-256 /
+	   }
+	 } >>,
+   ]
+~~~
 
 
 # Status Assertion
@@ -369,13 +391,36 @@ If the Digital Credential is valid, the Credential Issuer creates a new Status A
 }
 ~~~
 
+As exemplified for the JWT format, below is a non-normative example of a Credential proof of possession in CWT format. The CWT headers and payload are presented without applying signature and encoding for improved readability:
+~~~
+   {
+	 / protected / << {
+	   / alg / 1: -7 / ES256 /
+	   / typ / 16: -7 / status-attestation-request+cwt /
+	   / kid / 4: h'3132' / $ISSUER-CWKID /
+	 } >>,
+	 / unprotected / {
+	 },
+	 / payload / << {
+	   / iss    / 1: 0b434530-e151-4c40-98b7-74c75a5ef760 /,
+	   / iat    / 6: 1698744039 /,
+	   / exp    / 4: 1698830439 /,
+	   / credential_hash 8: $Issuer-Signed-JWT-Hash /,
+	   / credential_hash_alg 9: sha-256 /,
+	   / cnf:{
+        "COSE_Key":{...}
+	   }
+	 } >>,
+   }
+~~~
+
 The Status Assertion MUST contain the following claims when the JWT format is used.
 
 | Header Parameter Name | Description | Reference |
 | --- | --- | --- |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or to a symmetric algorithm (MAC) identifier. | {{RFC7515}}, {{RFC7517}} |
-| **typ** | It MUST be set to `status-attestation+jwt` or `status-attestation-request+cwt`. | {{RFC7515}}, {{RFC7517}} and this specification |
-| **kid** | Unique identifier of the Issuer JWK. | {{RFC7515}} |
+| **typ** | It MUST be set to `status-attestation+jwt` when JWT format is used. It MUST be set to `status-attestation+cwt` when CWT format is used. | {{RFC7515}}, {{RFC7517}} and this specification |
+| **kid** | Unique identifier of the Issuer JWK or CWT. | {{RFC7515}} |
 
 | Payload Parameter Name | Description | Reference |
 | --- | --- | --- |
