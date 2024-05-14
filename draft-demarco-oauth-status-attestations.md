@@ -326,7 +326,7 @@ Content-Type: application/json
 
 Given that the Wallet may request one or more Status Attestations from the same Credential Issuer, 
 the `status_assertion_requests` parameter is subject to the following specification:
-- Status_assertion_requests: REQUIRED. It MUST be implemented as an array of strings, 
+- Status_assertion_requests: REQUIRED. It MUST be implemented as an array of strings,
 where each string represents a Digital Credential proof of possession
 - The position of each `$StatusAssertionRequest` object 
 within the array MUST match the same position in the subsequent response.
@@ -334,9 +334,9 @@ within the array MUST match the same position in the subsequent response.
 To validate that the Wallet Instance is entitled to request its Status Assertion,
 the following requirements MUST be satisfied:
 
-- The Credential Issuer MUST verify the signature of all elements in the `status_assertion_requests` object 
+- The Credential Issuer MUST verify the signature of all elements in the `status_assertion_requests` object
 using the public key contained within the Digital Credential where the `status_assertion_requests` is referred to;
-- the Credential Issuer MUST verify that it is the legitimate Issuer of the Digital Credential 
+- the Credential Issuer MUST verify that it is the legitimate Issuer of the Digital Credential
 to which the `status_assertion_requests` refers.
 
 The technical and details about the `status_assertion_requests` object
