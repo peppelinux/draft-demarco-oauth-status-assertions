@@ -328,9 +328,10 @@ Content-Type: application/json
 "status_assertion_requests" : ["${base64url(json({typ: (some pop for status-assertion)+jwt, ...}))}.payload.signature", ... ]
 ~~~
 
-Given that the Wallet may request one or more Status Attestations from the same Credential Issuer,
-the `status_assertion_requests` parameter is subject to the following specification:
-- Status_assertion_requests: REQUIRED. It MUST be implemented as an array of strings,
+The Status Assertion HTTP request can be sent to a single Credential Issuer regarding multiple Digital Credentials, and MUST contain a json object with the member `status_assertion_requests`.
+
+The `status_assertion_requests` MUST be set with an array of strings.
+
 Each string within the array is a Digital Credential Status Assertion Request.
 
 The Credential Issuer that receives the Status Assertion Request MUST validate that the Wallet Instance making the request is authorized to request Status Assertions.
@@ -494,7 +495,7 @@ Content-Type: application/json
 }
 ~~~
 
-The member `status_assertion_responses` MUST be an array of strings, 
+The member `status_assertion_responses` MUST be an array of strings,
 where each of them represent a Status Assertion Response object. In particular:
 to the following specification:
 - Each element in the array MUST match the element contained in the request at the same position
