@@ -342,7 +342,7 @@ encoding, for better readability:
 }
 ~~~
 
-As exemplified for the JWT format, below is a non-normative example of a Credential proof of possession in CWT format. The CWT headers and payload are presented without applying signature and encoding for improved readability:
+As exemplified for the JWT format, below is a non-normative example of a Credential proof of possession in CWT format provided in an unencoded diagnostic representation. The CWT headers and payload are presented without applying signature and encoding for improved readability:
 
 ~~~
    [
@@ -392,7 +392,7 @@ If the Digital Credential is valid, the Credential Issuer creates a new Status A
 }
 ~~~
 
-As exemplified for the JWT format, below is a non-normative example of a Credential proof of possession in CWT format. The CWT headers and payload are presented without applying signature and encoding for improved readability:
+As exemplified for the JWT format, below is a non-normative example of a Credential proof of possession in CWT format provided in an unencoded diagnostic representation. The CWT headers and payload are presented without applying signature and encoding for improved readability:
 ~~~
    {
     / protected / << {
@@ -430,7 +430,7 @@ The Status Assertion MUST contain the following claims when the JWT format is us
 | **exp** | UNIX Timestamp with the expiry time of the Status Assertion. | {{RFC9126}}, {{RFC7519}} |
 | **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
 | **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. The value SHOULD be set to `sha-256`. | this specification |
-| **cnf** | JSON object containing the cryptographic key binding. It MUST match with the one provided within the related Digital Credential. | {{RFC7800}} Section 3.1 |
+| **cnf** | JSON object containing the cryptographic key binding. The sub-member contained within `cnf` member, such as `jwk` for JWT and `Cose_Key` for CWT, MUST match with the one provided within the related Digital Credential. Additionally, there may be other parameters present, such as `did`, for instance. | {{RFC7800}} Section 3.1 |
 
 
 # Status Assertion Response
