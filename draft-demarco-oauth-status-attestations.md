@@ -316,6 +316,10 @@ object as proof of possession.
 to the confirmation claim assigned by the issuer and contained within
 the Digital Credential.
 
+
+Below a non-normative example representing a Status Assertion Request array with a
+single JWT in it.
+
 ~~~
 POST /status HTTP/1.1
 Host: issuer.example.org
