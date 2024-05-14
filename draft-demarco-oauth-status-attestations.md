@@ -328,7 +328,7 @@ Given that the Wallet may request one or more Status Attestations from the same 
 the `status_assertion_requests` parameter is subject to the following specification:
 - Status_assertion_requests: REQUIRED. It MUST be implemented as an array of strings,
 where each string represents a Digital Credential proof of possession
-- The position of each `$StatusAssertionRequest` object 
+- The position of each `$StatusAssertionRequest` object
 within the array MUST match the same position in the subsequent response.
 
 To validate that the Wallet Instance is entitled to request its Status Assertion,
@@ -464,9 +464,9 @@ The Status Assertion MUST contain the following claims when the JWT format is us
 | **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be greater than the value 
 set for `iat`. | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
-| **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. 
+| **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound.
 The value SHOULD be set to `sha-256`. | this specification |
-| **cnf** | JSON object containing the cryptographic key binding. The `cnf.jwk` value MUST match 
+| **cnf** | JSON object containing the cryptographic key binding. The `cnf.jwk` value MUST match
 with the one provided within the related Digital Credential. | {{RFC7800}} Section 3.1 |
 
 
@@ -492,13 +492,13 @@ Content-Type: application/json
 }
 ~~~
 
-Given that the member `status_assertion_responses` is an array of strings, it is subject 
+Given that the member `status_assertion_responses` is an array of strings, it is subject
 to the following specification:
 - Each element in the array MUST match the element contained in the request at the same position
-- Each element MUST contain the error or the status of the assertion using the `typ` member 
+- Each element MUST contain the error or the status of the assertion using the `typ` member
 set to "status-assertion-error+{jwt,cwt}" 
 or "status-assertion+{jwt,cwt}"
-- The corresponding entry in the response must be of the same type as requested. For example, 
+- The corresponding entry in the response must be of the same type as requested. For example,
 if the entry in the request is "jwt", 
 then the entry at the same position in the response must also be "jwt".
 
