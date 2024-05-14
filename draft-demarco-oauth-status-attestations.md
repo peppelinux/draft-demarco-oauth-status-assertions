@@ -414,7 +414,7 @@ encoding, for better readability:
 }
 ~~~
 
-As exemplified for the JWT format, below is a non-normative example of a Credential proof of possession in CWT format provided in an unencoded diagnostic representation. The CWT headers and payload are presented without applying signature and encoding for improved readability:
+Below is a non-normative example of a Status Assertion Request object in CWT format represented in CBOR diagnostic notation format {{rfc8152}}, where the CWT headers and payload are presented without applying signature and encoding for better readability:
 
 ~~~
    [
