@@ -496,7 +496,8 @@ Content-Type: application/json
 }
 ~~~
 
-Given that the member `status_assertion_responses` is an array of strings, it is subject
+The member `status_assertion_responses` MUST be an array of strings, 
+where each of them represent a Status Assertion Response object. In particular:
 to the following specification:
 - Each element in the array MUST match the element contained in the request at the same position
 - Each element MUST contain the error or the status of the assertion using the `typ` member
