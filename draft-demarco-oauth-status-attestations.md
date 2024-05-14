@@ -297,7 +297,7 @@ related to a specific Credential issued by the same Credential Issuer.
          |  status_assertion_requests = [$StatusAssertionRequest] |
          +-------------------------------------------------------->
          |                                                        |
-         |  Response with Status Assertion                        |
+         |  Status Assertion Responses [...]                      |
          <--------------------------------------------------------+
          |                                                        |
 +--------+----------+                                  +----------+---------+
