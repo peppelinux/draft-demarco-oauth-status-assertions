@@ -37,9 +37,10 @@ normative:
   RFC7517: RFC7517
   RFC7519: RFC7519
   RFC7800: RFC7800
+  RFC8152: RFC8152
   RFC8392: RFC8392
   RFC9126: RFC9126
-
+  
 informative:
 
 
@@ -464,7 +465,7 @@ If the Digital Credential is valid, the Credential Issuer creates a new Status A
 }
 ~~~
 
-As exemplified for the JWT format, below is a non-normative example of a Credential proof of possession in CWT format provided in an unencoded diagnostic representation. The CWT headers and payload are presented without applying signature and encoding for improved readability:
+Below is a non-normative example of a Status Assertion Request object in CWT format represented in CBOR diagnostic notation format {{rfc8152}}, where the CWT headers and payload are presented without applying signature and encoding for better readability:
 ~~~
    {
     / protected / << {
