@@ -328,7 +328,7 @@ Content-Type: application/json
 "status_assertion_requests" : ["${base64url(json({typ: (some pop for status-assertion)+jwt, ...}))}.payload.signature", ... ]
 ~~~
 
-Given that the Wallet may request one or more Status Attestations from the same Credential Issuer, 
+Given that the Wallet may request one or more Status Attestations from the same Credential Issuer,
 the `status_assertion_requests` parameter is subject to the following specification:
 - Status_assertion_requests: REQUIRED. It MUST be implemented as an array of strings,
 where each string represents a Digital Credential proof of possession
@@ -465,7 +465,7 @@ The Status Assertion MUST contain the following claims when the JWT format is us
 | --- | --- | --- |
 | **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}}, {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of the Status Assertion issuance. | {{RFC9126}}, {{RFC7519}} |
-| **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be greater than the value 
+| **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be greater than the value
 set for `iat`. | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
 | **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound.
@@ -500,10 +500,10 @@ Given that the member `status_assertion_responses` is an array of strings, it is
 to the following specification:
 - Each element in the array MUST match the element contained in the request at the same position
 - Each element MUST contain the error or the status of the assertion using the `typ` member
-set to "status-assertion-error+{jwt,cwt}" 
+set to "status-assertion-error+{jwt,cwt}"
 or "status-assertion+{jwt,cwt}"
 - The corresponding entry in the response must be of the same type as requested. For example,
-if the entry in the request is "jwt", 
+if the entry in the request is "jwt",
 then the entry at the same position in the response must also be "jwt".
 
 # Interoperability of Credential Issuers Supporting Status Assertions
