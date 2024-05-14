@@ -338,7 +338,7 @@ The Credential Issuer that receives the Status Assertion Request MUST validate t
 Therefore the following requirements MUST be satisfied:
 
 - The Credential Issuer MUST verify the signature of all elements in the `status_assertion_requests` object
-using the public key contained within the Digital Credential where the `status_assertion_requests` is referred to;
+using the confirmation method contained within the Digital Credential where the `status_assertion_requests` is referred to;
 - the Credential Issuer MUST verify that it is the legitimate Issuer of the Digital Credential
 to which the `status_assertion_requests` refers.
 
@@ -469,7 +469,7 @@ set for `iat`. | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
 | **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound.
 The value SHOULD be set to `sha-256`. | this specification |
-| **cnf** | JSON object containing the cryptographic key binding. The `cnf.jwk` value MUST match
+| **cnf** | JSON object containing the confirmation method. The `cnf.jwk` value MUST match
 with the one provided within the related Digital Credential. | {{RFC7800}} Section 3.1 |
 
 
