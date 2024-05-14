@@ -381,7 +381,7 @@ When the JWT or CWT format are used, the JWT/CWT MUST contain the parameters def
 | --- | --- | --- |
 | **typ** | It MUST be set to `status-attestation+jwt` when JWT format is used. It MUST be set to `status-attestation+cwt` when CWT format is used. | {{RFC7516}} Section 4.1.1 |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
-| **kid** | Unique identifier of the JWK or "Cose Key" used for the signature of the Status Attestation Request, it MUST match the one contained in the Credential. | {{RFC7515}} |
+| **kid** | Unique identifier of the `JWK or` `Cose_Key` used for the signature of the Status Attestation Request, it MUST match the one contained in the Credential. | {{RFC7515}} |
 
 | Payload | Description | Reference |
 | --- | --- | --- |
