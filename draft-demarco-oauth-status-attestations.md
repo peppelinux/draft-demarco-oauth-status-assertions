@@ -493,7 +493,7 @@ The Status Assertion MUST contain the following claims when the JWT format is us
 | --- | --- | --- |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or to a symmetric algorithm (MAC) identifier. | {{RFC7515}}, {{RFC7517}} |
 | **typ** | It MUST be set to `status-attestation+jwt` when JWT format is used. It MUST be set to `status-attestation+cwt` when CWT format is used. | {{RFC7515}}, {{RFC7517}} and this specification |
-| **kid** | Unique identifier of the Issuer JWK or CWT. | {{RFC7515}} |
+| **kid** | Unique identifier of the Credential Issuer JWK | {{RFC7515}} |
 
 | Payload Parameter Name | Description | Reference |
 | --- | --- | --- |
