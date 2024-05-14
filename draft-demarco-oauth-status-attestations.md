@@ -313,7 +313,7 @@ Credential Issuer, where:
 for which the Status Assertion is requested, and enveloped in a signed
 object as proof of possession.
 - The proof of possession MUST be signed with the private key corresponding
-to the public key attested by the Credential Issuer and contained within
+to the confirmation claim assigned by the issuer and contained within
 the Digital Credential.
 
 ~~~
