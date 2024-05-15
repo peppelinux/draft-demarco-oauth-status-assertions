@@ -39,6 +39,7 @@ normative:
   RFC7800: RFC7800
   RFC8152: RFC8152
   RFC8392: RFC8392
+  RFC8747: RFC8747
   RFC9126: RFC9126
 
 informative:
@@ -371,8 +372,8 @@ Status Assertion,
 MUST demonstrate the proof of possession of the Digital Credential to
 the Credential Issuer.
 
-The proof of possession is made by enclosing the Digital Credential in an
-object (JWT or CWT) signed with the private key that its related public key is referenced in the Digital Credential.
+The proof of possession is made by enclosing the Digital Credential
+in an object (JWT or CWT) using the same confirmation method referenced in RFC7800.
 
 When the JWT or CWT format are used, the JWT/CWT MUST contain the parameters defined in the following table.
 
@@ -384,7 +385,8 @@ When the JWT or CWT format are used, the JWT/CWT MUST contain the parameters def
 
 | Payload | Description | Reference |
 | --- | --- | --- |
-| **iss** | Wallet identifier. | {{RFC9126}}, {{RFC7519}} |
+| **iss** | Wallet identifier. The Wallet identifier is out of the scope of this specs considering that it may be just a
+framework that renders the Wallet  identifier itself ephemeral. | {{RFC9126}}, {{RFC7519}} |
 | **aud** | It MUST be set with the Credential Issuer Status Attestation endpoint URL as value that identify the intended audience | {{RFC9126}}, {{RFC7519}} |
 | **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be superior to the value set for `iat`  . | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **iat** | UNIX Timestamp with the time of JWT/CWT issuance. | {{RFC9126}}, {{RFC7519}} |
@@ -502,7 +504,7 @@ The Status Assertion MUST contain the following claims when the JWT format is us
 | **exp** | UNIX Timestamp with the expiry time of the Status Assertion. | {{RFC9126}}, {{RFC7519}} |
 | **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
 | **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. The value SHOULD be set to `sha-256`. | this specification |
-| **cnf** | JSON object containing the cryptographic key binding. The sub-member contained within `cnf` member, such as `jwk` for JWT and `Cose_Key` for CWT, MUST match with the one provided within the related Digital Credential. Other confirmation methods can be utilized when the referenced Digital Credential supports them, in accordance with the relevant standards. | {{RFC7800}} Section 3.1 |
+| **cnf** | JSON object containing the cryptographic key binding. The sub-member contained within `cnf` member, such as `jwk` for JWT and `Cose_Key` for CWT, MUST match with the one provided within the related Digital Credential. Other confirmation methods can be utilized when the referenced Digital Credential supports them, in accordance with the relevant standards. | {{RFC7800}} Section 3.1, {{RFC8747}} Section 3.1 |
 
 
 # Status Assertion Response
