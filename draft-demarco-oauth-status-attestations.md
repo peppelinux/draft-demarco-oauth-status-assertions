@@ -394,7 +394,7 @@ framework that renders the Wallet  identifier itself ephemeral. | {{RFC9126}}, {
 | **credential_hash** | Hash value of the Digital Credential the Status Attestation is bound to. | this specification |
 | **credential_hash_alg** |  The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound. The value SHOULD be set to `sha-256`. | this specification |
 
-Below is a non-normative example of a Credential proof of possession with
+Below is a non-normative example of a Status Assertion Request, demonstrating the proof of possession of the related Digital Credential, with
 the JWT headers and payload are represented without applying signature and
 encoding, for better readability:
 
