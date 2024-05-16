@@ -32,6 +32,7 @@ author:
     email: fa.marino@ipzs.it
 
 normative:
+  RFC6749: RFC6749
   RFC7515: RFC7515
   RFC7516: RFC7516
   RFC7517: RFC7517
