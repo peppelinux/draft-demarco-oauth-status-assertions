@@ -329,7 +329,7 @@ Content-Type: application/json
 ~~~
 
 The Status Assertion HTTP request can be sent to a single Credential Issuer
-regarding multiple Digital Credentials, and MUST contain a json object with
+regarding multiple Digital Credentials, and MUST contain a JSON object with
 the member `status_assertion_requests`.
 
 The `status_assertion_requests` MUST be set with an array of strings, where
@@ -421,7 +421,7 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 | Payload | Description | Reference |
 | --- | --- | --- |
 | **iss** | Wallet identifier. | {{RFC9126}}, {{RFC7519}} |
-| **aud** | It MUST be set with the Credential Issuer Status Assertion endpoint URL as value that identify the intended audience | {{RFC9126}}, {{RFC7519}} |
+| **aud** | It MUST be set with the Credential Issuer Status Assertion endpoint URL as value that identify the intended audience. | {{RFC9126}}, {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
 | **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be greater than the value set for `iat`. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
