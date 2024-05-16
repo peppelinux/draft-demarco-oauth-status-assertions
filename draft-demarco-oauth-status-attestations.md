@@ -499,8 +499,7 @@ Content-Type: application/json
 ~~~
 
 The member `status_assertion_responses` MUST be an array of strings,
-where each of them represent a Status Assertion Response object. In particular:
-to the following specification:
+where each of them represent a Status Assertion Response object and the following requirements are met:
 - Each element in the array MUST match the element contained in the request at the same position
 - Each element MUST contain the error or the status of the assertion using the `typ` member
 set to "status-assertion-error+{jwt,cwt}"
