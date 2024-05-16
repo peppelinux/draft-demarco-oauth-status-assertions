@@ -500,7 +500,7 @@ Content-Type: application/json
 
 The member `status_assertion_responses` MUST be an array of strings,
 where each of them represent a Status Assertion Response object and the following requirements are met:
-- Each element in the array MUST match the corresponding element in the request array at the same index
+- Each element in the array MUST match the corresponding element in the request array at the same index to which it is related.
 - Each element MUST contain the error or the status of the assertion using the `typ` member
 set to "status-assertion-error+{jwt,cwt}" or "status-assertion+{jwt,cwt}"
 - The corresponding entry in the response MUST be of the same type as requested. For example,
