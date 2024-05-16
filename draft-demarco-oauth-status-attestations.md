@@ -332,9 +332,8 @@ The Status Assertion HTTP request can be sent to a single Credential Issuer
 regarding multiple Digital Credentials, and MUST contain a json object with
 the member `status_assertion_requests`.
 
-The `status_assertion_requests` MUST be set with an array of strings.
-
-Each string within the array is a Digital Credential Status Assertion Request.
+The `status_assertion_requests` MUST be set with an array of strings, where
+each string within the array represents a Digital Credential Status Assertion Request.
 
 The Credential Issuer that receives the Status Assertion Request
 MUST validate that the Wallet Instance making the request is
