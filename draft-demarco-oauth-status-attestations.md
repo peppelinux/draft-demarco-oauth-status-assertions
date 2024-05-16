@@ -372,8 +372,9 @@ Status Assertion,
 MUST demonstrate the proof of possession of the Digital Credential to
 the Credential Issuer.
 
-The proof of possession is made by enclosing the Digital Credential
-in an object (JWT or CWT) using the same confirmation method referenced in RFC7800.
+The proof of possession is achieved by hashing the Digital Credential within an object (JWT or CWT),
+which is included in the status assertion request. The same hash MUST be included in the status assertion response.
+The confirmation method is referenced in RFC7800.
 
 When the JWT or CWT format are used, the JWT/CWT MUST contain the parameters defined in the following table.
 
@@ -385,8 +386,7 @@ When the JWT or CWT format are used, the JWT/CWT MUST contain the parameters def
 
 | Payload | Description | Reference |
 | --- | --- | --- |
-| **iss** | Wallet identifier. The Wallet identifier is out of the scope of this specs considering that it may be just a
-framework that renders the Wallet  identifier itself ephemeral. | {{RFC9126}}, {{RFC7519}} |
+| **iss** | Wallet identifier. The Wallet identifier value is supposed to be used for identifying a wallet; therefore, it is out of scope for this specs, considering that it may simply be an ephemeral value. | {{RFC9126}}, {{RFC7519}} |
 | **aud** | It MUST be set with the Credential Issuer Status Attestation endpoint URL as value that identify the intended audience | {{RFC9126}}, {{RFC7519}} |
 | **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be superior to the value set for `iat`  . | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **iat** | UNIX Timestamp with the time of JWT/CWT issuance. | {{RFC9126}}, {{RFC7519}} |
