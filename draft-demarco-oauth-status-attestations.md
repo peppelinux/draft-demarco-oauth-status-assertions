@@ -338,9 +338,13 @@ are defined in the next section.
 In cases where a Status Assertion request is made for a Digital Credential
 that does not exist, has expired, been revoked, or is in any way invalid,
 or if the HTTP Request is compromised by missing or incorrect parameters,
-the Credential Issuer is required to respond with an HTTP Response. This
-response should have a status code of `400` and use `application/json`
-as the content type, including the following parameters:
+the Credential Issuer is required to respond with an HTTP Response.
+
+This response should use `application/json` as the content type.
+
+In case of bad request, the response status code will be `400`
+including the following parameters as specified in  the OAuth 2.0 RFC
+[Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2):
 
 - `error`, REQUIRED. The value must be assigned one of the error types
 as specified in the OAuth 2.0 RFC
@@ -359,6 +363,35 @@ Below a non-normative example of an HTTP Response with an error.
     "error":"invalid_request"
     "error_description": "The signature of credential_pop JWT is not valid"
   }
+~~~
+
+Since the Status Assertion Request is an array of strings, if one or more status
+assertion request are made for a Digital Credential with errors,
+the response status code will be always `200` including the parameters as specified in  the OAuth 2.0 RFC
+[Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2).
+
+In addition to the error codes referenced in {{RFC6749}}, the following error codes
+MUST also be supported:
+
+| Error Parameter Value | Description | Reference |
+| --- | --- | --- |
+| **credential_revoked** | The Digital Credential is revoked. The reason of revocation
+MUST be provided in the error_description field. | this specification |
+| **credential_updated** | One or more attributes contained in the Digital Credential are changed.
+The error_description field MUST contain a human-readable text describing the general parameters updated without specifying each one.  | this specification |
+| **credential_invalid** | The Digital Credential is invalid. The error_description field
+MUST contain the reason of invalidation. || this specification |
+
+Below a non-normative example of an HTTP Response with one or more Status Assertion Requests with error.
+
+~~~
+HTTP/1.1 201 Created
+Content-Type: application/json
+
+{
+    "status_assertion_responses": ["${base64url(json({typ: status-assertion-error+jwt, ...}))}.payload.signature",
+	"${base64url(json({typ: status-assertion-error+cwt, ...}))}.payload.signature", ... ]
+}
 ~~~
 
 ## Digital Credential Proof of Possession
