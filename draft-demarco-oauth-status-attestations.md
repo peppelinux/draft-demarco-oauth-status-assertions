@@ -341,9 +341,9 @@ authorized to request Status Assertions.
 Therefore the following requirements MUST be satisfied:
 
 - The Credential Issuer MUST verify the signature of all elements in the `status_assertion_requests` object
-using the confirmation method contained within the Digital Credential where the `status_assertion_requests` is referred to;
+using the confirmation method contained within the Digital Credential where the Status Assertion Request object is referred to;
 - The Credential Issuer MUST verify that it is the legitimate Issuer of the Digital Credential
-to which the `status_assertion_requests` refers.
+to which each Status Assertion Request object refers.
 
 The technical and details about the `status_assertion_requests` object
 are defined in the next section.
@@ -372,7 +372,7 @@ Below a non-normative example of an HTTP Response with an error.
 
   {
     "error": "invalid_request"
-    "error_description": "The signature of credential_pop JWT is not valid"
+    "error_description": "The signature of the status assertion request is not valid"
   }
 ~~~
 
@@ -486,8 +486,8 @@ code set to 404.
 If the Digital Credential is valid, the Credential Issuer MUST return
 an HTTP status code of 201 (Created), with the content type set to
 `application/json`. The response MUST include a JSON object with a member
-named `status_assertion_responses`, which contains the Status Assertion for the
-Wallet Instance, as illustrated in the following non-normative example:
+named `status_assertion_responses`, which contains the Status Assertions and or the Status Assertion Errors related to the request made by the
+Wallet Instance. In the non-normative example below is represented an HTTP Response with the `status_assertion_responses` JSON member:
 
 ~~~
 HTTP/1.1 201 Created
@@ -499,10 +499,11 @@ Content-Type: application/json
 ~~~
 
 The member `status_assertion_responses` MUST be an array of strings,
-where each of them represent a Status Assertion Response object and the following requirements are met:
+where each of them represent a Status Assertion Response object or a Status Assertion Error object.
+For each entry in the `status_assertion_responses` array, the following requirements are met:
 - Each element in the array MUST match the corresponding element in the request array at the same index to which it is related.
 - Each element MUST contain the error or the status of the assertion using the `typ` member.
-set to "status-assertion-error+{jwt,cwt}" or "status-assertion+{jwt,cwt}"
+set to "status-assertion-error+{jwt,cwt}" or "status-assertion+{jwt,cwt}", depending by the object type.
 - The corresponding entry in the response MUST be of the same type as requested. For example,
 if the entry in the request is "jwt",
 then the entry at the same position in the response must also be "jwt".
