@@ -503,7 +503,7 @@ where each of them represent a Status Assertion Response object and the followin
 - Each element in the array MUST match the corresponding element in the request array at the same index
 - Each element MUST contain the error or the status of the assertion using the `typ` member
 set to "status-assertion-error+{jwt,cwt}" or "status-assertion+{jwt,cwt}"
-- The corresponding entry in the response must be of the same type as requested. For example,
+- The corresponding entry in the response MUST be of the same type as requested. For example,
 if the entry in the request is "jwt",
 then the entry at the same position in the response must also be "jwt".
 
