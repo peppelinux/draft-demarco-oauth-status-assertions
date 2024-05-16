@@ -472,7 +472,7 @@ set for `iat`. | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
 | **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound.
 The value SHOULD be set to `sha-256`. | this specification |
-| **cnf** | JSON object containing the confirmation method. The `cnf.jwk` value MUST match
+| **cnf** | JSON object containing the confirmation method. Its value MUST be compliant with one contained in the related Digital Credential. For instance, if `cnf.jwk` is used within the Digital Credential, the same value MUST set within the Status Assertion Request.
 with the one provided within the related Digital Credential. | {{RFC7800}} Section 3.1 |
 
 
