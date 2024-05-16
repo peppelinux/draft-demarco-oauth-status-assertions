@@ -342,7 +342,7 @@ Therefore the following requirements MUST be satisfied:
 
 - The Credential Issuer MUST verify the signature of all elements in the `status_assertion_requests` object
 using the confirmation method contained within the Digital Credential where the `status_assertion_requests` is referred to;
-- the Credential Issuer MUST verify that it is the legitimate Issuer of the Digital Credential
+- The Credential Issuer MUST verify that it is the legitimate Issuer of the Digital Credential
 to which the `status_assertion_requests` refers.
 
 The technical and details about the `status_assertion_requests` object
