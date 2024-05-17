@@ -64,10 +64,10 @@ credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT)
 format. Status Assertions function
 similarly to OCSP Stapling, allowing wallet instances to present
 time-stamped assertions from the Credential Issuer.
-The approach outlined in this specification enables the 
-verification of credentials against revocation without 
-direct queries to third-party systems. 
-This enhances privacy, reduces latency, and 
+The approach outlined in this specification enables the
+verification of credentials against revocation without
+direct queries to third-party systems.
+This enhances privacy, reduces latency, and
 facilitates offline verification.
 
 The figure below illustrates the process by which a Wallet Instance
@@ -110,7 +110,7 @@ OpenID Connect Core [@OpenID.Core], the term "JSON Web Token (JWT)"
 defined by JSON Web Token (JWT) {{RFC7519}}, the term "CBOR Web Token (CWT)" defined in {{RFC8392}}.
 
 Holder:
-: An entity that receives Verifiable Credentials and has 
+: An entity that receives Verifiable Credentials and has
 control over them to present them to the Verifiers as Verifiable Presentations.
 
 Digital Credential:
@@ -396,7 +396,7 @@ regarding multiple Digital Credentials, and MUST contain a JSON object with
 the member `status_assertion_requests`.
 
 The `status_assertion_requests` MUST be set with an array of strings, where
-each string within the array represents a Digital Credential 
+each string within the array represents a Digital Credential
 Status Assertion Request object.
 
 The Credential Issuer that receives the Status Assertion Request object
@@ -405,7 +405,7 @@ authorized to request Status Assertions.
 Therefore the following requirements MUST be satisfied:
 
 - The Credential Issuer MUST verify the compliance of all elements in the `status_assertion_requests` object
-using the confirmation method contained within the Digital Credential where the Status Assertion Request 
+using the confirmation method contained within the Digital Credential where the Status Assertion Request
 object is referred to;
 - The Credential Issuer MUST verify that it is the legitimate Issuer of the Digital Credential
 to which each Status Assertion Request object refers.
