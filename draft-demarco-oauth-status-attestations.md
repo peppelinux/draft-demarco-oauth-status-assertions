@@ -433,24 +433,43 @@ Content-Type: application/json
 The member `status_assertion_responses` MUST be an array of strings,
 where each of them represent a Status Assertion Response object,
 as defined in
-[the section Status Assertion](#status-assertion)or a Status Assertion Error object,
+[the section Status Assertion](#status-assertion) or a Status Assertion Error object,
 as defined in [the section Status Error](#status-assertion-error).
+
 For each entry in the `status_assertion_responses` array, the following requirements are met:
-- Each element in the array MUST match the corresponding element in the request array at the same index to which it is related.
+- Each element in the array MUST match the corresponding element in the request array at
+the same position index to which it is related, eg: "[requestAboutA, requestAboutB]" produces "[responseAboutA, responseErrorAboutB]".
 - Each element MUST contain the error or the status of the assertion using the `typ` member.
-set to "status-assertion-error+{jwt,cwt}" or "status-assertion+{jwt,cwt}", depending by the object type.
+set to "status-assertion+{jwt,cwt}" or "status-assertion-error+{jwt,cwt}", depending by the object type.
 - The corresponding entry in the response MUST be of the same type as requested. For example,
-if the entry in the request is "jwt",
-then the entry at the same position in the response must also be "jwt".
+if the entry in the request is "jwt", then the entry at the same position in the response must also be "jwt".
 
 # Status Assertion Error
 
 If the Status Assertion is requested for a non-existent, expired, revoked
 or invalid Digital Credential, the
 Credential Issuer MUST respond with an HTTP Response with the status
-code set to 404.
+code set to 200 and the `status_assertion_responses` array with the related
+Status Assertioon Error object.
 
-TBD schema of the errors.
+The Status Assertion Error object must contain the parameters described in the 
+table below:
+
+| Header | Description | Reference |
+| --- | --- | --- |
+| **typ** | Depending on the related Status Assertion Request object format, it MUST be set to `status-attestation-error+jwt` or `status-attestation-error+cwt`. | {{RFC7516}} Section 4.1.1 |
+| **alg** | It MUST set to `none`. | {{RFC7516}} Section 4.1.1 |
+
+| Payload | Description | Reference |
+| --- | --- | --- |
+| **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}}, {{RFC7519}} |
+| **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
+| **credential_hash** | Hash value of the Digital Credential the Status Attestation is bound to, according to the related Status Assertion Request object. | this specification |
+| **credential_hash_alg** |  The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound. The value SHOULD be set to `sha-256`. | this specification |
+| **error** | The value must be assigned one of the error types as specified in the OAuth 2.0 RFC [Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2) or the others as defined in table below  | {{RFC7519}} Section 4.1.7 |
+| **error_description** | Text in human-readable form that offers more details to clarify the nature of the error encountered (for instance, changes in some attributes, reasons for revocation, other).  | {{RFC7519}} Section 4.1.7 |
+
+TODO: Table enumerating the additional error identifiers, specifically related to the status assertions.
 
 # Status Assertion
 
@@ -804,6 +823,7 @@ To indicate that the content is an CWT-based Status List:
 We would like to thank:
 
 - Paul Bastien
+- Sara Casanova
 - Emanuele De Cupis
 - Riccardo Iaconelli
 - Marina Adomeit
