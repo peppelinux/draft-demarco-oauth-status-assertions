@@ -434,7 +434,7 @@ The member `status_assertion_responses` MUST be an array of strings,
 where each of them represent a Status Assertion Response object,
 as defined in
 [the section Status Assertion](#status-assertion)or a Status Assertion Error object,
-as defined in [the section Status Error](#status-error).
+as defined in [the section Status Error](#status-assertion-error).
 For each entry in the `status_assertion_responses` array, the following requirements are met:
 - Each element in the array MUST match the corresponding element in the request array at the same index to which it is related.
 - Each element MUST contain the error or the status of the assertion using the `typ` member.
