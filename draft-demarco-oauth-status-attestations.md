@@ -368,7 +368,7 @@ Below a non-normative example of an HTTP Response with an error.
 
 Since the Status Assertion Request is an array of strings, if one or more Status
 Assertion Request object are made for a Digital Credential with errors,
-the response status code will be always `200` including the parameters as specified in  the OAuth 2.0 RFC
+the HTTP response status code is set to `200` including the parameters as specified in the OAuth 2.0 RFC
 [Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2).
 
 In addition to the error codes referenced in {{RFC6749}}, the following error codes
