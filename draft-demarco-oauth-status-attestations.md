@@ -371,11 +371,13 @@ Assertion Request object are made for a Digital Credential with errors,
 the HTTP response status code is set to `200` including the parameters as specified in the OAuth 2.0 RFC
 [Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2).
 
-In addition to the error codes referenced in {{RFC6749}}, the following error codes
-MUST also be supported:
+The Status Assertion Error object data schema is inspired by the errors defined in {{RFC6749}}, using error and error_description within the payload.
+Errors parameter values defined in {{RFC6749}} and the following error codes
+MUST be supported:
 
 | Error Parameter Value | Description | Reference |
 | --- | --- | --- |
+| **credential_revoked** | The Digital Credential is revoked. The reason of revocation MUST be provided in the error_description field. | this specification |
 | **credential_revoked** | The Digital Credential is revoked. The reason of revocation MUST be provided in the error_description field. | this specification |
 | **credential_updated** | One or more attributes contained in the Digital Credential are changed. The error_description field MUST contain a human-readable text describing the general parameters updated without specifying each one. | this specification |
 | **credential_invalid** | The Digital Credential is invalid. The error_description field MUST contain the reason of invalidation. | this specification |
