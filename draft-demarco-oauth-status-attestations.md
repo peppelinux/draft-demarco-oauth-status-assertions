@@ -452,7 +452,7 @@ Credential Issuer MUST respond with an HTTP Response with the status
 code set to 200 and the `status_assertion_responses` array with the related
 Status Assertioon Error object.
 
-The Status Assertion Error object must contain the parameters described in the 
+The Status Assertion Error object must contain the parameters described in the
 table below:
 
 | Header | Description | Reference |
