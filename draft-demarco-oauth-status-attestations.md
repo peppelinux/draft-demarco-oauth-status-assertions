@@ -217,7 +217,7 @@ without disclosing a status URL or any remote reference to it, as long as
 the linked Status Assertion is available and presented to the
 Verifier, and not expired.
 
-7. **Real-time validation**: OAuth Status Lists provide the possibility
+6. **Real-time validation**: OAuth Status Lists provide the possibility
 to do real-time validation of the Digital Credential status. To support
 the real-time status validation use cases, a Wallet MAY implement strategy
 to request a new Status Assertion before sending it to the Verifier.
