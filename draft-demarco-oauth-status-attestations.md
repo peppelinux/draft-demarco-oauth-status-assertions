@@ -378,7 +378,6 @@ MUST be supported:
 | Error Parameter Value | Description | Reference |
 | --- | --- | --- |
 | **credential_revoked** | The Digital Credential is revoked. The reason of revocation MUST be provided in the error_description field. | this specification |
-| **credential_revoked** | The Digital Credential is revoked. The reason of revocation MUST be provided in the error_description field. | this specification |
 | **credential_updated** | One or more attributes contained in the Digital Credential are changed. The error_description field MUST contain a human-readable text describing the general parameters updated without specifying each one. | this specification |
 | **credential_invalid** | The Digital Credential is invalid. The error_description field MUST contain the reason of invalidation. | this specification |
 
