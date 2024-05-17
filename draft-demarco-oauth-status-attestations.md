@@ -48,10 +48,10 @@ informative:
 Status Assertion is a signed object that demonstrates the validity status of a
 digital credential.
 These assertions are periodically provided
-to holders, who can present these to Verifiers along
+to holders, who can present these to verifier along
 with the corresponding digital credentials.
 The approach outlined in this document
-makes the verifiers able to check the non-revocation of a digital credential
+makes the verifier able to check the non-revocation of a digital credential
 without requiring to query any third-party entities.
 
 --- middle
@@ -288,24 +288,24 @@ related to a specific Credential issued by the same Credential Issuer.
 
 
 ~~~ ascii-art
-+-------------------+                         +--------------------+
-|                   |                         |                    |
-|  Wallet Instance  |                         | Credential Issuer  |
-|                   |                         |                    |
-+--------+----------+                         +----------+---------+
-         |                                               |
-         | HTTP POST /status                             |
-         |  credential_pop = $CredentialPoPJWT           |
-         +----------------------------------------------->
-         |                                               |
-         |  Response with Status Assertion JWT           |
-         <-----------------------------------------------+
-         |                                               |
-+--------+----------+                         +----------+---------+
-|                   |                         |                    |
-|  Wallet Instance  |                         | Credential Issuer  |
-|                   |                         |                    |
-+-------------------+                         +--------------------+
++-------------------+                                  +--------------------+
+|                   |                                  |                    |
+|  Wallet Instance  |                                  | Credential Issuer  |
+|                   |                                  |                    |
++--------+----------+                                  +----------+---------+
+         |                                                        |
+         | HTTP POST /status                                      |
+         |  status_assertion_requests = [$StatusAssertionRequest] |
+         +-------------------------------------------------------->
+         |                                                        |
+         |  Status Assertion Responses [...]                      |
+         <--------------------------------------------------------+
+         |                                                        |
++--------+----------+                                  +----------+---------+
+|                   |                                  |                    |
+|  Wallet Instance  |                                  | Credential Issuer  |
+|                   |                                  |                    |
++-------------------+                                  +--------------------+
 ~~~
 
 The Wallet Instance sends the Status Assertion request to the
@@ -317,21 +317,36 @@ object as proof of possession.
 to the confirmation claim assigned by the issuer and contained within
 the Digital Credential.
 
+
+Below a non-normative example representing a Status Assertion Request array with a
+single JWT in it.
+
 ~~~
 POST /status HTTP/1.1
 Host: issuer.example.org
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 
-credential_pop=$CredentialPoPJWT
+"status_assertion_requests" : ["${base64url(json({typ: (some pop for status-assertion)+jwt, ...}))}.payload.signature", ... ]
 ~~~
 
-To validate that the Wallet Instance is entitled to request its Status Assertion,
-the Credential Issuer:
-- MUST verify the signature of the `credential_pop` object using
-the public key contained in the Digital Credential;
-- MUST verify that it is the legitimate Credential Issuer.
+The Status Assertion HTTP request can be sent to a single Credential Issuer
+regarding multiple Digital Credentials, and MUST contain a JSON object with
+the member `status_assertion_requests`.
 
-The technical and details about the `credential_pop` object
+The `status_assertion_requests` MUST be set with an array of strings, where
+each string within the array represents a Digital Credential Status Assertion Request.
+
+The Credential Issuer that receives the Status Assertion Request
+MUST validate that the Wallet Instance making the request is
+authorized to request Status Assertions.
+Therefore the following requirements MUST be satisfied:
+
+- The Credential Issuer MUST verify the signature of all elements in the `status_assertion_requests` object
+using the confirmation method contained within the Digital Credential where the Status Assertion Request object is referred to;
+- The Credential Issuer MUST verify that it is the legitimate Issuer of the Digital Credential
+to which each Status Assertion Request object refers.
+
+The technical and details about the `status_assertion_requests` object
 are defined in the next section.
 
 ## Status Assertion Request Errors
@@ -361,8 +376,8 @@ Below a non-normative example of an HTTP Response with an error.
   Content-Type: application/json;charset=UTF-8
 
   {
-    "error":"invalid_request"
-    "error_description": "The signature of credential_pop JWT is not valid"
+    "error": "invalid_request"
+    "error_description": "The signature of the status assertion request is not valid"
   }
 ~~~
 
@@ -419,7 +434,7 @@ encoding, for better readability:
     "iss": "0b434530-e151-4c40-98b7-74c75a5ef760",
     "aud": "https://issuer.example.org/status-assertion-endpoint",
     "iat": 1698744039,
-    "exp": 1698834139,
+    "exp": 1698830439,
     "jti": "6f204f7e-e453-4dfd-814e-9d155319408c",
     "credential_hash": $Issuer-Signed-JWT-Hash
     "credential_hash_alg": "sha-256",
@@ -429,7 +444,7 @@ encoding, for better readability:
 
 When the JWT format is used, the JWT MUST contain the parameters defined in the following table.
 
-| Header | Description | Reference |
+| JOSE Header Parameter | Description | Reference |
 | --- | --- | --- |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
 | **typ** | It MUST be set to `status-assertion-request+jwt` | {{RFC7516}} Section 4.1.1 |
@@ -438,9 +453,9 @@ When the JWT format is used, the JWT MUST contain the parameters defined in the 
 | Payload | Description | Reference |
 | --- | --- | --- |
 | **iss** | Wallet identifier. | {{RFC9126}}, {{RFC7519}} |
-| **aud** | It MUST be set with the Credential Issuer Status Assertion endpoint URL as value that identify the intended audience | {{RFC9126}}, {{RFC7519}} |
+| **aud** | It MUST be set with the Credential Issuer Status Assertion endpoint URL as value that identify the intended audience. | {{RFC9126}}, {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of JWT issuance. | {{RFC9126}}, {{RFC7519}} |
-| **exp** | UNIX Timestamp with the expiration time of the JWT. | {{RFC9126}}, {{RFC7519}} |
+| **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be greater than the value set for `iat`. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
 | **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
 | **credential_hash_alg** |  The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. The value SHOULD be set to `sha-256`. | this specification |
@@ -463,7 +478,7 @@ If the Digital Credential is valid, the Credential Issuer creates a new Status A
 {
     "iss": "https://issuer.example.org",
     "iat": 1504699136,
-    "exp": 1504700136,
+    "exp": 1504785536,
     "credential_hash": $CREDENTIAL-HASH,
     "credential_hash_alg": "sha-256",
     "cnf": {
@@ -474,7 +489,7 @@ If the Digital Credential is valid, the Credential Issuer creates a new Status A
 
 The Status Assertion MUST contain the following claims when the JWT format is used.
 
-| JOSE Header | Description | Reference |
+| JOSE Header Parameter | Description | Reference |
 | --- | --- | --- |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or to a symmetric algorithm (MAC) identifier. | {{RFC7515}}, {{RFC7517}} |
 | **typ** | It MUST be set to `status-assertion+jwt`. | {{RFC7515}}, {{RFC7517}} and this specification |
@@ -484,10 +499,13 @@ The Status Assertion MUST contain the following claims when the JWT format is us
 | --- | --- | --- |
 | **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}}, {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of the Status Assertion issuance. | {{RFC9126}}, {{RFC7519}} |
-| **exp** | UNIX Timestamp with the expiry time of the Status Assertion. | {{RFC9126}}, {{RFC7519}} |
+| **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be greater than the value
+set for `iat`. | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
-| **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. The value SHOULD be set to `sha-256`. | this specification |
-| **cnf** | JSON object containing the cryptographic key binding. The `cnf.jwk` value MUST match with the one provided within the related Digital Credential. | {{RFC7800}} Section 3.1 |
+| **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound.
+The value SHOULD be set to `sha-256`. | this specification |
+| **cnf** | JSON object containing the confirmation method. Its value MUST be compliant with one contained in the related Digital Credential. For instance, if `cnf.jwk` is used within the Digital Credential, the same value MUST set within the Status Assertion Request.
+with the one provided within the related Digital Credential. | {{RFC7800}} Section 3.1 |
 
 
 # Status Assertion Response
@@ -500,18 +518,27 @@ code set to 404.
 If the Digital Credential is valid, the Credential Issuer MUST return
 an HTTP status code of 201 (Created), with the content type set to
 `application/json`. The response MUST include a JSON object with a member
-named `status_assertion`, which contains the Status Assertion for the
-Wallet Instance, as illustrated in the following non-normative example:
+named `status_assertion_responses`, which contains the Status Assertions and or the Status Assertion Errors related to the request made by the
+Wallet Instance. In the non-normative example below is represented an HTTP Response with the `status_assertion_responses` JSON member:
 
 ~~~
 HTTP/1.1 201 Created
 Content-Type: application/json
 
 {
-    "status_assertion": "eyJhbGciOiJFUzI1Ni ...",
+    "status_assertion_responses": ["${base64url(json({typ: status-assertion+jwt, ...}))}.payload.signature", ... ]
 }
 ~~~
 
+The member `status_assertion_responses` MUST be an array of strings,
+where each of them represent a Status Assertion Response object or a Status Assertion Error object.
+For each entry in the `status_assertion_responses` array, the following requirements are met:
+- Each element in the array MUST match the corresponding element in the request array at the same index to which it is related.
+- Each element MUST contain the error or the status of the assertion using the `typ` member.
+set to "status-assertion-error+{jwt,cwt}" or "status-assertion+{jwt,cwt}", depending by the object type.
+- The corresponding entry in the response MUST be of the same type as requested. For example,
+if the entry in the request is "jwt",
+then the entry at the same position in the response must also be "jwt".
 
 # Interoperability of Credential Issuers Supporting Status Assertions
 
