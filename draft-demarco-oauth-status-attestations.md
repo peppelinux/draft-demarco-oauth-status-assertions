@@ -422,7 +422,7 @@ represented an HTTP Response with the
 `status_assertion_responses` JSON member:
 
 ~~~
-HTTP/1.1 201 Created
+HTTP/1.1 200 Created
 Content-Type: application/json
 
 {
@@ -441,7 +441,7 @@ For each entry in the `status_assertion_responses` array, the following requirem
 the same position index to which it is related, eg: "[requestAboutA, requestAboutB]" produces "[responseAboutA, responseErrorAboutB]".
 - Each element MUST contain the error or the status of the assertion using the `typ` member.
 set to "status-assertion+{jwt,cwt}" or "status-assertion-error+{jwt,cwt}", depending by the object type.
-- The corresponding entry in the response MUST be of the same type as requested. For example,
+- The corresponding entry in the response MUST be of the same data format as requested. For example,
 if the entry in the request is "jwt", then the entry at the same position in the response must also be "jwt".
 
 # Status Assertion Error
