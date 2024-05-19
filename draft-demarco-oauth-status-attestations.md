@@ -323,9 +323,9 @@ When the JWT or CWT format are used, the JWT/CWT MUST contain the parameters def
 
 | Payload | Description | Reference |
 | --- | --- | --- |
-| **iss** | Wallet identifier. The Wallet identifier value is supposed to be used for identifying a wallet; therefore, it is out of scope for this specs, considering that it may simply be an ephemeral value. | {{RFC9126}}, {{RFC7519}} |
-| **aud** | It MUST be set with the Credential Issuer Status Attestation endpoint URL as value that identify the intended audience | {{RFC9126}}, {{RFC7519}} |
-| **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be superior to the value set for `iat`  . | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
+| **iss** | Status Assertion Request Issuer identifier. The value is supposed to be used for identifying the Wallet that has issued the request. It is out of scope for this document defining how this value must be set. | {{RFC9126}}, {{RFC7519}} |
+| **aud** | It MUST be set with the Credential Issuer Status Attestation endpoint URL as value that identify the intended audience. | {{RFC9126}}, {{RFC7519}} |
+| **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be superior to the value set for `iat` . | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **iat** | UNIX Timestamp with the time of JWT/CWT issuance. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
 | **credential_hash** | Hash value of the Digital Credential the Status Attestation is bound to. | this specification |
@@ -349,7 +349,7 @@ encoding, for better readability:
     "exp": 1698830439,
     "jti": "6f204f7e-e453-4dfd-814e-9d155319408c",
     "credential_hash": $Issuer-Signed-JWT-Hash
-    "credential_hash_alg": "sha-256",
+    "credential_hash_alg": "sha-256"
 }
 ~~~
 
