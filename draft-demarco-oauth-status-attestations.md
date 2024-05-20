@@ -473,7 +473,13 @@ table below:
 | **error** | The value must be assigned one of the error types as specified in the OAuth 2.0 RFC [Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2) or the others as defined in table below  | {{RFC7519}} Section 4.1.7 |
 | **error_description** | Text in human-readable form that offers more details to clarify the nature of the error encountered (for instance, changes in some attributes, reasons for revocation, other).  | {{RFC7519}} Section 4.1.7 |
 
-TODO: Table enumerating the additional error identifiers, specifically related to the status assertions.
+The Status Assertion Error object data schema is inspired by the errors defined in {{RFC6749}}; errors parameter values defined in {{RFC6749}} and the following error codes MUST be supported:
+
+| Error Parameter Value | Description | Reference |
+| --- | --- | --- |
+| **credential_revoked** | The Digital Credential is revoked. The reason of revocation MUST be provided in the error_description field. | this specification |
+| **credential_updated** | One or more attributes contained in the Digital Credential are changed. The error_description field MUST contain a human-readable text describing the general parameters updated without specifying each one. | this specification |
+| **credential_invalid** | The Digital Credential is invalid. The error_description field MUST contain the reason of invalidation. | this specification |
 
 # Status Assertion
 
@@ -842,3 +848,4 @@ We would like to thank:
 -02
 
 * Name of the draft changed from `OAuth Status Attestations` to `OAuth Status Assertions`
+* Exdended errors table added in [the section Status Error](#status-assertion-error)
