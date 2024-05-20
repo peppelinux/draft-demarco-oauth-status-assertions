@@ -776,9 +776,9 @@ We would like to thank:
 -03
 
 * Status Assertion Request and Response is now a json array with multiple entries.
-* Better generalization about the confirmation methods
-* Removed any informative comparison with OAuth Status List
-* JWT and CWT typ 
+* Better generalization about the confirmation methods.
+* Removed any informative comparison with OAuth Status List.
+* JWT and CWT typ.
 
 -02
 
