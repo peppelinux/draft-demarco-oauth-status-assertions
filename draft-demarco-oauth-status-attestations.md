@@ -32,6 +32,7 @@ author:
     email: fa.marino@ipzs.it
 
 normative:
+  RFC6749: RFC6749
   RFC7515: RFC7515
   RFC7516: RFC7516
   RFC7517: RFC7517
@@ -848,4 +849,4 @@ We would like to thank:
 -02
 
 * Name of the draft changed from `OAuth Status Attestations` to `OAuth Status Assertions`
-* Exdended errors table added in [the section Status Error](#status-assertion-error)
+* Exdended Status Assertion errors table added in [the section Status Error](#status-assertion-error)
