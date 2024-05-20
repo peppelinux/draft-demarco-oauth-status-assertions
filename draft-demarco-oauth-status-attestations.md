@@ -209,11 +209,15 @@ list of statuses.
 5. **Offline flow**: OAuth Status List can be accessed by a Verifier when
 an internet connection is present. At the same time,
 OAuth Status List defines
-how to provide a static Status List Token, to be included within a
-Digital Credential. This requires the Wallet Instance to acquire a
-new Digital Credential for a specific presentation. Even if similar to
+how to download an entire Status List or a Status List Token.
+In the Status List Token, the `status_list` and `sub` members are mandatory.
+They provide the URL and the index of the revocation entry for the Digital Credential,
+enabling a Verifier to check the status of the Digital Credential
+when a broadband connection becomes available.
+Even if similar to
 the OAuth Status List Token, the Status Assertions enable the User to
-persistently use their preexistent Digital Credentials, as long as
+persistently use their preexistent Digital Credentials,
+without disclosing a status URL or any remote reference to it, as long as
 the linked Status Assertion is available and presented to the
 Verifier, and not expired.
 
