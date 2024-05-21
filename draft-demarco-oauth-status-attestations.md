@@ -403,30 +403,53 @@ Credential Issuer MUST respond with an HTTP Response with the status
 code set to 200 and the `status_assertion_responses` array with the related
 Status Assertion Error object.
 
+A non-normative example is given below
+where the format is JWT.
+
+~~~
+{
+    "alg": "ES256",
+    "typ": "status-assertion-error+jwt"
+}
+.
+{
+    "iss": "https://issuer.example.org",
+    "jti": "6f204f7e-e453-4dfd-814e-9d155319408c"
+    "credential_hash": $CREDENTIAL-HASH,
+    "credential_hash_alg": "sha-256",
+    "error": "credential_revoked",
+    "error_description": "Credential has been replaced."
+    }
+}
+~~~
+
 The Status Assertion Error object must contain the parameters described in the
 table below:
 
 | Header | Description | Reference |
 | --- | --- | --- |
-| **typ** | Depending on the related Status Assertion Request object format, it MUST be set to `status-attestation-error+jwt` or `status-attestation-error+cwt`. | {{RFC7516}} Section 4.1.1 |
-| **alg** | It MUST set to `none`. | {{RFC7516}} Section 4.1.1 |
+| **typ** | REQUIRED. Depending on the related Status Assertion Request object format, it MUST be set to `status-attestation-error+jwt` or `status-attestation-error+cwt`. | {{RFC7516}} Section 4.1.1 |
+| **alg** | REQUIRED. It MUST set to `none`. | {{RFC7516}} Section 4.1.1 |
 
 | Payload | Description | Reference |
 | --- | --- | --- |
-| **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}}, {{RFC7519}} |
-| **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
-| **credential_hash** | Hash value of the Digital Credential the Status Attestation is bound to, according to the related Status Assertion Request object. | this specification |
-| **credential_hash_alg** |  The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound. The value SHOULD be set to `sha-256`. | this specification |
-| **error** | The value SHOULD be assigned one of the error types as specified in the {{RFC6749}} [Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2) or the others as defined in table below  | {{RFC7519}} Section 4.1.7 |
-| **error_description** | Text in human-readable form that offers more details to clarify the nature of the error encountered (for instance, changes in some attributes, reasons for revocation, other).  | {{RFC7519}} Section 4.1.7 |
+| **iss** | REQUIRED. It MUST be set to the identifier of the Issuer. | {{RFC9126}}, {{RFC7519}} |
+| **jti** | REQUIRED. Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
+| **credential_hash** | REQUIRED. Hash value of the Digital Credential the Status Attestation is bound to, according to the related Status Assertion Request object. | this specification |
+| **credential_hash_alg** |  REQUIRED. The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound. The value SHOULD be set to `sha-256`. | this specification |
+| **error** | REQUIRED. The value SHOULD be assigned one of the error types as specified in the {{RFC6749}} [Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2) or the others as defined in table below  | {{RFC7519}} Section 4.1.7 |
+| **error_description** | OPTIONAL. Text in human-readable form that offers more details to clarify the nature of the error encountered (for instance, changes in some attributes, reasons for revocation, other).  | {{RFC7519}} Section 4.1.7 |
 
 The `error` parameter for the Status Assertion Error object MUST be set with one of the values defined in the table below, in addition to the values specified in {{RFC6749}}:
 
 | Error Parameter Value | Description | Reference |
 | --- | --- | --- |
-| **credential_revoked** | The Digital Credential is revoked. The reason of revocation MUST be provided in the error_description field. | this specification |
-| **credential_updated** | One or more attributes contained in the Digital Credential are changed. The error_description field MUST contain a human-readable text describing the general parameters updated without specifying each one. | this specification |
-| **credential_invalid** | The Digital Credential is invalid. The error_description field MUST contain the reason of invalidation. | this specification |
+| **credential_revoked** | The Digital Credential is revoked. The reason of revocation SHOULD be provided in the error_description field. | this specification |
+| **credential_updated** | One or more attributes contained in the Digital Credential are changed. The error_description field SHOULD contain a human-readable text describing the general parameters updated without specifying each one. | this specification |
+| **credential_invalid** | The Digital Credential is invalid. The error_description field SHOULD contain the reason of invalidation. | this specification |
+| **invalid_signature** | The Digital Credential has an unknown key. The error_description field SHOULD contain the reason of signature invalidation. | this specification |
+| **credential_not_found** | The Digital Credential is not found for hashing issues for instead. The error_description field SHOULD contain the reason of invalidation. | this specification |
+| **unsupported_hash_alg** | The Digital Credential uses a hash algorithm not supported. The error_description field SHOULD contain the reason of issue. | this specification |
 
 # Status Assertion
 
