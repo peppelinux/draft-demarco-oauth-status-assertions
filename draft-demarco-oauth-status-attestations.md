@@ -444,12 +444,12 @@ The `error` parameter for the Status Assertion Error object MUST be set with one
 
 | Error Parameter Value | Description | Reference |
 | --- | --- | --- |
-| **credential_revoked** | The Digital Credential is revoked. The reason of revocation SHOULD be provided in the error_description field. | this specification |
-| **credential_updated** | One or more attributes contained in the Digital Credential are changed. The error_description field SHOULD contain a human-readable text describing the general parameters updated without specifying each one. | this specification |
-| **credential_invalid** | The Digital Credential is invalid. The error_description field SHOULD contain the reason of invalidation. | this specification |
-| **invalid_signature** | The Digital Credential has an unknown key. The error_description field SHOULD contain the reason of signature invalidation. | this specification |
-| **credential_not_found** | The Digital Credential is not found for hashing issues for instead. The error_description field SHOULD contain the reason of invalidation. | this specification |
-| **unsupported_hash_alg** | The Digital Credential uses a hash algorithm not supported. The error_description field SHOULD contain the reason of issue. | this specification |
+| **credential_revoked** | The Digital Credential results as already revoked. The reason of revocation MAY be provided in the `error_description` field. | this specification |
+| **credential_updated** | One or more information contained in the Digital Credential are changed. The `error_description` field SHOULD contain a human-readable text describing the general parameters updated without specifying each one. | this specification |
+| **credential_invalid** | The Digital Credential is invalid. The `error_description` field SHOULD contain the reason of invalidation. | this specification |
+| **invalid_request_signature** | The Status Assertion Request signature validation has failed. This error type is used when the proof of possession of the Digital Credential is found not valid within the Status Assertion Request. | this specification |
+| **credential_not_found** | The `credential_hash` value provided in the Status Assertion Request doesn't match with any active Digital Credential. | this specification |
+| **unsupported_hash_alg** | The hash algorithm set in `credential_hash_alg` is not supported. | this specification |
 
 # Status Assertion
 
@@ -823,6 +823,6 @@ We would like to thank:
 
 -02
 
-* Name of the draft changed from `OAuth Status Attestations` to `OAuth Status Assertions`
-* Exdended Status Assertion errors table added in [the section Status Error](#status-assertion-error)
+* Name of the draft changed from `OAuth Status Attestations` to `OAuth Status Assertions`.
+* Extended Status Assertion errors table added in [the section Status Error](#status-assertion-error).
 
