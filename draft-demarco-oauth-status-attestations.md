@@ -420,7 +420,7 @@ table below:
 | **error** | The value SHOULD be assigned one of the error types as specified in the {{RFC6749}} [Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2) or the others as defined in table below  | {{RFC7519}} Section 4.1.7 |
 | **error_description** | Text in human-readable form that offers more details to clarify the nature of the error encountered (for instance, changes in some attributes, reasons for revocation, other).  | {{RFC7519}} Section 4.1.7 |
 
-The `error` parameter values provided in {{RFC6749}} SHOULD be included and the following values MUST be supported:
+The `error` parameter for the Status Assertion Error object MUST be set with one of the values defined in the table below, in addition to the values specified in {{RFC6749}}:
 
 | Error Parameter Value | Description | Reference |
 | --- | --- | --- |
