@@ -32,6 +32,7 @@ author:
     email: fa.marino@ipzs.it
 
 normative:
+  RFC6749: RFC6749
   RFC7515: RFC7515
   RFC7516: RFC7516
   RFC7517: RFC7517
@@ -62,36 +63,38 @@ without requiring to query any third-party entities.
 Status Assertions ensure the non-revocation of digital
 credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT)
 format. Status Assertions function
-similarly to OCSP Stapling, allowing wallet instances to present
-time-stamped assertions provided by the Credential Issuer.
+similarly to OCSP Stapling, allowing clients to present to the
+relying parties
+time-stamped assertions provided by the credential issuer.
 The approach outlined in this specification enables the
 verification of credentials against revocation without
 direct queries to third-party systems,
 enhancing privacy, reducing latency, and
 faciliting offline verification.
 
-The figure below illustrates the process by which a Wallet Instance
+The figure below illustrates the process by which a client,
+such as a Wallet Instance,
 requests and obtains a Status Assertion from the credential issuer.
 
 ~~~ ascii-art
 +-----------------+                              +-------------------+
 |                 | Requests Status Assertions   |                   |
 |                 |----------------------------->|                   |
-| Wallet Instance |                              | Credential Issuer |
+| Client          |                              | Credential Issuer |
 |                 | Status Assertions            |                   |
 |                 |<-----------------------------|                   |
 +-----------------+                              +-------------------+
 ~~~
 **Figure 1**: Status Assertion Issuance Flow.
 
-The figure below illustrates the process by which a Wallet Instance
+The figure below illustrates the process by which a client
 presents the Status Assertion along with the corresponding digital credential,
 to prove the non-revocation status of the digital credential to a verifier.
 
 ~~~ ascii-art
 +-- ----------------+                             +----------+
 |                   | Presents Digital Credential |          |
-|  Wallet Instance  | and Status Assertion        | Verifier |
+| Client            | and Status Assertion        | Verifier |
 |                   |---------------------------->|          |
 +-------------------+                             +----------+
 ~~~
@@ -107,7 +110,9 @@ to prove the non-revocation status of the digital credential to a verifier.
 
 This specification uses the terms "End-User", "Entity" as defined by
 OpenID Connect Core [@OpenID.Core], the term "JSON Web Token (JWT)"
-defined by JSON Web Token (JWT) {{RFC7519}}, the term "CBOR Web Token (CWT)" defined in {{RFC8392}}.
+defined by JSON Web Token (JWT) {{RFC7519}},
+the term "CBOR Web Token (CWT)" defined in {{RFC8392}}, "Client" as
+defined {{RFC6749}}
 
 Holder:
 : An entity that receives Verifiable Credentials and has
@@ -137,17 +142,22 @@ Wallet Instance:
 It securely stores the User's Digital Credentials. It can present
 Digital Credentials to Verifiers
 and request Status Assertions from Issuers under the control of the User.
+For the purposes of this specification, the Wallet Instance is
+considered as a Client.
 
 # Rationale
 
 There are cases where the Verifier only needs
 to check the revocation status of a Digital Credential at the time of
 presentation, and therefore it should not be allowed to
-check the status of a Digital Credential over time due to some privacy constraints,
+check the status of a Digital Credential over time due to some
+privacy constraints,
 in compliance with national privacy regulations.
 
 For instance, consider a scenario where a Verifier's repeated access to a
-Status List to check the revocation status of a Digital Credential could
+status list, such as the one defined in
+[draft-ietf-oauth-status-list](https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/)
+to check the revocation status of a Digital Credential could
 be deemed as excessive monitoring of the End-User's activities.
 
 This could potentially infringe upon the End-User's right to privacy,
@@ -156,7 +166,8 @@ as outlined in [Article 8 of the European Convention on Human Rights]
 in the the European Union's General Data Protection Regulation
 ([GDPR](https://gdpr-info.eu/)),
 by creating a detailed profile of the End-User's
-credential status without explicit consent for such continuous surveillance.
+Digital Credential status without explicit consent for
+such continuous surveillance.
 
 # Requirements
 
@@ -390,7 +401,7 @@ If the Status Assertion is requested for a non-existent, expired, revoked
 or invalid Digital Credential, the
 Credential Issuer MUST respond with an HTTP Response with the status
 code set to 200 and the `status_assertion_responses` array with the related
-Status Assertioon Error object.
+Status Assertion Error object.
 
 The Status Assertion Error object must contain the parameters described in the
 table below:
@@ -406,7 +417,7 @@ table below:
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
 | **credential_hash** | Hash value of the Digital Credential the Status Attestation is bound to, according to the related Status Assertion Request object. | this specification |
 | **credential_hash_alg** |  The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound. The value SHOULD be set to `sha-256`. | this specification |
-| **error** | The value must be assigned one of the error types as specified in the OAuth 2.0 RFC [Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2) or the others as defined in table below  | {{RFC7519}} Section 4.1.7 |
+| **error** | The value SHOULD be assigned one of the error types as specified in the {{RFC6749}} [Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2) or the others as defined in table below  | {{RFC7519}} Section 4.1.7 |
 | **error_description** | Text in human-readable form that offers more details to clarify the nature of the error encountered (for instance, changes in some attributes, reasons for revocation, other).  | {{RFC7519}} Section 4.1.7 |
 
 TODO: Table enumerating the additional error identifiers, specifically related to the status assertions.
@@ -711,7 +722,7 @@ This section requests registration of the following media types [@RFC2046] in
 the "Media Types" registry [@IANA.MediaTypes] in the manner described
 in [@RFC6838].
 
-To indicate that the content is an JWT-based Status List:
+To indicate that the content is a JWT-based Status Assertion:
 
   * Type name: application
   * Subtype name: status-assertion-request+jwt
@@ -733,10 +744,10 @@ To indicate that the content is an JWT-based Status List:
   * Change controller: IETF
   * Provisional registration? No
 
-To indicate that the content is an CWT-based Status List:
+To indicate that the content is a CWT-based Status Assertion:
 
   * Type name: application
-  * Subtype name: status-assertion+jwt
+  * Subtype name: status-assertion+cwt
   * Required parameters: n/a
   * Optional parameters: n/a
   * Encoding considerations: binary
@@ -775,6 +786,7 @@ We would like to thank:
 
 -03
 
+* Removed any comparison with OAuth Status List 
 * Status Assertion Request and Response is now a json array with multiple entries.
 * Better generalization about the confirmation methods.
 * Removed any informative comparison with OAuth Status List.
@@ -782,4 +794,4 @@ We would like to thank:
 
 -02
 
-* Name of the draft changed from `OAuth Status Attestations` to `OAuth Status Assertions`
+* Name of the draft changed from `OAuth Status Attestations` to `OAuth Status Assertions`.
