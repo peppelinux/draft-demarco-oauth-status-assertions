@@ -403,8 +403,7 @@ Credential Issuer MUST respond with an HTTP Response with the status
 code set to 200 and the `status_assertion_responses` array with the related
 Status Assertion Error object.
 
-A non-normative example is given below
-where the format is JWT.
+Below a non-normative example of a Status Assertion Error object in JWT format, with the headers and payload represented in JSON format and without applying the signature.
 
 ~~~
 {
@@ -418,7 +417,7 @@ where the format is JWT.
     "credential_hash": $CREDENTIAL-HASH,
     "credential_hash_alg": "sha-256",
     "error": "credential_revoked",
-    "error_description": "Credential has been replaced."
+    "error_description": "Credential is revoked."
     }
 }
 ~~~
