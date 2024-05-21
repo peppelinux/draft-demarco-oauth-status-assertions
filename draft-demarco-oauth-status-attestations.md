@@ -206,19 +206,18 @@ guidance for concrete implementations utilizing common proof of
 possession mechanisms. This includes, but is not limited to:
 
 1. Having the digital representation of the Digital Credential (the bytes).
-2. Controlling a private key that corresponds to a public key associated
-with the Credential, often indicated within the Credential's cnf
-(confirmation) claim or through a similar mechanism.
+2. Controlling the confirmation method of the Credential, often indicated
+within the Credential's cnf (confirmation) claim or through a similar mechanism.
 
-The essence of requiring control over the private key and its
-demonstration through a cryptographic operation
-(e.g., signing a challenge or a token) is to ensure that the entity in
-possession of the Credential can execute actions exclusively reserved
-for the legitimate subject. The dual-layered approach of requiring both
-possession of the Credential and control over the corresponding private
-key indeed reinforces the security and integrity of the status assertion
-process. It also ensures that the entity requesting a Status Attestation
-is indeed the same entity to which the Credential was originally issued,
+The essence of requiring proof of control or ownership over the Credential
+through the confirmation method (e.g. signing a challenge or a token) is
+to ensure that the entity in possession of the Credential can execute
+actions exclusively reserved to the legitimate subject or owner.
+The dual-layered approach of requiring both possession of the
+Credential and control over it, reinforces the security and integrity of the status
+assertion process.
+It also ensures that the entity requesting a Status Attestation is indeed
+the same entity to which the Credential was originally issued,
 affirming the authenticity and rightful possession of the Credential.
 
 # Status Assertion Request
