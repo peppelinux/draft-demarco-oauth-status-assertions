@@ -874,7 +874,6 @@ We would like to thank:
 
 -03
 
-* IANA media type registry
 * Removed any comparison with OAuth Status List
 * Status Assertion Request and Response is now a json array with multiple entries.
 * Better generalization about the confirmation methods.
