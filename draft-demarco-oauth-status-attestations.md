@@ -408,7 +408,8 @@ Below a non-normative example of a Status Assertion Error object in JWT format, 
 ~~~
 {
     "alg": "ES256",
-    "typ": "status-assertion-error+jwt"
+    "typ": "status-assertion-error+jwt",
+    "kid": "Issuer-JWK-KID"
 }
 .
 {
