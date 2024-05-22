@@ -438,7 +438,7 @@ table below:
 | **credential_hash** | REQUIRED. The hash value MUST match the one contained in the Status Assertion Request to which the Status Assertion Error is related. | this specification |
 | **credential_hash_alg** |  REQUIRED. The hash algorithm MUST match the one contained in the Status Assertion Request to which the Status Assertion Error is related. | this specification |
 | **error** | REQUIRED. The value SHOULD be assigned with one of the error types defined in {{RFC6749}}[Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2) or defined in the Section [Status Assertion Error Values](status-assertion-error-values).  | {{RFC7519}} Section 4.1.7 |
-| **error_description** | OPTIONAL. Text in human-readable form that offers more details to clarify the nature of the error encountered (for instance, changes in some attributes, reasons for revocation, other).  | {{RFC7519}} Section 4.1.7 |
+| **error_description** | OPTIONAL. Text that clarifies the nature of the error, such as attribute changes, revocation reasons, in relation to the `error` value.  | {{RFC7519}} Section 4.1.7 |
 
 ## Status Assertion Error Values
 
