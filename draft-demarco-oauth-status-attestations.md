@@ -403,7 +403,7 @@ Credential Issuer MUST respond with an HTTP Response with the status
 code set to 200 and the `status_assertion_responses` array with the related
 Status Assertion Error object.
 
-Below a non-normative example of a Status Assertion Error object in JWT format, with the headers and payload represented in JSON format and without applying the signature.
+Below a non-normative example of a Status Assertion Error object in JWT format, with the headers and payload represented in JSON and without applying the signature.
 
 ~~~
 {
