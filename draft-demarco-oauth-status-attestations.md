@@ -176,11 +176,12 @@ listed in this section. The Status Assertion:
 
 - SHOULD be presented in conjunction with the Digital Credential.
 The Status Assertion MUST be timestamped with its issuance datetime,
-using a timestamp which is later then the time of presentation issuance;
+using a timestamp which is at or after the time of
+Digital Credential issuance;
 - MUST contain the expiration datetime after which the Digital Credential
 MUST NOT be considered valid anymore. The expiration datetime MUST be
 superior to the Status Assertion issuance datetime and it MUST end before
-the expiration of the Credential;
+the expiration of the Digital Credential;
 - MUST enable the offline use cases by employing validation using
 a cryptographic signature and the cryptographic public key of the
 Credential Issuer.
