@@ -213,8 +213,8 @@ through the confirmation method, such has proving the control of the cryptograph
 to ensure that the entity in possession of the Credential can execute
 actions exclusively reserved to the legitimate Holder.
 The dual-layered approach of requiring both possession of the
-Credential and control over it, reinforces the security and integrity of the status
-assertion process.
+Credential and control over it, reinforces the security and integrity of the Status
+Assertion process.
 This ensures that the Holder requesting a Status Attestation is indeed
 the same Holder to which the Credential was originally issued,
 affirming the authenticity and rightful possession of the Credential.
