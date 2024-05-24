@@ -215,7 +215,7 @@ actions exclusively reserved to the legitimate Holder.
 The dual-layered approach of requiring both possession of the
 Credential and control over it, reinforces the security and integrity of the Status
 Assertion process.
-This ensures that the Holder requesting a Status Attestation is indeed
+This ensures that the Holder requesting a Status Assertion is indeed
 the same Holder to which the Credential was originally issued,
 affirming the authenticity and rightful possession of the Credential.
 
