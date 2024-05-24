@@ -161,7 +161,7 @@ to check the revocation status of a Digital Credential could
 be deemed as excessive monitoring of the End-User's activities.
 
 This could potentially infringe upon the End-User's right to privacy,
-as outlined in 
+as outlined in
 [Article 8 of the European Convention on Human Rights](https://www.echr.coe.int/documents/convention_eng.pdf) and
 in the the European Union's General Data Protection Regulation
 ([GDPR](https://gdpr-info.eu/)),
