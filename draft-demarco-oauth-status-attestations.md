@@ -732,7 +732,51 @@ To indicate that the content is a JWT-based Status Assertion:
   * Security considerations: See (#Security) of [[ this specification ]]
   * Interoperability considerations: n/a
   * Published specification: [[ this specification ]]
-  * Applications that use this media type: Applications using [[ this specification ]] for updated status information of tokens
+  * Applications that use this media type: Applications using [[ this specification ]] for requesting Status Assertions.
+  * Fragment identifier considerations: n/a
+  * Additional information:
+    * File extension(s): n/a
+    * Macintosh file type code(s): n/a
+  * Person &amp; email address to contact for further information: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Intended usage: COMMON
+  * Restrictions on usage: none
+  * Author: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Change controller: IETF
+  * Provisional registration? No
+
+To indicate that the content is a CWT-based Status Assertion Request:
+
+  * Type name: application
+  * Subtype name: status-assertion-request+cwt
+  * Required parameters: n/a
+  * Optional parameters: n/a
+  * Encoding considerations: binary
+  * Security considerations: See (#Security) of [[ this specification ]]
+  * Interoperability considerations: n/a
+  * Published specification: [[ this specification ]]
+  * Applications that use this media type: Applications using [[ this specification ]] for requesting Status Assertions.
+  * Fragment identifier considerations: n/a
+  * Additional information:
+    * File extension(s): n/a
+    * Macintosh file type code(s): n/a
+  * Person &amp; email address to contact for further information: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Intended usage: COMMON
+  * Restrictions on usage: none
+  * Author: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Change controller: IETF
+  * Provisional registration? No
+
+To indicate that the content is a JWT-based Status Assertion:
+
+  * Type name: application
+  * Subtype name: status-assertion+jwt
+  * Required parameters: n/a
+  * Optional parameters: n/a
+  * Encoding considerations: binary
+  * Security considerations: See (#Security) of [[ this specification ]]
+  * Interoperability considerations: n/a
+  * Published specification: [[ this specification ]]
+  * Applications that use this media type: Applications using [[ this specification ]] for issuing or presenting Status Assertions.
   * Fragment identifier considerations: n/a
   * Additional information:
     * File extension(s): n/a
@@ -754,7 +798,51 @@ To indicate that the content is a CWT-based Status Assertion:
   * Security considerations: See (#Security) of [[ this specification ]]
   * Interoperability considerations: n/a
   * Published specification: [[ this specification ]]
-  * Applications that use this media type: Applications using [[ this specification ]] for status assertion of tokens and Digital Credentials
+  * Applications that use this media type: Applications using [[ this specification ]] for issuing or presenting Status Assertions.
+  * Fragment identifier considerations: n/a
+  * Additional information:
+    * File extension(s): n/a
+    * Macintosh file type code(s): n/a
+  * Person &amp; email address to contact for further information: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Intended usage: COMMON
+  * Restrictions on usage: none
+  * Author: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Change controller: IETF
+  * Provisional registration? No
+
+To indicate that the content is a JWT-based Status Assertion Error:
+
+  * Type name: application
+  * Subtype name: status-assertion-error+jwt
+  * Required parameters: n/a
+  * Optional parameters: n/a
+  * Encoding considerations: binary
+  * Security considerations: See (#Security) of [[ this specification ]]
+  * Interoperability considerations: n/a
+  * Published specification: [[ this specification ]]
+  * Applications that use this media type: Applications using [[ this specification ]] for issuing Status Assertions Request Errors.
+  * Fragment identifier considerations: n/a
+  * Additional information:
+    * File extension(s): n/a
+    * Macintosh file type code(s): n/a
+  * Person &amp; email address to contact for further information: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Intended usage: COMMON
+  * Restrictions on usage: none
+  * Author: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Change controller: IETF
+  * Provisional registration? No
+
+To indicate that the content is a CWT-based Status Assertion Error:
+
+  * Type name: application
+  * Subtype name: status-assertion-error+cwt
+  * Required parameters: n/a
+  * Optional parameters: n/a
+  * Encoding considerations: binary
+  * Security considerations: See (#Security) of [[ this specification ]]
+  * Interoperability considerations: n/a
+  * Published specification: [[ this specification ]]
+  * Applications that use this media type: Applications using [[ this specification ]] for issuing Status Assertions Request Errors.
   * Fragment identifier considerations: n/a
   * Additional information:
     * File extension(s): n/a
