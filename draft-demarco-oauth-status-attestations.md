@@ -175,17 +175,19 @@ The general requirements for the implementation of Status Assertion are
 listed in this section. The Status Assertion:
 
 - SHOULD be presented in conjunction with the Digital Credential.
+- MUST include information that links it to the
+referenced Digital Credential;
 - MUST be timestamped with its issuance datetime,
-using a timestamp which is later then the time of presentation issuance;
-- MUST contain the expiration datetime after which the Digital Credential
-must not be considered valid anymore. The expiration datetime MUST be
+using a timestamp which is at or after the time of
+Digital Credential issuance which it refers;
+- MUST contain the expiration datetime after which both
+the Status Assertion and the Digital Credential it refers
+MUST NOT be considered valid anymore. The expiration datetime MUST be
 superior to the Status Assertion issuance datetime and it MUST end before
-the expiration of the Credential;
+the expiration datetime of the Digital Credential;
 - MUST enable the offline use cases by employing validation using
 a cryptographic signature and the cryptographic public key of the
 Credential Issuer.
-- MUST include information that links it to the
-referenced Digital Credential;
 - MUST NOT contain personal information about the User who owns
 the Digital Credential to which the Status Assertion refers.
 
@@ -206,19 +208,18 @@ guidance for concrete implementations utilizing common proof of
 possession mechanisms. This includes, but is not limited to:
 
 1. Having the digital representation of the Digital Credential (the bytes).
-2. Controlling a private key that corresponds to a public key associated
-with the Credential, often indicated within the Credential's cnf
-(confirmation) claim or through a similar mechanism.
+2. Controlling the confirmation method of the Credential, using the Credential's `cnf` parameter.
 
-The essence of requiring control over the private key and its
-demonstration through a cryptographic operation
-(e.g., signing a challenge or a token) is to ensure that the entity in
-possession of the Credential can execute actions exclusively reserved
-for the legitimate subject. The dual-layered approach of requiring both
-possession of the Credential and control over the corresponding private
-key indeed reinforces the security and integrity of the Status Assertion
-process. It also ensures that the entity requesting a Status Assertion
-is indeed the same entity to which the Credential was originally issued,
+The essence of requiring proof of possession over the Credential
+through the confirmation method, such has proving the control of the
+cryptographic material related to a Credential, is
+to ensure that the entity in possession of the Credential can execute
+actions exclusively reserved to the legitimate Holder.
+The dual-layered approach of requiring both possession of the
+Credential and control over it, reinforces the security and integrity
+of the Status Assertion process.
+This ensures that the Holder requesting a Status Assertion is indeed
+the same Holder to which the Credential was originally issued,
 affirming the authenticity and rightful possession of the Credential.
 
 # Status Assertion Request
@@ -732,7 +733,51 @@ To indicate that the content is a JWT-based Status Assertion:
   * Security considerations: See (#Security) of [[ this specification ]]
   * Interoperability considerations: n/a
   * Published specification: [[ this specification ]]
-  * Applications that use this media type: Applications using [[ this specification ]] for updated status information of tokens
+  * Applications that use this media type: Applications using [[ this specification ]] for requesting Status Assertions.
+  * Fragment identifier considerations: n/a
+  * Additional information:
+    * File extension(s): n/a
+    * Macintosh file type code(s): n/a
+  * Person &amp; email address to contact for further information: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Intended usage: COMMON
+  * Restrictions on usage: none
+  * Author: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Change controller: IETF
+  * Provisional registration? No
+
+To indicate that the content is a CWT-based Status Assertion Request:
+
+  * Type name: application
+  * Subtype name: status-assertion-request+cwt
+  * Required parameters: n/a
+  * Optional parameters: n/a
+  * Encoding considerations: binary
+  * Security considerations: See (#Security) of [[ this specification ]]
+  * Interoperability considerations: n/a
+  * Published specification: [[ this specification ]]
+  * Applications that use this media type: Applications using [[ this specification ]] for requesting Status Assertions.
+  * Fragment identifier considerations: n/a
+  * Additional information:
+    * File extension(s): n/a
+    * Macintosh file type code(s): n/a
+  * Person &amp; email address to contact for further information: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Intended usage: COMMON
+  * Restrictions on usage: none
+  * Author: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Change controller: IETF
+  * Provisional registration? No
+
+To indicate that the content is a JWT-based Status Assertion:
+
+  * Type name: application
+  * Subtype name: status-assertion+jwt
+  * Required parameters: n/a
+  * Optional parameters: n/a
+  * Encoding considerations: binary
+  * Security considerations: See (#Security) of [[ this specification ]]
+  * Interoperability considerations: n/a
+  * Published specification: [[ this specification ]]
+  * Applications that use this media type: Applications using [[ this specification ]] for issuing or presenting Status Assertions.
   * Fragment identifier considerations: n/a
   * Additional information:
     * File extension(s): n/a
@@ -754,7 +799,51 @@ To indicate that the content is a CWT-based Status Assertion:
   * Security considerations: See (#Security) of [[ this specification ]]
   * Interoperability considerations: n/a
   * Published specification: [[ this specification ]]
-  * Applications that use this media type: Applications using [[ this specification ]] for status assertion of tokens and Digital Credentials
+  * Applications that use this media type: Applications using [[ this specification ]] for issuing or presenting Status Assertions.
+  * Fragment identifier considerations: n/a
+  * Additional information:
+    * File extension(s): n/a
+    * Macintosh file type code(s): n/a
+  * Person &amp; email address to contact for further information: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Intended usage: COMMON
+  * Restrictions on usage: none
+  * Author: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Change controller: IETF
+  * Provisional registration? No
+
+To indicate that the content is a JWT-based Status Assertion Error:
+
+  * Type name: application
+  * Subtype name: status-assertion-error+jwt
+  * Required parameters: n/a
+  * Optional parameters: n/a
+  * Encoding considerations: binary
+  * Security considerations: See (#Security) of [[ this specification ]]
+  * Interoperability considerations: n/a
+  * Published specification: [[ this specification ]]
+  * Applications that use this media type: Applications using [[ this specification ]] for issuing Status Assertions Request Errors.
+  * Fragment identifier considerations: n/a
+  * Additional information:
+    * File extension(s): n/a
+    * Macintosh file type code(s): n/a
+  * Person &amp; email address to contact for further information: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Intended usage: COMMON
+  * Restrictions on usage: none
+  * Author: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Change controller: IETF
+  * Provisional registration? No
+
+To indicate that the content is a CWT-based Status Assertion Error:
+
+  * Type name: application
+  * Subtype name: status-assertion-error+cwt
+  * Required parameters: n/a
+  * Optional parameters: n/a
+  * Encoding considerations: binary
+  * Security considerations: See (#Security) of [[ this specification ]]
+  * Interoperability considerations: n/a
+  * Published specification: [[ this specification ]]
+  * Applications that use this media type: Applications using [[ this specification ]] for issuing Status Assertions Request Errors.
   * Fragment identifier considerations: n/a
   * Additional information:
     * File extension(s): n/a
