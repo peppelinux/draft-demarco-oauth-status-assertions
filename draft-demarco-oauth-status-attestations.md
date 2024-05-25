@@ -161,8 +161,8 @@ to check the revocation status of a Digital Credential could
 be deemed as excessive monitoring of the End-User's activities.
 
 This could potentially infringe upon the End-User's right to privacy,
-as outlined in [Article 8 of the European Convention on Human Rights]
-(https://www.echr.coe.int/documents/convention_eng.pdf) and
+as outlined in
+[Article 8 of the European Convention on Human Rights](https://www.echr.coe.int/documents/convention_eng.pdf) and
 in the the European Union's General Data Protection Regulation
 ([GDPR](https://gdpr-info.eu/)),
 by creating a detailed profile of the End-User's
@@ -175,17 +175,19 @@ The general requirements for the implementation of Status Assertion are
 listed in this section. The Status Assertion:
 
 - SHOULD be presented in conjunction with the Digital Credential.
-The Status Assertion MUST be timestamped with its issuance datetime,
-using a timestamp which is later then the time of presentation issuance;
-- MUST contain the expiration datetime after which the Digital Credential
+- MUST include information that links it to the
+referenced Digital Credential;
+- MUST be timestamped with its issuance datetime,
+using a timestamp which is at or after the time of
+Digital Credential issuance which it refers;
+- MUST contain the expiration datetime after which both
+the Status Assertion and the Digital Credential it refers
 MUST NOT be considered valid anymore. The expiration datetime MUST be
 superior to the Status Assertion issuance datetime and it MUST end before
-the expiration of the Credential;
+the expiration datetime of the Digital Credential;
 - MUST enable the offline use cases by employing validation using
 a cryptographic signature and the cryptographic public key of the
 Credential Issuer.
-- MUST include information that links it to the
-referenced Digital Credential;
 - MUST NOT contain personal information about the User who owns
 the Digital Credential to which the Status Assertion refers.
 
@@ -206,19 +208,18 @@ guidance for concrete implementations utilizing common proof of
 possession mechanisms. This includes, but is not limited to:
 
 1. Having the digital representation of the Digital Credential (the bytes).
-2. Controlling a private key that corresponds to a public key associated
-with the Credential, often indicated within the Credential's cnf
-(confirmation) claim or through a similar mechanism.
+2. Controlling the confirmation method of the Credential, using the Credential's `cnf` parameter.
 
-The essence of requiring control over the private key and its
-demonstration through a cryptographic operation
-(e.g., signing a challenge or a token) is to ensure that the entity in
-possession of the Credential can execute actions exclusively reserved
-for the legitimate subject. The dual-layered approach of requiring both
-possession of the Credential and control over the corresponding private
-key indeed reinforces the security and integrity of the status assertion
-process. It also ensures that the entity requesting a Status Attestation
-is indeed the same entity to which the Credential was originally issued,
+The essence of requiring proof of possession over the Credential
+through the confirmation method, such has proving the control of the
+cryptographic material related to a Credential, is
+to ensure that the entity in possession of the Credential can execute
+actions exclusively reserved to the legitimate Holder.
+The dual-layered approach of requiring both possession of the
+Credential and control over it, reinforces the security and integrity
+of the Status Assertion process.
+This ensures that the Holder requesting a Status Assertion is indeed
+the same Holder to which the Credential was originally issued,
 affirming the authenticity and rightful possession of the Credential.
 
 # Status Assertion Request
@@ -268,19 +269,19 @@ When the JWT or CWT format are used, the JWT/CWT MUST contain the parameters def
 
 | Header | Description | Reference |
 | --- | --- | --- |
-| **typ** | It MUST be set to `status-attestation+jwt` when JWT format is used. It MUST be set to `status-attestation+cwt` when CWT format is used. | {{RFC7516}} Section 4.1.1 |
+| **typ** | It MUST be set to `status-assertion+jwt` when JWT format is used. It MUST be set to `status-assertion+cwt` when CWT format is used. | {{RFC7516}} Section 4.1.1 |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
-| **kid** | Unique identifier of the `JWK or` `Cose_Key` used for the signature of the Status Attestation Request, it MUST match the one contained in the Credential. | {{RFC7515}} |
+| **kid** | Unique identifier of the `JWK or` `Cose_Key` used for the signature of the Status Assertion Request, it MUST match the one contained in the Credential. | {{RFC7515}} |
 
 | Payload | Description | Reference |
 | --- | --- | --- |
 | **iss** | Status Assertion Request Issuer identifier. The value is supposed to be used for identifying the Wallet that has issued the request. It is out of scope for this document defining how this value must be set. | {{RFC9126}}, {{RFC7519}} |
-| **aud** | It MUST be set with the Credential Issuer Status Attestation endpoint URL as value that identify the intended audience. | {{RFC9126}}, {{RFC7519}} |
+| **aud** | It MUST be set with the Credential Issuer Status Assertion endpoint URL as value that identify the intended audience. | {{RFC9126}}, {{RFC7519}} |
 | **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be superior to the value set for `iat` . | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **iat** | UNIX Timestamp with the time of JWT/CWT issuance. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
-| **credential_hash** | Hash value of the Digital Credential the Status Attestation is bound to. | this specification |
-| **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Attestation is bound. The value SHOULD be set to `sha-256`. | this specification |
+| **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
+| **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. The value SHOULD be set to `sha-256`. | this specification |
 
 Below is a non-normative example of a Status Assertion Request with
 the JWT headers and payload are represented without applying signature and
@@ -312,14 +313,14 @@ and payload are presented without applying signature and encoding for better rea
    [
        / protected / << {
        / alg / 1: -7 / ES256 /
-       / typ / 16: -7 / status-attestation-request+cwt /
+       / typ / 16: -7 / status-assertion-request+cwt /
        / kid / 4: h'3132' / $CREDENTIAL-CNF-CWKID /
      } >>,
      / unprotected / {
      },
      / payload / << {
        / iss    / 1: 0b434530-e151-4c40-98b7-74c75a5ef760 /,
-       / aud    / 3: https://issuer.example.org/status-attestation-endpoint /,
+       / aud    / 3: https://issuer.example.org/status-assertion-endpoint /,
        / iat    / 6: 1698744039 /,
        / exp    / 4: 1698830439 /,
        / cti    / 7: 6f204f7e-e453-4dfd-814e-9d155319408c /,
@@ -437,7 +438,7 @@ table below:
 | **jti** | REQUIRED. Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
 | **credential_hash** | REQUIRED. The hash value MUST match the one contained in the Status Assertion Request to which the Status Assertion Error is related. | this specification |
 | **credential_hash_alg** |  REQUIRED. The hash algorithm MUST match the one contained in the Status Assertion Request to which the Status Assertion Error is related. | this specification |
-| **error** | REQUIRED. The value SHOULD be assigned with one of the error types defined in {{RFC6749}}[Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2) or defined in the Section [Status Assertion Error Values](status-assertion-error-values).  | {{RFC7519}} Section 4.1.7 |
+| **error** | REQUIRED. The value SHOULD be assigned with one of the error types defined in {{RFC6749}}[Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2) or defined in the Section [Status Assertion Error Values](status-assertion-error-values). | {{RFC7519}} Section 4.1.7 |
 | **error_description** | OPTIONAL. Text that clarifies the nature of the error, such as attribute changes, revocation reasons, in relation to the `error` value.  | {{RFC7519}} Section 4.1.7 |
 
 ## Status Assertion Error Values
@@ -488,7 +489,7 @@ The Status Assertion MUST contain the parameters defined below.
 | Header Parameter Name | Description | Reference |
 | --- | --- | --- |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or to a symmetric algorithm (MAC) identifier. | {{RFC7515}}, {{RFC7517}} |
-| **typ** | It MUST be set to `status-attestation+jwt` when JWT format is used. It MUST be set to `status-attestation+cwt` when CWT format is used. | {{RFC7515}}, {{RFC7517}} and this specification |
+| **typ** | It MUST be set to `status-assertion+jwt` when JWT format is used. It MUST be set to `status-assertion+cwt` when CWT format is used. | {{RFC7515}}, {{RFC7517}} and this specification |
 | **kid** | Unique identifier of the Credential Issuer JWK | {{RFC7515}} |
 
 | Payload Parameter Name | Description | Reference |
@@ -763,7 +764,51 @@ To indicate that the content is a JWT-based Status Assertion:
   * Security considerations: See (#Security) of [[ this specification ]]
   * Interoperability considerations: n/a
   * Published specification: [[ this specification ]]
-  * Applications that use this media type: Applications using [[ this specification ]] for updated status information of tokens
+  * Applications that use this media type: Applications using [[ this specification ]] for requesting Status Assertions.
+  * Fragment identifier considerations: n/a
+  * Additional information:
+    * File extension(s): n/a
+    * Macintosh file type code(s): n/a
+  * Person &amp; email address to contact for further information: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Intended usage: COMMON
+  * Restrictions on usage: none
+  * Author: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Change controller: IETF
+  * Provisional registration? No
+
+To indicate that the content is a CWT-based Status Assertion Request:
+
+  * Type name: application
+  * Subtype name: status-assertion-request+cwt
+  * Required parameters: n/a
+  * Optional parameters: n/a
+  * Encoding considerations: binary
+  * Security considerations: See (#Security) of [[ this specification ]]
+  * Interoperability considerations: n/a
+  * Published specification: [[ this specification ]]
+  * Applications that use this media type: Applications using [[ this specification ]] for requesting Status Assertions.
+  * Fragment identifier considerations: n/a
+  * Additional information:
+    * File extension(s): n/a
+    * Macintosh file type code(s): n/a
+  * Person &amp; email address to contact for further information: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Intended usage: COMMON
+  * Restrictions on usage: none
+  * Author: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Change controller: IETF
+  * Provisional registration? No
+
+To indicate that the content is a JWT-based Status Assertion:
+
+  * Type name: application
+  * Subtype name: status-assertion+jwt
+  * Required parameters: n/a
+  * Optional parameters: n/a
+  * Encoding considerations: binary
+  * Security considerations: See (#Security) of [[ this specification ]]
+  * Interoperability considerations: n/a
+  * Published specification: [[ this specification ]]
+  * Applications that use this media type: Applications using [[ this specification ]] for issuing or presenting Status Assertions.
   * Fragment identifier considerations: n/a
   * Additional information:
     * File extension(s): n/a
@@ -785,7 +830,51 @@ To indicate that the content is a CWT-based Status Assertion:
   * Security considerations: See (#Security) of [[ this specification ]]
   * Interoperability considerations: n/a
   * Published specification: [[ this specification ]]
-  * Applications that use this media type: Applications using [[ this specification ]] for status assertion of tokens and Digital Credentials
+  * Applications that use this media type: Applications using [[ this specification ]] for issuing or presenting Status Assertions.
+  * Fragment identifier considerations: n/a
+  * Additional information:
+    * File extension(s): n/a
+    * Macintosh file type code(s): n/a
+  * Person &amp; email address to contact for further information: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Intended usage: COMMON
+  * Restrictions on usage: none
+  * Author: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Change controller: IETF
+  * Provisional registration? No
+
+To indicate that the content is a JWT-based Status Assertion Error:
+
+  * Type name: application
+  * Subtype name: status-assertion-error+jwt
+  * Required parameters: n/a
+  * Optional parameters: n/a
+  * Encoding considerations: binary
+  * Security considerations: See (#Security) of [[ this specification ]]
+  * Interoperability considerations: n/a
+  * Published specification: [[ this specification ]]
+  * Applications that use this media type: Applications using [[ this specification ]] for issuing Status Assertions Request Errors.
+  * Fragment identifier considerations: n/a
+  * Additional information:
+    * File extension(s): n/a
+    * Macintosh file type code(s): n/a
+  * Person &amp; email address to contact for further information: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Intended usage: COMMON
+  * Restrictions on usage: none
+  * Author: Giuseppe De Marco, gi.demarco@innovazione.gov.it
+  * Change controller: IETF
+  * Provisional registration? No
+
+To indicate that the content is a CWT-based Status Assertion Error:
+
+  * Type name: application
+  * Subtype name: status-assertion-error+cwt
+  * Required parameters: n/a
+  * Optional parameters: n/a
+  * Encoding considerations: binary
+  * Security considerations: See (#Security) of [[ this specification ]]
+  * Interoperability considerations: n/a
+  * Published specification: [[ this specification ]]
+  * Applications that use this media type: Applications using [[ this specification ]] for issuing Status Assertions Request Errors.
   * Fragment identifier considerations: n/a
   * Additional information:
     * File extension(s): n/a
