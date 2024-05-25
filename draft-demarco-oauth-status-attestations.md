@@ -428,7 +428,7 @@ table below:
 
 | Header | Description | Reference |
 | --- | --- | --- |
-| **typ** | REQUIRED. Depending on the related Status Assertion Request object format, it MUST be set to `status-attestation-error+jwt` or `status-attestation-error+cwt`. | {{RFC7516}} Section 4.1.1 |
+| **typ** | REQUIRED. Depending on the related Status Assertion Request object format, it MUST be set to `status-assertion-error+jwt` or `status-assertion-error+cwt`. | {{RFC7516}} Section 4.1.1 |
 | **alg** | REQUIRED. For the Status Assertion Error that do not need to be signed the `alg` value MUST be set to `none`. | {{RFC7516}} Section 4.1.1 |
 
 | Payload | Description | Reference |
