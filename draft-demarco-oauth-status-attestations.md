@@ -578,6 +578,10 @@ may not always coincide with the actual usability of a Digital Credential,
 allowing Verifiers to examine and make educated conclusions based on a
 variety of scenarios.
 
+# Assertions of Invalidity
+
+Issuer's MAY provide an assertion of invalidity, in contrast to an assertion of validity or an error for digital credentials which have been revoked.
+This enables verifier policies to be conditioned on the presence of signed positive or negative state from the issuer, instead of the absence of information.
 
 # Security Considerations
 
