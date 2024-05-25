@@ -404,24 +404,57 @@ Credential Issuer MUST respond with an HTTP Response with the status
 code set to 200 and the `status_assertion_responses` array with the related
 Status Assertion Error object.
 
+Below a non-normative example of a Status Assertion Error object in JWT format, with the headers and payload represented in JSON and without applying the signature.
+
+~~~
+{
+    "alg": "ES256",
+    "typ": "status-assertion-error+jwt",
+    "kid": "Issuer-JWK-KID"
+}
+.
+{
+    "iss": "https://issuer.example.org",
+    "jti": "6f204f7e-e453-4dfd-814e-9d155319408c"
+    "credential_hash": $CREDENTIAL-HASH,
+    "credential_hash_alg": "sha-256",
+    "error": "credential_revoked",
+    "error_description": "Credential is revoked."
+    }
+}
+~~~
+
 The Status Assertion Error object must contain the parameters described in the
 table below:
 
 | Header | Description | Reference |
 | --- | --- | --- |
-| **typ** | Depending on the related Status Assertion Request object format, it MUST be set to `status-assertion-error+jwt` or `status-assertion-error+cwt`. | {{RFC7516}} Section 4.1.1 |
-| **alg** | It MUST set to `none`. | {{RFC7516}} Section 4.1.1 |
+| **typ** | REQUIRED. Depending on the related Status Assertion Request object format, it MUST be set to `status-assertion-error+jwt` or `status-assertion-error+cwt`. | {{RFC7516}} Section 4.1.1 |
+| **alg** | REQUIRED. Algorithm used to verify the cryptographic signature of the Status Assertion Error. Status Assertion Error that do not need to be signed SHOULD set the `alg` value to `none`. For further clarification about the requirement of signing the Status Assertion Errors, see Section [Rationale About The Unsigned Status Assertion Errors](#rationale-about-the-unsigned-status-assertion-errors). | {{RFC7516}} Section 4.1.1 |
 
 | Payload | Description | Reference |
 | --- | --- | --- |
-| **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}}, {{RFC7519}} |
-| **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
-| **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to, according to the related Status Assertion Request object. | this specification |
-| **credential_hash_alg** |  The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. The value SHOULD be set to `sha-256`. | this specification |
-| **error** | The value SHOULD be assigned one of the error types as specified in the {{RFC6749}} [Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2) or the others as defined in table below  | {{RFC7519}} Section 4.1.7 |
-| **error_description** | Text in human-readable form that offers more details to clarify the nature of the error encountered (for instance, changes in some attributes, reasons for revocation, other).  | {{RFC7519}} Section 4.1.7 |
+| **iss** | REQUIRED. It MUST be set to the identifier of the Issuer. | {{RFC9126}}, {{RFC7519}} |
+| **jti** | REQUIRED. Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
+| **credential_hash** | REQUIRED. The hash value MUST match the one contained in the Status Assertion Request to which the Status Assertion Error is related. | this specification |
+| **credential_hash_alg** |  REQUIRED. The hash algorithm MUST match the one contained in the Status Assertion Request to which the Status Assertion Error is related. | this specification |
+| **error** | REQUIRED. The value SHOULD be assigned with one of the error types defined in {{RFC6749}}[Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2) or defined in the Section [Status Assertion Error Values](status-assertion-error-values). | {{RFC7519}} Section 4.1.7 |
+| **error_description** | OPTIONAL. Text that clarifies the nature of the error, such as attribute changes, revocation reasons, in relation to the `error` value.  | {{RFC7519}} Section 4.1.7 |
 
-TODO: Table enumerating the additional error identifiers, specifically related to the status assertions.
+## Rationale About The Unsigned Status Assertion Errors
+To mitigate potential resource exhaustion attacks where an adversary could issue hundreds of fake Status Assertion Requests to force an Issuer to sign numerous Status Assertion Errors, it is advisable to set the header parameter`alg` value to `none` for Status Assertion Errors that do not require signatures. This approach conserves computational resources and prevents abuse, especially in scenarios where the Issuer's implementation could be vulnerable to resource exhaustion attacks. However, even if it is out of the scopes of this specification determine in which the Status Error Assertion signatures are necessary, when the Issuer signs the Status Assertion Errors the Client that received them MUST validate the signature.
+## Status Assertion Error Values
+
+The `error` parameter for the Status Assertion Error object MUST be set with one of the values defined in the table below, in addition to the values specified in {{RFC6749}}:
+
+| Error Parameter Value | Description | Reference |
+| --- | --- | --- |
+| **credential_revoked** | The Digital Credential results as already revoked. The reason of revocation MAY be provided in the `error_description` field. | this specification |
+| **credential_updated** | One or more information contained in the Digital Credential are changed. The `error_description` field SHOULD contain a human-readable text describing the general parameters updated without specifying each one. | this specification |
+| **credential_invalid** | The Digital Credential is invalid. The `error_description` field SHOULD contain the reason of invalidation. | this specification |
+| **invalid_request_signature** | The Status Assertion Request signature validation has failed. This error type is used when the proof of possession of the Digital Credential is found not valid within the Status Assertion Request. | this specification |
+| **credential_not_found** | The `credential_hash` value provided in the Status Assertion Request doesn't match with any active Digital Credential. | this specification |
+| **unsupported_hash_alg** | The hash algorithm set in `credential_hash_alg` is not supported. | this specification |
 
 # Status Assertion
 
@@ -884,3 +917,5 @@ We would like to thank:
 -02
 
 * Name of the draft changed from `OAuth Status Attestations` to `OAuth Status Assertions`.
+* Extended Status Assertion errors table added in [the section Status Error](#status-assertion-error).
+
