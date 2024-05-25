@@ -580,9 +580,12 @@ variety of scenarios.
 
 # Complex Status Assertions
 
-Issuer's MAY provide an assertion of invalidity, in contrast to an assertion of validity or an error for digital credentials which have been revoked.
+Status assertions can be complex, and are not limited to simple boolean information.
 This enables verifier policies to be conditioned on the presence of secured information, instead of the absence of information.
-Assertions can reflect dynamic information that is not limited to boolean values.
+This section proposes syntax to support complex assertions.
+The `validity` claim MUST be present and be either `true` or `false`.
+The `validity_reasons` MAY be present and if present MUST be an object.
+The semantics of the claims within the `validity_reasons` object are determined by the issuer.
 
 An example of a boolean status is:
 
@@ -604,14 +607,14 @@ An example of a boolean status is:
       "suspended": true,
     },
     "cnf": {
-        "jwk": {
-          "kid": "1wL9OG_AZOniODhs2xvMchvFcBWhpQPz3uW29LhqvI0",
-          "alg": "ES256",
-          "kty": "EC",
-          "crv": "P-256",
-          "x": "_2ySUmWFjwmraNlo15r6dIBXerVdy_NpJuwAKJMFdoc",
-          "y": "MV3C88MhhEMba6oyMBWuGeB3dKHP4YADJmGyJwwILsk"
-        }
+      "jwk": {
+        "kid": "1wL9OG_AZOniODhs2xvMchvFcBWhpQPz3uW29LhqvI0",
+        "alg": "ES256",
+        "kty": "EC",
+        "crv": "P-256",
+        "x": "_2ySUmWFjwmraNlo15r6dIBXerVdy_NpJuwAKJMFdoc",
+        "y": "MV3C88MhhEMba6oyMBWuGeB3dKHP4YADJmGyJwwILsk"
+      }
     }
 }
 ~~~
@@ -633,17 +636,17 @@ An example of an enumeration status is:
     "credential_hash_alg": "sha-256",
     "validity": false,
     "validity_reasons": {
-      "state": "suspended", // or "revoked", or "valid".
+      "state": "suspended", // or "revoked"
     },
     "cnf": {
-        "jwk": {
-          "kid": "1wL9OG_AZOniODhs2xvMchvFcBWhpQPz3uW29LhqvI0",
-          "alg": "ES256",
-          "kty": "EC",
-          "crv": "P-256",
-          "x": "_2ySUmWFjwmraNlo15r6dIBXerVdy_NpJuwAKJMFdoc",
-          "y": "MV3C88MhhEMba6oyMBWuGeB3dKHP4YADJmGyJwwILsk"
-        }
+      "jwk": {
+        "kid": "1wL9OG_AZOniODhs2xvMchvFcBWhpQPz3uW29LhqvI0",
+        "alg": "ES256",
+        "kty": "EC",
+        "crv": "P-256",
+        "x": "_2ySUmWFjwmraNlo15r6dIBXerVdy_NpJuwAKJMFdoc",
+        "y": "MV3C88MhhEMba6oyMBWuGeB3dKHP4YADJmGyJwwILsk"
+      }
     }
 }
 ~~~
@@ -668,14 +671,14 @@ An example of dynamic status using a small matrix:
       "preferences": [[1, 0.25, 0.76 ...] ...]
     },
     "cnf": {
-        "jwk": {
-          "kid": "1wL9OG_AZOniODhs2xvMchvFcBWhpQPz3uW29LhqvI0",
-          "alg": "ES256",
-          "kty": "EC",
-          "crv": "P-256",
-          "x": "_2ySUmWFjwmraNlo15r6dIBXerVdy_NpJuwAKJMFdoc",
-          "y": "MV3C88MhhEMba6oyMBWuGeB3dKHP4YADJmGyJwwILsk"
-        }
+      "jwk": {
+        "kid": "1wL9OG_AZOniODhs2xvMchvFcBWhpQPz3uW29LhqvI0",
+        "alg": "ES256",
+        "kty": "EC",
+        "crv": "P-256",
+        "x": "_2ySUmWFjwmraNlo15r6dIBXerVdy_NpJuwAKJMFdoc",
+        "y": "MV3C88MhhEMba6oyMBWuGeB3dKHP4YADJmGyJwwILsk"
+      }
     }
 }
 ~~~
@@ -799,6 +802,13 @@ the verification process.
 Status Assertions are based on a privacy-by-design approach, reflecting
 a deliberate effort to balance security and privacy needs in the
 Digital Credential ecosystem.
+
+## Validity Reasons
+
+Status assertions can reveal information about the holder or subject that was not commited to in the original credential issuance.
+Providing a reason that a digital credential is no longer valid can be essential to certian use cases, and unacceptable for others.
+For example, in a healthcare setting, a patient should not have have reasons for a suspended credential disclosed in assertions of suspension.
+However, in a supply chain context, a product suspension might benefit from additional information, such as batch or lot information.
 
 # IANA Considerations
 
