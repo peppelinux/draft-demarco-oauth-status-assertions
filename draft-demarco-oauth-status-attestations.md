@@ -430,7 +430,7 @@ table below:
 | Header | Description | Reference |
 | --- | --- | --- |
 | **typ** | REQUIRED. Depending on the related Status Assertion Request object format, it MUST be set to `status-assertion-error+jwt` or `status-assertion-error+cwt`. | {{RFC7516}} Section 4.1.1 |
-| **alg** | REQUIRED. For the Status Assertion Error that do not need to be signed the `alg` value MUST be set to `none`. | {{RFC7516}} Section 4.1.1 |
+| **alg** | REQUIRED. Algorithm used to verify the cryptographic signature of the Status Assertion Error. Status Assertion Error that do not need to be signed SHOULD set the `alg` value to `none`. For further clarification about the requirement of signing the Status Assertion Errors, see Section [Rationale About The Unsigned Status Assertion Errors](#rationale-about-the-unsigned-status-assertion-errors). | {{RFC7516}} Section 4.1.1 |
 
 | Payload | Description | Reference |
 | --- | --- | --- |
@@ -441,6 +441,8 @@ table below:
 | **error** | REQUIRED. The value SHOULD be assigned with one of the error types defined in {{RFC6749}}[Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2) or defined in the Section [Status Assertion Error Values](status-assertion-error-values). | {{RFC7519}} Section 4.1.7 |
 | **error_description** | OPTIONAL. Text that clarifies the nature of the error, such as attribute changes, revocation reasons, in relation to the `error` value.  | {{RFC7519}} Section 4.1.7 |
 
+## Rationale About The Unsigned Status Assertion Errors 
+To mitigate potential resource exhaustion attacks where an adversary could issue hundreds of fake status assertion requests to force an Issuer to sign numerous Status Assertion Errors, it is advisable to set the header parameter`alg` value to `none` for Status Assertion Errors that do not require signatures. This approach conserves computational resources and prevents abuse, especially in scenarios where the Issuer's implementation could be vulnerable to  resource exhaustion attack. However, even if it is out of the scopes of this specification determine in which  in cases the Status Error Assertion signatures are necessary, when the Issuer signs the Status Assertion Errors the Client that received them MUST validate the signature.
 ## Status Assertion Error Values
 
 The `error` parameter for the Status Assertion Error object MUST be set with one of the values defined in the table below, in addition to the values specified in {{RFC6749}}:
