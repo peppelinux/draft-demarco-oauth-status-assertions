@@ -175,17 +175,19 @@ The general requirements for the implementation of Status Assertion are
 listed in this section. The Status Assertion:
 
 - SHOULD be presented in conjunction with the Digital Credential.
-The Status Assertion MUST be timestamped with its issuance datetime,
-using a timestamp which is later then the time of presentation issuance;
-- MUST contain the expiration datetime after which the Digital Credential
+- MUST include information that links it to the
+referenced Digital Credential;
+- MUST be timestamped with its issuance datetime,
+using a timestamp which is at or after the time of
+Digital Credential issuance which it refers;
+- MUST contain the expiration datetime after which both
+the Status Assertion and the Digital Credential it refers
 MUST NOT be considered valid anymore. The expiration datetime MUST be
 superior to the Status Assertion issuance datetime and it MUST end before
-the expiration of the Credential;
+the expiration datetime of the Digital Credential;
 - MUST enable the offline use cases by employing validation using
 a cryptographic signature and the cryptographic public key of the
 Credential Issuer.
-- MUST include information that links it to the
-referenced Digital Credential;
 - MUST NOT contain personal information about the User who owns
 the Digital Credential to which the Status Assertion refers.
 
