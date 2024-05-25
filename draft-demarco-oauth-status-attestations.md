@@ -179,7 +179,7 @@ listed in this section. The Status Assertion:
 referenced Digital Credential;
 - MUST be timestamped with its issuance datetime,
 using a timestamp which is at or after the time of
-Digital Credential which it refers;
+Digital Credential issuance which it refers;
 - MUST contain the expiration datetime after which both
 the Status Assertion and the Digital Credential it refers
 MUST NOT be considered valid anymore. The expiration datetime MUST be
