@@ -584,7 +584,7 @@ Status assertions can be complex, and are not limited to simple boolean informat
 This enables verifier policies to be conditioned on the presence of secured information, instead of the absence of information.
 This section proposes syntax to support complex assertions.
 The `validity` claim MUST be present and be either `true` or `false`.
-The `validity_reasons` MAY be present and if present MUST be an object.
+The `validity_reasons` claim MAY be present and if present MUST be an object.
 The semantics of the claims within the `validity_reasons` object are determined by the issuer.
 
 An example of a boolean status is:
