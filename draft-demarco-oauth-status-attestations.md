@@ -578,10 +578,50 @@ may not always coincide with the actual usability of a Digital Credential,
 allowing Verifiers to examine and make educated conclusions based on a
 variety of scenarios.
 
-# Assertions of Invalidity
+# Complex Status Assertions
 
 Issuer's MAY provide an assertion of invalidity, in contrast to an assertion of validity or an error for digital credentials which have been revoked.
-This enables verifier policies to be conditioned on the presence of signed positive or negative state from the issuer, instead of the absence of information.
+This enables verifier policies to be conditioned on the presence of secured information, instead of the absence of information.
+Assertions can reflect dynamic information that is not limited to boolean values.
+
+An example of a boolean status is:
+
+~~~
+{
+  "suspended": true,
+}
+~~~
+
+An example of an enumeration status is:
+
+~~~
+{
+  "state": "suspended", // or "revoked", or "valid".
+}
+~~~
+
+An example of dynamic status using a small matrix:
+
+~~~
+{
+  "preferences": [[1, 0.25, 0.76 ...] ...]
+}
+~~~
+
+An example of multiple assertions:
+
+~~~
+HTTP/1.1 200 Created
+Content-Type: application/json
+
+{
+    "status_assertion_responses": [
+      $JWT_1, // Not revoked, boolean assertion
+      $JWT_2, // alg = none, suspended indicator
+      $JWT_3, // Preferences matrix assertion
+    ]
+}
+~~~
 
 # Security Considerations
 
