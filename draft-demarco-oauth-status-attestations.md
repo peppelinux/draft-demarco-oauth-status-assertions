@@ -807,7 +807,7 @@ Digital Credential ecosystem.
 
 Status assertions can reveal information about the holder or subject that was not commited to in the original credential issuance.
 Providing a reason that a digital credential is no longer valid can be essential to certian use cases, and unacceptable for others.
-For example, in a healthcare setting, a patient should not have have reasons for a suspended credential disclosed in assertions of suspension.
+For example, in a healthcare setting, a patient should not have medical reasons for a suspended credential disclosed in assertions of suspension.
 However, in a supply chain context, a product suspension might benefit from additional information, such as batch or lot information.
 
 # IANA Considerations
