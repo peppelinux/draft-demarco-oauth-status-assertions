@@ -460,7 +460,7 @@ The Status Assertion MUST contain the parameters defined below.
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or to a symmetric algorithm (MAC) identifier. | {{RFC7515}}, {{RFC7517}} |
 | **typ** | It MUST be set to `status-assertion+jwt` when JWT format is used. It MUST be set to `status-assertion+cwt` when CWT format is used. | {{RFC7515}}, {{RFC7517}} and this specification |
 | **kid** | Unique identifier of the Credential Issuer JWK. It is required when `x5c` or other cryptographic public key resolution identifiers are not used. | {{RFC7515}} |
-| **x5c** | X.509 certificate chain about the Credential Issuer. It is required when `kid` or other parameter such as `did` are not used. | {{RFC7515}} |
+| **x5c** | X.509 certificate chain about the Credential Issuer. It is required when `kid` or other parameter are not used. | {{RFC7515}} |
 
 | Payload Parameter Name | Description | Reference |
 | --- | --- | --- |
