@@ -588,7 +588,31 @@ An example of a boolean status is:
 
 ~~~
 {
-  "suspended": true,
+    "alg": "ES256",
+    "typ": "status-assertion+jwt",
+    "kid": "w8ZOZRcx21Zpry7H-0VLBsH7Wf7WXb6TeK3qVMCpY44"
+}
+.
+{
+    "iss": "https://issuer.example.org",
+    "iat": 1504699136,
+    "exp": 1504785536,
+    "credential_hash": "xnlAq6Ma8fgu1z4hdGphJnKLulaVHpLCFeZFUGpQ2dA",
+    "credential_hash_alg": "sha-256",
+    "validity": false,
+    "validity_reasons": {
+      "suspended": true,
+    },
+    "cnf": {
+        "jwk": {
+          "kid": "1wL9OG_AZOniODhs2xvMchvFcBWhpQPz3uW29LhqvI0",
+          "alg": "ES256",
+          "kty": "EC",
+          "crv": "P-256",
+          "x": "_2ySUmWFjwmraNlo15r6dIBXerVdy_NpJuwAKJMFdoc",
+          "y": "MV3C88MhhEMba6oyMBWuGeB3dKHP4YADJmGyJwwILsk"
+        }
+    }
 }
 ~~~
 
@@ -596,7 +620,31 @@ An example of an enumeration status is:
 
 ~~~
 {
-  "state": "suspended", // or "revoked", or "valid".
+    "alg": "ES256",
+    "typ": "status-assertion+jwt",
+    "kid": "w8ZOZRcx21Zpry7H-0VLBsH7Wf7WXb6TeK3qVMCpY44"
+}
+.
+{
+    "iss": "https://issuer.example.org",
+    "iat": 1504699136,
+    "exp": 1504785536,
+    "credential_hash": "xnlAq6Ma8fgu1z4hdGphJnKLulaVHpLCFeZFUGpQ2dA",
+    "credential_hash_alg": "sha-256",
+    "validity": false,
+    "validity_reasons": {
+      "state": "suspended", // or "revoked", or "valid".
+    },
+    "cnf": {
+        "jwk": {
+          "kid": "1wL9OG_AZOniODhs2xvMchvFcBWhpQPz3uW29LhqvI0",
+          "alg": "ES256",
+          "kty": "EC",
+          "crv": "P-256",
+          "x": "_2ySUmWFjwmraNlo15r6dIBXerVdy_NpJuwAKJMFdoc",
+          "y": "MV3C88MhhEMba6oyMBWuGeB3dKHP4YADJmGyJwwILsk"
+        }
+    }
 }
 ~~~
 
@@ -604,7 +652,31 @@ An example of dynamic status using a small matrix:
 
 ~~~
 {
-  "preferences": [[1, 0.25, 0.76 ...] ...]
+    "alg": "ES256",
+    "typ": "status-assertion+jwt",
+    "kid": "w8ZOZRcx21Zpry7H-0VLBsH7Wf7WXb6TeK3qVMCpY44"
+}
+.
+{
+    "iss": "https://issuer.example.org",
+    "iat": 1504699136,
+    "exp": 1504785536,
+    "credential_hash": "xnlAq6Ma8fgu1z4hdGphJnKLulaVHpLCFeZFUGpQ2dA",
+    "credential_hash_alg": "sha-256",
+    "validity": true,
+    "validity_reasons": {
+      "preferences": [[1, 0.25, 0.76 ...] ...]
+    },
+    "cnf": {
+        "jwk": {
+          "kid": "1wL9OG_AZOniODhs2xvMchvFcBWhpQPz3uW29LhqvI0",
+          "alg": "ES256",
+          "kty": "EC",
+          "crv": "P-256",
+          "x": "_2ySUmWFjwmraNlo15r6dIBXerVdy_NpJuwAKJMFdoc",
+          "y": "MV3C88MhhEMba6oyMBWuGeB3dKHP4YADJmGyJwwILsk"
+        }
+    }
 }
 ~~~
 
