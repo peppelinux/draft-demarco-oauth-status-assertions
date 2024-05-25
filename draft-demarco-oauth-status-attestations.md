@@ -269,9 +269,9 @@ When the JWT or CWT format are used, the JWT/CWT MUST contain the parameters def
 
 | Header | Description | Reference |
 | --- | --- | --- |
-| **typ** | It MUST be set to `status-assertion+jwt` when JWT format is used. It MUST be set to `status-assertion+cwt` when CWT format is used. | {{RFC7516}} Section 4.1.1 |
+| **typ** | It MUST be set to `status-assertion-request+jwt` when JWT format is used. It MUST be set to `status-assertion-request+cwt` when CWT format is used. | {{RFC7516}} Section 4.1.1 |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
-| **kid** | Unique identifier of the `JWK or` `Cose_Key` used for the signature of the Status Assertion Request, it MUST match the one contained in the Credential. | {{RFC7515}} |
+| **kid** | It is the Unique identifier of the `JWK` or `Cose_Key` owned by the Holder and used for validating the signature of the Status Assertion Request. When the Credential confirmation method uses a cryptographic material, it MUST match the one contained in the Credential. The header parameter `kid` is required when other cryptographic public key identification methods are not used, such as `x5c`.  | {{RFC7515}} |
 
 | Payload | Description | Reference |
 | --- | --- | --- |
@@ -492,7 +492,8 @@ The Status Assertion MUST contain the parameters defined below.
 | --- | --- | --- |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or to a symmetric algorithm (MAC) identifier. | {{RFC7515}}, {{RFC7517}} |
 | **typ** | It MUST be set to `status-assertion+jwt` when JWT format is used. It MUST be set to `status-assertion+cwt` when CWT format is used. | {{RFC7515}}, {{RFC7517}} and this specification |
-| **kid** | Unique identifier of the Credential Issuer JWK | {{RFC7515}} |
+| **kid** | Unique identifier of the Credential Issuer JWK. It is required when `x5c` or other cryptographic public key resolution identifiers are not used. | {{RFC7515}} |
+| **x5c** | X.509 certificate chain about the Credential Issuer. It is required when `kid` or other parameter are not used. | {{RFC7515}} |
 
 | Payload Parameter Name | Description | Reference |
 | --- | --- | --- |
