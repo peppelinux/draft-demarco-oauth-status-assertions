@@ -395,6 +395,7 @@ the same position index to which it is related, eg: _[requestAboutA, requestAbou
 set to "status-assertion+{jwt,cwt}" or "status-assertion-error+{jwt,cwt}", depending by the object type.
 - The corresponding entry in the response MUST be of the same data format as requested. For example,
 if the entry in the request is "jwt", then the entry at the same position in the response MUST also be "jwt".
+- The corresponding entry in the response MUST NOT contain the intended audience or any information regarding the Verifier to whom the assertion may be presented.
 
 # Status Assertion Error
 
@@ -404,7 +405,13 @@ Credential Issuer MUST respond with an HTTP Response with the status
 code set to 200 and the `status_assertion_responses` array with the related
 Status Assertion Error object.
 
-Below a non-normative example of a Status Assertion Error object in JWT format, with the headers and payload represented in JSON and without applying the signature.
+The Status Assertion Error MUST NOT be presented or provided to a Verifier,
+the only audience of the Status Assertion Error is the Holder of the Credential
+that has requested the Status Assertion. Therefore,
+the Status Assertion Error MUST NOT contain the parameter `aud`.
+
+Below a non-normative example of a Status Assertion Error object in JWT format,
+with the headers and payload represented in JSON and without applying the signature.
 
 ~~~
 {
@@ -424,7 +431,7 @@ Below a non-normative example of a Status Assertion Error object in JWT format, 
 }
 ~~~
 
-The Status Assertion Error object must contain the parameters described in the
+The Status Assertion Error object MUST contain the parameters described in the
 table below:
 
 | Header | Description | Reference |
