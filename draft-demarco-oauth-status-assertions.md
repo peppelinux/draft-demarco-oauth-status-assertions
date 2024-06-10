@@ -266,7 +266,7 @@ Issuer signed part, such as the Issuer Signed JWT using [@SD-JWT-VC],
 or the Mobile Security Object using [@ISO 18013-5],
 for which the Status Assertion is requested, and enveloped in a signed
 Status Assertion Request object.
-- The Status Assertion Request object MUST be evaluated MUST be signed with the private key corresponding
+- The Status Assertion Request object MUST be signed with the private key corresponding
 to the confirmation claim assigned by the Issuer and contained within
 the Digital Credential.
 
@@ -416,9 +416,7 @@ The Status Assertion Error MUST NOT be presented or provided to a Verifier,
 the only audience of the Status Assertion Error is the Holder of the Credential
 that has requested the Status Assertion. Therefore,
 it is not necessary that the Status Assertion Error
-contains the parameter `aud` within its payload, but, if it is present, it MUST be set
-with the same value of the `iss` parameter used by the Wallet in the related
-Status Assertion Request object.
+contains the parameter `aud`; if present, it MUST be set to the same value as the `iss` parameter used by the Wallet in the corresponding Status Assertion Request object.
 
 Below a non-normative example of a Status Assertion Error object in JWT format,
 with the headers and payload represented in JSON and without applying the signature.
