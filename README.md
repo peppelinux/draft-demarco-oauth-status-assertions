@@ -2,16 +2,16 @@
 
 This is the working area for the individual Internet-Draft, "OAuth Status Assertions".
 
-* [Editor's Copy](https://peppelinux.github.io/draft-demarco-oauth-status-attestations/#go.draft-demarco-oauth-status-attestations.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-demarco-oauth-status-attestations)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-demarco-oauth-status-attestations)
-* [Compare Editor's Copy to Individual Draft](https://peppelinux.github.io/draft-demarco-oauth-status-attestations/#go.draft-demarco-oauth-status-attestations.diff)
+* [Editor's Copy](https://peppelinux.github.io/draft-demarco-oauth-status-assertions/#go.draft-demarco-oauth-status-assertions.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-demarco-oauth-status-assertions)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-demarco-oauth-status-assertions)
+* [Compare Editor's Copy to Individual Draft](https://peppelinux.github.io/draft-demarco-oauth-status-assertions/#go.draft-demarco-oauth-status-assertions.diff)
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/peppelinux/draft-demarco-oauth-status-attestations/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/peppelinux/draft-demarco-oauth-status-assertions/blob/main/CONTRIBUTING.md).
 
 Contributions can be made by creating pull requests.
 The GitHub interface supports creating pull requests using the Edit (✏) button.
