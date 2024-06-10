@@ -3,7 +3,7 @@ title: "OAuth Status Assertions"
 abbrev: "OAuth Status Assertions"
 category: info
 
-docname: draft-demarco-oauth-status-attestations-latest
+docname: draft-demarco-oauth-status-assertions-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
@@ -14,8 +14,8 @@ keyword:
  - status list
  - revocation
 venue:
-  github: "peppelinux/draft-demarco-status-attestations"
-  latest: "https://peppelinux.github.io/draft-demarco-status-attestations/draft-demarco-status-attestations.html"
+  github: "peppelinux/draft-demarco-status-assertions"
+  latest: "https://peppelinux.github.io/draft-demarco-status-assertions/draft-demarco-status-assertions.html"
 
 author:
  -
@@ -917,16 +917,12 @@ We would like to thank:
 
 # Document History
 
--03
+-02
 
 * Removed any comparison with OAuth Status List
 * Status Assertion Request and Response is now a json array with multiple entries.
 * Better generalization about the confirmation methods.
 * Removed any informative comparison with OAuth Status List.
 * JWT and CWT typ.
-
--02
-
 * Name of the draft changed from `OAuth Status Attestations` to `OAuth Status Assertions`.
 * Extended Status Assertion errors table added in [the section Status Error](#status-assertion-error).
-
