@@ -925,7 +925,7 @@ We would like to thank:
 
 -02
 
-* Removed any comparison with OAuth Status List
+* Removed several comparisons with OAuth Status List
 * Status Assertion Request and Response is now a json array with multiple entries.
 * Better generalization about the confirmation methods.
 * Removed any informative comparison with OAuth Status List.
