@@ -379,7 +379,7 @@ represented an HTTP Response with the
 `status_assertion_responses` JSON member:
 
 ~~~
-HTTP/1.1 200 Created
+HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
