@@ -271,7 +271,6 @@ When the JWT or CWT format are used, the JWT/CWT MUST contain the parameters def
 | --- | --- | --- |
 | **typ** | It MUST be set to `status-assertion-request+jwt` when JWT format is used. It MUST be set to `status-assertion-request+cwt` when CWT format is used. | {{RFC7516}} Section 4.1.1 |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
-| **kid** | It is the Unique identifier of the `JWK` or `Cose_Key` owned by the Holder and used for validating the signature of the Status Assertion Request. When the Credential confirmation method uses a cryptographic material, it MUST match the one contained in the Credential. The header parameter `kid` is required when other cryptographic public key identification methods are not used, such as `x5c`.  | {{RFC7515}} |
 
 | Payload | Description | Reference |
 | --- | --- | --- |
@@ -290,8 +289,7 @@ encoding:
 ~~~
 {
     "alg": "ES256",
-    "typ": "status-assertion-request+jwt",
-    "kid": $CREDENTIAL-CNF-JWKID
+    "typ": "status-assertion-request+jwt"
 }
 .
 {
@@ -314,7 +312,6 @@ and payload are presented without applying signature and encoding for better rea
        / protected / << {
        / alg / 1: -7 / ES256 /
        / typ / 16: -7 / status-assertion-request+cwt /
-       / kid / 4: h'3132' / $CREDENTIAL-CNF-CWKID /
      } >>,
      / unprotected / {
      },
