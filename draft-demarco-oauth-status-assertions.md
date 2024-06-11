@@ -11,7 +11,6 @@ consensus: true
 v: 3
 keyword:
  - digital credentials
- - status list
  - revocation
 venue:
   github: "peppelinux/draft-demarco-status-attestations"
