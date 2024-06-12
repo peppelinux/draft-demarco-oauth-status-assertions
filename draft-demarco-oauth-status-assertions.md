@@ -166,7 +166,7 @@ This specification uses the terms "End-User", "Entity" as defined by
 OpenID Connect Core [OpenID.Core], the term "JSON Web Token (JWT)"
 defined by JSON Web Token (JWT) {{RFC7519}},
 the term "CBOR Web Token (CWT)" defined in {{RFC8392}}, "Client" as
-defined {{RFC6749}}
+defined {{RFC6749}}, "Verifiable Presentation" defined in [@OpenID4VP].
 
 Holder:
 : An entity that receives Verifiable Credentials and has
@@ -234,9 +234,10 @@ referenced Digital Credential;
 - MUST be timestamped with its issuance datetime,
 using a timestamp which is at or after the time of
 Digital Credential issuance which it refers;
-- MUST contain the expiration datetime after which both
-the Status Assertion and the Digital Credential it refers
-MUST NOT be considered valid anymore. The expiration datetime MUST be
+- MUST contain the expiration datetime after which
+the Status Assertion MUST NOT be considered valid anymore,
+and the Digital Credential it refers
+SHOULD NOT be considered valid anymore. The expiration datetime MUST be
 superior to the Status Assertion issuance datetime and it MUST end before
 the expiration datetime of the Digital Credential;
 - MUST enable the offline use cases by employing validation using
@@ -250,6 +251,7 @@ the Digital Credential to which the Status Assertion refers.
 The concept of Proof of Possession (PoP) of a Credential within the
 framework of the Status Assertion specification encompasses a broader
 perspective than merely possessing the digital bytes of the Credential.
+
 It involves demonstrating rightful control or ownership over the
 Credential, which can manifest in various forms depending on the
 technology employed and the nature of the Digital Credential itself.
@@ -312,7 +314,10 @@ related to a specific Credential issued by the same Credential Issuer.
 
 The Wallet Instance sends the Status Assertion request to the
 Credential Issuer, where:
-- The request MUST contain the base64url encoded hash value of the Digital Credential,
+
+- The request MUST contain the base64url encoded hash value of the Digital Credential's
+Issuer signed part, such as the Issuer Signed JWT using [@SD-JWT-VC],
+or the Mobile Security Object using [@ISO 18013-5],
 for which the Status Assertion is requested, and enveloped in a signed
 Status Assertion Request object.
 - The Status Assertion Request object MUST be signed with the private key corresponding
@@ -328,7 +333,7 @@ When the JWT or CWT format are used, the JWT/CWT MUST contain the parameters def
 
 | Payload | Description | Reference |
 | --- | --- | --- |
-| **iss** | Status Assertion Request Issuer identifier. The value is supposed to be used for identifying the Wallet that has issued the request. It is out of scope for this document defining how this value must be set. | {{RFC9126}}, {{RFC7519}} |
+| **iss** | Status Assertion Request Issuer identifier. The value is supposed to be used for identifying the Wallet that has issued the request. It is out of scope for this document defining how this value should be set. | {{RFC9126}}, {{RFC7519}} |
 | **aud** | It MUST be set with the Credential Issuer Status Assertion endpoint URL as value that identify the intended audience. | {{RFC9126}}, {{RFC7519}} |
 | **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be superior to the value set for `iat` . | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **iat** | UNIX Timestamp with the time of JWT/CWT issuance. | {{RFC9126}}, {{RFC7519}} |
@@ -352,7 +357,7 @@ encoding:
     "iat": 1698744039,
     "exp": 1698830439,
     "jti": "6f204f7e-e453-4dfd-814e-9d155319408c",
-    "credential_hash": $Issuer-Signed-JWT-Hash
+    "credential_hash": $hash-about-Issuer-Signed-JWT
     "credential_hash_alg": "sha-256"
 }
 ~~~
@@ -375,14 +380,14 @@ and payload are presented without applying signature and encoding for better rea
        / iat    / 6: 1698744039 /,
        / exp    / 4: 1698830439 /,
        / cti    / 7: 6f204f7e-e453-4dfd-814e-9d155319408c /,
-       / credential_hash / 8: $Issuer-Signed-JWT-Hash /,
+       / credential_hash / 8: $hash-about-MobileSecurityObject /,
        / credential_hash_alg / 9: sha-256 /
      } >>,
    ]
 ~~~
 
 Below a non-normative example representing a Status Assertion Request array with a
-single Status Assertion Reuqest object in JWT format.
+single Status Assertion Request object in JWT format.
 
 ~~~
 POST /status HTTP/1.1
@@ -425,7 +430,7 @@ represented an HTTP Response with the
 `status_assertion_responses` JSON member:
 
 ~~~
-HTTP/1.1 200 Created
+HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
@@ -441,8 +446,8 @@ as defined in [the section Status Error](#status-assertion-error).
 
 For each entry in the `status_assertion_responses` array, the following requirements are met:
 - Each element in the array MUST match the corresponding element in the request array at
-the same position index to which it is related, eg: _\[requestAboutA, requestAboutB]_ produces _\[responseAboutA, responseErrorAboutB]_.
-- Each element MUST contain the error or the status of the assertion using the `typ` member.
+the same position index to which it is related, eg: _[requestAboutA, requestAboutB]_ may produce _[responseAboutA, responseErrorAboutB]_.
+- Each element MUST contain the error or the status of the assertion, using the `typ` member
 set to "status-assertion+{jwt,cwt}" or "status-assertion-error+{jwt,cwt}", depending by the object type.
 - The corresponding entry in the response MUST be of the same data format as requested. For example,
 if the entry in the request is "jwt", then the entry at the same position in the response MUST also be "jwt".
@@ -462,7 +467,9 @@ The Status Assertion Error MUST NOT be presented or provided to a Verifier,
 the only audience of the Status Assertion Error is the Holder of the Credential
 that has requested the Status Assertion. Therefore,
 it is not necessary that the Status Assertion Error
-contains the parameter `aud` within its payload.
+contains the parameter `aud`; if present, it MUST be set to the same
+value as the `iss` parameter used by the Wallet in the corresponding
+Status Assertion Request object.
 
 Below a non-normative example of a Status Assertion Error object in JWT format,
 with the headers and payload represented in JSON and without applying the signature.
@@ -477,7 +484,7 @@ with the headers and payload represented in JSON and without applying the signat
 {
     "iss": "https://issuer.example.org",
     "jti": "6f204f7e-e453-4dfd-814e-9d155319408c"
-    "credential_hash": $CREDENTIAL-HASH,
+    "credential_hash": $hash-about-Issuer-Signed-JWT,
     "credential_hash_alg": "sha-256",
     "error": "credential_revoked",
     "error_description": "Credential is revoked."
@@ -504,6 +511,7 @@ table below:
 
 ## Rationale About The Unsigned Status Assertion Errors
 To mitigate potential resource exhaustion attacks where an adversary could issue hundreds of fake Status Assertion Requests to force an Issuer to sign numerous Status Assertion Errors, it is advisable to set the header parameter`alg` value to `none` for Status Assertion Errors that do not require signatures. This approach conserves computational resources and prevents abuse, especially in scenarios where the Issuer's implementation could be vulnerable to resource exhaustion attacks. However, even if it is out of the scopes of this specification determine in which the Status Error Assertion signatures are necessary, when the Issuer signs the Status Assertion Errors the Client that received them MUST validate the signature.
+
 ## Status Assertion Error Values
 
 The `error` parameter for the Status Assertion Error object MUST be set with one of the values defined in the table below, in addition to the values specified in {{RFC6749}}:
@@ -539,7 +547,7 @@ where the format is JWT.
     "iss": "https://issuer.example.org",
     "iat": 1504699136,
     "exp": 1504785536,
-    "credential_hash": $CREDENTIAL-HASH,
+    "credential_hash": $hash-about-Issuer-Signed-JWT,
     "credential_hash_alg": "sha-256",
     "cnf": {
         "jwk": {...}
@@ -628,7 +636,7 @@ an [SD-JWT.VC] is shown below.
 
 ### Credential Issuer Implementation Considerations
 
-When the Digital Credential is issued, the Credential Issuer SHOULD
+When the Digital Credential is issued, the Credential Issuer should
 calculate the hash value using the algorithm specified in
 `status.status_assertion.credential_hash_alg` and store this information
 in its database. This practice enhances efficiency by allowing the
@@ -685,19 +693,19 @@ regulations.
 
 The request for a Status Assertion does not transmit the Digital Credential
 for which the status is being attested. Instead, it includes a proof of
-possession (PoP) of the credential that is only interpretable by the
-Credential Issuer who issued the digital credential for which the
+possession (PoP) of the Digital Credential that is only interpretable by the
+Credential Issuer who issued the Digital Credential for which the
 Status Assertion is requested. This PoP can be achieved through a
 cryptographic signature using the public key contained within the
 Digital Credential over the request. This method is essential for
 preventing the potential for fraudulent requests intended to mislead or
 disclose sensitive information to unintended parties. By separating the
-Digital Credential from the status assertion request, the system ensures
+Digital Credential from the Status Assertion Request, the system ensures
 that the request does not inadvertently disclose any information about
-the Digital Credential or its holder. This strategy significantly
+the Digital Credential or its Holder. This strategy significantly
 enhances the privacy and security of the system by preventing the
 assertion process from being used to collect information about
-Digital Credentials or their holders through deceptive requests.
+Digital Credentials or their Holders through deceptive requests.
 
 ## Privacy Consideration: Opacity of Status Assertion Content
 
@@ -717,7 +725,7 @@ verification situations without risking the privacy of the people involved.
 
 Status Assertions are designed to uphold privacy by allowing Verifiers
 to operate independently, without the need for interaction or information
-disclosure to third-party entities or other verifiers. This design is
+disclosure to third-party entities or other Verifiers. This design is
 pivotal in ensuring unlinkability between Verifiers, where actions
 taken by one Verifier cannot be correlated or linked to actions
 taken by another. Verifiers can directly validate the status of a
@@ -741,7 +749,7 @@ or security of the Digital Credential Holder.
 A fundamental aspect of the privacy-preserving attributes of
 Status Assertions is their ability to address the "phone home" problem,
 which is the prevention of tracking by Digital Credential Issuers.
-Traditional models often require verifiers to query a central status
+Traditional models often require Verifiers to query a central status
 list or contact the issuer directly, a process that can inadvertently
 allow Credential Issuers to track when and where a Digital Credential
 is verified. Status Assertions, however, encapsulate all necessary
@@ -749,9 +757,9 @@ verification information within the assertion itself. This design choice
 ensures that Credential Issuers are unable to monitor the verification
 activities of their issued Digital Credentials, thereby significantly
 enhancing the privacy of the Holder. By removing the need for real-time
-communication with the issuer for status checks, Status Assertions
-effectively prevent the issuer from tracking verification activities,
-further reinforcing the system's dedication to protecting user privacy.
+communication with the Issuer for status checks, Status Assertions
+effectively prevent the Issuer from tracking verification activities,
+further reinforcing the system's dedication to protecting User privacy.
 
 ## Minimization of Data Exposure
 
@@ -768,7 +776,7 @@ by systematically verifying different combinations of data.
 By implementing robust cryptographic techniques and limiting the
 information contained in Status Assertions, the system reduces the
 feasibility of such attacks. This consideration is vital for safeguarding
-the privacy of the credential holders and for ensuring the integrity of
+the privacy of the Holders and for ensuring the integrity of
 the verification process.
 
 Status Assertions are based on a privacy-by-design approach, reflecting
@@ -966,7 +974,7 @@ We would like to thank:
 
 -02
 
-* Removed any comparison with OAuth Status List
+* Removed several comparisons with OAuth Status List
 * Status Assertion Request and Response is now a json array with multiple entries.
 * Better generalization about the confirmation methods.
 * Removed any informative comparison with OAuth Status List.
