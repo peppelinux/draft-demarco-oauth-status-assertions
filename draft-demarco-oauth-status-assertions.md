@@ -787,14 +787,14 @@ IANA "JSON Web Token Claims" registry [IANA.JWT] established by {{RFC7519}}.
 *  Claim Name: `credential_hash`
 *  Claim Description: Hash value of the Digital Credential the Status Assertion is bound to.
 *  Change Controller: IETF
-*  Specification Document(s): [#status-assertion](this specification)
+*  Specification Document(s): [this specification](#status-assertion)
 
 <br/>
 
 *  Claim Name: `credential_hash_alg`
 *  Claim Description: The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound.
 *  Change Controller: IETF
-*  Specification Document(s): [#status-assertion](this specification)
+*  Specification Document(s): [this specification](#status-assertion)
 
 ## Media Type Registration
 
@@ -809,7 +809,7 @@ To indicate that the content is a JWT-based Status Assertion:
   * Required parameters: n/a
   * Optional parameters: n/a
   * Encoding considerations: binary; A JWT-based Status Assertion Request object is a JWT; JWT values are encoded as a series of base64url-encoded values (some of which may be the empty string) separated by period ('.') characters.
-  * Security considerations: See (#Security) of [#security-considerations](this specification)
+  * Security considerations: See (#Security) of [this specification](#security-considerations)
   * Interoperability considerations: n/a
   * Published specification: this specification
   * Applications that use this media type: Applications using this specification for requesting Status Assertions.
@@ -831,7 +831,7 @@ To indicate that the content is a CWT-based Status Assertion Request:
   * Required parameters: n/a
   * Optional parameters: n/a
   * Encoding considerations: binary
-  * Security considerations: See (#Security) of [#security-considerations](this specification)
+  * Security considerations: See (#Security) of [this specification](#security-considerations)
   * Interoperability considerations: n/a
   * Published specification: this specification
   * Applications that use this media type: Applications using this specification for requesting Status Assertions.
@@ -853,7 +853,7 @@ To indicate that the content is a JWT-based Status Assertion:
   * Required parameters: n/a
   * Optional parameters: n/a
   * Encoding considerations: binary
-  * Security considerations: See (#Security) of [#security-considerations](this specification)
+  * Security considerations: See (#Security) of [this specification](#security-considerations)
   * Interoperability considerations: n/a
   * Published specification: this specification
   * Applications that use this media type: Applications using this specification for issuing or presenting Status Assertions.
@@ -875,7 +875,7 @@ To indicate that the content is a CWT-based Status Assertion:
   * Required parameters: n/a
   * Optional parameters: n/a
   * Encoding considerations: binary
-  * Security considerations: See (#Security) of [#security-considerations](this specification)
+  * Security considerations: See (#Security) of [this specification](#security-considerations)
   * Interoperability considerations: n/a
   * Published specification: this specification
   * Applications that use this media type: Applications using this specification for issuing or presenting Status Assertions.
@@ -897,7 +897,7 @@ To indicate that the content is a JWT-based Status Assertion Error:
   * Required parameters: n/a
   * Optional parameters: n/a
   * Encoding considerations: binary
-  * Security considerations: See (#Security) of [#security-considerations](this specification)
+  * Security considerations: See (#Security) of [this specification](#security-considerations)
   * Interoperability considerations: n/a
   * Published specification: this specification
   * Applications that use this media type: Applications using this specification for issuing Status Assertions Request Errors.
@@ -919,7 +919,7 @@ To indicate that the content is a CWT-based Status Assertion Error:
   * Required parameters: n/a
   * Optional parameters: n/a
   * Encoding considerations: binary
-  * Security considerations: See (#Security) of [#security-considerations](this specification)
+  * Security considerations: See (#Security) of [this specification](#security-considerations)
   * Interoperability considerations: n/a
   * Published specification: this specification
   * Applications that use this media type: Applications using this specification for issuing Status Assertions Request Errors.
