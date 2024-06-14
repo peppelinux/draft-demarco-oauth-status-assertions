@@ -32,7 +32,9 @@ author:
     email: fa.marino@ipzs.it
 
 normative:
+  RFC2046: RFC2046
   RFC6749: RFC6749
+  RFC6838: RFC6838
   RFC7515: RFC7515
   RFC7516: RFC7516
   RFC7517: RFC7517
@@ -798,9 +800,9 @@ IANA "JSON Web Token Claims" registry [IANA.JWT] established by {{RFC7519}}.
 
 ## Media Type Registration
 
-This section requests registration of the following media types [@!RFC2046] in
+This section requests registration of the following media types [RFC2046] in
 the "Media Types" registry [IANA.MediaTypes] in the manner described
-in [@!RFC6838].
+in [RFC6838].
 
 To indicate that the content is a JWT-based Status Assertion:
 
