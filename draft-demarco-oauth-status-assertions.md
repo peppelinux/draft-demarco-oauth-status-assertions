@@ -97,7 +97,9 @@ informative:
       org: "OpenID Foundation"
     title: "OpenID for Verifiable Credential Presentation"
     target: "https://openid.net/specs/openid-4-verifiable-presentations-1_0.html"
-
+  RFC6066:
+    title: "Transport Layer Security (TLS) Extensions: Extension Definitions"
+    target: "https://datatracker.ietf.org/doc/html/rfc6066"
 
 
 --- abstract
@@ -118,7 +120,7 @@ without requiring to query any third-party entities.
 Status Assertions ensure the non-revocation of digital
 credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT)
 format. Status Assertions function
-similarly to OCSP Stapling, allowing clients to present to the
+similarly to OCSP Stapling ([RFC6066]), allowing clients to present to the
 relying parties
 time-stamped assertions provided by the credential issuer.
 The approach outlined in this specification enables the
@@ -128,7 +130,7 @@ enhancing privacy, reducing latency, and
 faciliting offline verification.
 
 The figure below illustrates the process by which a client,
-such as a Wallet Instance,
+such as a wallet instance,
 requests and obtains a Status Assertion from the credential issuer.
 
 ~~~ ascii-art
@@ -143,8 +145,7 @@ requests and obtains a Status Assertion from the credential issuer.
 **Figure 1**: Status Assertion Issuance Flow.
 
 The figure below illustrates the process by which a client
-presents the Status Assertion along with the corresponding digital credential,
-to prove the non-revocation status of the digital credential to a verifier.
+presents the Status Assertion along with the corresponding digital credential.
 
 ~~~ ascii-art
 +-- ----------------+                             +----------+
@@ -155,6 +156,11 @@ to prove the non-revocation status of the digital credential to a verifier.
 ~~~
 **Figure 2**: Status Assertion Presentation Flow.
 
+In summary, the credential issuer provides the client with a
+Status Assertion, which is linked to a Digital Credential. This enables
+the client to present both the digital credential and its
+Status Assertion to a verifier as proof of the digital credential's
+non-revocation status.
 
 # Conventions and Definitions
 
@@ -167,24 +173,20 @@ This specification uses the terms "End-User", "Entity" as defined by
 OpenID Connect Core [OpenID.Core], the term "JSON Web Token (JWT)"
 defined by JSON Web Token (JWT) {{RFC7519}},
 the term "CBOR Web Token (CWT)" defined in {{RFC8392}}, "Client" as
-defined {{RFC6749}}
-
-Holder:
-: An entity that receives Verifiable Credentials and has
-control over them to present them to the Verifiers as Verifiable Presentations.
+defined {{RFC6749}}.
 
 Digital Credential:
 : A set of one or more claims about a subject made by a Credential Issuer.
 Alternative names are "Verifiable Credential" or "Credential".
 
+Holder:
+: An entity that receives Verifiable Credentials and has
+control over them to present them to the Verifiers as Verifiable Presentations.
+
 Credential Issuer:
 : Entity that is responsible for the issuance of the Digital Credentials.
 The Issuer is responsible for the lifecycle of their issued
 Digital Credentials and their validity status.
-
-Holder:
-: An entity that receives Verifiable Credentials and has control over
-them to present them to the Verifiers as Verifiable Presentations.
 
 Verifier:
 : Entity that relies on the validity of the Digital Credentials presented to it.
@@ -219,7 +221,7 @@ This could potentially infringe upon the End-User's right to privacy,
 as outlined in
 [ECHR-ART8] and
 in the the European Union's General Data Protection Regulation
-([GDPR]),
+[GDPR],
 by creating a detailed profile of the End-User's
 Digital Credential status without explicit consent for
 such continuous surveillance.
@@ -279,12 +281,6 @@ affirming the authenticity and rightful possession of the Credential.
 
 # Status Assertion Request
 
-The Credential Issuer provides the Wallet Instance with a Status Assertion,
-which is bound to a Digital Credential.
-This allows the Wallet Instance to present it, along with the
-Digital Credential itself,
-to a Verifier as proof of the Digital Credential's non-revocation status.
-
 The following diagram shows the Wallet Instance requesting a
 Status Assertion to a Credential Issuer,
 related to a specific Credential issued by the same Credential Issuer.
@@ -320,7 +316,7 @@ Status Assertion Request object.
 to the confirmation claim assigned by the Issuer and contained within
 the Digital Credential.
 
-When the JWT or CWT format are used, the JWT/CWT MUST contain the parameters defined in the following table.
+The Status Assertion Request object MUST contain the parameters defined in the following table.
 
 | Header | Description | Reference |
 | --- | --- | --- |
@@ -335,11 +331,12 @@ When the JWT or CWT format are used, the JWT/CWT MUST contain the parameters def
 | **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be superior to the value set for `iat` . | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **iat** | UNIX Timestamp with the time of JWT/CWT issuance. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
+| **cti** | Unique identifier for the CWT.  | {{RFC7519}} Section 4.1.7 |
 | **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
 | **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. The value SHOULD be set to `sha-256`. | this specification |
 
 Below is a non-normative example of a Status Assertion Request with
-the JWT headers and payload are represented without applying signature and
+the JWT headers and payload represented without applying signature and
 encoding:
 
 ~~~
