@@ -74,7 +74,7 @@ normative:
       org: "IANA"
     title: "CBOR Web Token (CWT) Claims"
     target: "https://www.iana.org/assignments/cwt/cwt.xhtml"
-  CWT.typ: I-D.ietf-cose-typ-header-parameter
+  RFC9596: RFC9596
   IANA-HASH-REG:
     title: "IANA - Named Information Hash Algorithm Registry"
     target: "https://www.iana.org/assignments/named-information/named-information.xhtml#hash-alg"
@@ -322,7 +322,7 @@ The Status Assertion Request object MUST contain the parameters defined in the f
 
 | Header | Description | Reference |
 | --- | --- | --- |
-| **typ** | It MUST be set to `status-assertion-request+jwt` when JWT format is used. It MUST be set to `status-assertion-request+cwt` when CWT format is used. | {{RFC7516}} Section 4.1.1 |
+| **typ** | It MUST be set to `status-assertion-request+jwt` when JWT format is used. It MUST be set to `status-assertion-request+cwt` when CWT format is used. | {{RFC7516}} Section 4.1.1, [RFC9596] |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or any symmetric algorithm (MAC) identifier. | {{RFC7516}} Section 4.1.1 |
 | **kid** | It is the Unique identifier of the `JWK` or `Cose_Key` owned by the Holder and used for validating the signature of the Status Assertion Request. When the Credential confirmation method uses a cryptographic material, it MUST match the one contained in the Credential. The header parameter `kid` is required when other cryptographic public key identification methods are not used, such as `x5c`.  | {{RFC7515}} |
 
