@@ -161,7 +161,7 @@ In summary, the credential issuer provides the client with a
 Status Assertion, which is linked to a Digital Credential. This enables
 the client to present both the digital credential and its
 Status Assertion to a verifier as proof of the digital credential's
-non-revocation status.
+validity status.
 
 # Conventions and Definitions
 
@@ -181,7 +181,7 @@ Digital Credential:
 Alternative names are "Verifiable Credential" or "Credential".
 
 Holder:
-: An entity that receives Verifiable Credentials and has
+: An entity that possesses Verifiable Credentials and has
 control over them to present them to the Verifiers as Verifiable Presentations.
 
 Credential Issuer:
