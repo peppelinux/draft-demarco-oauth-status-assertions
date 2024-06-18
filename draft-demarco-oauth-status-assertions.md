@@ -13,8 +13,8 @@ keyword:
  - digital credentials
  - revocation
 venue:
-  github: "peppelinux/draft-demarco-status-attestations"
-  latest: "https://peppelinux.github.io/draft-demarco-status-attestations/draft-demarco-oauth-status-assertions.html"
+  github: "peppelinux/draft-demarco-status-assertions"
+  latest: "https://peppelinux.github.io/draft-demarco-status-assertions/draft-demarco-oauth-status-assertions.html"
 
 author:
  -
