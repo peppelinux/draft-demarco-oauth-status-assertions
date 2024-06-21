@@ -732,8 +732,8 @@ An example of an enumeration status is:
     "exp": 1504785536,
     "credential_hash": "xnlAq6Ma8fgu1z4hdGphJnKLulaVHpLCFeZFUGpQ2dA",
     "credential_hash_alg": "sha-256",
-    "validity": false,
-    "validity_reasons": {
+    "credential_status_validity": false,
+    "credential_status": {
       "state": "suspended", // or "revoked"
     },
     "cnf": {
@@ -764,8 +764,8 @@ An example of dynamic status using a small matrix:
     "exp": 1504785536,
     "credential_hash": "xnlAq6Ma8fgu1z4hdGphJnKLulaVHpLCFeZFUGpQ2dA",
     "credential_hash_alg": "sha-256",
-    "validity": true,
-    "validity_reasons": {
+    "credential_status_validity": true,
+    "credential_status": {
       "preferences": [[1, 0.25, 0.76 ...] ...]
     },
     "cnf": {
