@@ -700,7 +700,7 @@ An example of a boolean status is:
     "exp": 1504785536,
     "credential_hash": "xnlAq6Ma8fgu1z4hdGphJnKLulaVHpLCFeZFUGpQ2dA",
     "credential_hash_alg": "sha-256",
-    "validity": false,
+    "credential_status_validity": false,
     "validity_reasons": {
       "suspended": true,
     },
