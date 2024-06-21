@@ -112,7 +112,7 @@ to holders, who can present these to verifier along
 with the corresponding digital credentials.
 The approach outlined in this document
 makes the verifier able to check the status,
-such as the nonb-revocation, of a digital credential
+such as the non-revocation, of a digital credential
 without requiring to query any third-party entities.
 
 --- middle
