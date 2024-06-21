@@ -111,14 +111,15 @@ These assertions are periodically provided
 to holders, who can present these to verifier along
 with the corresponding digital credentials.
 The approach outlined in this document
-makes the verifier able to check the non-revocation of a digital credential
+makes the verifier able to check the status,
+such as the nonb-revocation, of a digital credential
 without requiring to query any third-party entities.
 
 --- middle
 
 # Introduction
 
-Status Assertions ensure the non-revocation of digital
+Status Assertions show the status of digital
 credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT)
 format. Status Assertions function
 similarly to OCSP Stapling ([RFC6066]), allowing clients to present to the
@@ -247,7 +248,7 @@ the expiration datetime of the Digital Credential;
 - MUST enable the offline use cases by employing validation using
 a cryptographic signature and the cryptographic public key of the
 Credential Issuer.
-- MUST NOT contain personal information about the User who owns
+- SHOULD NOT contain personal information about the User who owns
 the Digital Credential to which the Status Assertion refers.
 
 # Proof of Possession of a Credential
@@ -268,7 +269,8 @@ guidance for concrete implementations utilizing common proof of
 possession mechanisms. This includes, but is not limited to:
 
 1. Having the digital representation of the Digital Credential (the bytes).
-2. Controlling the confirmation method of the Credential, using the Credential's `cnf` parameter.
+2. Controlling the confirmation method of the Credential,
+using the Credential's `cnf` parameter.
 
 The essence of requiring proof of possession over the Credential
 through the confirmation method, such has proving the control of the
@@ -548,6 +550,7 @@ where the format is JWT.
     "exp": 1504785536,
     "credential_hash": $hash-about-Issuer-Signed-JWT,
     "credential_hash_alg": "sha-256",
+    "credential_status_validity": true,
     "cnf": {
         "jwk": {...}
     }
@@ -570,6 +573,7 @@ The Status Assertion MUST contain the parameters defined below.
 | **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be greater than the value set for `iat`. | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
 | **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. The value SHOULD be set to `sha-256`. | this specification |
+| **credential_status_validity**| Boolean value determining the absolute validity of the Credential to which the Status Assertion is bound | this specification |
 | **cnf** | JSON object containing confirmation methods. The sub-member contained within `cnf` member, such as `jwk` for JWT and `Cose_Key` for CWT, MUST match with the one provided within the related Digital Credential. Other confirmation methods can be utilized when the referenced Digital Credential supports them, in accordance with the relevant standards. | {{RFC7800}} Section 3.1, {{RFC8747}} Section 3.1 |
 
 
