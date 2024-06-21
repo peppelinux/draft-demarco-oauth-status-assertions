@@ -573,7 +573,7 @@ The Status Assertion MUST contain the parameters defined below.
 | **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be greater than the value set for `iat`. | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
 | **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. The value SHOULD be set to `sha-256`. | this specification |
-| **credential_status_validity**| Boolean value determining the absolute validity of the Credential to which the Status Assertion is bound | this specification |
+| **credential_status_validity**| Boolean value indicating the absolute validity of the Credential linked to the Status Assertion. This parameter is REQUIRED, and the Verifier MUST verify its presence and value to assess the Credential's validity. | this specification |
 | **cnf** | JSON object containing confirmation methods. The sub-member contained within `cnf` member, such as `jwk` for JWT and `Cose_Key` for CWT, MUST match with the one provided within the related Digital Credential. Other confirmation methods can be utilized when the referenced Digital Credential supports them, in accordance with the relevant standards. | {{RFC7800}} Section 3.1, {{RFC8747}} Section 3.1 |
 
 
@@ -905,7 +905,7 @@ Digital Credential ecosystem.
 
 ## Validity Reasons
 
-Status Assertions may disclose details about the Holder or subject that were not initially committed to during the original Credential issuance. This can potentially expose additional information that was not part of the original credentialing process.
+Depending by the scopes of how the detailed Status Assertions are implemented, these may disclose details about the Holder or subject that were not initially committed to during the original Credential issuance. This can potentially expose additional information that was not part of the original credentialing process.
 Providing a reason that a Digital Credential is no longer valid can be essential to certain use cases, and unacceptable for others
 For example, in a healthcare setting, a patient should not have medical reasons for a suspended credential disclosed in assertions of suspension.
 However, in a supply chain context, a product suspension might benefit from additional information, such as batch or lot information.
