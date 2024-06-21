@@ -678,12 +678,12 @@ variety of scenarios.
 
 # Detailed Status Assertions
 
-Status assertions can be complex, and are not limited to simple boolean information.
-This enables verifier policies to be conditioned on the presence of secured information, instead of the absence of information.
-This section proposes syntax to support complex assertions.
+Status Assertions can introduce a more accurate level of detail, and therefore not necessarly limited to simple boolean information.
+This enables Verifier policies to be conditioned on the presence of secured information, instead of the absence of information.
+This section proposes syntax to support detailed assertions.
 The `credential_status_validity` claim MUST be present and be either `true` or `false`.
 The `credential_status` claim MAY be present and if present MUST be an object.
-The semantics of the claims within the `credential_status` object are determined by the issuer.
+The semantics of the claims within the `credential_status` object are determined by the Credential Issuer.
 
 An example of a boolean status is:
 
@@ -706,7 +706,6 @@ An example of a boolean status is:
     },
     "cnf": {
       "jwk": {
-        "kid": "1wL9OG_AZOniODhs2xvMchvFcBWhpQPz3uW29LhqvI0",
         "alg": "ES256",
         "kty": "EC",
         "crv": "P-256",
@@ -738,7 +737,6 @@ An example of an enumeration status is:
     },
     "cnf": {
       "jwk": {
-        "kid": "1wL9OG_AZOniODhs2xvMchvFcBWhpQPz3uW29LhqvI0",
         "alg": "ES256",
         "kty": "EC",
         "crv": "P-256",
@@ -770,7 +768,6 @@ An example of dynamic status using a small matrix:
     },
     "cnf": {
       "jwk": {
-        "kid": "1wL9OG_AZOniODhs2xvMchvFcBWhpQPz3uW29LhqvI0",
         "alg": "ES256",
         "kty": "EC",
         "crv": "P-256",
@@ -903,8 +900,8 @@ Digital Credential ecosystem.
 
 ## Validity Reasons
 
-Status assertions can reveal information about the holder or subject that was not commited to in the original credential issuance.
-Providing a reason that a digital credential is no longer valid can be essential to certian use cases, and unacceptable for others.
+Status Assertions may disclose details about the Holder or subject that were not initially committed to during the original Credential issuance. This can potentially expose additional information that was not part of the original credentialing process.
+Providing a reason that a Digital Credential is no longer valid can be essential to certain use cases, and unacceptable for others
 For example, in a healthcare setting, a patient should not have medical reasons for a suspended credential disclosed in assertions of suspension.
 However, in a supply chain context, a product suspension might benefit from additional information, such as batch or lot information.
 
