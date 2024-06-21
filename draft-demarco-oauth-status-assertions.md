@@ -676,7 +676,7 @@ may not always coincide with the actual usability of a Digital Credential,
 allowing Verifiers to examine and make educated conclusions based on a
 variety of scenarios.
 
-# Complex Status Assertions
+# Detailed Status Assertions
 
 Status assertions can be complex, and are not limited to simple boolean information.
 This enables verifier policies to be conditioned on the presence of secured information, instead of the absence of information.
