@@ -702,6 +702,7 @@ An example of a boolean status is:
     "credential_hash_alg": "sha-256",
     "credential_status_validity": false,
     "credential_status": {
+      "revoked": false,
       "suspended": true,
     },
     "cnf": {
