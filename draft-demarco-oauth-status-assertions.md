@@ -240,8 +240,10 @@ using a timestamp which is at or after the time of
 Digital Credential issuance which it refers;
 - MUST contain the expiration datetime after which
 the Status Assertion MUST NOT be considered valid anymore,
-and the Digital Credential it refers
-SHOULD NOT be considered valid anymore. The expiration datetime MUST be
+and the Digital Credential referred to SHOULD NOT
+be considered as having a valid status,
+since it appears without verification against any revocation.
+The expiration datetime MUST be
 superior to the Status Assertion issuance datetime and it MUST end before
 the expiration datetime of the Digital Credential;
 - MUST enable the offline use cases by employing validation using
