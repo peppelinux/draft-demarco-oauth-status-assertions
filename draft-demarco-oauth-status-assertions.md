@@ -241,8 +241,7 @@ Digital Credential issuance which it refers;
 - MUST contain the expiration datetime after which
 the Status Assertion MUST NOT be considered valid anymore,
 and the Digital Credential referred to SHOULD NOT
-be considered as having a valid status,
-since it appears without verification against any revocation.
+be considered as having a valid status, unless there exists some specific verifier policy that provides stronger guidance.
 The expiration datetime MUST be
 superior to the Status Assertion issuance datetime and it MUST end before
 the expiration datetime of the Digital Credential;
