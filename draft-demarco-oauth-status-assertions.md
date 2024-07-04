@@ -768,7 +768,7 @@ An example of dynamic status using a small matrix:
     "credential_hash": "xnlAq6Ma8fgu1z4hdGphJnKLulaVHpLCFeZFUGpQ2dA",
     "credential_hash_alg": "sha-256",
     "credential_status_validity": true,
-    "credential_status": {
+    "credential_status_detail": {
       "preferences": [[1, 0.25, 0.76 ...] ...]
     },
     "cnf": {
