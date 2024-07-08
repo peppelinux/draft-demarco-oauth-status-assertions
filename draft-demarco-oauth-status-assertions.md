@@ -686,8 +686,8 @@ Status Assertions can introduce a more accurate level of detail, and therefore n
 This enables Verifier policies to be conditioned on the presence of secured information, instead of the absence of information.
 This section proposes syntax to support detailed assertions.
 The `credential_status_validity` claim MUST be present and be either `true` or `false`.
-The `credential_status` claim MAY be present and if present MUST be an object.
-The semantics of the claims within the `credential_status` object are determined by the Credential Issuer.
+The `credential_status_detail` claim MAY be present and if present MUST be an object.
+The semantics of the claims within the `credential_status_detail` object are determined by the Credential Issuer.
 
 An example of a boolean status is:
 
@@ -929,6 +929,15 @@ IANA "JSON Web Token Claims" registry [IANA.JWT] established by {{RFC7519}}.
 *  Claim Description: The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound.
 *  Change Controller: IETF
 *  Specification Document(s): [this specification](#status-assertion)
+
+<br/>
+
+*  Claim Name: `credential_status_detail`
+*  Claim Description: New status information provided by the Issuer.
+*  Change Controller: IETF
+*  Specification Document(s): [this specification](#status-assertion)
+
+
 
 ## Media Type Registration
 
