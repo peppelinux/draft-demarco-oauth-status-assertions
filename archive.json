@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-09T00:53:30.705428+00:00",
+  "timestamp": "2024-07-11T00:54:04.521640+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -8806,6 +8806,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 79,
+      "id": "PR_kwDOK4XJ0s500rUe",
+      "title": "Update README.md",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/79",
+      "state": "OPEN",
+      "author": "Sascha-Block",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Features and benefits of OAuth Status Assertions to clearly communicate their use and privacy benefits .",
+      "createdAt": "2024-07-09T12:01:12Z",
+      "updatedAt": "2024-07-09T12:01:12Z",
+      "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "baseRefName": "main",
+      "baseRefOid": "b49765707b9ab30139beab7045aecef5c58461a9",
+      "headRepository": "Sascha-Block/draft-demarco-oauth-status-assertions",
+      "headRefName": "patch-1",
+      "headRefOid": "ab466d6d0dfb8a03b024f048e8c2902bda506eb9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
