@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-14T00:58:12.983712+00:00",
+  "timestamp": "2024-07-16T00:54:34.252990+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -7358,7 +7358,7 @@
       ],
       "body": "Addressing:\r\n\r\nhttps://github.com/peppelinux/draft-demarco-oauth-status-attestations/pull/53#discussion_r1614083883\r\n\r\nThe purpose of this pull request is to define the signed information which can be conveyed to a verifier, to clarify the constraints on verifier policies.\r\n\r\nWith other status list approaches, there is an ability to communicate a single boolean, multiple boolean, or enumerations.\r\n\r\nWith our approach here, we are not limited by the bitstring data structure, so dynamic state is less constrained.\r\n\r\nThis PR also highlights the current design decision to use alg = none, to signal revocation, without providing an assertion that can be consumed by a verifier.\r\n\r\nThere may be very legitimate reasons to prefer to return unsigned information for boolean status, but for complex status, unsigned information is more dangerous to consume.\r\n\r\nI believe the specification should leave some of these decisions up to profiles.",
       "createdAt": "2024-05-25T13:19:46Z",
-      "updatedAt": "2024-07-08T13:07:14Z",
+      "updatedAt": "2024-07-15T07:38:03Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "73316fd7e515056d54a3d8043d39a2f3a4ae7141",
@@ -8028,6 +8028,19 @@
               "updatedAt": "2024-07-02T15:34:09Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6BwwBq",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-15T07:38:03Z",
+          "updatedAt": "2024-07-15T07:38:03Z",
+          "comments": []
         }
       ]
     },
