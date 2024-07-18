@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-16T00:54:34.252990+00:00",
+  "timestamp": "2024-07-18T00:53:15.865417+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -62,6 +62,16 @@
       "name": "under-discussion",
       "description": "",
       "color": "C6D808"
+    },
+    {
+      "name": "ietf-comments",
+      "description": "",
+      "color": "6EF83A"
+    },
+    {
+      "name": "pr-ready",
+      "description": "",
+      "color": "BAE7B3"
     }
   ],
   "issues": [
@@ -1057,12 +1067,22 @@
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "pr-ready"
+      ],
       "body": "Perhaps the biggest challenge with multiple credential / assertion presentations is managing overlapping, or disjoint, or unbounded validity periods.\r\n\r\nFor each signed object, the following fields can be present  `iat`, `nbf`, `exp`.\r\n\r\nThese fields are typically optional, so by default they could remain optional.\r\n\r\nHowever we currently have normative language that attempts to align them and constrain them, for example that a status should not be issued before a credential, or that a status should not expire after a credential expires.\r\n\r\nThere are cases where a credential might be issues, and then status used to incrementally extend its expiration, for example:\r\n\r\nvc: { iat: 0 }, sa: { iat: 1, exp: 2 } ... sa: { iat: 3, exp: 5 } ....\r\n\r\nThere are cases where a status can only be requested for the validity period of the credential:\r\n\r\nvc: { iat: 0, exp: 10 }, sa: { iat: 1, exp: 2 } ... sa: { iat: 3, exp: 5 } .... (will never have exp greater than 10)\r\n\r\nThere are cases where issuance time and activation time are not the same (like post data checks):\r\n\r\nvc: { iat: 0, nbf: 5, exp: 10 }, sa: { iat: 1, exp: 2 }  (appears valid, but nbf 5 is after exp 2, so this status will not be valid)",
       "createdAt": "2024-06-12T00:44:55Z",
-      "updatedAt": "2024-06-12T00:44:55Z",
+      "updatedAt": "2024-07-16T10:03:51Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "body": "This [PR](https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/61) closes this issue",
+          "createdAt": "2024-07-16T10:03:36Z",
+          "updatedAt": "2024-07-16T10:03:36Z"
+        }
+      ]
     },
     {
       "number": 71,
@@ -1076,7 +1096,7 @@
       "labels": [],
       "body": "Not all credentials expire.\r\n\r\nI think we should provide examples for all cases of vc + sa with `iat` and `exp`.\r\n\r\nThere is also `nbf` which could interact negatively with `iat` and `exp`.\r\n\r\n_Originally posted by @OR13 in https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/65#discussion_r1635625370_\r\n            ",
       "createdAt": "2024-06-12T01:08:58Z",
-      "updatedAt": "2024-06-12T01:08:58Z",
+      "updatedAt": "2024-07-16T10:03:00Z",
       "closedAt": null,
       "comments": []
     },
@@ -1113,10 +1133,12 @@
       "author": "peppelinux",
       "authorAssociation": "OWNER",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "ietf-comments"
+      ],
       "body": "The current document is directly focusing on a technical mechanism without telling what the problems to be solved are.\r\n\r\nthank to Denis.",
       "createdAt": "2024-06-12T01:15:06Z",
-      "updatedAt": "2024-06-12T01:15:07Z",
+      "updatedAt": "2024-07-16T10:02:29Z",
       "closedAt": null,
       "comments": []
     },
@@ -1129,10 +1151,12 @@
       "author": "peppelinux",
       "authorAssociation": "OWNER",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "ietf-comments"
+      ],
       "body": "The current title of this draft is \"OAuth Status Assertions\".\r\n\r\nThe content of the draft is not specific to OAuth specifically. However, Status Assertions are specific to the use of Digital Credentials.\r\n\r\nIf a SPICE WG is created by the IESG (which should be known at the end of this week), the title of this document would become:\r\n\r\n    \"SPICE Status Assertions\". \r\n\r\nMore seriously, its title should rather be \"Credential Status Assertions\" or \"Digital Credential Status Assertions\".\r\n\r\n\r\nthanks to Denis.",
       "createdAt": "2024-06-12T01:24:50Z",
-      "updatedAt": "2024-07-02T12:58:13Z",
+      "updatedAt": "2024-07-16T10:02:44Z",
       "closedAt": null,
       "comments": []
     },
@@ -1145,10 +1169,12 @@
       "author": "peppelinux",
       "authorAssociation": "OWNER",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "ietf-comments"
+      ],
       "body": "Always Denis:\r\n\r\n\r\n    Section 15.3. Unlinkability and Reusability of Status Assertions, the text states:\r\n\r\n        This design is pivotal in ensuring unlinkability between Verifiers, where actions taken by one Verifier\r\n        cannot be correlated or linked to actions taken by another. \r\n\r\n    This sentence sounds strange. An \"action taken by one Verifier\" will be invisible to another Verifier unless the network is unprotected,\r\n    but it is assumed that TLS is being used. What is the problem for correlating \"actions\" taken by a Verifier ? This sentence would need to be reconsidered.\r\n\r\n\r\nit says that since there are no fixed audiences in the status assertions, a verifier obtainign a status assertion cannot know if that assertion was already used with another verifier or any information usefull to track its usage and or its audience\r\n \r\n\r\n    However, \"unlinkability between Verifiers\" usually means unlinkability between *colluding* Verifiers that shall not be able to know that a same end-user\r\n    made an access to a protected resource.\r\n\r\n    Using SD-JWT, such property can be supported if a SD-JWT are used only once. This should be mentioned in this section.\r\n\r\n\r\nthe same with the status assertions\r\n ",
       "createdAt": "2024-06-12T01:31:00Z",
-      "updatedAt": "2024-06-12T10:45:44Z",
+      "updatedAt": "2024-07-16T10:02:36Z",
       "closedAt": null,
       "comments": [
         {
@@ -7358,7 +7384,7 @@
       ],
       "body": "Addressing:\r\n\r\nhttps://github.com/peppelinux/draft-demarco-oauth-status-attestations/pull/53#discussion_r1614083883\r\n\r\nThe purpose of this pull request is to define the signed information which can be conveyed to a verifier, to clarify the constraints on verifier policies.\r\n\r\nWith other status list approaches, there is an ability to communicate a single boolean, multiple boolean, or enumerations.\r\n\r\nWith our approach here, we are not limited by the bitstring data structure, so dynamic state is less constrained.\r\n\r\nThis PR also highlights the current design decision to use alg = none, to signal revocation, without providing an assertion that can be consumed by a verifier.\r\n\r\nThere may be very legitimate reasons to prefer to return unsigned information for boolean status, but for complex status, unsigned information is more dangerous to consume.\r\n\r\nI believe the specification should leave some of these decisions up to profiles.",
       "createdAt": "2024-05-25T13:19:46Z",
-      "updatedAt": "2024-07-15T07:38:03Z",
+      "updatedAt": "2024-07-17T16:07:25Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "73316fd7e515056d54a3d8043d39a2f3a4ae7141",
@@ -8041,6 +8067,157 @@
           "createdAt": "2024-07-15T07:38:03Z",
           "updatedAt": "2024-07-15T07:38:03Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6B9Ly4",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "fmarino-ipzs",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-16T13:44:44Z",
+          "updatedAt": "2024-07-16T13:44:44Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6CAxds",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "leifj",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I don't see any major issues here but I suggest rewriting the normative language about PII along the lines I suggested.",
+          "createdAt": "2024-07-16T20:23:32Z",
+          "updatedAt": "2024-07-16T20:29:21Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "So this is the right sentiment but I think the way to express this is that a verifier MUST NOT be able to derive information about the credential or the subject that isn't already provided in a proof to the verifier.",
+              "createdAt": "2024-07-16T20:23:32Z",
+              "updatedAt": "2024-07-16T20:29:21Z"
+            },
+            {
+              "originalPosition": 23,
+              "body": "Simply talking about PII doesn't cover all the cases you can screw up basically.",
+              "createdAt": "2024-07-16T20:23:55Z",
+              "updatedAt": "2024-07-16T20:29:21Z"
+            },
+            {
+              "originalPosition": 62,
+              "body": "How do we represent a \"pending\" revocation?",
+              "createdAt": "2024-07-16T20:26:30Z",
+              "updatedAt": "2024-07-16T20:29:21Z"
+            },
+            {
+              "originalPosition": 62,
+              "body": "Pending beeing neither valid or invalid...",
+              "createdAt": "2024-07-16T20:27:28Z",
+              "updatedAt": "2024-07-16T20:29:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6CCA0G",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-17T01:08:00Z",
+          "updatedAt": "2024-07-17T01:08:00Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "pending is an half state, my pythonic mind says that 0.5 is not true\r\n\r\n![immagine](https://github.com/user-attachments/assets/d071cab4-3e99-42e9-aba3-ee3b605c22bb)\r\n",
+              "createdAt": "2024-07-17T01:08:00Z",
+              "updatedAt": "2024-07-17T01:11:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6CCEmd",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-17T01:13:15Z",
+          "updatedAt": "2024-07-17T01:13:15Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "In the W3C Bitstring Status list, there is a purpose called \"message\" which is not revoked or suspended... You can use it to signal any message the issuer chooses.... Including pending.\n\nThe more I have thought about this, the more I conclude that credential status is a separate category of validity information... It's not as simple as being inside or outside a validity period... Or revoked or suspended being invalid and their opposites being valid.\n\nI think it's better to allow the verifier to determine validity, and for the issuer to simply focus on clearly communicating.",
+              "createdAt": "2024-07-17T01:13:15Z",
+              "updatedAt": "2024-07-17T01:13:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6CCGRL",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-17T01:15:11Z",
+          "updatedAt": "2024-07-17T01:15:26Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "```suggestion\n- MUST NOT contain personal information about the User who owns\n```\n",
+              "createdAt": "2024-07-17T01:15:11Z",
+              "updatedAt": "2024-07-17T01:15:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6CI8G8",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "leifj",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-17T16:06:00Z",
+          "updatedAt": "2024-07-17T16:06:00Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "so why don't we elliminate the boolean entirely and just have an IANA registry for the status semantic - the spec would register \"valid\" and \"invalid\" as two standard semantics. Everybody else get to define their own. The problem with mixing a boolean with \"extra information\" is that you get into a criciality issue: what if somebody defines a semantic that critically modifies the truthyness of the boolean. This is something that has plagued extensions in X509 btw.",
+              "createdAt": "2024-07-17T16:06:00Z",
+              "updatedAt": "2024-07-17T16:06:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6CI8_m",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "leifj",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-17T16:07:25Z",
+          "updatedAt": "2024-07-17T16:07:25Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "I suggest something along the lines of \"MUST NOT contain information about the data subject (user) that isn't already made available to the validator\"",
+              "createdAt": "2024-07-17T16:07:25Z",
+              "updatedAt": "2024-07-17T16:07:26Z"
+            }
+          ]
         }
       ]
     },
