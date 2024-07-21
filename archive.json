@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-18T00:53:15.865417+00:00",
+  "timestamp": "2024-07-21T00:57:54.509903+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -7384,7 +7384,7 @@
       ],
       "body": "Addressing:\r\n\r\nhttps://github.com/peppelinux/draft-demarco-oauth-status-attestations/pull/53#discussion_r1614083883\r\n\r\nThe purpose of this pull request is to define the signed information which can be conveyed to a verifier, to clarify the constraints on verifier policies.\r\n\r\nWith other status list approaches, there is an ability to communicate a single boolean, multiple boolean, or enumerations.\r\n\r\nWith our approach here, we are not limited by the bitstring data structure, so dynamic state is less constrained.\r\n\r\nThis PR also highlights the current design decision to use alg = none, to signal revocation, without providing an assertion that can be consumed by a verifier.\r\n\r\nThere may be very legitimate reasons to prefer to return unsigned information for boolean status, but for complex status, unsigned information is more dangerous to consume.\r\n\r\nI believe the specification should leave some of these decisions up to profiles.",
       "createdAt": "2024-05-25T13:19:46Z",
-      "updatedAt": "2024-07-17T16:07:25Z",
+      "updatedAt": "2024-07-18T14:06:39Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "73316fd7e515056d54a3d8043d39a2f3a4ae7141",
@@ -7451,6 +7451,13 @@
           "body": "@OR13 see also these:\r\n\r\n- https://github.com/italia/eudi-wallet-it-docs/pull/302\r\n- https://github.com/italia/eudi-wallet-it-docs/issues/264",
           "createdAt": "2024-06-20T12:44:22Z",
           "updatedAt": "2024-06-20T12:44:22Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@marinaado your question is one of my original motivations for exposing this representation.\r\n\r\nIn other status mechanisms, a verifier can obtain an issuer signed status that is \"negative\" such as \"revoked or suspended\".\r\n\r\nGetting a signed assertion that something is not valid is different than being unable to get a signed assertion that something is still valid.\r\n\r\nIn more complex state machines, where there are more states than valid, revoked, suspended... getting a signed assertion of \"pending\" or \"in progress\", or \"6/10 items completed\"... can be more useful to policy automation than an error.\r\n\r\nI think the error responses make sense, when there is no status to provide back, or the issuer policy is to not provide a status for certain states.\r\n\r\nEven in a more complicated status assertion system, the issuer might return errors at certain times of the day (too close to a rollover window), or for certain states, such as \"update in progress\", or \"pending\".\r\n\r\nWe should probably provide some guidance to implementers on when to choose \"valid\" or \"error\", and when to choose \"latest status\" or \"error\".\r\n\r\nIn the context of HTTP errors, I think of status assertion errors as coming in 2 forms:\r\n\r\n5xx - issuer rejects the request for internal reasons beyond the control of the holder.\r\n4xx - issuer rejects the request because the holder has made a mistake.\r\n\r\nRegardless of what the issuer ultimately returns boolean, enumeration, or objects... I can still see some value in also returning 4xx or 5xx in some cases.\r\n\r\nI hope this answers your question.",
+          "createdAt": "2024-07-18T13:18:26Z",
+          "updatedAt": "2024-07-18T13:18:26Z"
         }
       ],
       "reviews": [
@@ -8160,26 +8167,6 @@
           ]
         },
         {
-          "id": "PRR_kwDOK4XJ0s6CCGRL",
-          "commit": {
-            "abbreviatedOid": "e6239f5"
-          },
-          "author": "OR13",
-          "authorAssociation": "COLLABORATOR",
-          "state": "COMMENTED",
-          "body": "",
-          "createdAt": "2024-07-17T01:15:11Z",
-          "updatedAt": "2024-07-17T01:15:26Z",
-          "comments": [
-            {
-              "originalPosition": 23,
-              "body": "```suggestion\n- MUST NOT contain personal information about the User who owns\n```\n",
-              "createdAt": "2024-07-17T01:15:11Z",
-              "updatedAt": "2024-07-17T01:15:26Z"
-            }
-          ]
-        },
-        {
           "id": "PRR_kwDOK4XJ0s6CI8G8",
           "commit": {
             "abbreviatedOid": "e6239f5"
@@ -8216,6 +8203,79 @@
               "body": "I suggest something along the lines of \"MUST NOT contain information about the data subject (user) that isn't already made available to the validator\"",
               "createdAt": "2024-07-17T16:07:25Z",
               "updatedAt": "2024-07-17T16:07:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6CO5lB",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Is there a relation between the Status Assertion Errors and the Credential_status_validity being false?\r\n\r\nWhile specification says that revoked credential should generate Status Assertion Error, the following example from the spec is IMHO conflicting that. \r\n\r\nShouldn't a revoked credential generate an Status Assertion Error response message with the Credential_status_validity being false?\r\n\r\n\r\n```\r\n{\r\n    \"alg\": \"ES256\",\r\n    \"typ\": \"status-assertion+jwt\",\r\n    \"kid\": \"w8ZOZRcx21Zpry7H-0VLBsH7Wf7WXb6TeK3qVMCpY44\"\r\n}\r\n.\r\n{\r\n    \"iss\": \"https://issuer.example.org\",\r\n    \"iat\": 1504699136,\r\n    \"exp\": 1504785536,\r\n    \"credential_hash\": \"xnlAq6Ma8fgu1z4hdGphJnKLulaVHpLCFeZFUGpQ2dA\",\r\n    \"credential_hash_alg\": \"sha-256\",\r\n    \"credential_status_validity\": false,\r\n    \"credential_status_detail\": {\r\n      \"state\": \"suspended\", // or \"revoked\"\r\n    },\r\n```",
+          "createdAt": "2024-07-18T07:25:56Z",
+          "updatedAt": "2024-07-18T07:25:56Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6CSTL6",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-18T13:31:09Z",
+          "updatedAt": "2024-07-18T13:31:09Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "hmm, thats undermining one of my use cases.\r\n\r\nLets imagine a truck that can be loaded with different products, and each product has a different weight.\r\n\r\nThe truck is empty waiting to be loaded, it is loaded with copper ore, it drives over a weighing station which creates a status assertion for the truck that asserts: copper, weight.\r\n\r\nThe rest of the truck credential may have an \"unloaded weight\", but it won't have \"copper\".\r\n\r\nLet me give a personal credentials use case that centers around new PII disclosures as well.\r\n\r\nLets say a person has no children when their credential is issued, but a few days later then have twins.\r\n\r\nThe status assertion could be: children: true, or children: 2 ... in either case, it would be new information to a verifier.\r\n\r\nIf your point is that \"determining what is PII is a can of worms\"... I agree.\r\n\r\nI might recommend we simple avoid the discussion of PII outside of security considerations, and treat the status assertion as conveying information which the issuer can only provide about the subject after the credential has been issued and bound to the subjects public key... this information could be related to time or location or changes in physical traits, the subject of a credential is not necessarily a natural or legal person... see security considerations section __ for guidance on informed consent for personal information related to natural persons, etc....\r\n\r\nI've offered an alternative here: https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/61/files#r1682850960",
+              "createdAt": "2024-07-18T13:31:09Z",
+              "updatedAt": "2024-07-18T13:33:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6CSUh4",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-18T13:33:07Z",
+          "updatedAt": "2024-07-18T13:33:08Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\n- SHOULD NOT contain new information about natural person subjects, without gathering informed consent.\r\n```",
+              "createdAt": "2024-07-18T13:33:07Z",
+              "updatedAt": "2024-07-18T13:33:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6CSU0Z",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-18T13:33:37Z",
+          "updatedAt": "2024-07-18T14:06:39Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "I have come to the position that boolean values are a mistake for status assertions... and that it is verifier policy that determines if a status is cause to reject a presentation.\r\n\r\nI've also come to the conclusion that IANA registries are not necessarily the best scalable solution for status assertions in complex domains (chemistry, logistics, healthcare, cyber).\r\n\r\nIf there are assertions that need to be \"globally understood\" then IANA makes sense, but I don't see a global registry that starts with \"suspended\" or \"revoked\" growing well.\r\n\r\nI think many of the entries that might be entered in such a registry are probably much more domain specific.\r\n\r\nThe guidance to experts would typically be, \"make sure there is no existing registry entry that solves this problem\"... I imagine adjudicating new requests for all use cases in a single registry to be extremely difficult... and producing the same outcome you mention above, just with multiple status options, or multiple status values... criticality is lost, and verifier behavior becomes undefined.\r\n\r\nIn my mental model, status assertions are always credential type specific.\r\n\r\nAlthough it might look like both a business license and a drivers license are \"revoked\"... \"revoked\" actually means different things, depending on the credential type.\r\n\r\nWe want to ensure that \"revoked\" does not mean different things for the same credential type across different issuers.\r\n\r\nThis is better accomplished with credential type registries, than status registries.\r\n\r\nIn a credential type registry, you could have:\r\n\r\n\r\n|  type                      |  assertions                       |\r\n| -----------------  | -----------------------  |\r\n|  drivers license     |  suspended, revoked      |\r\n|  business license  |  pending, revoked           |\r\n\r\n\r\nStatuses are relative to a credential type, and complexity and interoperability are constrained by \"registered credential types\"... In order to understand \"drivers license\", you MUST understand \"suspended\" or \"revoked\".\r\n\r\nThis approach also works in the open world model. \r\n\r\nFor example, we use JSON Schema to enable this kind of status scheme for W3C Verifiable Credentials in a supply chain context.\r\n\r\nThe issuer can publish the documentation that verifiers can use to determine how to process the credential, and the status assertions for each credential type that the issuer supports.\r\n\r\nIf the credential contains a reference to its own schema, there is a single point point of discovery for all this information.\r\n\r\nComing back to the spec text we have.\r\n\r\nI think it is fine for the issuer to try to be helpful and tell the verifier \"new information, don't reject this\", or \"new information, please reject this\".\r\n\r\nBut its still going to be the verifier's decision what to do... In that sense, I don't see the value of the boolean as being particularly high.\r\n\r\nIf the credential type tells you there must be a status assertion and the verifier does not get one, reject.\r\nOtherwise, let the verifier apply their policy to the credential and the status assertion, and determine if they should reject or accept.\r\n",
+              "createdAt": "2024-07-18T14:06:39Z",
+              "updatedAt": "2024-07-18T14:07:55Z"
             }
           ]
         }
@@ -9009,7 +9069,7 @@
       "labels": [],
       "body": "Features and benefits of OAuth Status Assertions to clearly communicate their use and privacy benefits .",
       "createdAt": "2024-07-09T12:01:12Z",
-      "updatedAt": "2024-07-09T12:01:12Z",
+      "updatedAt": "2024-07-19T13:05:44Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "b49765707b9ab30139beab7045aecef5c58461a9",
@@ -9021,7 +9081,101 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOK4XJ0s6CW73F",
+          "commit": {
+            "abbreviatedOid": "ab466d6"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-18T23:16:21Z",
+          "updatedAt": "2024-07-18T23:16:21Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-07-18T23:16:21Z",
+              "updatedAt": "2024-07-18T23:16:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6CW77P",
+          "commit": {
+            "abbreviatedOid": "ab466d6"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-18T23:16:47Z",
+          "updatedAt": "2024-07-18T23:16:47Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "```suggestion\r\n**Independence**: Verifiers do not need direct interaction with the issuer to confirm the validity of a credential, which increases the privacy and security of the process.\r\n```",
+              "createdAt": "2024-07-18T23:16:47Z",
+              "updatedAt": "2024-07-18T23:16:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6CW8IT",
+          "commit": {
+            "abbreviatedOid": "ab466d6"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-18T23:18:05Z",
+          "updatedAt": "2024-07-18T23:18:06Z",
+          "comments": [
+            {
+              "originalPosition": 30,
+              "body": "```suggestion\r\nIn both secure and privacy-friendly way, OAuth Status Assertions provide an effective way to manage the validity and status of digital credentials.\r\n```",
+              "createdAt": "2024-07-18T23:18:05Z",
+              "updatedAt": "2024-07-18T23:18:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6CW8Kq",
+          "commit": {
+            "abbreviatedOid": "ab466d6"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-18T23:18:18Z",
+          "updatedAt": "2024-07-18T23:18:18Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6CbSNZ",
+          "commit": {
+            "abbreviatedOid": "ab466d6"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-19T13:05:44Z",
+          "updatedAt": "2024-07-19T13:05:44Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nStatus assertions are used to provide time sensitive claims that impact the validity of digital credentials without the need for a direct request from third parties. They are periodically issued to the holders of the credentials, who can present them to the verifiers together with the corresponding digital credentials.\r\n```",
+              "createdAt": "2024-07-19T13:05:44Z",
+              "updatedAt": "2024-07-19T13:05:45Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
