@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-21T00:57:54.509903+00:00",
+  "timestamp": "2024-07-23T00:54:21.147931+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -7384,7 +7384,7 @@
       ],
       "body": "Addressing:\r\n\r\nhttps://github.com/peppelinux/draft-demarco-oauth-status-attestations/pull/53#discussion_r1614083883\r\n\r\nThe purpose of this pull request is to define the signed information which can be conveyed to a verifier, to clarify the constraints on verifier policies.\r\n\r\nWith other status list approaches, there is an ability to communicate a single boolean, multiple boolean, or enumerations.\r\n\r\nWith our approach here, we are not limited by the bitstring data structure, so dynamic state is less constrained.\r\n\r\nThis PR also highlights the current design decision to use alg = none, to signal revocation, without providing an assertion that can be consumed by a verifier.\r\n\r\nThere may be very legitimate reasons to prefer to return unsigned information for boolean status, but for complex status, unsigned information is more dangerous to consume.\r\n\r\nI believe the specification should leave some of these decisions up to profiles.",
       "createdAt": "2024-05-25T13:19:46Z",
-      "updatedAt": "2024-07-18T14:06:39Z",
+      "updatedAt": "2024-07-22T12:35:29Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "73316fd7e515056d54a3d8043d39a2f3a4ae7141",
@@ -7458,6 +7458,13 @@
           "body": "@marinaado your question is one of my original motivations for exposing this representation.\r\n\r\nIn other status mechanisms, a verifier can obtain an issuer signed status that is \"negative\" such as \"revoked or suspended\".\r\n\r\nGetting a signed assertion that something is not valid is different than being unable to get a signed assertion that something is still valid.\r\n\r\nIn more complex state machines, where there are more states than valid, revoked, suspended... getting a signed assertion of \"pending\" or \"in progress\", or \"6/10 items completed\"... can be more useful to policy automation than an error.\r\n\r\nI think the error responses make sense, when there is no status to provide back, or the issuer policy is to not provide a status for certain states.\r\n\r\nEven in a more complicated status assertion system, the issuer might return errors at certain times of the day (too close to a rollover window), or for certain states, such as \"update in progress\", or \"pending\".\r\n\r\nWe should probably provide some guidance to implementers on when to choose \"valid\" or \"error\", and when to choose \"latest status\" or \"error\".\r\n\r\nIn the context of HTTP errors, I think of status assertion errors as coming in 2 forms:\r\n\r\n5xx - issuer rejects the request for internal reasons beyond the control of the holder.\r\n4xx - issuer rejects the request because the holder has made a mistake.\r\n\r\nRegardless of what the issuer ultimately returns boolean, enumeration, or objects... I can still see some value in also returning 4xx or 5xx in some cases.\r\n\r\nI hope this answers your question.",
           "createdAt": "2024-07-18T13:18:26Z",
           "updatedAt": "2024-07-18T13:18:26Z"
+        },
+        {
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@OR13 Yes it makes sense. Are you suggesting that we change the Status Assertion Errors section?",
+          "createdAt": "2024-07-22T12:35:28Z",
+          "updatedAt": "2024-07-22T12:35:28Z"
         }
       ],
       "reviews": [
