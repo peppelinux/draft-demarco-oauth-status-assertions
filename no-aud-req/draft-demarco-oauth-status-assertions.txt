@@ -5,10 +5,10 @@
 Network Working Group                                        G. D. Marco
 Internet-Draft               Dipartimento per la trasformazione digitale
 Intended status: Informational                                 O. Steele
-Expires: 19 December 2024                                      Transmute
+Expires: 24 January 2025                                       Transmute
                                                                F. Marino
                                 Istituto Poligrafico e Zecca dello Stato
-                                                            17 June 2024
+                                                            23 July 2024
 
 
                         OAuth Status Assertions
@@ -29,13 +29,13 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at
-   https://peppelinux.github.io/draft-demarco-status-attestations/draft-
-   demarco-oauth-status-assertions.html.  Status information for this
-   document may be found at https://datatracker.ietf.org/doc/draft-
+   https://peppelinux.github.io/draft-demarco-oauth-status-assertions/
+   draft-demarco-oauth-status-assertions.html.  Status information for
+   this document may be found at https://datatracker.ietf.org/doc/draft-
    demarco-oauth-status-assertions/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/peppelinux/draft-demarco-status-attestations.
+   https://github.com/peppelinux/draft-demarco-oauth-status-assertions.
 
 Status of This Memo
 
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 December 2024.
+   This Internet-Draft will expire on 24 January 2025.
 
 Copyright Notice
 
@@ -228,10 +228,11 @@ Table of Contents
 
    *  MUST contain the expiration datetime after which the Status
       Assertion MUST NOT be considered valid anymore, and the Digital
-      Credential it refers SHOULD NOT be considered valid anymore.  The
-      expiration datetime MUST be superior to the Status Assertion
-      issuance datetime and it MUST end before the expiration datetime
-      of the Digital Credential;
+      Credential referred to SHOULD NOT be considered as having a valid
+      status, unless there exists some specific verifier policy that
+      provides stronger guidance.  The expiration datetime MUST be
+      superior to the Status Assertion issuance datetime and it MUST end
+      before the expiration datetime of the Digital Credential;
 
    *  MUST enable the offline use cases by employing validation using a
       cryptographic signature and the cryptographic public key of the
@@ -239,6 +240,10 @@ Table of Contents
 
    *  MUST NOT contain personal information about the User who owns the
       Digital Credential to which the Status Assertion refers.
+
+   *  MUST NOT contain any information regarding the Verifier to whom it
+      may be presented, such as the Verifier identifier as the intended
+      audience.
 
 6.  Proof of Possession of a Credential
 
@@ -1435,9 +1440,9 @@ Content-Type: application/json
    [SD-JWT.VC]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-03, 4 March
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-04, 8 July
               2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-sd-jwt-vc-03>.
+              oauth-sd-jwt-vc-04>.
 
 Appendix A.  Acknowledgments
 
