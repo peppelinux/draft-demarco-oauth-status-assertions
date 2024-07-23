@@ -22,7 +22,7 @@ sequenceDiagram
 
 # Objectives and Explanation of OAuth Status Assertions
 
-OAuth status assertions are used to check the validity of digital credentials without the need for a direct request to third parties. They are periodically issued to the holders of the credentials, who can present them to the verifiers together with the corresponding digital credentials.
+Status assertions are used to provide time sensitive claims that impact the validity of digital credentials without the need for a direct request from third parties. They are periodically issued to the holders of the credentials, who can present them to the verifiers together with the corresponding digital credentials.
 
 ## Key aspects of the concept of OAuth Status Assertions:
 OAuth Status Assertions provide a robust method of verifying the validity of digital credentials without the need for verifiers to access external sources or third parties.
@@ -37,16 +37,14 @@ The main goal of OAuth Status Assertions is to **confirm the non-revocation of a
 2) **Request and receipt:** The holder of a credential can request a status assertion from the issuer. This is usually done by means of a request containing a JSON Web Token (JWT) or a CBOR Web Token (CWT) that carries specific information about the credential.
 3) **Presentation:** The holder presents the credential together with its status assertion to the verifier. This process is similar to Online Certificate Status Protocol (OCSP) stapling in the TLS protocol, where the server presents a time-stamped certificate status token.
 
-OCSP is a protocol used for obtaining the revocation status of an X.509 digital certificate, commonly used in secure network communications to ascertain whether a certificate is still valid or has been revoked. 
-On top OCSP is a more efficient alternative to the traditional method of checking against a Certificate Revocation List (CRL) and is widely used because it can provide real-time status information about a certificate’s validity.
 
 ### Conceptual features:
 
 **Data protection:** The procedure ensures that no unnecessary personal data of the holder or information about the use of the credential is passed on to the verifier or other parties.
 **Offline capability:** The ability to check the validity of credentials offline without having to access a central database or online status lists is a key advantage of this approach.
-Independence: Verifiers do not need direct interaction with the issuer to confirm the validity of a credential, which increases the privacy and security of the process.
+**Independence**: Verifiers do not need direct interaction with the issuer to confirm the validity of a credential, which increases the privacy and security of the process.
 
-In this way, OAuth Status Assertions provide an effective way to manage the validity and status of digital credentials in a way that is both secure and privacy-friendly.
+In both secure and privacy-friendly way, OAuth Status Assertions provide an effective way to manage the validity and status of digital credentials.
 
 ## Contributing
 
