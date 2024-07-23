@@ -250,6 +250,8 @@ a cryptographic signature and the cryptographic public key of the
 Credential Issuer.
 - MUST NOT contain personal information about the User who owns
 the Digital Credential to which the Status Assertion refers.
+- MUST NOT contain any information regarding the Verifier to whom it may
+be presented, such as the Verifier identifier as the intended audience.
 
 # Proof of Possession of a Credential
 
