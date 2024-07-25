@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-23T00:54:21.147931+00:00",
+  "timestamp": "2024-07-25T00:54:22.961797+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -7384,7 +7384,7 @@
       ],
       "body": "Addressing:\r\n\r\nhttps://github.com/peppelinux/draft-demarco-oauth-status-attestations/pull/53#discussion_r1614083883\r\n\r\nThe purpose of this pull request is to define the signed information which can be conveyed to a verifier, to clarify the constraints on verifier policies.\r\n\r\nWith other status list approaches, there is an ability to communicate a single boolean, multiple boolean, or enumerations.\r\n\r\nWith our approach here, we are not limited by the bitstring data structure, so dynamic state is less constrained.\r\n\r\nThis PR also highlights the current design decision to use alg = none, to signal revocation, without providing an assertion that can be consumed by a verifier.\r\n\r\nThere may be very legitimate reasons to prefer to return unsigned information for boolean status, but for complex status, unsigned information is more dangerous to consume.\r\n\r\nI believe the specification should leave some of these decisions up to profiles.",
       "createdAt": "2024-05-25T13:19:46Z",
-      "updatedAt": "2024-07-22T12:35:29Z",
+      "updatedAt": "2024-07-23T16:09:47Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "73316fd7e515056d54a3d8043d39a2f3a4ae7141",
@@ -8285,6 +8285,26 @@
               "updatedAt": "2024-07-18T14:07:55Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6CzHE2",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "leifj",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-23T16:09:46Z",
+          "updatedAt": "2024-07-23T16:09:47Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "what I am really looking for is a clear resolution to #31 here by aligning the language as best we can with that of the regulation which this proposal doesn't do imo.",
+              "createdAt": "2024-07-23T16:09:46Z",
+              "updatedAt": "2024-07-23T16:11:08Z"
+            }
+          ]
         }
       ]
     },
@@ -9076,13 +9096,13 @@
       "labels": [],
       "body": "Features and benefits of OAuth Status Assertions to clearly communicate their use and privacy benefits .",
       "createdAt": "2024-07-09T12:01:12Z",
-      "updatedAt": "2024-07-19T13:05:44Z",
+      "updatedAt": "2024-07-23T22:23:09Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "b49765707b9ab30139beab7045aecef5c58461a9",
       "headRepository": "Sascha-Block/draft-demarco-oauth-status-assertions",
       "headRefName": "patch-1",
-      "headRefOid": "ab466d6d0dfb8a03b024f048e8c2902bda506eb9",
+      "headRefOid": "2adec28a4121f0b4575be7954acc9b18127156f6",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -9181,6 +9201,46 @@
               "updatedAt": "2024-07-19T13:05:45Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 80,
+      "id": "PR_kwDOK4XJ0s52RStK",
+      "title": "added requirements about not specifying the audience of a status assertion",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/80",
+      "state": "OPEN",
+      "author": "peppelinux",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "status assertions do not disclose their intended audience to the credential issuers",
+      "createdAt": "2024-07-23T22:21:42Z",
+      "updatedAt": "2024-07-24T05:31:01Z",
+      "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "baseRefName": "main",
+      "baseRefOid": "b49765707b9ab30139beab7045aecef5c58461a9",
+      "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "headRefName": "no-aud-req",
+      "headRefOid": "e71f7396b6854ec04394917fb9a2db43fa007145",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOK4XJ0s6C31_3",
+          "commit": {
+            "abbreviatedOid": "e71f739"
+          },
+          "author": "fmarino-ipzs",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-24T05:31:01Z",
+          "updatedAt": "2024-07-24T05:31:01Z",
+          "comments": []
         }
       ]
     }
