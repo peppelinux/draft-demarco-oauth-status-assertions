@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-25T00:54:22.961797+00:00",
+  "timestamp": "2024-07-28T00:58:22.979007+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -1185,6 +1185,22 @@
           "updatedAt": "2024-06-12T10:45:43Z"
         }
       ]
+    },
+    {
+      "number": 81,
+      "id": "I_kwDOK4XJ0s6RDNDZ",
+      "title": "Use Status List IANA Registry ",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/81",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Add registry entries for valid and invalid.\n\nEnable assertion to include those values along with potential credentials type specific fresh information.",
+      "createdAt": "2024-07-27T16:01:20Z",
+      "updatedAt": "2024-07-27T16:01:20Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -7384,7 +7400,7 @@
       ],
       "body": "Addressing:\r\n\r\nhttps://github.com/peppelinux/draft-demarco-oauth-status-attestations/pull/53#discussion_r1614083883\r\n\r\nThe purpose of this pull request is to define the signed information which can be conveyed to a verifier, to clarify the constraints on verifier policies.\r\n\r\nWith other status list approaches, there is an ability to communicate a single boolean, multiple boolean, or enumerations.\r\n\r\nWith our approach here, we are not limited by the bitstring data structure, so dynamic state is less constrained.\r\n\r\nThis PR also highlights the current design decision to use alg = none, to signal revocation, without providing an assertion that can be consumed by a verifier.\r\n\r\nThere may be very legitimate reasons to prefer to return unsigned information for boolean status, but for complex status, unsigned information is more dangerous to consume.\r\n\r\nI believe the specification should leave some of these decisions up to profiles.",
       "createdAt": "2024-05-25T13:19:46Z",
-      "updatedAt": "2024-07-23T16:09:47Z",
+      "updatedAt": "2024-07-27T16:16:51Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "73316fd7e515056d54a3d8043d39a2f3a4ae7141",
@@ -8305,6 +8321,106 @@
               "updatedAt": "2024-07-23T16:11:08Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6DQyPu",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-26T16:06:24Z",
+          "updatedAt": "2024-07-26T16:06:25Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "In StatusList we have come to the same conclusion as Leif and we already have a regristration for the IANA Status semantic, you can think of piggybacking on this one. This is a potential for symmtry and symbioses between the specs.",
+              "createdAt": "2024-07-26T16:06:24Z",
+              "updatedAt": "2024-07-26T16:06:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6DQ3vn",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "leifj",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-26T16:19:23Z",
+          "updatedAt": "2024-07-26T16:19:23Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "That is not a bad idea",
+              "createdAt": "2024-07-26T16:19:23Z",
+              "updatedAt": "2024-07-26T16:19:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6DUiiB",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-27T15:58:45Z",
+          "updatedAt": "2024-07-27T15:58:46Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "I'm very supportive of aligning the status list and status assertion claims and semantics everywhere we can.\n\n",
+              "createdAt": "2024-07-27T15:58:46Z",
+              "updatedAt": "2024-07-27T15:58:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6DUinp",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-27T16:02:23Z",
+          "updatedAt": "2024-07-27T16:02:23Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "I filed https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/81",
+              "createdAt": "2024-07-27T16:02:23Z",
+              "updatedAt": "2024-07-27T16:02:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6DUi_L",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-27T16:16:51Z",
+          "updatedAt": "2024-07-27T16:16:51Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "Thanks for the pointer.\n\nLet's unpack the requirements:\n\n> not allow providers of electronic attestations of attributes or any other party, after the issuance of the attestation of attributes, to obtain data that allows transactions or user behaviour to be tracked, linked or correlated, or knowledge of transactions or user behaviour to be otherwise obtained, unless explicitly authorised by the user;\n\nThe key part of this is last bit.\n\nIf the user (holder) provides additional information to the issuer, the assertion can contain new information, including potential tracking.\n\nIn the case the holder discloses a status assertion or potentially even as fresh disclosure of a disclosable status assertion.. the holder controls what information other parties receive.\n\nIn status assertion the biggest privacy risk comes from issuer tracking, based on when fresh assertions are requested.\n\nJustin mentioned this at the mic line in the oauth session at IETF 120.\n\nWe should provide guidance on the privacy trade offs.\n\n\n",
+              "createdAt": "2024-07-27T16:16:51Z",
+              "updatedAt": "2024-07-27T16:16:51Z"
+            }
+          ]
         }
       ]
     },
@@ -9096,7 +9212,7 @@
       "labels": [],
       "body": "Features and benefits of OAuth Status Assertions to clearly communicate their use and privacy benefits .",
       "createdAt": "2024-07-09T12:01:12Z",
-      "updatedAt": "2024-07-23T22:23:09Z",
+      "updatedAt": "2024-07-25T10:01:20Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "b49765707b9ab30139beab7045aecef5c58461a9",
@@ -9201,6 +9317,146 @@
               "updatedAt": "2024-07-19T13:05:45Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6DDWJX",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-25T08:42:19Z",
+          "updatedAt": "2024-07-25T08:42:19Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "\"direct request from third parties\" in the first sentence is a bit ambiguous.  Perhaps say instead: \"without introducing third parties in the trust framework and changes in the flow of credential issuance and presentation.\" \r\n\r\n\"They are periodically issued to the holders of the credentials\" in the second sentence is not correct IMHO as they are issued per request of the Holder. So perhaps rephrase to: \"They are issued on request of the credential Holder\"",
+              "createdAt": "2024-07-25T08:42:19Z",
+              "updatedAt": "2024-07-25T08:42:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6DDXGp",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-25T08:43:57Z",
+          "updatedAt": "2024-07-25T08:43:57Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "Perhaps we should stick to the terminology: \"verify the status of the digital credentials\". It is up to the Verifier to determine what valid means in their context. ",
+              "createdAt": "2024-07-25T08:43:57Z",
+              "updatedAt": "2024-07-25T08:43:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6DD7hZ",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-25T09:52:19Z",
+          "updatedAt": "2024-07-25T09:52:20Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "The same comment about the used terminology as above i.e confirm the status of credential.\r\n\r\nI would say that this \"preserves\" privacy instead of \"increases\". Increase is relative. ",
+              "createdAt": "2024-07-25T09:52:20Z",
+              "updatedAt": "2024-07-25T09:52:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6DD8wo",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-25T09:54:51Z",
+          "updatedAt": "2024-07-25T09:54:51Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "Should the generation not happen after the request? Or it is implementation-dependent. ",
+              "createdAt": "2024-07-25T09:54:51Z",
+              "updatedAt": "2024-07-25T09:54:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6DD-Z4",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-25T09:57:03Z",
+          "updatedAt": "2024-07-25T09:57:03Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "We should say that NO data is presented to third parties (not only the unnecessary).",
+              "createdAt": "2024-07-25T09:57:03Z",
+              "updatedAt": "2024-07-25T09:57:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6DECRZ",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-25T10:00:45Z",
+          "updatedAt": "2024-07-25T10:00:45Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "Verifiers do not need direct interaction with the issuer **or other third parties** to confirm the **status** of a credential, which **preservers** the privacy and security of the process.",
+              "createdAt": "2024-07-25T10:00:45Z",
+              "updatedAt": "2024-07-25T10:00:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6DEC6p",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-25T10:01:20Z",
+          "updatedAt": "2024-07-25T10:01:20Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "Overall suggestion is to capitalise Holder, Verifier and Issuer through the text.",
+              "createdAt": "2024-07-25T10:01:20Z",
+              "updatedAt": "2024-07-25T10:01:20Z"
+            }
+          ]
         }
       ]
     },
@@ -9216,7 +9472,7 @@
       "labels": [],
       "body": "status assertions do not disclose their intended audience to the credential issuers",
       "createdAt": "2024-07-23T22:21:42Z",
-      "updatedAt": "2024-07-24T05:31:01Z",
+      "updatedAt": "2024-07-25T08:23:10Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "b49765707b9ab30139beab7045aecef5c58461a9",
@@ -9241,6 +9497,26 @@
           "createdAt": "2024-07-24T05:31:01Z",
           "updatedAt": "2024-07-24T05:31:01Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6DDL5K",
+          "commit": {
+            "abbreviatedOid": "e71f739"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-25T08:23:09Z",
+          "updatedAt": "2024-07-25T08:23:10Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Perhaps rephrase the second part of the statement after the comma: (e.g. disclose the Verifier's identifier to specify the intended audience)",
+              "createdAt": "2024-07-25T08:23:10Z",
+              "updatedAt": "2024-07-25T08:23:10Z"
+            }
+          ]
         }
       ]
     }
