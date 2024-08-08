@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-06T00:54:35.199637+00:00",
+  "timestamp": "2024-08-08T00:55:10.506892+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -1199,6 +1199,22 @@
       "body": "Add registry entries for valid and invalid.\n\nEnable assertion to include those values along with potential credentials type specific fresh information.",
       "createdAt": "2024-07-27T16:01:20Z",
       "updatedAt": "2024-07-27T16:01:20Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 82,
+      "id": "I_kwDOK4XJ0s6SPJPu",
+      "title": "Align Terminology with Status List",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/82",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "As Status Assertion is planning to use the extension point of OAuth Token Status List, I think it would be great to align the base terminology, so that readers comparing the specs have an easier time doing so. Specifically we use:\r\n- Issuer\r\n- Relying Party\r\n- Referenced Token\r\n\r\nWe also currently think about adding:\r\n- Client\r\n- Status List Provider -> this one could be renamed to be more general",
+      "createdAt": "2024-08-07T13:07:01Z",
+      "updatedAt": "2024-08-07T13:07:01Z",
       "closedAt": null,
       "comments": []
     }
