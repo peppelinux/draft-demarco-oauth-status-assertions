@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-13T00:56:18.608887+00:00",
+  "timestamp": "2024-08-15T00:53:02.696323+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -1210,11 +1210,13 @@
       "state": "OPEN",
       "author": "paulbastian",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "peppelinux"
+      ],
       "labels": [],
       "body": "As Status Assertion is planning to use the extension point of OAuth Token Status List, I think it would be great to align the base terminology, so that readers comparing the specs have an easier time doing so. Specifically we use:\r\n- Issuer\r\n- Relying Party\r\n- Referenced Token\r\n\r\nWe also currently think about adding:\r\n- Client\r\n- Status List Provider -> this one could be renamed to be more general",
       "createdAt": "2024-08-07T13:07:01Z",
-      "updatedAt": "2024-08-07T13:07:01Z",
+      "updatedAt": "2024-08-14T20:31:54Z",
       "closedAt": null,
       "comments": []
     }
@@ -7416,7 +7418,7 @@
       ],
       "body": "Addressing:\r\n\r\nhttps://github.com/peppelinux/draft-demarco-oauth-status-attestations/pull/53#discussion_r1614083883\r\n\r\nThe purpose of this pull request is to define the signed information which can be conveyed to a verifier, to clarify the constraints on verifier policies.\r\n\r\nWith other status list approaches, there is an ability to communicate a single boolean, multiple boolean, or enumerations.\r\n\r\nWith our approach here, we are not limited by the bitstring data structure, so dynamic state is less constrained.\r\n\r\nThis PR also highlights the current design decision to use alg = none, to signal revocation, without providing an assertion that can be consumed by a verifier.\r\n\r\nThere may be very legitimate reasons to prefer to return unsigned information for boolean status, but for complex status, unsigned information is more dangerous to consume.\r\n\r\nI believe the specification should leave some of these decisions up to profiles.",
       "createdAt": "2024-05-25T13:19:46Z",
-      "updatedAt": "2024-07-27T16:16:51Z",
+      "updatedAt": "2024-08-14T20:50:14Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "73316fd7e515056d54a3d8043d39a2f3a4ae7141",
@@ -7497,6 +7499,13 @@
           "body": "@OR13 Yes it makes sense. Are you suggesting that we change the Status Assertion Errors section?",
           "createdAt": "2024-07-22T12:35:28Z",
           "updatedAt": "2024-07-22T12:35:28Z"
+        },
+        {
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "body": "I suggest to have in this PR at least @leifj 's suggestion about \"MUST NOT contain information about the data subject (user) that isn't already made available to the validator\"\r\n\r\nI didn't get what we should change about the status assertion errors, I am supportive in reducing them to only handle exceptions and errors about the status assertion error requests\r\n\r\nI suggest to handle the language alignment in another PR, hopefully when this PR is merged, therefore having a full revision of the document\r\n\r\nregarding the http status code, since we have decided to handle arrays of object where each request and response are about one or more of these, returning a 4xx or 5xx errors would not be related to the status assertions protocol but to deployments of httpd ",
+          "createdAt": "2024-08-14T20:50:13Z",
+          "updatedAt": "2024-08-14T20:50:13Z"
         }
       ],
       "reviews": [
@@ -8435,6 +8444,26 @@
               "body": "Thanks for the pointer.\n\nLet's unpack the requirements:\n\n> not allow providers of electronic attestations of attributes or any other party, after the issuance of the attestation of attributes, to obtain data that allows transactions or user behaviour to be tracked, linked or correlated, or knowledge of transactions or user behaviour to be otherwise obtained, unless explicitly authorised by the user;\n\nThe key part of this is last bit.\n\nIf the user (holder) provides additional information to the issuer, the assertion can contain new information, including potential tracking.\n\nIn the case the holder discloses a status assertion or potentially even as fresh disclosure of a disclosable status assertion.. the holder controls what information other parties receive.\n\nIn status assertion the biggest privacy risk comes from issuer tracking, based on when fresh assertions are requested.\n\nJustin mentioned this at the mic line in the oauth session at IETF 120.\n\nWe should provide guidance on the privacy trade offs.\n\n\n",
               "createdAt": "2024-07-27T16:16:51Z",
               "updatedAt": "2024-07-27T16:16:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Fdr9z",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-14T20:41:37Z",
+          "updatedAt": "2024-08-14T20:41:37Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "I support aligning the specs terms, since status assertions was born as a status list feature/extension",
+              "createdAt": "2024-08-14T20:41:37Z",
+              "updatedAt": "2024-08-14T20:41:37Z"
             }
           ]
         }
