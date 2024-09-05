@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-03T00:57:08.125174+00:00",
+  "timestamp": "2024-09-05T00:57:47.615817+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -842,7 +842,7 @@
       "labels": [],
       "body": "All those comparisons will be held in this thread unless an informational RFC will be created about both the status lists and the status assertions",
       "createdAt": "2024-05-20T06:53:44Z",
-      "updatedAt": "2024-05-24T13:07:32Z",
+      "updatedAt": "2024-09-03T08:52:07Z",
       "closedAt": null,
       "comments": [
         {
@@ -865,6 +865,13 @@
           "body": "- communicating the list by the holder (stapling) also forces the holder to disclose new status for credentials the verifier has previously seen or might see in the future",
           "createdAt": "2024-05-24T13:07:31Z",
           "updatedAt": "2024-05-24T13:07:31Z"
+        },
+        {
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "body": "A credential is revoked but status list fails download. Is that credential revoked? Standing on the last status list (outdated and already obtained by RP) yes, while it is not.",
+          "createdAt": "2024-09-03T08:52:05Z",
+          "updatedAt": "2024-09-03T08:52:05Z"
         }
       ]
     },
