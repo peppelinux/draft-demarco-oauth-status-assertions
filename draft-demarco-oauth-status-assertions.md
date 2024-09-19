@@ -582,7 +582,7 @@ detailing the necessary metadata and practices to integrate into their systems.
 ## Credential Issuer Metadata
 
 The Credential Issuers that uses the Status Assertions MUST include in their
-OpenID4VCI [OpenID4VCI] metadata the claims:
+metadata the following parameters:
 
 - `status_assertion_endpoint`. REQUIRED. It MUST be an HTTPs URL indicating
 the endpoint where the Wallet Instances can request Status Assertions.
