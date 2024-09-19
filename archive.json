@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-17T00:48:48.484593+00:00",
+  "timestamp": "2024-09-19T00:59:12.404669+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -1196,16 +1196,16 @@
     {
       "number": 81,
       "id": "I_kwDOK4XJ0s6RDNDZ",
-      "title": "Use Status List IANA Registry ",
+      "title": "Align vocabulary with status list draft",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/81",
       "state": "OPEN",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "Add registry entries for valid and invalid.\n\nEnable assertion to include those values along with potential credentials type specific fresh information.",
+      "body": "Add registry entries for valid and invalid.\r\n\r\nEnable assertion to include those values along with potential credentials type specific fresh information.\r\n\r\nSee: https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-03#section-14.2",
       "createdAt": "2024-07-27T16:01:20Z",
-      "updatedAt": "2024-07-27T16:01:20Z",
+      "updatedAt": "2024-09-18T14:29:11Z",
       "closedAt": null,
       "comments": []
     },
@@ -1224,6 +1224,22 @@
       "body": "As Status Assertion is planning to use the extension point of OAuth Token Status List, I think it would be great to align the base terminology, so that readers comparing the specs have an easier time doing so. Specifically we use:\r\n- Issuer\r\n- Relying Party\r\n- Referenced Token\r\n\r\nWe also currently think about adding:\r\n- Client\r\n- Status List Provider -> this one could be renamed to be more general",
       "createdAt": "2024-08-07T13:07:01Z",
       "updatedAt": "2024-08-14T20:31:54Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 83,
+      "id": "I_kwDOK4XJ0s6XCFly",
+      "title": "Align boolean validity claim",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/83",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "We want to align the boolean validity claim with the status list approach.\r\nThis would mean dropping it in future versions, potentially.\r\n\r\nOriginally discussed in https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/61",
+      "createdAt": "2024-09-18T14:27:20Z",
+      "updatedAt": "2024-09-18T14:27:40Z",
       "closedAt": null,
       "comments": []
     }
@@ -7425,7 +7441,7 @@
       ],
       "body": "Addressing:\r\n\r\nhttps://github.com/peppelinux/draft-demarco-oauth-status-attestations/pull/53#discussion_r1614083883\r\n\r\nThe purpose of this pull request is to define the signed information which can be conveyed to a verifier, to clarify the constraints on verifier policies.\r\n\r\nWith other status list approaches, there is an ability to communicate a single boolean, multiple boolean, or enumerations.\r\n\r\nWith our approach here, we are not limited by the bitstring data structure, so dynamic state is less constrained.\r\n\r\nThis PR also highlights the current design decision to use alg = none, to signal revocation, without providing an assertion that can be consumed by a verifier.\r\n\r\nThere may be very legitimate reasons to prefer to return unsigned information for boolean status, but for complex status, unsigned information is more dangerous to consume.\r\n\r\nI believe the specification should leave some of these decisions up to profiles.",
       "createdAt": "2024-05-25T13:19:46Z",
-      "updatedAt": "2024-08-14T20:50:14Z",
+      "updatedAt": "2024-09-18T14:13:20Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "73316fd7e515056d54a3d8043d39a2f3a4ae7141",
@@ -8308,9 +8324,9 @@
           "comments": [
             {
               "originalPosition": 24,
-              "body": "```suggestion\r\n- SHOULD NOT contain new information about natural person subjects, without gathering informed consent.\r\n```",
+              "body": "```suggestion\r\n- SHOULD NOT contain information about the data subject (user) that isn't already made available to the validator.\r\n```",
               "createdAt": "2024-07-18T13:33:07Z",
-              "updatedAt": "2024-07-18T13:33:08Z"
+              "updatedAt": "2024-09-18T14:12:57Z"
             }
           ]
         },
@@ -8471,6 +8487,46 @@
               "body": "I support aligning the specs terms, since status assertions was born as a status list feature/extension",
               "createdAt": "2024-08-14T20:41:37Z",
               "updatedAt": "2024-08-14T20:41:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6J2a5f",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-18T13:42:09Z",
+          "updatedAt": "2024-09-18T13:42:09Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "@paulbastian could you please provide reference for the StatusList IANA Status semantics registration. ",
+              "createdAt": "2024-09-18T13:42:09Z",
+              "updatedAt": "2024-09-18T13:42:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6J2yFe",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-18T14:13:20Z",
+          "updatedAt": "2024-09-18T14:13:20Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "I've revised the suggestion to match https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/61/files#r1681325358",
+              "createdAt": "2024-09-18T14:13:20Z",
+              "updatedAt": "2024-09-18T14:13:20Z"
             }
           ]
         }
