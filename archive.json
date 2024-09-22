@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-19T00:59:12.404669+00:00",
+  "timestamp": "2024-09-22T01:05:12.114507+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -72,6 +72,11 @@
       "name": "pr-ready",
       "description": "",
       "color": "BAE7B3"
+    },
+    {
+      "name": "has-pr",
+      "description": "",
+      "color": "CD93E3"
     }
   ],
   "issues": [
@@ -470,11 +475,15 @@
       "state": "OPEN",
       "author": "awoie",
       "authorAssociation": "NONE",
-      "assignees": [],
-      "labels": [],
+      "assignees": [
+        "peppelinux"
+      ],
+      "labels": [
+        "has-pr"
+      ],
       "body": "IMO, OID4VCI metadata should not be defined in a separate document. At least as long there is no IANA registry for that.",
       "createdAt": "2024-03-19T12:33:37Z",
-      "updatedAt": "2024-03-19T12:33:37Z",
+      "updatedAt": "2024-09-19T07:56:56Z",
       "closedAt": null,
       "comments": []
     },
@@ -521,10 +530,12 @@
       "author": "awoie",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "question"
+      ],
       "body": "It is not clear what happens if the verifier encounters a credential with a status attestation method in the `status` field but does not receive a status attestation. \r\n\r\nThree questions:\r\n- Should the verifier reject a credential presentation if the wallet did not provide a status attestation?\r\n- How does the holder know whether the verifier requires a status attestation?\r\n- Why would a holder ever present a credential along with a revoked status attestation?",
       "createdAt": "2024-03-19T13:33:40Z",
-      "updatedAt": "2024-03-19T13:43:26Z",
+      "updatedAt": "2024-09-19T10:44:22Z",
       "closedAt": null,
       "comments": [
         {
@@ -1052,7 +1063,7 @@
       "id": "I_kwDOK4XJ0s6L27Ip",
       "title": "Sequence Diagram",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/69",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -1061,9 +1072,17 @@
       ],
       "body": "```mermaid\r\nsequenceDiagram\r\n    Issuer-->>Holder: (credential issuance out of scope)\r\n    Holder->>Issuer: application/status-assertion-request+jwt\r\n    Issuer ->> Issuer : Status Check\r\n    Issuer ->> Holder: application/status-assertion+jwt\r\n    Holder -->> Verifier: (credential presentation out of scope)\r\n```\r\n\r\n[editable-link](https://mermaid.live/edit#pako:eNp9UTtPxDAM_iuWJxCt2DPcAgMMTCcxoCxW4nLh2iTnOELodP-dtFXFSyLTJ-d7-HFGlzyjwcKnytHxfaBXoclGaO-xlMrS97vdQxo9i4ErJ-w5aqARQvulJoFUFdIAxaXM16ty5TfhamGAch6DIw0p3hYlraWnUljmQi9zeNGbt3f9HgxNv0ED-0UFdwd2xz-srb__Yr7sVzbMg8EzSxjC79mycGlwMfo5H3Y4sUwUfNvaefazqAee2KJp0JMcLdp4aTyqmvYf0aFRqdxhzZ502zCagcbSquyDJnlaz7Bco8NM8SWljXP5BBcrkiI)",
       "createdAt": "2024-06-11T13:23:48Z",
-      "updatedAt": "2024-06-12T00:02:07Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-09-19T10:45:55Z",
+      "closedAt": "2024-09-19T10:45:54Z",
+      "comments": [
+        {
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "body": "Included in the README, https://github.com/peppelinux/draft-demarco-oauth-status-assertions?tab=readme-ov-file#overview",
+          "createdAt": "2024-09-19T10:45:54Z",
+          "updatedAt": "2024-09-19T10:45:54Z"
+        }
+      ]
     },
     {
       "number": 70,
@@ -9627,6 +9646,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 84,
+      "id": "PR_kwDOK4XJ0s57_vFu",
+      "title": "fix: Credential Issuer metadata not necessarly OpenID4VCI",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/84",
+      "state": "OPEN",
+      "author": "peppelinux",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "this PR resolves https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/27",
+      "createdAt": "2024-09-19T07:56:18Z",
+      "updatedAt": "2024-09-19T10:42:06Z",
+      "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "baseRefName": "main",
+      "baseRefOid": "b49765707b9ab30139beab7045aecef5c58461a9",
+      "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "headRefName": "openid4vci",
+      "headRefOid": "0d2045573a9e6ed26effc7fd0355fe154aad7111",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
