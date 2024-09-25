@@ -248,7 +248,7 @@ the expiration datetime of the Digital Credential;
 - MUST enable the offline use cases by employing validation using
 a cryptographic signature and the cryptographic public key of the
 Credential Issuer.
-- SHOULD NOT contain personal information about the User who owns
+- SHOULD NOT contain personal information about the User, that isn't already made available to the Credential Verifier, who owns
 the Digital Credential to which the Status Assertion refers.
 
 # Proof of Possession of a Credential
