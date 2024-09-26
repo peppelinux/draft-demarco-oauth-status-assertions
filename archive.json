@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-24T01:01:20.411145+00:00",
+  "timestamp": "2024-09-26T01:00:25.205724+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -755,11 +755,13 @@
       "state": "OPEN",
       "author": "peppelinux",
       "authorAssociation": "OWNER",
-      "assignees": [],
+      "assignees": [
+        "peppelinux"
+      ],
       "labels": [],
       "body": "we should move these to informative references\r\n\r\n_Originally posted by @OR13 in https://github.com/peppelinux/draft-demarco-oauth-status-attestations/pull/42#discussion_r1598509544_\r\n            ",
       "createdAt": "2024-05-14T08:33:21Z",
-      "updatedAt": "2024-05-14T08:33:21Z",
+      "updatedAt": "2024-09-25T15:15:43Z",
       "closedAt": null,
       "comments": []
     },
@@ -1122,9 +1124,31 @@
       "labels": [],
       "body": "Not all credentials expire.\r\n\r\nI think we should provide examples for all cases of vc + sa with `iat` and `exp`.\r\n\r\nThere is also `nbf` which could interact negatively with `iat` and `exp`.\r\n\r\n_Originally posted by @OR13 in https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/65#discussion_r1635625370_\r\n            ",
       "createdAt": "2024-06-12T01:08:58Z",
-      "updatedAt": "2024-07-16T10:03:00Z",
+      "updatedAt": "2024-09-25T15:31:00Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "fmarino-ipzs",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We can handle this case with the assertion status \u2018SUSPENDED\u2019 until the credential becomes valid. \r\nWDYT?",
+          "createdAt": "2024-09-25T15:19:36Z",
+          "updatedAt": "2024-09-25T15:19:36Z"
+        },
+        {
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "body": "We should resolve this first: https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/83#issue-2533906802",
+          "createdAt": "2024-09-25T15:29:33Z",
+          "updatedAt": "2024-09-25T15:29:33Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "`nbf`,`iat`, `exp` should be optional in base specs, they can be made mandatory in profiles for specific types.\r\n\r\nin my opinion, `iat` and `exp` should be mandatory in key binding tokens, and status assertions, since they are meant to be \"short lived\"... not all credential types that have status are meant to be \"short lived\".",
+          "createdAt": "2024-09-25T15:30:59Z",
+          "updatedAt": "2024-09-25T15:30:59Z"
+        }
+      ]
     },
     {
       "number": 72,
@@ -1224,9 +1248,17 @@
       "labels": [],
       "body": "Add registry entries for valid and invalid.\r\n\r\nEnable assertion to include those values along with potential credentials type specific fresh information.\r\n\r\nSee: https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-03#section-14.2",
       "createdAt": "2024-07-27T16:01:20Z",
-      "updatedAt": "2024-09-18T14:29:11Z",
+      "updatedAt": "2024-09-25T07:56:25Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This PR is related to the issues pointed in the https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/61, i.e. : \r\n- consider alignment of the credential_status_detail parameter vocabulary with the statusPurpose parameter of OAuth Status Lists specification. \r\n ",
+          "createdAt": "2024-09-25T07:41:51Z",
+          "updatedAt": "2024-09-25T07:56:25Z"
+        }
+      ]
     },
     {
       "number": 82,
@@ -1237,7 +1269,8 @@
       "author": "paulbastian",
       "authorAssociation": "NONE",
       "assignees": [
-        "peppelinux"
+        "peppelinux",
+        "marinaado"
       ],
       "labels": [],
       "body": "As Status Assertion is planning to use the extension point of OAuth Token Status List, I think it would be great to align the base terminology, so that readers comparing the specs have an easier time doing so. Specifically we use:\r\n- Issuer\r\n- Relying Party\r\n- Referenced Token\r\n\r\nWe also currently think about adding:\r\n- Client\r\n- Status List Provider -> this one could be renamed to be more general",
@@ -1254,11 +1287,39 @@
       "state": "OPEN",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "marinaado"
+      ],
       "labels": [],
       "body": "We want to align the boolean validity claim with the status list approach.\r\nThis would mean dropping it in future versions, potentially.\r\n\r\nOriginally discussed in https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/61",
       "createdAt": "2024-09-18T14:27:20Z",
-      "updatedAt": "2024-09-18T14:27:40Z",
+      "updatedAt": "2024-09-25T15:12:32Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "body": "See: https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#section-7.1",
+          "createdAt": "2024-09-25T15:12:19Z",
+          "updatedAt": "2024-09-25T15:12:19Z"
+        }
+      ]
+    },
+    {
+      "number": 85,
+      "id": "I_kwDOK4XJ0s6X3KsA",
+      "title": "Remove credential status from Status Attestation error",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/85",
+      "state": "OPEN",
+      "author": "marinaado",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "marinaado"
+      ],
+      "labels": [],
+      "body": "In relation to the discussion in https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/61, the Status Attestation error values should not contain the credential status. The status of the credential, it being revoked, suspended or invalid, should not be considered an Status Attestation error. \r\n\r\nThe text needs to be revised to remove all mention of using errors for this purpose. ",
+      "createdAt": "2024-09-25T12:13:15Z",
+      "updatedAt": "2024-09-25T15:13:22Z",
       "closedAt": null,
       "comments": []
     }
@@ -7460,13 +7521,13 @@
       ],
       "body": "Addressing:\r\n\r\nhttps://github.com/peppelinux/draft-demarco-oauth-status-attestations/pull/53#discussion_r1614083883\r\n\r\nThe purpose of this pull request is to define the signed information which can be conveyed to a verifier, to clarify the constraints on verifier policies.\r\n\r\nWith other status list approaches, there is an ability to communicate a single boolean, multiple boolean, or enumerations.\r\n\r\nWith our approach here, we are not limited by the bitstring data structure, so dynamic state is less constrained.\r\n\r\nThis PR also highlights the current design decision to use alg = none, to signal revocation, without providing an assertion that can be consumed by a verifier.\r\n\r\nThere may be very legitimate reasons to prefer to return unsigned information for boolean status, but for complex status, unsigned information is more dangerous to consume.\r\n\r\nI believe the specification should leave some of these decisions up to profiles.",
       "createdAt": "2024-05-25T13:19:46Z",
-      "updatedAt": "2024-09-18T14:13:20Z",
+      "updatedAt": "2024-09-25T15:21:53Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "73316fd7e515056d54a3d8043d39a2f3a4ae7141",
       "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "headRefName": "assertions-of-invalidity",
-      "headRefOid": "e6239f587439d34adf58acf72f31ad3bc0e9c6aa",
+      "headRefOid": "425868d1d21eb77816e07a6ddfa5ccfe1bb37d32",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -7548,6 +7609,13 @@
           "body": "I suggest to have in this PR at least @leifj 's suggestion about \"MUST NOT contain information about the data subject (user) that isn't already made available to the validator\"\r\n\r\nI didn't get what we should change about the status assertion errors, I am supportive in reducing them to only handle exceptions and errors about the status assertion error requests\r\n\r\nI suggest to handle the language alignment in another PR, hopefully when this PR is merged, therefore having a full revision of the document\r\n\r\nregarding the http status code, since we have decided to handle arrays of object where each request and response are about one or more of these, returning a 4xx or 5xx errors would not be related to the status assertions protocol but to deployments of httpd ",
           "createdAt": "2024-08-14T20:50:13Z",
           "updatedAt": "2024-08-14T20:50:13Z"
+        },
+        {
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This PR should be merged, while the leftover work is moved to the following issues: \r\n\r\n- https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/81 to address  alignment of the credential_status_detail parameter vocabulary with the statusPurpose parameter of OAuth Status Lists specification.\r\n\r\n- https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/83 to revisit the decision to have the boolean validity claim with the status list approach, potentially dropping it in the future versions\r\n\r\n- https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/85 to remove credential status from Status Attestation error\r\n\r\n\r\n",
+          "createdAt": "2024-09-25T12:20:19Z",
+          "updatedAt": "2024-09-25T12:20:19Z"
         }
       ],
       "reviews": [
@@ -8546,6 +8614,59 @@
               "body": "I've revised the suggestion to match https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/61/files#r1681325358",
               "createdAt": "2024-09-18T14:13:20Z",
               "updatedAt": "2024-09-18T14:13:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6KtltI",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-25T06:33:34Z",
+          "updatedAt": "2024-09-25T06:33:34Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "I refer to this section: https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-status-types\nI just observed though that we are missing a corresponding subsection in the IANA as appendix, which I will fix shortly.",
+              "createdAt": "2024-09-25T06:33:34Z",
+              "updatedAt": "2024-09-25T06:33:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Kw-JA",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "There are several issues that we moved to issues #81, #83  and #85 85. Otherwise i am fine with this PR.",
+          "createdAt": "2024-09-25T12:23:34Z",
+          "updatedAt": "2024-09-25T12:23:34Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Ky060",
+          "commit": {
+            "abbreviatedOid": "e6239f5"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-25T15:05:02Z",
+          "updatedAt": "2024-09-25T15:05:02Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "```suggestion\r\n- SHOULD NOT contain personal information about the User, that isn't already made available to the Credential Verifier, who owns\r\n```",
+              "createdAt": "2024-09-25T15:05:02Z",
+              "updatedAt": "2024-09-25T15:05:02Z"
             }
           ]
         }
@@ -9599,7 +9720,7 @@
       "labels": [],
       "body": "status assertions do not disclose their intended audience to the credential issuers",
       "createdAt": "2024-07-23T22:21:42Z",
-      "updatedAt": "2024-07-25T08:23:10Z",
+      "updatedAt": "2024-09-25T15:24:24Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "b49765707b9ab30139beab7045aecef5c58461a9",
@@ -9644,6 +9765,19 @@
               "updatedAt": "2024-07-25T08:23:10Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6KzBAI",
+          "commit": {
+            "abbreviatedOid": "e71f739"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-25T15:24:24Z",
+          "updatedAt": "2024-09-25T15:24:24Z",
+          "comments": []
         }
       ]
     },
@@ -9659,7 +9793,7 @@
       "labels": [],
       "body": "this PR resolves https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/27",
       "createdAt": "2024-09-19T07:56:18Z",
-      "updatedAt": "2024-09-19T10:42:06Z",
+      "updatedAt": "2024-09-25T15:25:18Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "b49765707b9ab30139beab7045aecef5c58461a9",
@@ -9671,7 +9805,47 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOK4XJ0s6KzAUA",
+          "commit": {
+            "abbreviatedOid": "0d20455"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-25T15:23:22Z",
+          "updatedAt": "2024-09-25T15:23:22Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6KzBGU",
+          "commit": {
+            "abbreviatedOid": "0d20455"
+          },
+          "author": "fmarino-ipzs",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-25T15:24:34Z",
+          "updatedAt": "2024-09-25T15:24:34Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6KzBiJ",
+          "commit": {
+            "abbreviatedOid": "0d20455"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-25T15:25:18Z",
+          "updatedAt": "2024-09-25T15:25:18Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
