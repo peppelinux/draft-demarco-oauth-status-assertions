@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-26T01:00:25.205724+00:00",
+  "timestamp": "2024-09-29T01:06:04.173954+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -472,7 +472,7 @@
       "id": "I_kwDOK4XJ0s6C0sac",
       "title": "OID4VCI metadata should not be defined in a standalone draft",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/27",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "awoie",
       "authorAssociation": "NONE",
       "assignees": [
@@ -483,8 +483,8 @@
       ],
       "body": "IMO, OID4VCI metadata should not be defined in a separate document. At least as long there is no IANA registry for that.",
       "createdAt": "2024-03-19T12:33:37Z",
-      "updatedAt": "2024-09-19T07:56:56Z",
-      "closedAt": null,
+      "updatedAt": "2024-09-26T14:17:55Z",
+      "closedAt": "2024-09-26T14:17:54Z",
       "comments": []
     },
     {
@@ -1091,7 +1091,7 @@
       "id": "I_kwDOK4XJ0s6L7J2U",
       "title": "Detailed Validity Periods",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/70",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -1100,8 +1100,8 @@
       ],
       "body": "Perhaps the biggest challenge with multiple credential / assertion presentations is managing overlapping, or disjoint, or unbounded validity periods.\r\n\r\nFor each signed object, the following fields can be present  `iat`, `nbf`, `exp`.\r\n\r\nThese fields are typically optional, so by default they could remain optional.\r\n\r\nHowever we currently have normative language that attempts to align them and constrain them, for example that a status should not be issued before a credential, or that a status should not expire after a credential expires.\r\n\r\nThere are cases where a credential might be issues, and then status used to incrementally extend its expiration, for example:\r\n\r\nvc: { iat: 0 }, sa: { iat: 1, exp: 2 } ... sa: { iat: 3, exp: 5 } ....\r\n\r\nThere are cases where a status can only be requested for the validity period of the credential:\r\n\r\nvc: { iat: 0, exp: 10 }, sa: { iat: 1, exp: 2 } ... sa: { iat: 3, exp: 5 } .... (will never have exp greater than 10)\r\n\r\nThere are cases where issuance time and activation time are not the same (like post data checks):\r\n\r\nvc: { iat: 0, nbf: 5, exp: 10 }, sa: { iat: 1, exp: 2 }  (appears valid, but nbf 5 is after exp 2, so this status will not be valid)",
       "createdAt": "2024-06-12T00:44:55Z",
-      "updatedAt": "2024-07-16T10:03:51Z",
-      "closedAt": null,
+      "updatedAt": "2024-09-26T06:48:17Z",
+      "closedAt": "2024-09-26T06:48:17Z",
       "comments": [
         {
           "author": "peppelinux",
@@ -1206,9 +1206,24 @@
       ],
       "body": "The current title of this draft is \"OAuth Status Assertions\".\r\n\r\nThe content of the draft is not specific to OAuth specifically. However, Status Assertions are specific to the use of Digital Credentials.\r\n\r\nIf a SPICE WG is created by the IESG (which should be known at the end of this week), the title of this document would become:\r\n\r\n    \"SPICE Status Assertions\". \r\n\r\nMore seriously, its title should rather be \"Credential Status Assertions\" or \"Digital Credential Status Assertions\".\r\n\r\n\r\nthanks to Denis.",
       "createdAt": "2024-06-12T01:24:50Z",
-      "updatedAt": "2024-07-16T10:02:44Z",
+      "updatedAt": "2024-09-26T14:26:39Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "body": "aligning the name with Status List this draft should be therefore renamed to \"Token Status Assertions\"",
+          "createdAt": "2024-09-26T14:20:47Z",
+          "updatedAt": "2024-09-26T14:20:47Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "or even shorter, Status Assertions.",
+          "createdAt": "2024-09-26T14:26:37Z",
+          "updatedAt": "2024-09-26T14:26:37Z"
+        }
+      ]
     },
     {
       "number": 75,
@@ -7512,7 +7527,7 @@
       "id": "PR_kwDOK4XJ0s5wjTiZ",
       "title": "Detailed status assertions",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/61",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -7521,17 +7536,19 @@
       ],
       "body": "Addressing:\r\n\r\nhttps://github.com/peppelinux/draft-demarco-oauth-status-attestations/pull/53#discussion_r1614083883\r\n\r\nThe purpose of this pull request is to define the signed information which can be conveyed to a verifier, to clarify the constraints on verifier policies.\r\n\r\nWith other status list approaches, there is an ability to communicate a single boolean, multiple boolean, or enumerations.\r\n\r\nWith our approach here, we are not limited by the bitstring data structure, so dynamic state is less constrained.\r\n\r\nThis PR also highlights the current design decision to use alg = none, to signal revocation, without providing an assertion that can be consumed by a verifier.\r\n\r\nThere may be very legitimate reasons to prefer to return unsigned information for boolean status, but for complex status, unsigned information is more dangerous to consume.\r\n\r\nI believe the specification should leave some of these decisions up to profiles.",
       "createdAt": "2024-05-25T13:19:46Z",
-      "updatedAt": "2024-09-25T15:21:53Z",
+      "updatedAt": "2024-09-26T06:48:16Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "73316fd7e515056d54a3d8043d39a2f3a4ae7141",
       "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "headRefName": "assertions-of-invalidity",
       "headRefOid": "425868d1d21eb77816e07a6ddfa5ccfe1bb37d32",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-09-26T06:48:16Z",
+      "mergedAt": "2024-09-26T06:48:16Z",
+      "mergedBy": "peppelinux",
+      "mergeCommit": {
+        "oid": "67534bd0fef57b03fce52793cb0f9150609938ec"
+      },
       "comments": [
         {
           "author": "peppelinux",
@@ -9460,7 +9477,7 @@
       "labels": [],
       "body": "Features and benefits of OAuth Status Assertions to clearly communicate their use and privacy benefits .",
       "createdAt": "2024-07-09T12:01:12Z",
-      "updatedAt": "2024-07-25T10:01:20Z",
+      "updatedAt": "2024-09-26T14:28:06Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "b49765707b9ab30139beab7045aecef5c58461a9",
@@ -9705,6 +9722,19 @@
               "updatedAt": "2024-07-25T10:01:20Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6K90cI",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I am approving this, assuming the comments are all resolved with changes or dismissed, or have issues to track further discussion.",
+          "createdAt": "2024-09-26T14:28:06Z",
+          "updatedAt": "2024-09-26T14:28:06Z",
+          "comments": []
         }
       ]
     },
@@ -9713,24 +9743,26 @@
       "id": "PR_kwDOK4XJ0s52RStK",
       "title": "added requirements about not specifying the audience of a status assertion",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/80",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "peppelinux",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "status assertions do not disclose their intended audience to the credential issuers",
       "createdAt": "2024-07-23T22:21:42Z",
-      "updatedAt": "2024-09-25T15:24:24Z",
+      "updatedAt": "2024-09-26T14:18:42Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "b49765707b9ab30139beab7045aecef5c58461a9",
       "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "headRefName": "no-aud-req",
-      "headRefOid": "e71f7396b6854ec04394917fb9a2db43fa007145",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "74b29bfeed70fb6042cf923a6b838fa0f405b407",
+      "closedAt": "2024-09-26T14:18:42Z",
+      "mergedAt": "2024-09-26T14:18:42Z",
+      "mergedBy": "peppelinux",
+      "mergeCommit": {
+        "oid": "3c888deb06dd14c924c8b4c5dca368cd776b9d06"
+      },
       "comments": [],
       "reviews": [
         {
@@ -9778,6 +9810,39 @@
           "createdAt": "2024-09-25T15:24:24Z",
           "updatedAt": "2024-09-25T15:24:24Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6K5SAp",
+          "commit": {
+            "abbreviatedOid": "e71f739"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-26T06:51:06Z",
+          "updatedAt": "2024-09-26T06:51:07Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n- MUST NOT contain any information regarding the Verifier to whom it may\r\nbe presented, such as disclose the Verifier identifier to specify the intended audience.\r\n```",
+              "createdAt": "2024-09-26T06:51:06Z",
+              "updatedAt": "2024-09-26T06:51:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6K5njw",
+          "commit": {
+            "abbreviatedOid": "e71f739"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-26T07:33:56Z",
+          "updatedAt": "2024-09-26T07:33:56Z",
+          "comments": []
         }
       ]
     },
@@ -9786,24 +9851,26 @@
       "id": "PR_kwDOK4XJ0s57_vFu",
       "title": "fix: Credential Issuer metadata not necessarly OpenID4VCI",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/84",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "peppelinux",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "this PR resolves https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/27",
       "createdAt": "2024-09-19T07:56:18Z",
-      "updatedAt": "2024-09-25T15:25:18Z",
+      "updatedAt": "2024-09-26T14:17:54Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "b49765707b9ab30139beab7045aecef5c58461a9",
       "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "headRefName": "openid4vci",
       "headRefOid": "0d2045573a9e6ed26effc7fd0355fe154aad7111",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-09-26T14:17:53Z",
+      "mergedAt": "2024-09-26T14:17:53Z",
+      "mergedBy": "peppelinux",
+      "mergeCommit": {
+        "oid": "fd78c3127edfa1f12940529681982035821c08ac"
+      },
       "comments": [],
       "reviews": [
         {
