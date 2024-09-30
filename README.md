@@ -22,7 +22,7 @@ sequenceDiagram
 
 # Objectives and Explanation of OAuth Status Assertions
 
-Status Assertions are used to provide evidences about the validity of digital credentials, according to the mechanism where all the information are provided by Wallet and under the sole control of the User. Using the Status Assertions the credential verifiers do not use a direct request to a third party outside of the wallet instance. Status Assertions are periodically issued to the holders of the credentials, who can present them to the verifiers together with the corresponding digital credentials.
+Status Assertions are used to provide evidences about the validity of Digital Credentials, according to the mechanism where all the information are provided by Wallet and under the sole control of the User. Using the Status Assertions the Credential Verifiers do not use a direct request to a third party, therefore they do not ask information about a Credential outside of the Wallet instance. Status Assertions are periodically issued to the Holders of the Credentials who can present them to the Verifiers together with the corresponding Digital Credentials.
 
 ## Key aspects of the concept of OAuth Status Assertions:
 Status Assertions provide a method to obtain a proof of validity of digital credentials, such as the non revocation of these, without the need for verifiers to access external sources or third parties outside of the Wallet who presents them.
