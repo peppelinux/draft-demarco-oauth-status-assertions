@@ -20,18 +20,14 @@ sequenceDiagram
 ```
 
 
-# Objectives and Explanation of OAuth Status Assertions
+# Status Assertions Scopes
 
-Status Assertions are used to provide evidences about the validity of Digital Credentials, according to the mechanism where all the information are provided by Wallet and under the sole control of the User. Using the Status Assertions the Credential Verifiers do not use a direct request to a third party, therefore they do not ask information about a Credential outside of the Wallet instance. Status Assertions are periodically issued to the Holders of the Credentials who can present them to the Verifiers together with the corresponding Digital Credentials.
+Status Assertions are used to provide evidences about the validity of Digital Credentials, such as the non revocation of these, according to the mechanism where all the information are provided by Wallet and under the sole control of the User. Using the Status Assertions the Credential Verifiers do not use a direct request to a third party, therefore they do not ask information about a Credential outside of the Wallet instance. Status Assertions are periodically issued to the Holders of the Credentials who can present them to the Verifiers together with the corresponding Digital Credentials.
 
 ## Key aspects of the concept of OAuth Status Assertions:
-Status Assertions provide a method to obtain a proof of validity of digital credentials, such as the non revocation of these, without the need for verifiers to access external sources or third parties outside of the Wallet who presents them.
+Status Assertions provide a method to obtain a proof of validity of digital credentials without the need for verifiers to access external sources or third parties outside of the Wallet who presents them.
 
-### Purpose and goal: 
-
-The main goal of Status Assertions is to **confirm the status of a digital credential**, such as its non-revocation. This allows Verifiers to check the validity of a Credential without having to access external systems or databases. This increases privacy, reduces latency and facilitates offline verification.
-
-### Functions and process:
+### Issuance and Presentation of Status Assertions
 
 1) **Generation:** A Credential Issuer generates a Status Assertion that provides a signed proof of the current status of a Credential.
 2) **Request and receipt:** The Holder can request a Status Assertion from the Credential Issuer. This is usually done by means of a request containing a JSON Web Token (JWT) or a CBOR Web Token (CWT) that carries a oproof of possession of the Credential.
