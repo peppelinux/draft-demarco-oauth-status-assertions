@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-29T01:06:04.173954+00:00",
+  "timestamp": "2024-10-01T01:06:55.352814+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -1334,9 +1334,17 @@
       "labels": [],
       "body": "In relation to the discussion in https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/61, the Status Attestation error values should not contain the credential status. The status of the credential, it being revoked, suspended or invalid, should not be considered an Status Attestation error. \r\n\r\nThe text needs to be revised to remove all mention of using errors for this purpose. ",
       "createdAt": "2024-09-25T12:13:15Z",
-      "updatedAt": "2024-09-25T15:13:22Z",
+      "updatedAt": "2024-09-30T10:45:51Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "pietroACN",
+          "authorAssociation": "NONE",
+          "body": "The [actual ](https://italia.github.io/eudi-wallet-it-docs/versione-corrente/en/revocation-lists.html#status-assertion-http-response) response HTTP Status Codes do not provide any feedback on the Status Attestation status but only the request status, this is a proper behavior.\r\n\r\nFrom the other side for each request, the Status Assertion Error object includes the following list of possible Error Codes:\r\n\r\n- invalid_request\r\n- credential_revoked\r\n- credential_updated\r\n- credential_invalid\r\n- invalid_request_signature\r\n- credential_not_found\r\n- unsupported_hash_alg\r\n\r\nThe _invalid_request_ is described as \"The request is not valid due to the lack or incorrectness of one or more parameters\" and requires details in the error_description field: this looks overlapping with 'unsupported_hash_alg' and  with 'invalid_request_signature' errors as they represent incorrectness in the relative parameters ( as in the  invalid_request case).\r\n\r\nThe _credential_updated_ response brings potential issues from several aspects:\r\n\r\n1. the credential to be revoked is not provided in the revocation_assertion_requests claim as it contains only its HASH, thus is not clear how a hash-verification can distinguish the case of provisioning a wrong credential vs the case of update on some existing fields:  there is no possibility for the Credential Issuer to ensure that the provided Hash differs from the stored one only due to updates of its content or because of any other reason\r\n2. as the Credential Issuer is forbidden to store details of the issued credential, it cannot keep information about specific information changed within it as it could be used to track its contents.\r\n\r\nMy suggestion here is:\r\n\r\n1. Remove  the _unsupported_hash_alg_  and _invalid_request_signature_ statuses as they are part of invalid_request\r\n2. Remove the  _credential_updated_ status",
+          "createdAt": "2024-09-30T10:45:50Z",
+          "updatedAt": "2024-09-30T10:45:50Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -9477,13 +9485,13 @@
       "labels": [],
       "body": "Features and benefits of OAuth Status Assertions to clearly communicate their use and privacy benefits .",
       "createdAt": "2024-07-09T12:01:12Z",
-      "updatedAt": "2024-09-26T14:28:06Z",
+      "updatedAt": "2024-09-30T12:57:11Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "b49765707b9ab30139beab7045aecef5c58461a9",
       "headRepository": "Sascha-Block/draft-demarco-oauth-status-assertions",
       "headRefName": "patch-1",
-      "headRefOid": "2adec28a4121f0b4575be7954acc9b18127156f6",
+      "headRefOid": "f831b22d6efc1fbca00f01fdf315942f927258d1",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -9734,6 +9742,279 @@
           "body": "I am approving this, assuming the comments are all resolved with changes or dismissed, or have issues to track further discussion.",
           "createdAt": "2024-09-26T14:28:06Z",
           "updatedAt": "2024-09-26T14:28:06Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6LUIKB",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T12:05:29Z",
+          "updatedAt": "2024-09-30T12:05:30Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nStatus Assertions are used to provide evidences about the validity of digital credentials, according to the mechanism where all the information are provided by Wallet and under the sole control of the User. Using the Status Assertions the credential verifiers do not use a direct request to a third party outside of the wallet instance. Status Assertions are periodically issued to the holders of the credentials, who can present them to the verifiers together with the corresponding digital credentials.\r\n```",
+              "createdAt": "2024-09-30T12:05:30Z",
+              "updatedAt": "2024-09-30T12:05:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6LUIfU",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T12:06:09Z",
+          "updatedAt": "2024-09-30T12:06:10Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\nStatus Assertions provide a method to obtain a proof of validity of digital credentials, such as the non revocation of these, without the need for verifiers to access external sources or third parties outside of the Wallet who presents them.\r\n```",
+              "createdAt": "2024-09-30T12:06:10Z",
+              "updatedAt": "2024-09-30T12:06:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6LUI9x",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T12:07:09Z",
+          "updatedAt": "2024-09-30T12:07:09Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "see my suggestion above",
+              "createdAt": "2024-09-30T12:07:09Z",
+              "updatedAt": "2024-09-30T12:07:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6LUJZx",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T12:08:01Z",
+          "updatedAt": "2024-09-30T12:08:01Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "```suggestion\r\nIn both secure and privacy-friendly way, Status Assertions provide an effective way to manage the validity and status of Digital Credentials.\r\n```",
+              "createdAt": "2024-09-30T12:08:01Z",
+              "updatedAt": "2024-09-30T12:08:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6LUJtZ",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T12:08:35Z",
+          "updatedAt": "2024-09-30T12:08:35Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "```suggestion\r\n**Independence**: Verifiers do not need direct interaction with the Credential Issuer or other third parties to confirm the status of a Digital Credential, which preservers the privacy and security of the process.\r\n```",
+              "createdAt": "2024-09-30T12:08:35Z",
+              "updatedAt": "2024-09-30T12:08:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6LUJ53",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T12:08:58Z",
+          "updatedAt": "2024-09-30T12:08:58Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\n**Data protection:** The procedure ensures that no unnecessary personal data of the Holder or information about the use of the Credential is passed on to the Verifier or other parties.\r\n```",
+              "createdAt": "2024-09-30T12:08:58Z",
+              "updatedAt": "2024-09-30T12:08:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6LUKfl",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T12:10:05Z",
+          "updatedAt": "2024-09-30T12:10:05Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\n2) **Request and receipt:** The Holder can request a Status Assertion from the Credential Issuer. This is usually done by means of a request containing a JSON Web Token (JWT) or a CBOR Web Token (CWT) that carries a oproof of possession of the Credential.\r\n3) **Presentation:** The Holder presents the Credential together with its Status Assertion to the Verifier. This process is similar to Online Certificate Status Protocol (OCSP) stapling in the TLS protocol, where the server presents a time-stamped status token.\r\n```",
+              "createdAt": "2024-09-30T12:10:05Z",
+              "updatedAt": "2024-09-30T12:10:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6LUK2P",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T12:10:45Z",
+          "updatedAt": "2024-09-30T12:10:45Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\r\n1) **Generation:** A Credential Issuer generates a Status Assertion that provides a signed proof of the current status of a Credential.\r\n```",
+              "createdAt": "2024-09-30T12:10:45Z",
+              "updatedAt": "2024-09-30T12:10:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6LULJ7",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T12:11:21Z",
+          "updatedAt": "2024-09-30T12:11:22Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\nThe main goal of Status Assertions is to **confirm the status of a digital credential**, such as its non-revocation. This allows Verifiers to check the validity of a Credential without having to access external systems or databases. This increases privacy, reduces latency and facilitates offline verification.\r\n```",
+              "createdAt": "2024-09-30T12:11:21Z",
+              "updatedAt": "2024-09-30T12:11:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6LUNPZ",
+          "commit": {
+            "abbreviatedOid": "b7d0f14"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T12:15:20Z",
+          "updatedAt": "2024-09-30T12:15:20Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "Done.",
+              "createdAt": "2024-09-30T12:15:20Z",
+              "updatedAt": "2024-09-30T12:15:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6LUN5_",
+          "commit": {
+            "abbreviatedOid": "b7d0f14"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T12:16:31Z",
+          "updatedAt": "2024-09-30T12:16:32Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nStatus Assertions are used to provide evidences about the validity of Digital Credentials, according to the mechanism where all the information are provided by Wallet and under the sole control of the User. Using the Status Assertions the Credential Verifiers do not use a direct request to a third party, therefore they do not ask information about a Credential outside of the Wallet instance. Status Assertions are periodically issued to the Holders of the Credentials who can present them to the Verifiers together with the corresponding Digital Credentials.\r\n```",
+              "createdAt": "2024-09-30T12:16:31Z",
+              "updatedAt": "2024-09-30T12:16:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6LUOqG",
+          "commit": {
+            "abbreviatedOid": "40873a5"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T12:17:55Z",
+          "updatedAt": "2024-09-30T12:17:55Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\n# Status Assertions Scopes\r\n\r\nStatus Assertions are used to provide evidences about the validity of Digital Credentials, such as the non revocation of these, according to the mechanism where all the information are provided by Wallet and under the sole control of the User. Using the Status Assertions the Credential Verifiers do not use a direct request to a third party, therefore they do not ask information about a Credential outside of the Wallet instance. Status Assertions are periodically issued to the Holders of the Credentials who can present them to the Verifiers together with the corresponding Digital Credentials.\r\n\r\n## Key aspects of the concept of OAuth Status Assertions:\r\nStatus Assertions provide a method to obtain a proof of validity of digital credentials without the need for verifiers to access external sources or third parties outside of the Wallet who presents them.\r\n```",
+              "createdAt": "2024-09-30T12:17:55Z",
+              "updatedAt": "2024-09-30T12:17:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6LUPR3",
+          "commit": {
+            "abbreviatedOid": "40873a5"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T12:19:01Z",
+          "updatedAt": "2024-09-30T12:19:02Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\r\n### Issuance and Presentation of Status Assertions\r\n```",
+              "createdAt": "2024-09-30T12:19:02Z",
+              "updatedAt": "2024-09-30T12:19:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6LUsma",
+          "commit": {
+            "abbreviatedOid": "f831b22"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-30T12:57:11Z",
+          "updatedAt": "2024-09-30T12:57:11Z",
           "comments": []
         }
       ]
