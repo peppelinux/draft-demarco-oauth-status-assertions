@@ -463,7 +463,7 @@ such as the Verifier identifier as the intended audience.
 
 The Status Assertion Error MUST NOT be presented or provided to a Verifier,
 the only audience of the Status Assertion Error is the Holder of the Credential
-that has requested the Status Assertion. Therefore, 
+that has requested the Status Assertion. Therefore,
 it is not necessary that the Status Assertion Error
 contains the parameter `aud`; if present, it MUST be set to the same
 value as the `iss` parameter used by the Wallet in the corresponding
