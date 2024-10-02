@@ -485,7 +485,7 @@ with the headers and payload represented in JSON and without applying the signat
     "credential_hash": $hash-about-Issuer-Signed-JWT,
     "credential_hash_alg": "sha-256",
     "error": "invalid_request_signature",
-    "error_description": "The verification of the request signature have failed."
+    "error_description": "The verification of the request signature has failed."
     }
 }
 ~~~
