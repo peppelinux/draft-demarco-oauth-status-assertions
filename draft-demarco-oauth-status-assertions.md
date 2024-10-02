@@ -461,12 +461,6 @@ such as the Verifier identifier as the intended audience.
 
 # Status Assertion Error
 
-If the Status Assertion is requested for a non-existent, expired, revoked
-or invalid Digital Credential, the
-Credential Issuer MUST respond with an HTTP Response with the status
-code set to 200 and the `status_assertion_responses` array with the related
-Status Assertion Error object.
-
 The Status Assertion Error MUST NOT be presented or provided to a Verifier,
 the only audience of the Status Assertion Error is the Holder of the Credential
 that has requested the Status Assertion. Therefore,
@@ -490,8 +484,8 @@ with the headers and payload represented in JSON and without applying the signat
     "jti": "6f204f7e-e453-4dfd-814e-9d155319408c"
     "credential_hash": $hash-about-Issuer-Signed-JWT,
     "credential_hash_alg": "sha-256",
-    "error": "credential_revoked",
-    "error_description": "Credential is revoked."
+    "error": "invalid_request_signature",
+    "error_description": "The verification of the request signature has failed."
     }
 }
 ~~~
@@ -511,7 +505,7 @@ table below:
 | **credential_hash** | REQUIRED. The hash value MUST match the one contained in the Status Assertion Request to which the Status Assertion Error is related. | this specification |
 | **credential_hash_alg** |  REQUIRED. The hash algorithm MUST match the one contained in the Status Assertion Request to which the Status Assertion Error is related. | this specification |
 | **error** | REQUIRED. The value SHOULD be assigned with one of the error types defined in {{RFC6749}}[Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2) or defined in the Section [Status Assertion Error Values](status-assertion-error-values). | {{RFC7519}} Section 4.1.7 |
-| **error_description** | OPTIONAL. Text that clarifies the nature of the error, such as attribute changes, revocation reasons, in relation to the `error` value.  | {{RFC7519}} Section 4.1.7 |
+| **error_description** | OPTIONAL. Text that clarifies the nature of the error in relation to the `error` value.  | {{RFC7519}} Section 4.1.7 |
 
 ## Rationale About The Unsigned Status Assertion Errors
 To mitigate potential resource exhaustion attacks where an adversary could issue hundreds of fake Status Assertion Requests to force an Issuer to sign numerous Status Assertion Errors, it is advisable to set the header parameter`alg` value to `none` for Status Assertion Errors that do not require signatures. This approach conserves computational resources and prevents abuse, especially in scenarios where the Issuer's implementation could be vulnerable to resource exhaustion attacks. However, even if it is out of the scopes of this specification determine in which the Status Error Assertion signatures are necessary, when the Issuer signs the Status Assertion Errors the Client that received them MUST validate the signature.
@@ -522,9 +516,6 @@ The `error` parameter for the Status Assertion Error object MUST be set with one
 
 | Error Parameter Value | Description | Reference |
 | --- | --- | --- |
-| **credential_revoked** | The Digital Credential results as already revoked. The reason of revocation MAY be provided in the `error_description` field. | this specification |
-| **credential_updated** | One or more information contained in the Digital Credential are changed. The `error_description` field SHOULD contain a human-readable text describing the general parameters updated without specifying each one. | this specification |
-| **credential_invalid** | The Digital Credential is invalid. The `error_description` field SHOULD contain the reason of invalidation. | this specification |
 | **invalid_request_signature** | The Status Assertion Request signature validation has failed. This error type is used when the proof of possession of the Digital Credential is found not valid within the Status Assertion Request. | this specification |
 | **credential_not_found** | The `credential_hash` value provided in the Status Assertion Request doesn't match with any active Digital Credential. | this specification |
 | **unsupported_hash_alg** | The hash algorithm set in `credential_hash_alg` is not supported. | this specification |
