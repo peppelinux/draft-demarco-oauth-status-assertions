@@ -685,7 +685,7 @@ variety of scenarios.
 
 # Detailed Status Assertions
 
-Status Assertions can introduce a more accurate level of detail about the credential status.
+Status Assertions can introduce a more accurate level of detail about the Credential status.
 This enables Verifier policies to be conditioned on the presence of authorative information.
 This section proposes syntax to support detailed assertions.
 The `credential_status_validity` claim MUST be present.
