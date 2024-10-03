@@ -553,7 +553,7 @@ where the format is JWT.
     "exp": 1504785536,
     "credential_hash": $hash-about-Issuer-Signed-JWT,
     "credential_hash_alg": "sha-256",
-    "credential_status_validity": valid,
+    "credential_status_validity": "valid",
     "cnf": {
         "jwk": {...}
     }
