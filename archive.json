@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-01T01:06:55.352814+00:00",
+  "timestamp": "2024-10-03T01:01:07.152030+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -610,7 +610,7 @@
       "labels": [],
       "body": "PoP of Credential cnf key hould not be used, instead an api-key exchanged between wallet and Issuer.\r\n\r\nAdvantages are:\r\n- enables claim-based bound credentials\r\n- does not require user interaction as the PoP key may be bound to PIN/Biometrics but the api-key does not, as it is provided by the Issuer during issuance",
       "createdAt": "2024-04-11T15:10:52Z",
-      "updatedAt": "2024-06-12T19:57:11Z",
+      "updatedAt": "2024-10-02T12:49:24Z",
       "closedAt": null,
       "comments": [
         {
@@ -640,6 +640,13 @@
           "body": "@paulbastian we can do this and it is resonable, we can protect the endpoint also with DPoP using a key specialized for this purpose,\r\n\r\nthank you\r\n",
           "createdAt": "2024-06-12T07:37:25Z",
           "updatedAt": "2024-06-12T19:57:11Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "NONE",
+          "body": "As we have integrated [this PR](https://github.com/openid/OpenID4VCI/pull/391) into OpenID4VCI, you may easily share tokens/api-keys in the issuance to request new status assertions, instead of relying on the PoP mechanism. I would advise to move away from the PoP key in the Credential and use an Credential Format independent mechanism instead",
+          "createdAt": "2024-10-02T12:49:23Z",
+          "updatedAt": "2024-10-02T12:49:23Z"
         }
       ]
     },
@@ -1325,7 +1332,7 @@
       "id": "I_kwDOK4XJ0s6X3KsA",
       "title": "Remove credential status from Status Attestation error",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/85",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "marinaado",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1334,8 +1341,8 @@
       "labels": [],
       "body": "In relation to the discussion in https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/61, the Status Attestation error values should not contain the credential status. The status of the credential, it being revoked, suspended or invalid, should not be considered an Status Attestation error. \r\n\r\nThe text needs to be revised to remove all mention of using errors for this purpose. ",
       "createdAt": "2024-09-25T12:13:15Z",
-      "updatedAt": "2024-09-30T10:45:51Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-02T15:14:42Z",
+      "closedAt": "2024-10-02T15:14:42Z",
       "comments": [
         {
           "author": "pietroACN",
@@ -1343,6 +1350,13 @@
           "body": "The [actual ](https://italia.github.io/eudi-wallet-it-docs/versione-corrente/en/revocation-lists.html#status-assertion-http-response) response HTTP Status Codes do not provide any feedback on the Status Attestation status but only the request status, this is a proper behavior.\r\n\r\nFrom the other side for each request, the Status Assertion Error object includes the following list of possible Error Codes:\r\n\r\n- invalid_request\r\n- credential_revoked\r\n- credential_updated\r\n- credential_invalid\r\n- invalid_request_signature\r\n- credential_not_found\r\n- unsupported_hash_alg\r\n\r\nThe _invalid_request_ is described as \"The request is not valid due to the lack or incorrectness of one or more parameters\" and requires details in the error_description field: this looks overlapping with 'unsupported_hash_alg' and  with 'invalid_request_signature' errors as they represent incorrectness in the relative parameters ( as in the  invalid_request case).\r\n\r\nThe _credential_updated_ response brings potential issues from several aspects:\r\n\r\n1. the credential to be revoked is not provided in the revocation_assertion_requests claim as it contains only its HASH, thus is not clear how a hash-verification can distinguish the case of provisioning a wrong credential vs the case of update on some existing fields:  there is no possibility for the Credential Issuer to ensure that the provided Hash differs from the stored one only due to updates of its content or because of any other reason\r\n2. as the Credential Issuer is forbidden to store details of the issued credential, it cannot keep information about specific information changed within it as it could be used to track its contents.\r\n\r\nMy suggestion here is:\r\n\r\n1. Remove  the _unsupported_hash_alg_  and _invalid_request_signature_ statuses as they are part of invalid_request\r\n2. Remove the  _credential_updated_ status",
           "createdAt": "2024-09-30T10:45:50Z",
           "updatedAt": "2024-09-30T10:45:50Z"
+        },
+        {
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "body": "> The [actual ](https://italia.github.io/eudi-wallet-it-docs/versione-corrente/en/revocation-lists.html#status-assertion-http-response) response HTTP Status Codes do not provide any feedback on the Status Attestation status but only the request status, this is a proper behavior.\r\n\r\nSince we use multiple requests within a single array (json object) and obtain array of status assertion responses, we have decided to not use a single http status code describing the status of the response, since clientA may ask 3 status assertions about 3 different credentials, and obtain 2 status assertions and one status assertion error object within the response array.\r\n\r\n@fmarino-ipzs worked a lot in this field, if is there something else to say it would be great to get his perspective too.",
+          "createdAt": "2024-10-02T15:13:18Z",
+          "updatedAt": "2024-10-02T15:13:30Z"
         }
       ]
     }
@@ -10192,6 +10206,336 @@
           "createdAt": "2024-09-25T15:25:18Z",
           "updatedAt": "2024-09-25T15:25:18Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 86,
+      "id": "PR_kwDOK4XJ0s59Xux4",
+      "title": "Remove credential status from Status Assertion Errors",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/86",
+      "state": "MERGED",
+      "author": "marinaado",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Cleanup of the errors containing status of the credential.",
+      "createdAt": "2024-10-02T12:40:22Z",
+      "updatedAt": "2024-10-02T15:14:41Z",
+      "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "baseRefName": "main",
+      "baseRefOid": "3c888deb06dd14c924c8b4c5dca368cd776b9d06",
+      "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "headRefName": "status-attestation-error-patch1",
+      "headRefOid": "ae8106f25bf92224aeaec7782fffb84a3ed1e8f7",
+      "closedAt": "2024-10-02T15:14:41Z",
+      "mergedAt": "2024-10-02T15:14:41Z",
+      "mergedBy": "peppelinux",
+      "mergeCommit": {
+        "oid": "031a46e0f110f1b57ee45adc64568cc053d419af"
+      },
+      "comments": [
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "probably the ci can be fixed with `make fix-lint`",
+          "createdAt": "2024-10-02T15:07:16Z",
+          "updatedAt": "2024-10-02T15:07:16Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOK4XJ0s6Lpkkj",
+          "commit": {
+            "abbreviatedOid": "e797a6a"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-02T13:22:30Z",
+          "updatedAt": "2024-10-02T13:22:31Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\n    \"error_description\": \"The verification of the request signature has failed.\"\r\n```",
+              "createdAt": "2024-10-02T13:22:30Z",
+              "updatedAt": "2024-10-02T13:22:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Lpkw1",
+          "commit": {
+            "abbreviatedOid": "e797a6a"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-02T13:22:43Z",
+          "updatedAt": "2024-10-02T13:22:43Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Lq1LB",
+          "commit": {
+            "abbreviatedOid": "2cad4fb"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-02T15:07:33Z",
+          "updatedAt": "2024-10-02T15:07:33Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\nthat has requested the Status Assertion. Therefore,\r\n```",
+              "createdAt": "2024-10-02T15:07:33Z",
+              "updatedAt": "2024-10-02T15:07:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Lq1TF",
+          "commit": {
+            "abbreviatedOid": "ae8106f"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-02T15:07:45Z",
+          "updatedAt": "2024-10-02T15:07:45Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 87,
+      "id": "PR_kwDOK4XJ0s59ZDFs",
+      "title": "align boolean validity claim",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/87",
+      "state": "OPEN",
+      "author": "marinaado",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-02T15:14:36Z",
+      "updatedAt": "2024-10-02T15:19:36Z",
+      "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "baseRefName": "main",
+      "baseRefOid": "3c888deb06dd14c924c8b4c5dca368cd776b9d06",
+      "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "headRefName": "align-boolean-validity-claim",
+      "headRefOid": "f0e2586a46831db49959af91cc3691031b4d88db",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOK4XJ0s6Lq7qy",
+          "commit": {
+            "abbreviatedOid": "3775980"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-02T15:15:52Z",
+          "updatedAt": "2024-10-02T15:15:53Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n    \"credential_status_validity\": \"valid\",\r\n```",
+              "createdAt": "2024-10-02T15:15:53Z",
+              "updatedAt": "2024-10-02T15:15:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Lq8AG",
+          "commit": {
+            "abbreviatedOid": "3775980"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-02T15:16:25Z",
+          "updatedAt": "2024-10-02T15:16:26Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\nStatus Assertions can introduce a more accurate level of detail about the Credential status.\r\n```",
+              "createdAt": "2024-10-02T15:16:25Z",
+              "updatedAt": "2024-10-02T15:16:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Lq8eW",
+          "commit": {
+            "abbreviatedOid": "3775980"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-02T15:16:45Z",
+          "updatedAt": "2024-10-02T15:16:45Z",
+          "comments": [
+            {
+              "originalPosition": 53,
+              "body": "```suggestion\r\n      \"state\": \"document lost\"\r\n```",
+              "createdAt": "2024-10-02T15:16:45Z",
+              "updatedAt": "2024-10-02T15:16:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Lq8kP",
+          "commit": {
+            "abbreviatedOid": "3775980"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-02T15:16:50Z",
+          "updatedAt": "2024-10-02T15:16:51Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\n| **credential_status_validity**| String value indicating the absolute validity of the Credential linked to the Status Assertion, describing its state, mode, condition or stage. The value MUST be from the IANA registry (TBD). Status validity parameter is REQUIRED, and the Verifier MUST verify its presence and value to assess the Credential's validity. | this specification |\r\n```",
+              "createdAt": "2024-10-02T15:16:51Z",
+              "updatedAt": "2024-10-02T15:16:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Lq-Kw",
+          "commit": {
+            "abbreviatedOid": "f0e2586"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-02T15:18:17Z",
+          "updatedAt": "2024-10-02T15:18:18Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "```suggestion\r\n    \"credential_status_validity\": \"suspended\",\r\n```",
+              "createdAt": "2024-10-02T15:18:17Z",
+              "updatedAt": "2024-10-02T15:18:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Lq-Rk",
+          "commit": {
+            "abbreviatedOid": "f0e2586"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-02T15:18:28Z",
+          "updatedAt": "2024-10-02T15:18:29Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "```suggestion\r\n    \"credential_status_validity\": \"invalid\",\r\n```",
+              "createdAt": "2024-10-02T15:18:28Z",
+              "updatedAt": "2024-10-02T15:18:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Lq-mv",
+          "commit": {
+            "abbreviatedOid": "f0e2586"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-02T15:18:42Z",
+          "updatedAt": "2024-10-02T15:18:43Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "```suggestion\r\n    \"credential_status_validity\": \"valid\",\r\n```",
+              "createdAt": "2024-10-02T15:18:42Z",
+              "updatedAt": "2024-10-02T15:18:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Lq_AC",
+          "commit": {
+            "abbreviatedOid": "f0e2586"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-02T15:18:49Z",
+          "updatedAt": "2024-10-02T15:18:49Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "```suggestion\r\n    \"credential_status_validity\": \"suspended\",\r\n```",
+              "createdAt": "2024-10-02T15:18:49Z",
+              "updatedAt": "2024-10-02T15:18:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Lq_Ov",
+          "commit": {
+            "abbreviatedOid": "f0e2586"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-02T15:19:02Z",
+          "updatedAt": "2024-10-02T15:19:03Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "```suggestion\r\n    \"credential_status_validity\": \"invalid\",\r\n```",
+              "createdAt": "2024-10-02T15:19:03Z",
+              "updatedAt": "2024-10-02T15:19:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Lq_kU",
+          "commit": {
+            "abbreviatedOid": "f0e2586"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-02T15:19:36Z",
+          "updatedAt": "2024-10-02T15:19:36Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "```suggestion\r\n    \"credential_status_validity\": \"valid\",\r\n```",
+              "createdAt": "2024-10-02T15:19:36Z",
+              "updatedAt": "2024-10-02T15:19:36Z"
+            }
+          ]
         }
       ]
     }
