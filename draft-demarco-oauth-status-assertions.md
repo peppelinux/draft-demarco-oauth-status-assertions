@@ -740,7 +740,7 @@ An example of an enumeration status is:
     "credential_hash_alg": "sha-256",
     "credential_status_validity": invalid,
     "credential_status_detail": {
-      "state": "Document lost"
+      "state": "document lost"
     },
     "cnf": {
       "jwk": {
