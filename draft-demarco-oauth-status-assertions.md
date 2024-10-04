@@ -48,11 +48,6 @@ normative:
       org: "IANA"
     title: "Media Types"
     target: "https://www.iana.org/assignments/media-types/media-types.xhtml"
-  OpenID4VCI:
-    author:
-      org: "OpenID Foundation"
-    title: "OpenID for Verifiable Credential Issuance"
-    target: "https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html"
   IANA.MediaTypes:
     author:
       org: "IANA"
