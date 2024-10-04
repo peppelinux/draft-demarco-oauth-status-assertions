@@ -4,7 +4,7 @@ abbrev: "OAuth Status Assertions"
 category: info
 
 docname: draft-demarco-oauth-status-assertions-latest
-submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
+submissiontype: IETF
 number:
 date:
 consensus: true
