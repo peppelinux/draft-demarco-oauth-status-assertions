@@ -293,7 +293,6 @@ The following diagram shows the Wallet Instance requesting a
 Status Assertion to a Credential Issuer,
 related to a specific Credential issued by the same Credential Issuer.
 
-
 ~~~ ascii-art
 +-------------------+                                  +--------------------+
 |                   |                                  |                    |
