@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-03T01:01:07.152030+00:00",
+  "timestamp": "2024-10-06T01:05:43.122809+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -384,7 +384,7 @@
         },
         {
           "author": "SaraConsoliACN",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "This issue has been resolved by PR #37.",
           "createdAt": "2024-05-20T15:17:40Z",
           "updatedAt": "2024-05-20T15:17:40Z"
@@ -460,7 +460,7 @@
       "comments": [
         {
           "author": "SaraConsoliACN",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "\r\n@OR13 Can we consider this issue closed now that we have dedicated a chapter to privacy considerations?",
           "createdAt": "2024-04-29T10:09:17Z",
           "updatedAt": "2024-04-29T10:09:17Z"
@@ -490,7 +490,7 @@
     {
       "number": 28,
       "id": "I_kwDOK4XJ0s6C0vdZ",
-      "title": "Define use case for this status attestation mechanism",
+      "title": "Comparison with Status list - Define use case for this status attestation mechanism",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/28",
       "state": "OPEN",
       "author": "awoie",
@@ -502,7 +502,7 @@
       ],
       "body": "It is not clear to me why other status mechanisms cannot be used instead of the proposed one. It would be good to understand under which circumstances the proposed status mechanism has clear benefits. I believe it is mostly saving HTTP requests for RPs, right?\r\n\r\nI don't necessarily agree with the statements made on privacy and trust model that are included in the document. IMO, OAuth Status List is privacy preserving and the trust model could be the same as for the proposed option. In fact, some people are implementing Status List using the existing issuer trust model.",
       "createdAt": "2024-03-19T12:39:56Z",
-      "updatedAt": "2024-05-23T08:46:10Z",
+      "updatedAt": "2024-10-04T09:36:07Z",
       "closedAt": null,
       "comments": [
         {
@@ -759,7 +759,7 @@
       "id": "I_kwDOK4XJ0s6Ix-sR",
       "title": "Move ECHR and GDP links to informative references",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/44",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "peppelinux",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -768,9 +768,17 @@
       "labels": [],
       "body": "we should move these to informative references\r\n\r\n_Originally posted by @OR13 in https://github.com/peppelinux/draft-demarco-oauth-status-attestations/pull/42#discussion_r1598509544_\r\n            ",
       "createdAt": "2024-05-14T08:33:21Z",
-      "updatedAt": "2024-09-25T15:15:43Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-10-04T09:34:46Z",
+      "closedAt": "2024-10-04T09:34:46Z",
+      "comments": [
+        {
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "body": "Already done here: https://github.com/peppelinux/draft-demarco-oauth-status-assertions/blob/main/draft-demarco-oauth-status-assertions.md?plain=1#L85",
+          "createdAt": "2024-10-04T09:34:46Z",
+          "updatedAt": "2024-10-04T09:34:46Z"
+        }
+      ]
     },
     {
       "number": 46,
@@ -915,7 +923,7 @@
       "comments": [
         {
           "author": "SaraConsoliACN",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "The PR that aims to resolve, even if partially, this issue is: ~https://github.com/peppelinux/draft-demarco-oauth-status-attestations/pull/54~ https://github.com/peppelinux/draft-demarco-oauth-status-attestations/pull/51/files",
           "createdAt": "2024-05-21T13:32:42Z",
           "updatedAt": "2024-05-22T12:31:36Z"
@@ -3100,7 +3108,7 @@
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/33",
       "state": "MERGED",
       "author": "SaraConsoliACN",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This PR may resolve issue #30, #20. Additionally, it is noted that the EXP timestamp MUST be superior to IAT timestamp.",
@@ -3217,7 +3225,7 @@
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/35",
       "state": "CLOSED",
       "author": "SaraConsoliACN",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This PR addresses various commits made in the last days:\r\n- issue #30\r\nAdditionally, the expiration time (EXP) object in the attestation has been adjusted to 24 hours",
@@ -3342,7 +3350,7 @@
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/36",
       "state": "MERGED",
       "author": "SaraConsoliACN",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This PR:\r\n- Addresses issue #30\r\n- Fixes some editorial issues\r\n- Adds a note on the 'exp' parameter, which must be greater than the 'iat' parameter\r\n",
@@ -3687,7 +3695,7 @@
             "abbreviatedOid": "cfda2ed"
           },
           "author": "SaraConsoliACN",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-05-10T12:16:23Z",
@@ -4559,7 +4567,7 @@
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/37",
       "state": "MERGED",
       "author": "SaraConsoliACN",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "this commit may resolve issue #20.",
@@ -4765,7 +4773,7 @@
             "abbreviatedOid": "c0a708c"
           },
           "author": "SaraConsoliACN",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-05-14T09:25:44Z",
@@ -4785,7 +4793,7 @@
             "abbreviatedOid": "80fc807"
           },
           "author": "SaraConsoliACN",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-05-14T09:25:53Z",
@@ -4881,7 +4889,7 @@
             "abbreviatedOid": "49ddfd8"
           },
           "author": "SaraConsoliACN",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-05-15T08:34:28Z",
@@ -4901,7 +4909,7 @@
             "abbreviatedOid": "49ddfd8"
           },
           "author": "SaraConsoliACN",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-05-15T08:34:41Z",
@@ -4967,7 +4975,7 @@
             "abbreviatedOid": "5f23e8e"
           },
           "author": "SaraConsoliACN",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-05-15T14:58:07Z",
@@ -5249,7 +5257,7 @@
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/38",
       "state": "MERGED",
       "author": "SaraConsoliACN",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This commit solves the issue #5",
@@ -5556,7 +5564,7 @@
             "abbreviatedOid": "82be3b6"
           },
           "author": "SaraConsoliACN",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-05-13T14:11:12Z",
@@ -5684,7 +5692,7 @@
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/45",
       "state": "CLOSED",
       "author": "SaraConsoliACN",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This PR aims to resolve issue #14.",
@@ -5810,7 +5818,7 @@
             "abbreviatedOid": "c8d4d6d"
           },
           "author": "SaraConsoliACN",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-05-17T12:16:23Z",
@@ -5959,7 +5967,7 @@
             "abbreviatedOid": "2f7d38e"
           },
           "author": "SaraConsoliACN",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "Thank you.",
           "createdAt": "2024-05-20T07:40:29Z",
@@ -6054,7 +6062,7 @@
             "abbreviatedOid": "0eee697"
           },
           "author": "SaraConsoliACN",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2024-05-20T08:37:02Z",
@@ -6188,7 +6196,7 @@
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/53",
       "state": "MERGED",
       "author": "SaraConsoliACN",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This commit aims to resolve issue #46.",
@@ -6222,7 +6230,7 @@
             "abbreviatedOid": "f8feaa1"
           },
           "author": "SaraConsoliACN",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-05-21T11:14:29Z",
@@ -6242,7 +6250,7 @@
             "abbreviatedOid": "f8feaa1"
           },
           "author": "SaraConsoliACN",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-05-21T11:24:42Z",
@@ -6896,7 +6904,7 @@
             "abbreviatedOid": "36089d7"
           },
           "author": "SaraConsoliACN",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2024-05-21T08:17:30Z",
@@ -6998,7 +7006,7 @@
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/55",
       "state": "MERGED",
       "author": "SaraConsoliACN",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This commit aims to resolve issue #47.",
@@ -7139,7 +7147,7 @@
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/56",
       "state": "MERGED",
       "author": "SaraConsoliACN",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": " PR that aims to resolve issues #19 and #39",
@@ -9432,7 +9440,7 @@
             "abbreviatedOid": "a962b9f"
           },
           "author": "SaraConsoliACN",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2024-06-28T07:56:03Z",
@@ -10315,7 +10323,7 @@
     {
       "number": 87,
       "id": "PR_kwDOK4XJ0s59ZDFs",
-      "title": "align boolean validity claim",
+      "title": "Align the boolean validity claim",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/87",
       "state": "OPEN",
       "author": "marinaado",
@@ -10324,18 +10332,26 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-10-02T15:14:36Z",
-      "updatedAt": "2024-10-02T15:19:36Z",
+      "updatedAt": "2024-10-03T16:03:40Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "3c888deb06dd14c924c8b4c5dca368cd776b9d06",
       "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "headRefName": "align-boolean-validity-claim",
-      "headRefOid": "f0e2586a46831db49959af91cc3691031b4d88db",
+      "headRefOid": "3a374dcce39009c423480cb913d7b480ee2d2354",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I am concerned if the examples given for the credential_status_detail parameter are good to explain its use. The examples we give don't provide any additional information then what is already in the credential_status_validity parameter.",
+          "createdAt": "2024-10-03T16:03:39Z",
+          "updatedAt": "2024-10-03T16:03:39Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOK4XJ0s6Lq7qy",
@@ -10536,6 +10552,46 @@
               "updatedAt": "2024-10-02T15:19:36Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 88,
+      "id": "PR_kwDOK4XJ0s59mURY",
+      "title": "fix: links and refs updated",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/88",
+      "state": "OPEN",
+      "author": "peppelinux",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR aligns some refs/links",
+      "createdAt": "2024-10-04T09:38:09Z",
+      "updatedAt": "2024-10-04T22:37:17Z",
+      "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "baseRefName": "main",
+      "baseRefOid": "031a46e0f110f1b57ee45adc64568cc053d419af",
+      "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "headRefName": "fixrefs",
+      "headRefOid": "6e172ff9b0f96fd046901f20d863dd09fbfb7cf6",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOK4XJ0s6MCBnT",
+          "commit": {
+            "abbreviatedOid": "6e172ff"
+          },
+          "author": "fmarino-ipzs",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-04T22:37:17Z",
+          "updatedAt": "2024-10-04T22:37:17Z",
+          "comments": []
         }
       ]
     }
