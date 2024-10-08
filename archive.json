@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-06T01:05:43.122809+00:00",
+  "timestamp": "2024-10-08T01:00:52.394333+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -9507,7 +9507,7 @@
       "labels": [],
       "body": "Features and benefits of OAuth Status Assertions to clearly communicate their use and privacy benefits .",
       "createdAt": "2024-07-09T12:01:12Z",
-      "updatedAt": "2024-09-30T12:57:11Z",
+      "updatedAt": "2024-10-06T06:53:28Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "b49765707b9ab30139beab7045aecef5c58461a9",
@@ -10038,6 +10038,19 @@
           "createdAt": "2024-09-30T12:57:11Z",
           "updatedAt": "2024-09-30T12:57:11Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6MGUC4",
+          "commit": {
+            "abbreviatedOid": "f831b22"
+          },
+          "author": "fmarino-ipzs",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-06T06:53:28Z",
+          "updatedAt": "2024-10-06T06:53:28Z",
+          "comments": []
         }
       ]
     },
@@ -10332,7 +10345,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-10-02T15:14:36Z",
-      "updatedAt": "2024-10-03T16:03:40Z",
+      "updatedAt": "2024-10-06T12:39:14Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "3c888deb06dd14c924c8b4c5dca368cd776b9d06",
@@ -10550,6 +10563,32 @@
               "body": "```suggestion\r\n    \"credential_status_validity\": \"valid\",\r\n```",
               "createdAt": "2024-10-02T15:19:36Z",
               "updatedAt": "2024-10-02T15:19:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6MGhI4",
+          "commit": {
+            "abbreviatedOid": "3a374dc"
+          },
+          "author": "fmarino-ipzs",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-10-06T12:07:41Z",
+          "updatedAt": "2024-10-06T12:39:14Z",
+          "comments": [
+            {
+              "originalPosition": 33,
+              "body": "```suggestion\nAn example of boolean detail status is:\n```\n",
+              "createdAt": "2024-10-06T12:07:41Z",
+              "updatedAt": "2024-10-06T12:39:14Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\n| **credential_status_validity**| Numerical value indicating the validity of the Credential linked to the Status Assertion, describing its state, mode, condition or stage. The value MUST be from the IANA registry (TBD).Values from 0 to 2 are defined by this specification with the following meaning: 0-VALID, 1-INVALID, 2-SUSPENDED. Credential Issuers MAY extend with other numeric values based on use cases of interest. Status validity parameter is REQUIRED, and the Verifier MUST verify its presence and value to assess the Credential's validity. | this specification |\n```\n    ",
+              "createdAt": "2024-10-06T12:38:09Z",
+              "updatedAt": "2024-10-06T12:39:14Z"
             }
           ]
         }
