@@ -696,7 +696,7 @@ The `credential_status_validity` claim MUST be present.
 The `credential_status_detail` claim MAY be present and if present MUST be an object.
 The semantics of the claims within the `credential_status_detail` object are determined by the Credential Issuer.
 
-An example of bolean detail status is:
+An example of boolean detail status is:
 
 ~~~
 {
