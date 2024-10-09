@@ -576,7 +576,7 @@ The Status Assertion MUST contain the parameters defined below.
 | **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be greater than the value set for `iat`. | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
 | **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. The value SHOULD be set to `sha-256`. | this specification |
-| **credential_status_validity**| Numerical value indicating the validity of the Credential linked to the Status Assertion, describing its state, mode, condition or stage. The value MUST be from the IANA registry (TBD). Status validity parameter is REQUIRED, and the Verifier MUST verify its presence and value to assess the Credential's validity. | this specification |
+| **credential_status_validity**| Numerical value indicating the validity of the Credential linked to the Status Assertion, describing its state, mode, condition or stage. The value MUST be from the IANA registry (as described in Section 7.1 of draft-ietf-oauth-status-list). Status validity parameter is REQUIRED, and the Verifier MUST verify its presence and value to assess the Credential's validity. | this specification |
 | **cnf** | JSON object containing confirmation methods. The sub-member contained within `cnf` member, such as `jwk` for JWT and `Cose_Key` for CWT, MUST match with the one provided within the related Digital Credential. Other confirmation methods can be utilized when the referenced Digital Credential supports them, in accordance with the relevant standards. | {{RFC7800}} Section 3.1, {{RFC8747}} Section 3.1 |
 
 
