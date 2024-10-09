@@ -744,7 +744,7 @@ An example of an enumeration detail status is:
     "credential_hash_alg": "sha-256",
     "credential_status_validity": 3,
     "credential_status_detail": {
-      "state": "suspended",
+      ...
     },
     "cnf": {
       "jwk": {
