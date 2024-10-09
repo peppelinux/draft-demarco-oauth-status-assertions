@@ -598,7 +598,7 @@ Status Assertion is requested,  using one of the hash algorithms listed
 in the [IANA-HASH-REG].
 - `credential_status_detail_supported`. OPTIONAL. JSON array that outlines the details of each Credential's validity status supported by the Credential Issuer. This parameter MAY be used to extend the values defined in Section [Status Assertion](#status-assertion). Each entry MUST contain the following parameters:
 
-    - `credential_status_validity`. Numerical value indicating the validity of the Credential.  
+    - `credential_status_validity`. Numerical value indicating the validity of the Credential.
     - `state`. String value of a Credential status supported.
     - `description`. String containing the human-readable description of the status related to this object.
 
