@@ -713,8 +713,7 @@ An example of boolean detail status is:
     "credential_hash_alg": "sha-256",
     "credential_status_validity": 3,
     "credential_status_detail": {
-      "revoked": false,
-      "suspended": true,
+      ...
     },
     "cnf": {
       "jwk": {
