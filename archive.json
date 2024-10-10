@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-08T01:00:52.394333+00:00",
+  "timestamp": "2024-10-10T01:00:32.902220+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -1367,6 +1367,46 @@
           "updatedAt": "2024-10-02T15:13:30Z"
         }
       ]
+    },
+    {
+      "number": 90,
+      "id": "I_kwDOK4XJ0s6Zjgj-",
+      "title": "Copy IANA registry into appendix temporarily",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/90",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Add a note the RFC editor that this will be removed when the registry is established by status list draft.",
+      "createdAt": "2024-10-09T15:10:27Z",
+      "updatedAt": "2024-10-09T15:13:22Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Here is some example table syntax, I pulled from another draft to help complete this issue:\r\n\r\n```\r\n| Name            | Value | Description                      | Reference\r\n|---\r\n| N/A             | 0     | N/A                              | N/A\r\n| RFC9162_SHA256  | 1     | SHA256 Binary Merkle Tree        | {{-certificate-transparency-v2}}\r\n| EXPERIMENTAL    | 11    | Unknown                          | RFC XXXX\r\n| EXPERIMENTAL    | 22    | Unknown                          | RFC XXXX\r\n| EXPERIMENTAL    | 33    | Unknown                          | RFC XXXX\r\n{: #cose-verifiable-data-structures align=\"left\" title=\"COSE Verifiable Data Structures\"}\r\n```\r\n\r\nThis should help to resolve this issue.",
+          "createdAt": "2024-10-09T15:13:07Z",
+          "updatedAt": "2024-10-09T15:13:22Z"
+        }
+      ]
+    },
+    {
+      "number": 91,
+      "id": "I_kwDOK4XJ0s6ZjoFk",
+      "title": "Add i18n language examples",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/91",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Replace the examples credential-status_detail with internationalized messages for display to the end user.\r\n\r\nuse the \"...\" to signal that additional fields could be present.",
+      "createdAt": "2024-10-09T15:24:19Z",
+      "updatedAt": "2024-10-09T15:24:41Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -10345,13 +10385,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-10-02T15:14:36Z",
-      "updatedAt": "2024-10-06T12:39:14Z",
+      "updatedAt": "2024-10-09T19:32:30Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "3c888deb06dd14c924c8b4c5dca368cd776b9d06",
       "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "headRefName": "align-boolean-validity-claim",
-      "headRefOid": "3a374dcce39009c423480cb913d7b480ee2d2354",
+      "headRefOid": "828e9eb1ed6184c8e827fa6deac97d3368e885de",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -10360,9 +10400,16 @@
         {
           "author": "marinaado",
           "authorAssociation": "COLLABORATOR",
-          "body": "I am concerned if the examples given for the credential_status_detail parameter are good to explain its use. The examples we give don't provide any additional information then what is already in the credential_status_validity parameter.",
+          "body": "I am concerned if the examples given for the credential_status_detail parameter are good to explain its use. The examples we give don't provide any additional information then what is already in the credential_status_validity parameter.\r\n\r\nAgreed was to address this in the new issue #91 ",
           "createdAt": "2024-10-03T16:03:39Z",
-          "updatedAt": "2024-10-03T16:03:39Z"
+          "updatedAt": "2024-10-09T15:43:08Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I filed this issue related to i18n and the examples. https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/91",
+          "createdAt": "2024-10-09T15:25:07Z",
+          "updatedAt": "2024-10-09T15:25:07Z"
         }
       ],
       "reviews": [
@@ -10591,6 +10638,272 @@
               "updatedAt": "2024-10-06T12:39:14Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6MV_CK",
+          "commit": {
+            "abbreviatedOid": "e0c6241"
+          },
+          "author": "fmarino-ipzs",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-08T13:52:51Z",
+          "updatedAt": "2024-10-08T13:52:52Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "@marinaado , I added this additional optional parameter in the metadata of a CI. The idea is that a CI MAY use this parameter to extend the values defined within this specification (0, 1, 2) and the Wallet can obtain from the CI's Metadata the detailed info to prompt the User.  \r\nWDYT about this? \r\n\r\n@OR13 , @peppelinux  ^^",
+              "createdAt": "2024-10-08T13:52:52Z",
+              "updatedAt": "2024-10-08T13:52:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6MWY_p",
+          "commit": {
+            "abbreviatedOid": "3a374dc"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-08T14:26:06Z",
+          "updatedAt": "2024-10-08T14:26:06Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "I think that we agreed that we don't want to hardcode the values in this spec, as we want to align values with related parameter in Status List specification. We assume that they will register the values in the IANA registry so we want to reference to that instead. I think thought that we can use this values in the examples.",
+              "createdAt": "2024-10-08T14:26:06Z",
+              "updatedAt": "2024-10-08T14:26:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6MX-pf",
+          "commit": {
+            "abbreviatedOid": "5e268a2"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-08T17:17:32Z",
+          "updatedAt": "2024-10-08T17:17:32Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\n| **credential_status_validity**| Numerical value indicating the validity of the Credential linked to the Status Assertion, describing its state, mode, condition or stage. The value MUST be from the IANA registry (as described in Section 7.1 of draft-ietf-oauth-status-list). Status validity parameter is REQUIRED, and the Verifier MUST verify its presence and value to assess the Credential's validity. | this specification |\r\n```",
+              "createdAt": "2024-10-08T17:17:32Z",
+              "updatedAt": "2024-10-09T15:44:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6MX-0t",
+          "commit": {
+            "abbreviatedOid": "5e268a2"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-08T17:17:58Z",
+          "updatedAt": "2024-10-08T17:17:58Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "This will need adjustment to link up properly as a well formed reference",
+              "createdAt": "2024-10-08T17:17:58Z",
+              "updatedAt": "2024-10-08T17:17:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6MY324",
+          "commit": {
+            "abbreviatedOid": "5e268a2"
+          },
+          "author": "fmarino-ipzs",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-08T19:16:07Z",
+          "updatedAt": "2024-10-08T19:16:08Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "Even if we will have the values registered in IANA, why shouldn't we have in this specification? IMHO having them explicitly here could be useful for implementers that are already implementing this. Am I missing something? ",
+              "createdAt": "2024-10-08T19:16:08Z",
+              "updatedAt": "2024-10-08T19:16:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6MgzqT",
+          "commit": {
+            "abbreviatedOid": "5e268a2"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-09T14:54:46Z",
+          "updatedAt": "2024-10-09T14:54:46Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "Then we need to update our spec every time that the IANA registry is updated so we open a door to not be in all times at sync. ",
+              "createdAt": "2024-10-09T14:54:46Z",
+              "updatedAt": "2024-10-09T14:54:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Mg_RQ",
+          "commit": {
+            "abbreviatedOid": "3a374dc"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-09T15:11:14Z",
+          "updatedAt": "2024-10-09T15:11:14Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "I created this issue, https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/90\r\n\r\nand am resolving this conversation.",
+              "createdAt": "2024-10-09T15:11:14Z",
+              "updatedAt": "2024-10-09T15:11:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6MhFV9",
+          "commit": {
+            "abbreviatedOid": "5e268a2"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-09T15:21:00Z",
+          "updatedAt": "2024-10-09T15:21:00Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "I also cross filed this issue regarding the discussion on reserved for private use range here: https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/181",
+              "createdAt": "2024-10-09T15:21:00Z",
+              "updatedAt": "2024-10-09T15:21:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6MhHNv",
+          "commit": {
+            "abbreviatedOid": "5e268a2"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-09T15:23:56Z",
+          "updatedAt": "2024-10-09T15:23:57Z",
+          "comments": [
+            {
+              "originalPosition": 66,
+              "body": "```suggestion\r\n      ...\r\n```",
+              "createdAt": "2024-10-09T15:23:56Z",
+              "updatedAt": "2024-10-09T15:23:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6MhHVz",
+          "commit": {
+            "abbreviatedOid": "5e268a2"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-09T15:24:08Z",
+          "updatedAt": "2024-10-09T15:24:08Z",
+          "comments": [
+            {
+              "originalPosition": 84,
+              "body": "```suggestion\r\n      ...\r\n```",
+              "createdAt": "2024-10-09T15:24:08Z",
+              "updatedAt": "2024-10-09T15:24:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6MhWUd",
+          "commit": {
+            "abbreviatedOid": "e0c6241"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-09T15:48:13Z",
+          "updatedAt": "2024-10-09T15:48:13Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "Agreed that the IANA registry reserved range for private use should be used to communicate values outside of the ones defined in the IANA registry. ",
+              "createdAt": "2024-10-09T15:48:13Z",
+              "updatedAt": "2024-10-09T15:48:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6MjmH2",
+          "commit": {
+            "abbreviatedOid": "229178b"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-09T19:28:28Z",
+          "updatedAt": "2024-10-09T19:28:28Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Mjmlt",
+          "commit": {
+            "abbreviatedOid": "229178b"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-09T19:29:34Z",
+          "updatedAt": "2024-10-09T19:29:34Z",
+          "comments": [
+            {
+              "originalPosition": 33,
+              "body": "```suggestion\r\n    - `credential_status_validity`. Numerical value indicating the validity of the Credential.\r\n```",
+              "createdAt": "2024-10-09T19:29:34Z",
+              "updatedAt": "2024-10-09T19:29:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Mjnyq",
+          "commit": {
+            "abbreviatedOid": "828e9eb"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-09T19:32:30Z",
+          "updatedAt": "2024-10-09T19:32:30Z",
+          "comments": []
         }
       ]
     },
@@ -10606,7 +10919,7 @@
       "labels": [],
       "body": "This PR aligns some refs/links",
       "createdAt": "2024-10-04T09:38:09Z",
-      "updatedAt": "2024-10-04T22:37:17Z",
+      "updatedAt": "2024-10-08T17:18:17Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "031a46e0f110f1b57ee45adc64568cc053d419af",
@@ -10630,6 +10943,144 @@
           "body": "",
           "createdAt": "2024-10-04T22:37:17Z",
           "updatedAt": "2024-10-04T22:37:17Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6MWo8c",
+          "commit": {
+            "abbreviatedOid": "6e172ff"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-08T14:48:13Z",
+          "updatedAt": "2024-10-08T14:48:13Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6MXKf2",
+          "commit": {
+            "abbreviatedOid": "6e172ff"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-08T15:40:14Z",
+          "updatedAt": "2024-10-08T15:40:14Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6MX--Y",
+          "commit": {
+            "abbreviatedOid": "6e172ff"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-08T17:18:17Z",
+          "updatedAt": "2024-10-08T17:18:17Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 89,
+      "id": "PR_kwDOK4XJ0s5-FVyp",
+      "title": "Terminology fix",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/89",
+      "state": "OPEN",
+      "author": "marinaado",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In the attempt to align the terminology to the OAuth Token Status List, this PR introduces following terminology change: \r\n\r\n- from \"Credential Issuer\" to \"Issuer\" \r\n\r\nThe terminology differences for following terms still exist: \r\n\r\n- Relying Party (OAuth Token Status List) vs Verifier (Status Assertions)\r\n- Referenced Token (OAuth Token Status List) vs Digital Credential (Status Assertions)",
+      "createdAt": "2024-10-09T13:36:34Z",
+      "updatedAt": "2024-10-09T15:40:34Z",
+      "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "baseRefName": "main",
+      "baseRefOid": "bc37e02ab93a84fa56ed821464b2e9af6e5a7caa",
+      "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "headRefName": "align-terminology-with-status-list",
+      "headRefOid": "d73657dc09084cc6cdf9b3e3a4dbff0d740591ff",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOK4XJ0s6Mg2PF",
+          "commit": {
+            "abbreviatedOid": "d73657d"
+          },
+          "author": "fmarino-ipzs",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-09T14:58:31Z",
+          "updatedAt": "2024-10-09T14:59:46Z",
+          "comments": [
+            {
+              "originalPosition": 78,
+              "body": "```suggestion\r\n: A set of one or more claims about a subject made by an Issuer.\r\n```",
+              "createdAt": "2024-10-09T14:58:31Z",
+              "updatedAt": "2024-10-09T14:59:46Z"
+            },
+            {
+              "originalPosition": 124,
+              "body": "```suggestion\r\nStatus Assertion to an Issuer,\r\n```",
+              "createdAt": "2024-10-09T14:58:56Z",
+              "updatedAt": "2024-10-09T14:59:46Z"
+            },
+            {
+              "originalPosition": 205,
+              "body": "```suggestion\r\nWhen a Status Assertion is requested to an Issuer, the\r\n```",
+              "createdAt": "2024-10-09T14:59:16Z",
+              "updatedAt": "2024-10-09T14:59:46Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 92,
+      "id": "PR_kwDOK4XJ0s5-GRf6",
+      "title": "add Marina as co-author",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/92",
+      "state": "OPEN",
+      "author": "peppelinux",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "for merit and concreteness",
+      "createdAt": "2024-10-09T15:27:18Z",
+      "updatedAt": "2024-10-09T15:55:33Z",
+      "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "baseRefName": "main",
+      "baseRefOid": "bc37e02ab93a84fa56ed821464b2e9af6e5a7caa",
+      "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "headRefName": "marina",
+      "headRefOid": "6dec576d42978b438842f1e90087cbaf434db954",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOK4XJ0s6MhbSt",
+          "commit": {
+            "abbreviatedOid": "6dec576"
+          },
+          "author": "fmarino-ipzs",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-09T15:55:33Z",
+          "updatedAt": "2024-10-09T15:55:33Z",
           "comments": []
         }
       ]
