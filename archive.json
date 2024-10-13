@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-10T01:00:32.902220+00:00",
+  "timestamp": "2024-10-13T01:05:26.667353+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -11057,7 +11057,7 @@
       "labels": [],
       "body": "for merit and concreteness",
       "createdAt": "2024-10-09T15:27:18Z",
-      "updatedAt": "2024-10-09T15:55:33Z",
+      "updatedAt": "2024-10-10T01:17:27Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "bc37e02ab93a84fa56ed821464b2e9af6e5a7caa",
@@ -11081,6 +11081,19 @@
           "body": "",
           "createdAt": "2024-10-09T15:55:33Z",
           "updatedAt": "2024-10-09T15:55:33Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6MldSz",
+          "commit": {
+            "abbreviatedOid": "6dec576"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-10T01:17:27Z",
+          "updatedAt": "2024-10-10T01:17:27Z",
           "comments": []
         }
       ]
