@@ -543,7 +543,7 @@ where the format is JWT.
     "exp": 1504785536,
     "credential_hash": $hash-about-Issuer-Signed-JWT,
     "credential_hash_alg": "sha-256",
-    "credential_status_validity": true,
+    "credential_status_validity": 0,
     "cnf": {
         "jwk": {...}
     }
@@ -566,7 +566,7 @@ The Status Assertion MUST contain the parameters defined below.
 | **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be greater than the value set for `iat`. | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
 | **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. The value SHOULD be set to `sha-256`. | this specification |
-| **credential_status_validity**| Boolean value indicating the absolute validity of the Credential linked to the Status Assertion. This parameter is REQUIRED, and the Verifier MUST verify its presence and value to assess the Credential's validity. | this specification |
+| **credential_status_validity**| Numerical value indicating the validity of the Credential linked to the Status Assertion, describing its state, mode, condition or stage. The value MUST be from the IANA registry (as described in Section 7.1 of draft-ietf-oauth-status-list). Status validity parameter is REQUIRED, and the Verifier MUST verify its presence and value to assess the Credential's validity. | this specification |
 | **cnf** | JSON object containing confirmation methods. The sub-member contained within `cnf` member, such as `jwk` for JWT and `Cose_Key` for CWT, MUST match with the one provided within the related Digital Credential. Other confirmation methods can be utilized when the referenced Digital Credential supports them, in accordance with the relevant standards. | {{RFC7800}} Section 3.1, {{RFC8747}} Section 3.1 |
 
 
@@ -577,7 +577,7 @@ detailing the necessary metadata and practices to integrate into their systems.
 
 ## Credential Issuer Metadata
 
-The Credential Issuers that uses the Status Assertions MUST include in their
+The Credential Issuers that uses the Status Assertions include in their
 metadata the following parameters:
 
 - `status_assertion_endpoint`. REQUIRED. It MUST be an HTTPs URL indicating
@@ -586,7 +586,11 @@ the endpoint where the Wallet Instances can request Status Assertions.
 the Wallet Instance to hash the Digital Credential for which the
 Status Assertion is requested,  using one of the hash algorithms listed
 in the [IANA-HASH-REG].
+- `credential_status_detail_supported`. OPTIONAL. JSON array that outlines the details of each Credential's validity status supported by the Credential Issuer. This parameter MAY be used to extend the values defined in Section [Status Assertion](#status-assertion). Each entry MUST contain the following parameters:
 
+    - `credential_status_validity`. Numerical value indicating the validity of the Credential.
+    - `state`. String value of a Credential status supported.
+    - `description`. String containing the human-readable description of the status related to this object.
 
 ## Issued Digital Credentials
 
@@ -675,14 +679,14 @@ variety of scenarios.
 
 # Detailed Status Assertions
 
-Status Assertions can introduce a more accurate level of detail, and therefore not necessarly limited to simple boolean information.
-This enables Verifier policies to be conditioned on the presence of secured information, instead of the absence of information.
+Status Assertions can introduce a more accurate level of detail about the Credential status.
+This enables Verifier policies to be conditioned on the presence of authorative information.
 This section proposes syntax to support detailed assertions.
-The `credential_status_validity` claim MUST be present and be either `true` or `false`.
+The `credential_status_validity` claim MUST be present.
 The `credential_status_detail` claim MAY be present and if present MUST be an object.
 The semantics of the claims within the `credential_status_detail` object are determined by the Credential Issuer.
 
-An example of a boolean status is:
+An example of boolean detail status is:
 
 ~~~
 {
@@ -697,10 +701,9 @@ An example of a boolean status is:
     "exp": 1504785536,
     "credential_hash": "xnlAq6Ma8fgu1z4hdGphJnKLulaVHpLCFeZFUGpQ2dA",
     "credential_hash_alg": "sha-256",
-    "credential_status_validity": false,
+    "credential_status_validity": 3,
     "credential_status_detail": {
-      "revoked": false,
-      "suspended": true,
+      ...
     },
     "cnf": {
       "jwk": {
@@ -714,7 +717,7 @@ An example of a boolean status is:
 }
 ~~~
 
-An example of an enumeration status is:
+An example of an enumeration detail status is:
 
 ~~~
 {
@@ -729,9 +732,9 @@ An example of an enumeration status is:
     "exp": 1504785536,
     "credential_hash": "xnlAq6Ma8fgu1z4hdGphJnKLulaVHpLCFeZFUGpQ2dA",
     "credential_hash_alg": "sha-256",
-    "credential_status_validity": false,
+    "credential_status_validity": 3,
     "credential_status_detail": {
-      "state": "suspended", // or "revoked"
+      ...
     },
     "cnf": {
       "jwk": {
@@ -745,7 +748,7 @@ An example of an enumeration status is:
 }
 ~~~
 
-An example of dynamic status using a small matrix:
+An example of dynamic status using a small matrix for detail status:
 
 ~~~
 {
@@ -760,7 +763,7 @@ An example of dynamic status using a small matrix:
     "exp": 1504785536,
     "credential_hash": "xnlAq6Ma8fgu1z4hdGphJnKLulaVHpLCFeZFUGpQ2dA",
     "credential_hash_alg": "sha-256",
-    "credential_status_validity": true,
+    "credential_status_validity": 0,
     "credential_status_detail": {
       "preferences": [[1, 0.25, 0.76 ...] ...]
     },
@@ -784,7 +787,7 @@ Content-Type: application/json
 
 {
     "status_assertion_responses": [
-      $JWT_1, // Not revoked, boolean assertion
+      $JWT_1, // valid, boolean assertion
       $JWT_2, // alg = none, suspended indicator
       $JWT_3, // Preferences matrix assertion
     ]
