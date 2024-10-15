@@ -29,6 +29,10 @@ author:
     fullname: Francesco Marino
     organization: Istituto Poligrafico e Zecca dello Stato
     email: fa.marino@ipzs.it
+ -
+    fullname: Marina Adomeit
+    organization: SUNET
+    email: marina@sunet.se
 
 normative:
   RFC2046: RFC2046
