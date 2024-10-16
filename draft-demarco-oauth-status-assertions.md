@@ -178,7 +178,7 @@ the term "CBOR Web Token (CWT)" defined in {{RFC8392}}, "Client" as
 defined {{RFC6749}}, "Verifiable Presentation" defined in [@OpenID4VP].
 
 Digital Credential:
-: A set of one or more claims about a subject made by a Issuer.
+: A set of one or more claims about a subject made by an Issuer.
 Alternative names are "Verifiable Credential" or "Credential".
 
 Holder:
