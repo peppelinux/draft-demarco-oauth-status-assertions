@@ -290,7 +290,7 @@ affirming the authenticity and rightful possession of the Credential.
 # Status Assertion Request
 
 The following diagram shows the Wallet Instance requesting a
-Status Assertion to a Issuer,
+Status Assertion to an Issuer,
 related to a specific Credential issued by the same Issuer.
 
 ~~~ ascii-art
