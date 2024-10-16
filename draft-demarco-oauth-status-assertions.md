@@ -192,7 +192,7 @@ Digital Credentials and their validity status and responsible for issuance of re
 
 Verifier:
 : Entity that relies on the validity of the Digital Credentials presented to it.
-This Entity, also known as a Verifier, verifies the authenticity and
+This Entity, also known as a Relying Party, verifies the authenticity and
 validity of the Digital Credentials, including their revocation status,
 before accepting them.
 
