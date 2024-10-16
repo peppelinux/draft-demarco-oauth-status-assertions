@@ -521,7 +521,7 @@ The `error` parameter for the Status Assertion Error object MUST be set with one
 
 # Status Assertion
 
-When a Status Assertion is requested to a Issuer, the
+When a Status Assertion is requested to an Issuer, the
 Issuer checks the status of the Digital Credential and creates a
 Status Assertion bound to it.
 
