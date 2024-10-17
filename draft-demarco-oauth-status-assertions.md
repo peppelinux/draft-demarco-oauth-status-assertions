@@ -110,10 +110,10 @@ informative:
 Status Assertion is a signed object that demonstrates the validity status of a
 digital credential.
 These assertions are periodically provided
-to holders, who can present these to verifier along
+to holders, who can present these to Verifier along
 with the corresponding digital credentials.
 The approach outlined in this document
-makes the verifier able to check the status,
+makes the Verifier able to check the status,
 such as the non-revocation, of a digital credential
 without requiring to query any third-party entities.
 
@@ -126,7 +126,7 @@ credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT)
 format. Status Assertions function
 similarly to OCSP Stapling ([RFC6066]), allowing clients to present to the
 relying parties
-time-stamped assertions provided by the credential issuer.
+time-stamped assertions provided by the Issuer.
 The approach outlined in this specification enables the
 verification of credentials against revocation without
 direct queries to third-party systems,
@@ -135,16 +135,16 @@ faciliting offline verification.
 
 The figure below illustrates the process by which a client,
 such as a wallet instance,
-requests and obtains a Status Assertion from the credential issuer.
+requests and obtains a Status Assertion from the Issuer.
 
 ~~~ ascii-art
-+-----------------+                              +-------------------+
-|                 | Requests Status Assertions   |                   |
-|                 |----------------------------->|                   |
-| Client          |                              | Credential Issuer |
-|                 | Status Assertions            |                   |
-|                 |<-----------------------------|                   |
-+-----------------+                              +-------------------+
++----------------+                              +------------------+
+|                | Requests Status Assertions   |                  |
+|                |----------------------------->|                  |
+|     Client     |                              |      Issuer      |
+|                | Status Assertions            |                  |
+|                |<-----------------------------|                  |
++----------------+                              +------------------+
 ~~~
 **Figure 1**: Status Assertion Issuance Flow.
 
@@ -152,18 +152,18 @@ The figure below illustrates the process by which a client
 presents the Status Assertion along with the corresponding digital credential.
 
 ~~~ ascii-art
-+-- ----------------+                             +----------+
-|                   | Presents Digital Credential |          |
-| Client            | and Status Assertion        | Verifier |
-|                   |---------------------------->|          |
-+-------------------+                             +----------+
++----------------+                             +------------------+
+|                | Presents Digital Credential |                  |
+|     Client     | and Status Assertion        |     Verifier     |
+|                |---------------------------->|                  |
++----------------+                             +------------------+
 ~~~
 **Figure 2**: Status Assertion Presentation Flow.
 
-In summary, the credential issuer provides the client with a
+In summary, the Issuer provides the client with a
 Status Assertion, which is linked to a Digital Credential. This enables
 the client to present both the digital credential and its
-Status Assertion to a verifier as proof of the digital credential's
+Status Assertion to a Verifier as proof of the digital credential's
 validity status.
 
 # Conventions and Definitions
@@ -180,17 +180,17 @@ the term "CBOR Web Token (CWT)" defined in {{RFC8392}}, "Client" as
 defined {{RFC6749}}, "Verifiable Presentation" defined in [OpenID4VP].
 
 Digital Credential:
-: A set of one or more claims about a subject made by a Credential Issuer.
+: A set of one or more claims about a subject made by an Issuer.
 Alternative names are "Verifiable Credential" or "Credential".
 
 Holder:
-: An entity that possesses Verifiable Credentials and has
+: An entity that possesses Digital Credentials and has
 control over them to present them to the Verifiers as Verifiable Presentations.
 
-Credential Issuer:
+Issuer:
 : Entity that is responsible for the issuance of the Digital Credentials.
 The Issuer is responsible for the lifecycle of their issued
-Digital Credentials and their validity status.
+Digital Credentials and their validity status and responsible for issuance of related Status Assertions.
 
 Verifier:
 : Entity that relies on the validity of the Digital Credentials presented to it.
@@ -244,14 +244,14 @@ Digital Credential issuance which it refers;
 - MUST contain the expiration datetime after which
 the Status Assertion MUST NOT be considered valid anymore,
 and the Digital Credential referred to SHOULD NOT
-be considered as having a valid status, unless there exists some specific verifier policy that provides stronger guidance.
+be considered as having a valid status, unless there exists some specific Verifier policy that provides stronger guidance.
 The expiration datetime MUST be
 superior to the Status Assertion issuance datetime and it MUST end before
 the expiration datetime of the Digital Credential;
 - MUST enable the offline use cases by employing validation using
 a cryptographic signature and the cryptographic public key of the
-Credential Issuer.
-- SHOULD NOT contain personal information about the User, that isn't already made available to the Credential Verifier, who owns
+Issuer.
+- SHOULD NOT contain personal information about the User, that isn't already made available to the Verifier, who owns
 the Digital Credential to which the Status Assertion refers.
 - MUST NOT contain any information regarding the Verifier to whom it may
 be presented, such as disclose the Verifier identifier to specify the intended audience.
@@ -292,13 +292,13 @@ affirming the authenticity and rightful possession of the Credential.
 # Status Assertion Request
 
 The following diagram shows the Wallet Instance requesting a
-Status Assertion to a Credential Issuer,
-related to a specific Credential issued by the same Credential Issuer.
+Status Assertion to an Issuer,
+related to a specific Credential issued by the same Issuer.
 
 ~~~ ascii-art
-+-------------------+                                  +--------------------+
-|  Wallet Instance  |                                  | Credential Issuer  |
-+--------+----------+                                  +----------+---------+
++-------------------+                                  +-------------------+
+|  Wallet Instance  |                                  |      Issuer       |
++--------+----------+                                  +----------+--------+
          |                                                        |
          | HTTP POST /status                                      |
          |  status_assertion_requests = [$StatusAssertionRequest] |
@@ -307,13 +307,13 @@ related to a specific Credential issued by the same Credential Issuer.
          |  Status Assertion Responses [...]                      |
          <--------------------------------------------------------+
          |                                                        |
-+--------+----------+                                  +----------+---------+
-|  Wallet Instance  |                                  | Credential Issuer  |
-+-------------------+                                  +--------------------+
++--------+----------+                                  +----------+--------+
+|  Wallet Instance  |                                  |       Issuer      |
++-------------------+                                  +-------------------+
 ~~~
 
 The Wallet Instance sends the Status Assertion request to the
-Credential Issuer, where:
+Issuer, where:
 
 - The request MUST contain the base64url encoded hash value of the Digital Credential's
 Issuer signed part, such as the Issuer Signed JWT using [SD-JWT.VC],
@@ -335,7 +335,7 @@ in the following table.
 | Payload | Description | Reference |
 | --- | --- | --- |
 | **iss** | Status Assertion Request Issuer identifier. The value is supposed to be used for identifying the Wallet that has issued the request. It is out of scope for this document defining how this value should be set. | {{RFC9126}}, {{RFC7519}} |
-| **aud** | It MUST be set with the Credential Issuer Status Assertion endpoint URL as value that identify the intended audience. | {{RFC9126}}, {{RFC7519}} |
+| **aud** | It MUST be set with the Issuer Status Assertion endpoint URL as value that identify the intended audience. | {{RFC9126}}, {{RFC7519}} |
 | **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be superior to the value set for `iat` . | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **iat** | UNIX Timestamp with the time of JWT/CWT issuance. | {{RFC9126}}, {{RFC7519}} |
 | **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
@@ -401,7 +401,7 @@ Content-Type: application/json
 }
 ~~~
 
-The Status Assertion HTTP request can be sent to a single Credential Issuer
+The Status Assertion HTTP request can be sent to a single Issuer
 regarding multiple Digital Credentials, and MUST contain a JSON object with
 the member `status_assertion_requests`.
 
@@ -409,15 +409,15 @@ The `status_assertion_requests` MUST be set with an array of strings, where
 each string within the array represents a Digital Credential
 Status Assertion Request object.
 
-The Credential Issuer that receives the Status Assertion Request object
+The Issuer that receives the Status Assertion Request object
 MUST validate that the Wallet Instance making the request is
 authorized to request Status Assertions.
 Therefore the following requirements MUST be satisfied:
 
-- The Credential Issuer MUST verify the compliance of all elements in the `status_assertion_requests` object
+- The Issuer MUST verify the compliance of all elements in the `status_assertion_requests` object
 using the confirmation method contained within the Digital Credential where the Status Assertion Request
 object is referred to;
-- The Credential Issuer MUST verify that it is the legitimate Issuer of the Digital Credential
+- The Issuer MUST verify that it is the legitimate Issuer of the Digital Credential
 to which each Status Assertion Request object refers.
 
 
@@ -520,11 +520,11 @@ The `error` parameter for the Status Assertion Error object MUST be set with one
 
 # Status Assertion
 
-When a Status Assertion is requested to a Credential Issuer, the
+When a Status Assertion is requested to an Issuer, the
 Issuer checks the status of the Digital Credential and creates a
 Status Assertion bound to it.
 
-If the Digital Credential is valid, the Credential Issuer
+If the Digital Credential is valid, the Issuer
 creates a new Status Assertion,
 which a non-normative example is given below
 where the format is JWT.
@@ -555,8 +555,8 @@ The Status Assertion MUST contain the parameters defined below.
 | --- | --- | --- |
 | **alg** | A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. It MUST NOT be set to `none` or to a symmetric algorithm (MAC) identifier. | {{RFC7515}}, {{RFC7517}} |
 | **typ** | It MUST be set to `status-assertion+jwt` when JWT format is used. It MUST be set to `status-assertion+cwt` when CWT format is used. | {{RFC7515}}, {{RFC7517}} and this specification |
-| **kid** | Unique identifier of the Credential Issuer JWK. It is required when `x5c` or other cryptographic public key resolution identifiers are not used. | {{RFC7515}} |
-| **x5c** | X.509 certificate chain about the Credential Issuer. It is required when `kid` or other parameter are not used. | {{RFC7515}} |
+| **kid** | Unique identifier of the Issuer JWK. It is required when `x5c` or other cryptographic public key resolution identifiers are not used. | {{RFC7515}} |
+| **x5c** | X.509 certificate chain about the Issuer. It is required when `kid` or other parameter are not used. | {{RFC7515}} |
 
 | Payload Parameter Name | Description | Reference |
 | --- | --- | --- |
@@ -569,14 +569,14 @@ The Status Assertion MUST contain the parameters defined below.
 | **cnf** | JSON object containing confirmation methods. The sub-member contained within `cnf` member, such as `jwk` for JWT and `Cose_Key` for CWT, MUST match with the one provided within the related Digital Credential. Other confirmation methods can be utilized when the referenced Digital Credential supports them, in accordance with the relevant standards. | {{RFC7800}} Section 3.1, {{RFC8747}} Section 3.1 |
 
 
-# Interoperability of Credential Issuers Supporting Status Assertions
+# Interoperability of Issuers Supporting Status Assertions
 
-This section outlines how Credential Issuers support Status Assertions,
+This section outlines how Issuers support Status Assertions,
 detailing the necessary metadata and practices to integrate into their systems.
 
-## Credential Issuer Metadata
+## Issuer Metadata
 
-The Credential Issuers that uses the Status Assertions include in their
+Issuers using Status Assertions MUST include in their
 metadata the following parameters:
 
 - `status_assertion_endpoint`. REQUIRED. It MUST be an HTTPs URL indicating
@@ -593,7 +593,7 @@ in the [IANA-HASH-REG].
 
 ## Issued Digital Credentials
 
-The Credential Issuers that uses the Status Assertions SHOULD include in the
+The Issuers that uses the Status Assertions SHOULD include in the
 issued Digital Credentials the object `status` with the
 JSON member `status_assertion` set to a JSON Object containing the following
 member:
@@ -633,13 +633,13 @@ an [SD-JWT.VC] is shown below.
 }
 ~~~
 
-### Credential Issuer Implementation Considerations
+### Issuer Implementation Considerations
 
-When the Digital Credential is issued, the Credential Issuer should
+When the Digital Credential is issued, the Issuer should
 calculate the hash value using the algorithm specified in
 `status.status_assertion.credential_hash_alg` and store this information
 in its database. This practice enhances efficiency by allowing the
-Credential Issuer to quickly compare the requested
+Issuer to quickly compare the requested
 `credential_hash` with the pre-calculated one, when processing
 Status Assertion requests made by Holders.
 
@@ -683,7 +683,7 @@ This enables Verifier policies to be conditioned on the presence of authorative 
 This section proposes syntax to support detailed assertions.
 The `credential_status_validity` claim MUST be present.
 The `credential_status_detail` claim MAY be present and if present MUST be an object.
-The semantics of the claims within the `credential_status_detail` object are determined by the Credential Issuer.
+The semantics of the claims within the `credential_status_detail` object are determined by the Issuer.
 
 An example of boolean detail status is:
 
@@ -809,7 +809,7 @@ regulations.
 The request for a Status Assertion does not transmit the Digital Credential
 for which the status is being attested. Instead, it includes a proof of
 possession (PoP) of the Digital Credential that is only interpretable by the
-Credential Issuer who issued the Digital Credential for which the
+Issuer who issued the Digital Credential for which the
 Status Assertion is requested. This PoP can be achieved through a
 cryptographic signature using the public key contained within the
 Digital Credential over the request. This method is essential for
@@ -865,11 +865,11 @@ A fundamental aspect of the privacy-preserving attributes of
 Status Assertions is their ability to address the "phone home" problem,
 which is the prevention of tracking by Digital Credential Issuers.
 Traditional models often require Verifiers to query a central status
-list or contact the issuer directly, a process that can inadvertently
-allow Credential Issuers to track when and where a Digital Credential
+list or contact the Issuer directly, a process that can inadvertently
+allow Issuers to track when and where a Digital Credential
 is verified. Status Assertions, however, encapsulate all necessary
 verification information within the assertion itself. This design choice
-ensures that Credential Issuers are unable to monitor the verification
+ensures that Issuers are unable to monitor the verification
 activities of their issued Digital Credentials, thereby significantly
 enhancing the privacy of the Holder. By removing the need for real-time
 communication with the Issuer for status checks, Status Assertions
