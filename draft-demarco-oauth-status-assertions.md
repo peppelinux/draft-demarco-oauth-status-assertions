@@ -668,7 +668,7 @@ Digital Credential. If true, the Verifier SHOULD:
     - the Issuer parameter value MUST match the one in the Credential;
     - the Issued at time parameter value MUST be equal to or later than the Issued at time parameter value in the Credential;
     - the Expiration time parameter value MUST be later than the current time;
-    - the Not before time parameter value MUST be less than or equal to the current time;
+    - the Not before time parameter value, if present, MUST be less than or equal to the current time;
     - when the confirmation method uses cryptographic material, this material MUST be used for the signature validation
     - the binding with the Credential MUST be checked, the hash value of the issuer signed part of the credential MUST be produced and this MUST match the one contained in the Status Assertion. 
 
