@@ -22,7 +22,7 @@ sequenceDiagram
 
 # Status Assertions Scopes
 
-Status Assertions are used to provide evidences about the validity of Digital Credentials, such as the non revocation of these, according to the mechanism where all the information are provided by Wallet and under the sole control of the User. Using the Status Assertions the Credential Verifiers do not use a direct request to a third party, therefore they do not ask information about a Credential outside of the Wallet instance. Status Assertions are periodically issued to the Holders of the Credentials who can present them to the Verifiers together with the corresponding Digital Credentials.
+Status Assertions are used to provide evidences about the validity of Digital Credentials, such as the non revocation of these, according to the mechanism where all the information are provided by Wallet and under the sole control of the User. Using the Status Assertions the Credential Verifiers without introducing third parties, the Credential Verifiers do not ask information about a Credential outside of the Wallet instance. Status Assertions are issued on request of the Credential holder who can present them to the Verifiers together with the corresponding Digital Credentials.
 
 ## Issuance and Presentation of Status Assertions
 
