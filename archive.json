@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-15T01:02:01.282206+00:00",
+  "timestamp": "2024-10-17T01:01:17.018212+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -1135,11 +1135,13 @@
       "state": "OPEN",
       "author": "peppelinux",
       "authorAssociation": "OWNER",
-      "assignees": [],
+      "assignees": [
+        "peppelinux"
+      ],
       "labels": [],
       "body": "Not all credentials expire.\r\n\r\nI think we should provide examples for all cases of vc + sa with `iat` and `exp`.\r\n\r\nThere is also `nbf` which could interact negatively with `iat` and `exp`.\r\n\r\n_Originally posted by @OR13 in https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/65#discussion_r1635625370_\r\n            ",
       "createdAt": "2024-06-12T01:08:58Z",
-      "updatedAt": "2024-09-25T15:31:00Z",
+      "updatedAt": "2024-10-16T15:18:33Z",
       "closedAt": null,
       "comments": [
         {
@@ -1271,15 +1273,15 @@
       "id": "I_kwDOK4XJ0s6RDNDZ",
       "title": "Align vocabulary with status list draft",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/81",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Add registry entries for valid and invalid.\r\n\r\nEnable assertion to include those values along with potential credentials type specific fresh information.\r\n\r\nSee: https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-03#section-14.2",
       "createdAt": "2024-07-27T16:01:20Z",
-      "updatedAt": "2024-09-25T07:56:25Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-16T15:14:56Z",
+      "closedAt": "2024-10-16T15:14:56Z",
       "comments": [
         {
           "author": "marinaado",
@@ -1287,6 +1289,13 @@
           "body": "This PR is related to the issues pointed in the https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/61, i.e. : \r\n- consider alignment of the credential_status_detail parameter vocabulary with the statusPurpose parameter of OAuth Status Lists specification. \r\n ",
           "createdAt": "2024-09-25T07:41:51Z",
           "updatedAt": "2024-09-25T07:56:25Z"
+        },
+        {
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "body": "@OR13 can you confirm that this issue was resolved https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/61\r\n\r\nI remember to have asked the merge of PR 61 and to continue working on the additional value/terms alignements using a separate issue, as opend by you. While, at the end, we got all the required updates in PR 61 and this seems enough\r\n\r\nI close this issue and if I made a mistake please re-open this with the motivation",
+          "createdAt": "2024-10-16T15:14:56Z",
+          "updatedAt": "2024-10-16T15:14:56Z"
         }
       ]
     },
@@ -1314,7 +1323,7 @@
       "id": "I_kwDOK4XJ0s6XCFly",
       "title": "Align boolean validity claim",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/83",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1323,8 +1332,8 @@
       "labels": [],
       "body": "We want to align the boolean validity claim with the status list approach.\r\nThis would mean dropping it in future versions, potentially.\r\n\r\nOriginally discussed in https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/61",
       "createdAt": "2024-09-18T14:27:20Z",
-      "updatedAt": "2024-09-25T15:12:32Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-15T14:21:27Z",
+      "closedAt": "2024-10-15T14:21:26Z",
       "comments": [
         {
           "author": "peppelinux",
@@ -10378,24 +10387,26 @@
       "id": "PR_kwDOK4XJ0s59ZDFs",
       "title": "Align the boolean validity claim",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/87",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "marinaado",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-10-02T15:14:36Z",
-      "updatedAt": "2024-10-14T12:35:09Z",
+      "updatedAt": "2024-10-15T14:21:26Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "3c888deb06dd14c924c8b4c5dca368cd776b9d06",
       "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "headRefName": "align-boolean-validity-claim",
       "headRefOid": "828e9eb1ed6184c8e827fa6deac97d3368e885de",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-10-15T14:21:25Z",
+      "mergedAt": "2024-10-15T14:21:25Z",
+      "mergedBy": "peppelinux",
+      "mergeCommit": {
+        "oid": "31d6c05e7977ec0206810a3f11cdcd9b10b2fc28"
+      },
       "comments": [
         {
           "author": "marinaado",
@@ -10925,24 +10936,26 @@
       "id": "PR_kwDOK4XJ0s59mURY",
       "title": "fix: links and refs updated",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/88",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "peppelinux",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "This PR aligns some refs/links",
       "createdAt": "2024-10-04T09:38:09Z",
-      "updatedAt": "2024-10-08T17:18:17Z",
+      "updatedAt": "2024-10-16T15:10:05Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "031a46e0f110f1b57ee45adc64568cc053d419af",
       "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "headRefName": "fixrefs",
       "headRefOid": "6e172ff9b0f96fd046901f20d863dd09fbfb7cf6",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-10-16T15:10:04Z",
+      "mergedAt": "2024-10-16T15:10:04Z",
+      "mergedBy": "peppelinux",
+      "mergeCommit": {
+        "oid": "939a76b25db68dd651edd9ecf26f3ea2ee63dab6"
+      },
       "comments": [],
       "reviews": [
         {
@@ -11011,13 +11024,13 @@
       "labels": [],
       "body": "In the attempt to align the terminology to the OAuth Token Status List, this PR introduces following terminology change: \r\n\r\n- from \"Credential Issuer\" to \"Issuer\" \r\n\r\nThe terminology differences for following terms still exist: \r\n\r\n- Relying Party (OAuth Token Status List) vs Verifier (Status Assertions)\r\n- Referenced Token (OAuth Token Status List) vs Digital Credential (Status Assertions)",
       "createdAt": "2024-10-09T13:36:34Z",
-      "updatedAt": "2024-10-09T15:40:34Z",
+      "updatedAt": "2024-10-16T15:31:51Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
-      "baseRefOid": "bc37e02ab93a84fa56ed821464b2e9af6e5a7caa",
+      "baseRefOid": "839a94528ace2d383ac61b84a0ea6c7ddb329bca",
       "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "headRefName": "align-terminology-with-status-list",
-      "headRefOid": "d73657dc09084cc6cdf9b3e3a4dbff0d740591ff",
+      "headRefOid": "30e130d73a93fa908664aced5462bd055211bc61",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -11055,6 +11068,32 @@
               "updatedAt": "2024-10-09T14:59:46Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Nbja0",
+          "commit": {
+            "abbreviatedOid": "30e130d"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-16T15:09:23Z",
+          "updatedAt": "2024-10-16T15:09:23Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Nb1bO",
+          "commit": {
+            "abbreviatedOid": "30e130d"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-16T15:31:51Z",
+          "updatedAt": "2024-10-16T15:31:51Z",
+          "comments": []
         }
       ]
     },
@@ -11063,24 +11102,26 @@
       "id": "PR_kwDOK4XJ0s5-GRf6",
       "title": "add Marina as co-author",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/92",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "peppelinux",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "for merit and concreteness",
       "createdAt": "2024-10-09T15:27:18Z",
-      "updatedAt": "2024-10-10T01:17:27Z",
+      "updatedAt": "2024-10-15T14:21:52Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "bc37e02ab93a84fa56ed821464b2e9af6e5a7caa",
       "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "headRefName": "marina",
       "headRefOid": "6dec576d42978b438842f1e90087cbaf434db954",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-10-15T14:21:52Z",
+      "mergedAt": "2024-10-15T14:21:52Z",
+      "mergedBy": "peppelinux",
+      "mergeCommit": {
+        "oid": "839a94528ace2d383ac61b84a0ea6c7ddb329bca"
+      },
       "comments": [],
       "reviews": [
         {
