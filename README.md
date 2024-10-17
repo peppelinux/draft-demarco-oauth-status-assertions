@@ -32,7 +32,7 @@ Status Assertions are used to provide evidences about the validity of Digital Cr
 
 ## Features
 
-**Data protection:** The procedure ensures that no unnecessary personal data of the Holder or information about the use of the Credential is passed on to the Verifier or other parties. Verifiers do not need direct interaction with the Credential Issuer or other third parties to confirm the status of a Digital Credential, which preservers the privacy and security of the process.
+**Data protection:** The procedure ensures that no unnecessary personal data of the Holder or information about the use of the Credential is passed on to the Verifier or other parties. Verifiers do not need direct interaction with the Credential Issuer or other third parties to confirm the status of a Digital Credential.
 **Offline capability:** The ability to check the validity of credentials offline without having to access a central database or online status lists is a key advantage of this approach.
 
 ## Contributing
