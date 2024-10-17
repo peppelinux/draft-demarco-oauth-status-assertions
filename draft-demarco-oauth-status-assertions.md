@@ -52,11 +52,6 @@ normative:
       org: "IANA"
     title: "Media Types"
     target: "https://www.iana.org/assignments/media-types/media-types.xhtml"
-  OpenID4VCI:
-    author:
-      org: "OpenID Foundation"
-    title: "OpenID for Verifiable Credential Issuance"
-    target: "https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html"
   IANA.MediaTypes:
     author:
       org: "IANA"
@@ -92,7 +87,10 @@ informative:
   GDPR:
     title: GDPR
     target: https://gdpr-info.eu/
-  SD-JWT.VC: I-D.ietf-oauth-sd-jwt-vc
+  SD-JWT.VC:
+    author:
+    title: "SD-JWT-based Verifiable Credentials (SD-JWT VC)"
+    target: "https://www.ietf.org/archive/id/draft-ietf-oauth-sd-jwt-vc-05.html"
   ISO.mdoc:
     author:
       org: "ISO/IEC JTC 1/SC 17"
@@ -179,7 +177,7 @@ This specification uses the terms "End-User", "Entity" as defined by
 OpenID Connect Core [OpenID.Core], the term "JSON Web Token (JWT)"
 defined by JSON Web Token (JWT) {{RFC7519}},
 the term "CBOR Web Token (CWT)" defined in {{RFC8392}}, "Client" as
-defined {{RFC6749}}, "Verifiable Presentation" defined in [@OpenID4VP].
+defined {{RFC6749}}, "Verifiable Presentation" defined in [OpenID4VP].
 
 Digital Credential:
 : A set of one or more claims about a subject made by an Issuer.
@@ -299,9 +297,7 @@ related to a specific Credential issued by the same Issuer.
 
 ~~~ ascii-art
 +-------------------+                                  +-------------------+
-|                   |                                  |                   |
 |  Wallet Instance  |                                  |      Issuer       |
-|                   |                                  |                   |
 +--------+----------+                                  +----------+--------+
          |                                                        |
          | HTTP POST /status                                      |
@@ -312,9 +308,7 @@ related to a specific Credential issued by the same Issuer.
          <--------------------------------------------------------+
          |                                                        |
 +--------+----------+                                  +----------+--------+
-|                   |                                  |                   |
 |  Wallet Instance  |                                  |       Issuer      |
-|                   |                                  |                   |
 +-------------------+                                  +-------------------+
 ~~~
 
@@ -322,15 +316,16 @@ The Wallet Instance sends the Status Assertion request to the
 Issuer, where:
 
 - The request MUST contain the base64url encoded hash value of the Digital Credential's
-Issuer signed part, such as the Issuer Signed JWT using [@SD-JWT-VC],
-or the Mobile Security Object using [@ISO 18013-5],
+Issuer signed part, such as the Issuer Signed JWT using [SD-JWT.VC],
+or the Mobile Security Object using [ISO.mdoc],
 for which the Status Assertion is requested, and enveloped in a signed
 Status Assertion Request object.
 - The Status Assertion Request object MUST be signed with the private key corresponding
 to the confirmation claim assigned by the Issuer and contained within
 the Digital Credential.
 
-The Status Assertion Request object MUST contain the parameters defined in the following table.
+The Status Assertion Request object MUST contain the parameters defined
+in the following table.
 
 | Header | Description | Reference |
 | --- | --- | --- |
@@ -453,7 +448,7 @@ as defined in [the section Status Error](#status-assertion-error).
 
 For each entry in the `status_assertion_responses` array, the following requirements are met:
 - Each element in the array MUST match the corresponding element in the request array at
-the same position index to which it is related, eg: _[requestAboutA, requestAboutB]_ may produce _[responseAboutA, responseErrorAboutB]_.
+the same position index to which it is related, eg: _\[requestAboutA, requestAboutB\]_ may produce _\[responseAboutA, responseErrorAboutB\]_.
 - Each element MUST contain the error or the status of the assertion, using the `typ` member
 set to "status-assertion+{jwt,cwt}" or "status-assertion-error+{jwt,cwt}", depending by the object type.
 - The corresponding entry in the response MUST be of the same data format as requested. For example,
