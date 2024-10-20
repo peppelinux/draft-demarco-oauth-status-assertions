@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-17T01:01:17.018212+00:00",
+  "timestamp": "2024-10-20T01:06:49.566140+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -867,10 +867,12 @@
       "assignees": [
         "peppelinux"
       ],
-      "labels": [],
+      "labels": [
+        "wontfix"
+      ],
       "body": "All those comparisons will be held in this thread unless an informational RFC will be created about both the status lists and the status assertions",
       "createdAt": "2024-05-20T06:53:44Z",
-      "updatedAt": "2024-09-03T08:52:07Z",
+      "updatedAt": "2024-10-17T10:13:47Z",
       "closedAt": null,
       "comments": [
         {
@@ -1304,7 +1306,7 @@
       "id": "I_kwDOK4XJ0s6SPJPu",
       "title": "Align Terminology with Status List",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/82",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "NONE",
       "assignees": [
@@ -1314,8 +1316,8 @@
       "labels": [],
       "body": "As Status Assertion is planning to use the extension point of OAuth Token Status List, I think it would be great to align the base terminology, so that readers comparing the specs have an easier time doing so. Specifically we use:\r\n- Issuer\r\n- Relying Party\r\n- Referenced Token\r\n\r\nWe also currently think about adding:\r\n- Client\r\n- Status List Provider -> this one could be renamed to be more general",
       "createdAt": "2024-08-07T13:07:01Z",
-      "updatedAt": "2024-08-14T20:31:54Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-17T09:32:23Z",
+      "closedAt": "2024-10-17T09:32:23Z",
       "comments": []
     },
     {
@@ -1414,6 +1416,22 @@
       "body": "Replace the examples credential-status_detail with internationalized messages for display to the end user.\r\n\r\nuse the \"...\" to signal that additional fields could be present.",
       "createdAt": "2024-10-09T15:24:19Z",
       "updatedAt": "2024-10-09T15:24:41Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 94,
+      "id": "I_kwDOK4XJ0s6a0wvP",
+      "title": "Refs and links to RFC9162 (Certificates Transparency)",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/94",
+      "state": "OPEN",
+      "author": "peppelinux",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "this looks like the detailed statuses we had\r\nhttps://datatracker.ietf.org/doc/html/rfc9162#section-7.1",
+      "createdAt": "2024-10-18T13:27:57Z",
+      "updatedAt": "2024-10-18T13:27:57Z",
       "closedAt": null,
       "comments": []
     }
@@ -9556,18 +9574,26 @@
       "labels": [],
       "body": "Features and benefits of OAuth Status Assertions to clearly communicate their use and privacy benefits .",
       "createdAt": "2024-07-09T12:01:12Z",
-      "updatedAt": "2024-10-06T06:53:28Z",
+      "updatedAt": "2024-10-19T18:42:14Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
-      "baseRefOid": "b49765707b9ab30139beab7045aecef5c58461a9",
+      "baseRefOid": "c47fa429957222c55ed9e53aee8000258e275f60",
       "headRepository": "Sascha-Block/draft-demarco-oauth-status-assertions",
       "headRefName": "patch-1",
-      "headRefOid": "f831b22d6efc1fbca00f01fdf315942f927258d1",
+      "headRefOid": "b7cd37c783fcbb3e3739a3b6d9b2b4d60c6ce456",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "Sascha-Block",
+          "authorAssociation": "NONE",
+          "body": "Changes approved. Full commitment on transparent work in real time :-)",
+          "createdAt": "2024-10-17T10:02:47Z",
+          "updatedAt": "2024-10-17T10:02:47Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOK4XJ0s6CW73F",
@@ -10100,6 +10126,66 @@
           "createdAt": "2024-10-06T06:53:28Z",
           "updatedAt": "2024-10-06T06:53:28Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6NiwOz",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-17T09:40:28Z",
+          "updatedAt": "2024-10-17T09:40:28Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Changes made, pls check",
+              "createdAt": "2024-10-17T09:40:28Z",
+              "updatedAt": "2024-10-17T09:40:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Nixes",
+          "commit": {
+            "abbreviatedOid": "2adec28"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-17T09:42:41Z",
+          "updatedAt": "2024-10-17T09:42:41Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Done",
+              "createdAt": "2024-10-17T09:42:41Z",
+              "updatedAt": "2024-10-17T09:42:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6N1uW7",
+          "commit": {
+            "abbreviatedOid": "b7cd37c"
+          },
+          "author": "fmarino-ipzs",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T18:42:01Z",
+          "updatedAt": "2024-10-19T18:42:14Z",
+          "comments": [
+            {
+              "originalPosition": 29,
+              "body": "Is the ability to check online status lists a key advantage of this approach?",
+              "createdAt": "2024-10-19T18:42:02Z",
+              "updatedAt": "2024-10-19T18:42:14Z"
+            }
+          ]
         }
       ]
     },
@@ -11017,24 +11103,26 @@
       "id": "PR_kwDOK4XJ0s5-FVyp",
       "title": "Terminology fix",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/89",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "marinaado",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "In the attempt to align the terminology to the OAuth Token Status List, this PR introduces following terminology change: \r\n\r\n- from \"Credential Issuer\" to \"Issuer\" \r\n\r\nThe terminology differences for following terms still exist: \r\n\r\n- Relying Party (OAuth Token Status List) vs Verifier (Status Assertions)\r\n- Referenced Token (OAuth Token Status List) vs Digital Credential (Status Assertions)",
       "createdAt": "2024-10-09T13:36:34Z",
-      "updatedAt": "2024-10-16T15:31:51Z",
+      "updatedAt": "2024-10-17T09:32:22Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
-      "baseRefOid": "839a94528ace2d383ac61b84a0ea6c7ddb329bca",
+      "baseRefOid": "939a76b25db68dd651edd9ecf26f3ea2ee63dab6",
       "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "headRefName": "align-terminology-with-status-list",
-      "headRefOid": "30e130d73a93fa908664aced5462bd055211bc61",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "3a496411c8c176677ccc6b0569d0cc24b52b5285",
+      "closedAt": "2024-10-17T09:32:22Z",
+      "mergedAt": "2024-10-17T09:32:22Z",
+      "mergedBy": "peppelinux",
+      "mergeCommit": {
+        "oid": "c47fa429957222c55ed9e53aee8000258e275f60"
+      },
       "comments": [],
       "reviews": [
         {
@@ -11148,6 +11236,139 @@
           "body": "",
           "createdAt": "2024-10-10T01:17:27Z",
           "updatedAt": "2024-10-10T01:17:27Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 93,
+      "id": "PR_kwDOK4XJ0s5-8i-2",
+      "title": "added RP checks and further clarification for the assertion verification phase",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/93",
+      "state": "OPEN",
+      "author": "peppelinux",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR resolves https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/71\r\n\r\nThis PR resolves https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/29\r\n\r\nthose issues was already touched by previous pr that have partially resolved them, but now definitively with this one.",
+      "createdAt": "2024-10-17T10:12:02Z",
+      "updatedAt": "2024-10-17T19:56:35Z",
+      "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "baseRefName": "main",
+      "baseRefOid": "c47fa429957222c55ed9e53aee8000258e275f60",
+      "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "headRefName": "rp-checks",
+      "headRefOid": "af96f065e7db3ce5388d7ab723778aeb49643b05",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOK4XJ0s6NjCXw",
+          "commit": {
+            "abbreviatedOid": "234e8c7"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-17T10:12:41Z",
+          "updatedAt": "2024-10-17T10:12:41Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "@marinaado this is because we don't use defined terms representations before the section that defines them",
+              "createdAt": "2024-10-17T10:12:41Z",
+              "updatedAt": "2024-10-17T10:12:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6NkUI3",
+          "commit": {
+            "abbreviatedOid": "234e8c7"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-17T12:36:29Z",
+          "updatedAt": "2024-10-17T12:36:29Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6NkU5u",
+          "commit": {
+            "abbreviatedOid": "234e8c7"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-17T12:37:37Z",
+          "updatedAt": "2024-10-17T12:37:37Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "```suggestion\r\n    - the Not before time parameter value, if present, MUST be less than or equal to the current time;\r\n```",
+              "createdAt": "2024-10-17T12:37:37Z",
+              "updatedAt": "2024-10-17T12:37:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6NkXuC",
+          "commit": {
+            "abbreviatedOid": "234e8c7"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-17T12:41:16Z",
+          "updatedAt": "2024-10-17T12:41:17Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "Not sure about this sentence. Are we trying to say that the token must be verified with confirmation method? This reads as restricting confirmation methods, which I think we should leave up to credential type specifications.\r\n\r\nWe could say, \"The token (which one?) must verify with the confirmation method in the Credential\".",
+              "createdAt": "2024-10-17T12:41:17Z",
+              "updatedAt": "2024-10-17T12:42:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6NkuFR",
+          "commit": {
+            "abbreviatedOid": "234e8c7"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-17T13:15:04Z",
+          "updatedAt": "2024-10-17T13:15:04Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "```suggestion\r\n    - The hash of the credential MUST be produced as described in __tbd___ and MUST match the hash contained in the Status Assertion. \r\n```",
+              "createdAt": "2024-10-17T13:15:04Z",
+              "updatedAt": "2024-10-17T13:15:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6NkuU3",
+          "commit": {
+            "abbreviatedOid": "234e8c7"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-17T13:15:26Z",
+          "updatedAt": "2024-10-17T13:15:26Z",
           "comments": []
         }
       ]
