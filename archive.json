@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-20T01:06:49.566140+00:00",
+  "timestamp": "2024-10-22T01:02:15.754743+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -11252,7 +11252,7 @@
       "labels": [],
       "body": "This PR resolves https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/71\r\n\r\nThis PR resolves https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/29\r\n\r\nthose issues was already touched by previous pr that have partially resolved them, but now definitively with this one.",
       "createdAt": "2024-10-17T10:12:02Z",
-      "updatedAt": "2024-10-17T19:56:35Z",
+      "updatedAt": "2024-10-20T07:02:48Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "c47fa429957222c55ed9e53aee8000258e275f60",
@@ -11369,6 +11369,19 @@
           "body": "",
           "createdAt": "2024-10-17T13:15:26Z",
           "updatedAt": "2024-10-17T13:15:26Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6N3mir",
+          "commit": {
+            "abbreviatedOid": "af96f06"
+          },
+          "author": "fmarino-ipzs",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-20T07:02:48Z",
+          "updatedAt": "2024-10-20T07:02:48Z",
           "comments": []
         }
       ]
