@@ -8,18 +8,6 @@ This is the working area for the individual Internet-Draft, "OAuth Status Assert
 * [Compare Editor's Copy to Individual Draft](https://peppelinux.github.io/draft-demarco-oauth-status-assertions/#go.draft-demarco-oauth-status-assertions.diff)
 
 
-# Overview 
-
-```mermaid
-sequenceDiagram
-    Issuer-->>Holder: (credential issuance out of scope)
-    Holder->>Issuer: application/status-assertion-request+jwt
-    Issuer -->> Issuer : (status check out of scope)
-    Issuer ->> Holder: application/status-assertion+jwt
-    Holder -->> Verifier: (credential presentation out of scope)
-```
-
-
 ## Contributing
 
 See the
