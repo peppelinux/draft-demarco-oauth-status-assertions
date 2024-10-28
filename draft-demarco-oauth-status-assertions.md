@@ -664,13 +664,13 @@ Digital Credential. If true, the Verifier SHOULD:
   by matching the JWS Header parameter `typ` set to `status-assertion+jwt`
   and looking for the `credential_hash` value that matches with the
   hash produced at the previous point;
-  - evaluate the validity of the Status Assertion within the vp_token by checking the following parameters:
+  - evaluate the validity of the Status Assertion within the `vp_token` parameter, by checking the following items:
     - the Issuer parameter value MUST match the one in the Credential;
     - the Issued at time parameter value MUST be equal to or later than the Issued at time parameter value in the Credential;
     - the Expiration time parameter value MUST be later than the current time;
     - the Not before time parameter value, if present, MUST be less than or equal to the current time;
-    - when the confirmation method uses cryptographic material, this material MUST be used for the signature validation
-    - the binding with the Credential MUST be checked, the hash value of the issuer signed part of the credential MUST be produced and this MUST match the one contained in the Status Assertion. 
+    - the confirmation method MUST be used for the validation (eg: if it uses cryptographic material, this material must be used for the signature validation)
+    - The hash of the Credential MUST be produced as described in [Section 7](#status-assertion-request) and MUST match the hash contained in the Status Assertion. 
 
 # Considerations On Revocation Verification
 
