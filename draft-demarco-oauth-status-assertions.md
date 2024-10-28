@@ -1101,7 +1101,7 @@ We would like to thank:
 # Document History
 
 -03
- 
+
 * Terminology aligned with IETF Token Status Lists
 * Marina Adomeit added as co-author
 * Added informative references about national and international regulations
