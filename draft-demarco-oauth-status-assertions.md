@@ -670,7 +670,7 @@ Digital Credential. If true, the Verifier SHOULD:
     - the Expiration time parameter value MUST be later than the current time;
     - the Not before time parameter value, if present, MUST be less than or equal to the current time;
     - the confirmation method MUST be used for the validation (eg: if it uses cryptographic material, this material must be used for the signature validation)
-    - The hash of the Credential MUST be produced as described in [Section 7](#status-assertion-request) and MUST match the hash contained in the Status Assertion. 
+    - The hash of the Credential MUST be produced as described in [Section 7](#status-assertion-request) and MUST match the hash contained in the Status Assertion.
 
 # Considerations On Revocation Verification
 
