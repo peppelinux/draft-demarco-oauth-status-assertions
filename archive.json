@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-27T01:06:19.988859+00:00",
+  "timestamp": "2024-10-29T01:03:01.979593+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -11252,13 +11252,13 @@
       "labels": [],
       "body": "This PR resolves https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/71\r\n\r\nThis PR resolves https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/29\r\n\r\nthose issues was already touched by previous pr that have partially resolved them, but now definitively with this one.",
       "createdAt": "2024-10-17T10:12:02Z",
-      "updatedAt": "2024-10-20T07:02:48Z",
+      "updatedAt": "2024-10-28T21:23:27Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "c47fa429957222c55ed9e53aee8000258e275f60",
       "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "headRefName": "rp-checks",
-      "headRefOid": "af96f065e7db3ce5388d7ab723778aeb49643b05",
+      "headRefOid": "90c3faa4b65a35556d3dcb4b47af809c46a9ffaf",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -11352,9 +11352,9 @@
           "comments": [
             {
               "originalPosition": 46,
-              "body": "```suggestion\r\n    - The hash of the credential MUST be produced as described in __tbd___ and MUST match the hash contained in the Status Assertion. \r\n```",
+              "body": "```suggestion\r\n    - The hash of the Credential MUST be produced as described in [Section 7](#status-assertion-request) and MUST match the hash contained in the Status Assertion. \r\n```",
               "createdAt": "2024-10-17T13:15:04Z",
-              "updatedAt": "2024-10-17T13:15:04Z"
+              "updatedAt": "2024-10-28T21:09:40Z"
             }
           ]
         },
@@ -11383,6 +11383,99 @@
           "createdAt": "2024-10-20T07:02:48Z",
           "updatedAt": "2024-10-20T07:02:48Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6PEIqL",
+          "commit": {
+            "abbreviatedOid": "af96f06"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-28T21:04:18Z",
+          "updatedAt": "2024-10-28T21:04:19Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "```suggestion\r\n  - evaluate the validity of the Status Assertion within the `vp_token` parameter, by checking the following items:\r\n```",
+              "createdAt": "2024-10-28T21:04:19Z",
+              "updatedAt": "2024-10-28T21:04:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6PEJrs",
+          "commit": {
+            "abbreviatedOid": "af96f06"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-28T21:06:48Z",
+          "updatedAt": "2024-10-28T21:06:48Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "```suggestion\r\n    - the confirmation method MUST be used for the validation (eg: if it uses cryptographic material, this material must be used for the signature validation)\r\n```\r\n\r\n@OR13 wdyt? ^",
+              "createdAt": "2024-10-28T21:06:48Z",
+              "updatedAt": "2024-10-28T21:06:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6PEJyv",
+          "commit": {
+            "abbreviatedOid": "af96f06"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-28T21:07:05Z",
+          "updatedAt": "2024-10-28T21:07:05Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "see my next comment for the resolution of this",
+              "createdAt": "2024-10-28T21:07:05Z",
+              "updatedAt": "2024-10-28T21:07:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6PEOEi",
+          "commit": {
+            "abbreviatedOid": "af96f06"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-28T21:14:55Z",
+          "updatedAt": "2024-10-28T21:14:55Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6PERKF",
+          "commit": {
+            "abbreviatedOid": "f0d5afb"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-28T21:21:32Z",
+          "updatedAt": "2024-10-28T21:21:33Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "```suggestion\r\n    - The hash of the Credential MUST be produced as described in [Section 7](#status-assertion-request) and MUST match the hash contained in the Status Assertion.\r\n```",
+              "createdAt": "2024-10-28T21:21:33Z",
+              "updatedAt": "2024-10-28T21:21:33Z"
+            }
+          ]
         }
       ]
     }
