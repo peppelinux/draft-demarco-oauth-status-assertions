@@ -194,7 +194,8 @@ Verifier:
 : Entity that relies on the validity of the Digital Credentials presented to it.
 This Entity, verifies the authenticity and
 validity of the Digital Credentials, including their revocation status,
-before accepting them. Alternative names are "Relying Party" and "Credential Verifier". 
+before accepting them. Alternative names are
+"Relying Party" and "Credential Verifier".
 
 Wallet Instance:
 : The digital Wallet in control of a User, also known as Wallet.
