@@ -5,12 +5,12 @@
 Network Working Group                                        G. D. Marco
 Internet-Draft               Dipartimento per la trasformazione digitale
 Intended status: Informational                                 O. Steele
-Expires: 1 May 2025                                            Transmute
+Expires: 3 May 2025                                            Transmute
                                                                F. Marino
                                 Istituto Poligrafico e Zecca dello Stato
                                                               M. Adomeit
                                                                    SUNET
-                                                         28 October 2024
+                                                         30 October 2024
 
 
                         OAuth Status Assertions
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 May 2025.
+   This Internet-Draft will expire on 3 May 2025.
 
 Copyright Notice
 
@@ -117,14 +117,14 @@ Table of Contents
    JSON Web Tokens (JWT) or CBOR Web Tokens (CWT) format.  Status
    Assertions function similarly to OCSP Stapling ([RFC6066]), allowing
    clients to present to the relying parties time-stamped assertions
-   provided by the Issuer.  The approach outlined in this specification
+   provided by the issuer.  The approach outlined in this specification
    enables the verification of credentials against revocation without
    direct queries to third-party systems, enhancing privacy, reducing
    latency, and faciliting offline verification.
 
    The figure below illustrates the process by which a client, such as a
    wallet instance, requests and obtains a Status Assertion from the
-   Issuer.
+   issuer.
 
    +----------------+                              +------------------+
    |                | Requests Status Assertions   |                  |
@@ -235,6 +235,10 @@ Table of Contents
       provides stronger guidance.  The expiration datetime MUST be
       superior to the Status Assertion issuance datetime and it MUST end
       before the expiration datetime of the Digital Credential;
+
+   *  MAY contain the _not before time_ parameter, specifying the time
+      from which the Status Assertion MUST be considered valid and
+      evaluable.
 
    *  MUST enable the offline use cases by employing validation using a
       cryptographic signature and the cryptographic public key of the
@@ -906,7 +910,28 @@ Content-Type: application/json
          assertion+jwt and looking for the credential_hash value that
          matches with the hash produced at the previous point;
 
-      -  evaluate the validity of the Status Assertion.
+      -  evaluate the validity of the Status Assertion within the
+         vp_token parameter, by checking the following items:
+
+         o  the Issuer parameter value MUST match the one in the
+            Credential;
+
+         o  the Issued at time parameter value MUST be equal to or later
+            than the Issued at time parameter value in the Credential;
+
+         o  the Expiration time parameter value MUST be later than the
+            current time;
+
+         o  the Not before time parameter value, if present, MUST be
+            less than or equal to the current time;
+
+         o  the confirmation method MUST be used for the validation (eg:
+            if it uses cryptographic material, this material must be
+            used for the signature validation)
+
+         o  The hash of the Credential MUST be produced as described in
+            Section 7 (Section 7) and MUST match the hash contained in
+            the Status Assertion.
 
 13.  Considerations On Revocation Verification
 
@@ -1609,7 +1634,25 @@ Appendix A.  Acknowledgments
 
    *  Amir Sharif
 
+   *  Oliver Terbu
+
 Appendix B.  Document History
+
+   -03
+
+   *  Terminology aligned with IETF Token Status Lists
+
+   *  Marina Adomeit added as co-author
+
+   *  Added informative references about national and international
+      regulations
+
+   *  Abandoned boolean values for Integers values
+
+   *  Status values aligned with IETF Token Status Lists
+
+   *  Added the requirement about not specificing audiences in the
+      Status Assertions
 
    -02
 
