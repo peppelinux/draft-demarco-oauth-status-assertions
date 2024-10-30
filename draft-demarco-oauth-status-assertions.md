@@ -126,7 +126,7 @@ credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT)
 format. Status Assertions function
 similarly to OCSP Stapling ([RFC6066]), allowing clients to present to the
 relying parties
-time-stamped assertions provided by the Issuer.
+time-stamped assertions provided by the issuer.
 The approach outlined in this specification enables the
 verification of credentials against revocation without
 direct queries to third-party systems,
@@ -135,7 +135,7 @@ faciliting offline verification.
 
 The figure below illustrates the process by which a client,
 such as a wallet instance,
-requests and obtains a Status Assertion from the Issuer.
+requests and obtains a Status Assertion from the issuer.
 
 ~~~ ascii-art
 +----------------+                              +------------------+
@@ -248,6 +248,8 @@ be considered as having a valid status, unless there exists some specific Verifi
 The expiration datetime MUST be
 superior to the Status Assertion issuance datetime and it MUST end before
 the expiration datetime of the Digital Credential;
+- MAY contain the _not before time_ parameter, specifying the time
+from which the Status Assertion MUST be considered valid and evaluable.
 - MUST enable the offline use cases by employing validation using
 a cryptographic signature and the cryptographic public key of the
 Issuer.
@@ -506,6 +508,7 @@ table below:
 | **error_description** | OPTIONAL. Text that clarifies the nature of the error in relation to the `error` value.  | {{RFC7519}} Section 4.1.7 |
 
 ## Rationale About The Unsigned Status Assertion Errors
+
 To mitigate potential resource exhaustion attacks where an adversary could issue hundreds of fake Status Assertion Requests to force an Issuer to sign numerous Status Assertion Errors, it is advisable to set the header parameter`alg` value to `none` for Status Assertion Errors that do not require signatures. This approach conserves computational resources and prevents abuse, especially in scenarios where the Issuer's implementation could be vulnerable to resource exhaustion attacks. However, even if it is out of the scopes of this specification determine in which the Status Error Assertion signatures are necessary, when the Issuer signs the Status Assertion Errors the Client that received them MUST validate the signature.
 
 ## Status Assertion Error Values
@@ -661,7 +664,13 @@ Digital Credential. If true, the Verifier SHOULD:
   by matching the JWS Header parameter `typ` set to `status-assertion+jwt`
   and looking for the `credential_hash` value that matches with the
   hash produced at the previous point;
-  - evaluate the validity of the Status Assertion.
+  - evaluate the validity of the Status Assertion within the `vp_token` parameter, by checking the following items:
+    - the Issuer parameter value MUST match the one in the Credential;
+    - the Issued at time parameter value MUST be equal to or later than the Issued at time parameter value in the Credential;
+    - the Expiration time parameter value MUST be later than the current time;
+    - the Not before time parameter value, if present, MUST be less than or equal to the current time;
+    - the confirmation method MUST be used for the validation (eg: if it uses cryptographic material, this material must be used for the signature validation)
+    - The hash of the Credential MUST be produced as described in [Section 7](#status-assertion-request) and MUST match the hash contained in the Status Assertion.
 
 # Considerations On Revocation Verification
 
@@ -1086,9 +1095,19 @@ We would like to thank:
 - Victor Näslund
 - Giada Sciarretta
 - Amir Sharif
+- Oliver Terbu
 
 
 # Document History
+
+-03
+
+* Terminology aligned with IETF Token Status Lists
+* Marina Adomeit added as co-author
+* Added informative references about national and international regulations
+* Abandoned boolean values for Integers values
+* Status values aligned with IETF Token Status Lists
+* Added the requirement about not specificing audiences in the Status Assertions
 
 -02
 
