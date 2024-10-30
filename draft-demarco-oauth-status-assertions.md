@@ -397,8 +397,8 @@ Content-Type: application/json
 
 {
     "status_assertion_requests" : [
-      $status_assertion_request, 
-      $status_assertion_request, ... 
+      $status_assertion_request,
+      $status_assertion_request, ...
     ]
 }
 ~~~
