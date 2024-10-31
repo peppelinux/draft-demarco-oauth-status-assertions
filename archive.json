@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-29T01:03:01.979593+00:00",
+  "timestamp": "2024-10-31T01:02:32.315842+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -526,7 +526,7 @@
       "id": "I_kwDOK4XJ0s6C1OoJ",
       "title": "Missing validation steps for verifiers",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/29",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "awoie",
       "authorAssociation": "NONE",
       "assignees": [],
@@ -535,8 +535,8 @@
       ],
       "body": "It is not clear what happens if the verifier encounters a credential with a status attestation method in the `status` field but does not receive a status attestation. \r\n\r\nThree questions:\r\n- Should the verifier reject a credential presentation if the wallet did not provide a status attestation?\r\n- How does the holder know whether the verifier requires a status attestation?\r\n- Why would a holder ever present a credential along with a revoked status attestation?",
       "createdAt": "2024-03-19T13:33:40Z",
-      "updatedAt": "2024-09-19T10:44:22Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-30T17:46:44Z",
+      "closedAt": "2024-10-30T17:46:44Z",
       "comments": [
         {
           "author": "awoie",
@@ -1026,7 +1026,7 @@
       "id": "I_kwDOK4XJ0s6L1umE",
       "title": "credential_hash within the status.status_assertion",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/66",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "peppelinux",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -1037,8 +1037,8 @@
       ],
       "body": "to simplify the implementation we may think to add the credential_hash directly in the status object representing the support of status assertion\r\n\r\nthis would avoid the calculation of the hash by the wallet instance that may only validate the computed hash\r\n\r\n\r\n````\r\n{\r\n    \"vct\": \"https://credentials.example.com/identity_credential\",\r\n    \"given_name\": \"John\",\r\n    \"family_name\": \"Doe\",\r\n    \"email\": \"johndoe@example.com\",\r\n    \"phone_number\": \"+1-202-555-0101\",\r\n    \"address\": {\r\n      \"street_address\": \"123 Main St\",\r\n      \"locality\": \"Anytown\",\r\n      \"region\": \"Anystate\",\r\n      \"country\": \"US\"\r\n    },\r\n    \"birthdate\": \"1940-01-01\",\r\n    \"is_over_18\": true,\r\n    \"is_over_21\": true,\r\n    \"is_over_65\": true,\r\n    \"status\": {\r\n       \"status_assertion\": {\r\n           \"credential_hash_alg\": \"sha-256\",\r\n           \"credential_hash\": ..........,\r\n       }\r\n    }\r\n   }\r\n````",
       "createdAt": "2024-06-11T11:00:20Z",
-      "updatedAt": "2024-06-11T13:21:58Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-30T18:22:01Z",
+      "closedAt": "2024-10-30T18:22:01Z",
       "comments": [
         {
           "author": "peppelinux",
@@ -1134,7 +1134,7 @@
       "id": "I_kwDOK4XJ0s6L7OZF",
       "title": "Not all credentials expire.",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/71",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "peppelinux",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -1143,8 +1143,8 @@
       "labels": [],
       "body": "Not all credentials expire.\r\n\r\nI think we should provide examples for all cases of vc + sa with `iat` and `exp`.\r\n\r\nThere is also `nbf` which could interact negatively with `iat` and `exp`.\r\n\r\n_Originally posted by @OR13 in https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/65#discussion_r1635625370_\r\n            ",
       "createdAt": "2024-06-12T01:08:58Z",
-      "updatedAt": "2024-10-16T15:18:33Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-30T17:46:44Z",
+      "closedAt": "2024-10-30T17:46:43Z",
       "comments": [
         {
           "author": "fmarino-ipzs",
@@ -1249,7 +1249,7 @@
       "id": "I_kwDOK4XJ0s6L7TWh",
       "title": "Unlinkability and Reusability of Status Assertions",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/75",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "peppelinux",
       "authorAssociation": "OWNER",
       "assignees": [],
@@ -1258,8 +1258,8 @@
       ],
       "body": "Always Denis:\r\n\r\n\r\n    Section 15.3. Unlinkability and Reusability of Status Assertions, the text states:\r\n\r\n        This design is pivotal in ensuring unlinkability between Verifiers, where actions taken by one Verifier\r\n        cannot be correlated or linked to actions taken by another. \r\n\r\n    This sentence sounds strange. An \"action taken by one Verifier\" will be invisible to another Verifier unless the network is unprotected,\r\n    but it is assumed that TLS is being used. What is the problem for correlating \"actions\" taken by a Verifier ? This sentence would need to be reconsidered.\r\n\r\n\r\nit says that since there are no fixed audiences in the status assertions, a verifier obtainign a status assertion cannot know if that assertion was already used with another verifier or any information usefull to track its usage and or its audience\r\n \r\n\r\n    However, \"unlinkability between Verifiers\" usually means unlinkability between *colluding* Verifiers that shall not be able to know that a same end-user\r\n    made an access to a protected resource.\r\n\r\n    Using SD-JWT, such property can be supported if a SD-JWT are used only once. This should be mentioned in this section.\r\n\r\n\r\nthe same with the status assertions\r\n ",
       "createdAt": "2024-06-12T01:31:00Z",
-      "updatedAt": "2024-07-16T10:02:36Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-30T18:21:15Z",
+      "closedAt": "2024-10-30T18:21:15Z",
       "comments": [
         {
           "author": "Denisthemalice",
@@ -1267,6 +1267,20 @@
           "body": "> \"the same with the status assertions\". \r\n\r\nThis is correct, but this should be mentioned in the draft and it is not mentioned",
           "createdAt": "2024-06-12T10:45:43Z",
           "updatedAt": "2024-06-12T10:45:43Z"
+        },
+        {
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "body": "@Denisthemalice here the PR that aims to resolve this issue\r\nhttps://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/80/files\r\n\r\n",
+          "createdAt": "2024-10-30T18:20:38Z",
+          "updatedAt": "2024-10-30T18:20:38Z"
+        },
+        {
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "body": "please feel free to reopen this if you would like to add any additional remark",
+          "createdAt": "2024-10-30T18:21:15Z",
+          "updatedAt": "2024-10-30T18:21:15Z"
         }
       ]
     },
@@ -1432,6 +1446,22 @@
       "body": "this looks like the detailed statuses we had\r\nhttps://datatracker.ietf.org/doc/html/rfc9162#section-7.1",
       "createdAt": "2024-10-18T13:27:57Z",
       "updatedAt": "2024-10-18T13:27:57Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 95,
+      "id": "I_kwDOK4XJ0s6cTs86",
+      "title": "CDDL examples in the spec",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/95",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Since we are modeling both CBOR and JSON, CDDL could be useful, especially the controls for `.b64u` , `.json` and `.cbor`",
+      "createdAt": "2024-10-29T21:59:25Z",
+      "updatedAt": "2024-10-29T21:59:26Z",
       "closedAt": null,
       "comments": []
     }
@@ -11245,24 +11275,26 @@
       "id": "PR_kwDOK4XJ0s5-8i-2",
       "title": "added RP checks and further clarification for the assertion verification phase",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/93",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "peppelinux",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "This PR resolves https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/71\r\n\r\nThis PR resolves https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/29\r\n\r\nthose issues was already touched by previous pr that have partially resolved them, but now definitively with this one.",
       "createdAt": "2024-10-17T10:12:02Z",
-      "updatedAt": "2024-10-28T21:23:27Z",
+      "updatedAt": "2024-10-30T17:46:43Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "c47fa429957222c55ed9e53aee8000258e275f60",
       "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "headRefName": "rp-checks",
       "headRefOid": "90c3faa4b65a35556d3dcb4b47af809c46a9ffaf",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-10-30T17:46:42Z",
+      "mergedAt": "2024-10-30T17:46:42Z",
+      "mergedBy": "peppelinux",
+      "mergeCommit": {
+        "oid": "96338f8734552e2ac7cb31b445fc659549c00195"
+      },
       "comments": [],
       "reviews": [
         {
@@ -11478,6 +11510,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 96,
+      "id": "PR_kwDOK4XJ0s6AbSys",
+      "title": "fix: terms and editorials for better readability",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/96",
+      "state": "OPEN",
+      "author": "peppelinux",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "According to @paulbastian review",
+      "createdAt": "2024-10-30T18:05:50Z",
+      "updatedAt": "2024-10-30T18:13:23Z",
+      "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "baseRefName": "main",
+      "baseRefOid": "96338f8734552e2ac7cb31b445fc659549c00195",
+      "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "headRefName": "editorials-and-terms",
+      "headRefOid": "64fc1111475046346065b93d987be4b42016e2f5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
