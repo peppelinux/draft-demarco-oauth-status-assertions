@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-31T01:02:32.315842+00:00",
+  "timestamp": "2024-11-03T01:06:08.107277+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -11523,7 +11523,7 @@
       "labels": [],
       "body": "According to @paulbastian review",
       "createdAt": "2024-10-30T18:05:50Z",
-      "updatedAt": "2024-10-30T18:13:23Z",
+      "updatedAt": "2024-10-31T21:10:30Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "96338f8734552e2ac7cb31b445fc659549c00195",
@@ -11535,7 +11535,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOK4XJ0s6Pl6rs",
+          "commit": {
+            "abbreviatedOid": "64fc111"
+          },
+          "author": "fmarino-ipzs",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-31T21:10:30Z",
+          "updatedAt": "2024-10-31T21:10:30Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
