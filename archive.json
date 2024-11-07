@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-05T01:00:20.044885+00:00",
+  "timestamp": "2024-11-07T01:00:39.151250+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -11523,7 +11523,7 @@
       "labels": [],
       "body": "According to @paulbastian review",
       "createdAt": "2024-10-30T18:05:50Z",
-      "updatedAt": "2024-10-31T21:10:30Z",
+      "updatedAt": "2024-11-06T16:26:19Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "96338f8734552e2ac7cb31b445fc659549c00195",
@@ -11547,6 +11547,32 @@
           "body": "",
           "createdAt": "2024-10-31T21:10:30Z",
           "updatedAt": "2024-10-31T21:10:30Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6QKnWg",
+          "commit": {
+            "abbreviatedOid": "64fc111"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "I am ok with the change, but we need to be consistent with how we defined the terminology and use the capitalised terms then when we refer to terms in the terminology:  \r\n- option 1: we keep Issuer and Verifier in the terminology and refer it as credential Issuer and credential Verifier in the text\r\n- option 2: we change the terminology yo Credential Issuer and Credential Verifier, and use that throughout the text. ",
+          "createdAt": "2024-11-06T15:42:43Z",
+          "updatedAt": "2024-11-06T15:42:43Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6QLLaV",
+          "commit": {
+            "abbreviatedOid": "64fc111"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-06T16:26:19Z",
+          "updatedAt": "2024-11-06T16:26:19Z",
           "comments": []
         }
       ]
