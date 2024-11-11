@@ -126,7 +126,7 @@ credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT)
 format. Status Assertions function
 similarly to OCSP Stapling ([RFC6066]), allowing Holders
 to present to the relying parties
-time-stamped assertions provided by the credential issuer.
+time-stamped assertions provided by the Issuer.
 The approach outlined in this specification enables the
 verification of credentials against revocation without
 direct queries to third-party systems,
@@ -135,7 +135,7 @@ faciliting offline verification.
 
 The figure below illustrates the process by which a Holder,
 such as a wallet instance,
-requests and obtains a Status Assertion from the issuer.
+requests and obtains a Status Assertion from the Issuer.
 
 ~~~ ascii-art
 +----------------+                              +------------------+
@@ -160,7 +160,7 @@ presents the Status Assertion along with the corresponding digital credential.
 ~~~
 **Figure 2**: Status Assertion Presentation Flow.
 
-In summary, the credential issuer provides the holder with a
+In summary, the Issuer provides the Holder with a
 Status Assertion, which is linked to a Digital Credential. This enables
 the Holder to present both the Digital Credential and its
 Status Assertion to a Credential Verifier as proof of the Digital Credential's
