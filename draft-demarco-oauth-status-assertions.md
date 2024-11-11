@@ -128,7 +128,7 @@ similarly to OCSP Stapling ([RFC6066]), allowing Holders
 to present to the Relying Parties
 time-stamped assertions provided by the Issuer.
 The approach outlined in this specification enables the
-verification of credentials against revocation without
+verification of Credentials against revocation without
 direct queries to third-party systems,
 enhancing privacy, reducing latency, and
 faciliting offline verification.
@@ -149,7 +149,7 @@ requests and obtains a Status Assertion from the Issuer.
 **Figure 1**: Status Assertion Issuance Flow.
 
 The figure below illustrates the process by which a Holder
-presents the Status Assertion along with the corresponding digital credential.
+presents the Status Assertion along with the corresponding Digital Credential.
 
 ~~~ ascii-art
 +----------------+                             +------------------+
