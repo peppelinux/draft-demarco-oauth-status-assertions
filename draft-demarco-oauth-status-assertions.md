@@ -110,10 +110,10 @@ informative:
 Status Assertion is a signed object that demonstrates the validity status of a
 digital credential.
 These assertions are periodically provided
-to holders, who can present these to credential verifier along
+to Holders, who can present these to Credential Verifier along
 with the corresponding digital credentials.
 The approach outlined in this document
-makes the credential verifier able to check the status,
+makes the Credential Verifier able to check the status,
 such as the non-revocation, of a digital credential
 without requiring to query any third-party entities.
 
@@ -124,7 +124,7 @@ without requiring to query any third-party entities.
 Status Assertions show the status of digital
 credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT)
 format. Status Assertions function
-similarly to OCSP Stapling ([RFC6066]), allowing credential holders
+similarly to OCSP Stapling ([RFC6066]), allowing Holders
 to present to the relying parties
 time-stamped assertions provided by the credential issuer.
 The approach outlined in this specification enables the
@@ -133,7 +133,7 @@ direct queries to third-party systems,
 enhancing privacy, reducing latency, and
 faciliting offline verification.
 
-The figure below illustrates the process by which a credential holder,
+The figure below illustrates the process by which a Holder,
 such as a wallet instance,
 requests and obtains a Status Assertion from the issuer.
 
@@ -148,7 +148,7 @@ requests and obtains a Status Assertion from the issuer.
 ~~~
 **Figure 1**: Status Assertion Issuance Flow.
 
-The figure below illustrates the process by which a credential holder
+The figure below illustrates the process by which a Holder
 presents the Status Assertion along with the corresponding digital credential.
 
 ~~~ ascii-art
@@ -161,9 +161,9 @@ presents the Status Assertion along with the corresponding digital credential.
 **Figure 2**: Status Assertion Presentation Flow.
 
 In summary, the credential issuer provides the holder with a
-Status Assertion, which is linked to a digital credential. This enables
-the holder to present both the digital credential and its
-Status Assertion to a credential verifier as proof of the digital credential's
+Status Assertion, which is linked to a Digital Credential. This enables
+the Holder to present both the Digital Credential and its
+Status Assertion to a Credential Verifier as proof of the Digital Credential's
 validity status.
 
 # Conventions and Definitions
