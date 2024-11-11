@@ -5,12 +5,12 @@
 Network Working Group                                        G. D. Marco
 Internet-Draft               Dipartimento per la trasformazione digitale
 Intended status: Informational                                 O. Steele
-Expires: 3 May 2025                                            Transmute
+Expires: 15 May 2025                                           Transmute
                                                                F. Marino
                                 Istituto Poligrafico e Zecca dello Stato
                                                               M. Adomeit
                                                                    SUNET
-                                                         30 October 2024
+                                                        11 November 2024
 
 
                         OAuth Status Assertions
@@ -20,9 +20,9 @@ Abstract
 
    Status Assertion is a signed object that demonstrates the validity
    status of a digital credential.  These assertions are periodically
-   provided to holders, who can present these to credential verifier
+   provided to Holders, who can present these to Credential Verifier
    along with the corresponding digital credentials.  The approach
-   outlined in this document makes the credential verifier able to check
+   outlined in this document makes the Credential Verifier able to check
    the status, such as the non-revocation, of a digital credential
    without requiring to query any third-party entities.
 
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 May 2025.
+   This Internet-Draft will expire on 15 May 2025.
 
 Copyright Notice
 
@@ -116,15 +116,15 @@ Table of Contents
    Status Assertions show the status of digital credentials, whether in
    JSON Web Tokens (JWT) or CBOR Web Tokens (CWT) format.  Status
    Assertions function similarly to OCSP Stapling ([RFC6066]), allowing
-   credential holders to present to the relying parties time-stamped
-   assertions provided by the credential issuer.  The approach outlined
-   in this specification enables the verification of credentials against
+   Holders to present to the relying parties time-stamped assertions
+   provided by the credential issuer.  The approach outlined in this
+   specification enables the verification of credentials against
    revocation without direct queries to third-party systems, enhancing
    privacy, reducing latency, and faciliting offline verification.
 
-   The figure below illustrates the process by which a credential
-   holder, such as a wallet instance, requests and obtains a Status
-   Assertion from the issuer.
+   The figure below illustrates the process by which a Holder, such as a
+   wallet instance, requests and obtains a Status Assertion from the
+   issuer.
 
    +----------------+                              +------------------+
    |                | Requests Status Assertions   |                  |
@@ -136,9 +136,8 @@ Table of Contents
 
    *Figure 1*: Status Assertion Issuance Flow.
 
-   The figure below illustrates the process by which a credential holder
-   presents the Status Assertion along with the corresponding digital
-   credential.
+   The figure below illustrates the process by which a Holder presents
+   the Status Assertion along with the corresponding digital credential.
 
    +----------------+                             +------------------+
    |                | Presents Digital Credential |                  |
@@ -149,10 +148,10 @@ Table of Contents
    *Figure 2*: Status Assertion Presentation Flow.
 
    In summary, the credential issuer provides the holder with a Status
-   Assertion, which is linked to a digital credential.  This enables the
-   holder to present both the digital credential and its Status
-   Assertion to a credential verifier as proof of the digital
-   credential's validity status.
+   Assertion, which is linked to a Digital Credential.  This enables the
+   Holder to present both the Digital Credential and its Status
+   Assertion to a Credential Verifier as proof of the Digital
+   Credential's validity status.
 
 2.  Conventions and Definitions
 
