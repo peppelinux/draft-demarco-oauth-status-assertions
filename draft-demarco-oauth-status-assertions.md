@@ -110,10 +110,10 @@ informative:
 Status Assertion is a signed object that demonstrates the validity status of a
 digital credential.
 These assertions are periodically provided
-to holders, who can present these to Verifier along
+to Holders, who can present these to Credential Verifier along
 with the corresponding digital credentials.
 The approach outlined in this document
-makes the Verifier able to check the status,
+makes the Credential Verifier able to check the status,
 such as the non-revocation, of a digital credential
 without requiring to query any third-party entities.
 
@@ -124,46 +124,46 @@ without requiring to query any third-party entities.
 Status Assertions show the status of digital
 credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT)
 format. Status Assertions function
-similarly to OCSP Stapling ([RFC6066]), allowing clients to present to the
-relying parties
-time-stamped assertions provided by the issuer.
+similarly to OCSP Stapling ([RFC6066]), allowing Holders
+to present to the Relying Parties
+time-stamped assertions provided by the Issuer.
 The approach outlined in this specification enables the
-verification of credentials against revocation without
+verification of Credentials against revocation without
 direct queries to third-party systems,
 enhancing privacy, reducing latency, and
 faciliting offline verification.
 
-The figure below illustrates the process by which a client,
+The figure below illustrates the process by which a Holder,
 such as a wallet instance,
-requests and obtains a Status Assertion from the issuer.
+requests and obtains a Status Assertion from the Issuer.
 
 ~~~ ascii-art
 +----------------+                              +------------------+
 |                | Requests Status Assertions   |                  |
 |                |----------------------------->|                  |
-|     Client     |                              |      Issuer      |
+|     Holder     |                              |      Issuer      |
 |                | Status Assertions            |                  |
 |                |<-----------------------------|                  |
 +----------------+                              +------------------+
 ~~~
 **Figure 1**: Status Assertion Issuance Flow.
 
-The figure below illustrates the process by which a client
-presents the Status Assertion along with the corresponding digital credential.
+The figure below illustrates the process by which a Holder
+presents the Status Assertion along with the corresponding Digital Credential.
 
 ~~~ ascii-art
 +----------------+                             +------------------+
 |                | Presents Digital Credential |                  |
-|     Client     | and Status Assertion        |     Verifier     |
+|     Holder     | and Status Assertion        |     Verifier     |
 |                |---------------------------->|                  |
 +----------------+                             +------------------+
 ~~~
 **Figure 2**: Status Assertion Presentation Flow.
 
-In summary, the Issuer provides the client with a
+In summary, the Issuer provides the Holder with a
 Status Assertion, which is linked to a Digital Credential. This enables
-the client to present both the digital credential and its
-Status Assertion to a Verifier as proof of the digital credential's
+the Holder to present both the Digital Credential and its
+Status Assertion to a Credential Verifier as proof of the Digital Credential's
 validity status.
 
 # Conventions and Definitions
@@ -177,26 +177,25 @@ This specification uses the terms "End-User", "Entity" as defined by
 OpenID Connect Core [OpenID.Core], the term "JSON Web Token (JWT)"
 defined by JSON Web Token (JWT) {{RFC7519}},
 the term "CBOR Web Token (CWT)" defined in {{RFC8392}}, "Client" as
-defined {{RFC6749}}, "Verifiable Presentation" defined in [OpenID4VP].
+defined {{RFC6749}}, "Holder", "Verifiable Presentation"
+defined in [OpenID4VP].
 
 Digital Credential:
-: A set of one or more claims about a subject made by an Issuer.
+: A set of one or more claims about a subject issued by an Issuer.
 Alternative names are "Verifiable Credential" or "Credential".
-
-Holder:
-: An entity that possesses Digital Credentials and has
-control over them to present them to the Verifiers as Verifiable Presentations.
 
 Issuer:
 : Entity that is responsible for the issuance of the Digital Credentials.
 The Issuer is responsible for the lifecycle of their issued
-Digital Credentials and their validity status and responsible for issuance of related Status Assertions.
+Digital Credentials and their validity status and responsible for issuance
+of related Status Assertions. Alternative name is "Credential Issuer".
 
 Verifier:
 : Entity that relies on the validity of the Digital Credentials presented to it.
-This Entity, also known as a Relying Party, verifies the authenticity and
+This Entity, verifies the authenticity and
 validity of the Digital Credentials, including their revocation status,
-before accepting them.
+before accepting them. Alternative names are
+"Relying Party" and "Credential Verifier".
 
 Wallet Instance:
 : The digital Wallet in control of a User, also known as Wallet.
@@ -212,8 +211,7 @@ There are cases where the Verifier only needs
 to check the revocation status of a Digital Credential at the time of
 presentation, and therefore it should not be allowed to
 check the status of a Digital Credential over time due to some
-privacy constraints,
-in compliance with national privacy regulations.
+privacy constraints, in compliance with national privacy regulations.
 
 For instance, consider a scenario where a Verifier's repeated access to a
 status list, such as the one defined in
@@ -399,7 +397,10 @@ Host: issuer.example.org
 Content-Type: application/json
 
 {
-    "status_assertion_requests" : ["${base64url(json({typ: (some pop for status-assertion)+jwt, ...}))}.payload.signature", ... ]
+    "status_assertion_requests" : [
+      $status_assertion_request,
+      $status_assertion_request, ...
+    ]
 }
 ~~~
 
@@ -438,7 +439,10 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-    "status_assertion_responses": ["${base64url(json({typ: status-assertion+jwt, ...}))}.payload.signature", ... ]
+    "status_assertion_responses": [
+      $status_assertion_response,
+      $status_assertion_response, ...
+    ]
 }
 ~~~
 
@@ -509,7 +513,7 @@ table below:
 
 ## Rationale About The Unsigned Status Assertion Errors
 
-To mitigate potential resource exhaustion attacks where an adversary could issue hundreds of fake Status Assertion Requests to force an Issuer to sign numerous Status Assertion Errors, it is advisable to set the header parameter`alg` value to `none` for Status Assertion Errors that do not require signatures. This approach conserves computational resources and prevents abuse, especially in scenarios where the Issuer's implementation could be vulnerable to resource exhaustion attacks. However, even if it is out of the scopes of this specification determine in which the Status Error Assertion signatures are necessary, when the Issuer signs the Status Assertion Errors the Client that received them MUST validate the signature.
+To mitigate potential resource exhaustion attacks where an adversary could issue hundreds of fake Status Assertion Requests to force an Issuer to sign numerous Status Assertion Errors, it is advisable to set the header parameter`alg` value to `none` for Status Assertion Errors that do not require signatures. This approach conserves computational resources and prevents abuse, especially in scenarios where the Issuer's implementation could be vulnerable to resource exhaustion attacks. However, even if it is out of the scopes of this specification determine in which the Status Error Assertion signatures are necessary, when the Issuer signs the Status Assertion Errors the Holder that received them MUST validate the signature.
 
 ## Status Assertion Error Values
 
