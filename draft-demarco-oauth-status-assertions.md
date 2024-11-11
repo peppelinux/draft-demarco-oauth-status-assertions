@@ -235,6 +235,9 @@ such continuous surveillance.
 The general requirements for the implementation of Status Assertion are
 listed in this section. The Status Assertion:
 
+- notifies the Holder about the status of their Digital Credential,
+because the Holder MUST be informed by the Issuers of any changes
+in the status of their Digital Credentials.
 - SHOULD be presented in conjunction with the Digital Credential.
 - MUST include information that links it to the
 referenced Digital Credential;
