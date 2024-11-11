@@ -181,7 +181,7 @@ defined {{RFC6749}}, "Holder", "Verifiable Presentation"
 defined in [OpenID4VP].
 
 Digital Credential:
-: A set of one or more claims about a subject issued by a Credential Issuer.
+: A set of one or more claims about a subject issued by an Issuer.
 Alternative names are "Verifiable Credential" or "Credential".
 
 Issuer:
