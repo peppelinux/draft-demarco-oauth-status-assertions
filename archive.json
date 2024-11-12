@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-10T01:04:25.039613+00:00",
+  "timestamp": "2024-11-12T00:59:54.793516+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -11516,25 +11516,42 @@
       "id": "PR_kwDOK4XJ0s6AbSys",
       "title": "fix: terms and editorials for better readability",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/96",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "peppelinux",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "According to @paulbastian review",
       "createdAt": "2024-10-30T18:05:50Z",
-      "updatedAt": "2024-11-06T16:26:19Z",
+      "updatedAt": "2024-11-11T16:21:37Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "96338f8734552e2ac7cb31b445fc659549c00195",
       "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "headRefName": "editorials-and-terms",
-      "headRefOid": "64fc1111475046346065b93d987be4b42016e2f5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "329c68b82d04479836dcf70a06e70a109fd22b3e",
+      "closedAt": "2024-11-11T16:21:37Z",
+      "mergedAt": "2024-11-11T16:21:37Z",
+      "mergedBy": "peppelinux",
+      "mergeCommit": {
+        "oid": "3aabe8002899388ee3e79b20f16fa90de33433ba"
+      },
+      "comments": [
+        {
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "body": "@marinaado we don't capitalize terms until we don't have defined them in the terminology section (this is what I have learned in ietf/openid specs)\r\n\r\n",
+          "createdAt": "2024-11-11T10:01:08Z",
+          "updatedAt": "2024-11-11T10:01:08Z"
+        },
+        {
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> @marinaado we don't capitalize terms until we don't have defined them in the terminology section (this is what I have learned in ietf/openid specs)\r\nIndeed, and those are part of the terminology section so this is why i suggested to capitalise them.\r\n",
+          "createdAt": "2024-11-11T12:19:56Z",
+          "updatedAt": "2024-11-11T12:19:56Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOK4XJ0s6Pl6rs",
@@ -11573,6 +11590,392 @@
           "body": "",
           "createdAt": "2024-11-06T16:26:19Z",
           "updatedAt": "2024-11-06T16:26:19Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Qrgtu",
+          "commit": {
+            "abbreviatedOid": "64fc111"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-11T13:41:13Z",
+          "updatedAt": "2024-11-11T13:41:13Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nto Holders, who can present these to Credential Verifier along\r\n```",
+              "createdAt": "2024-11-11T13:41:13Z",
+              "updatedAt": "2024-11-11T13:41:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Qrgy0",
+          "commit": {
+            "abbreviatedOid": "64fc111"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-11T13:41:22Z",
+          "updatedAt": "2024-11-11T13:41:23Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\nmakes the Credential Verifier able to check the status,\r\n```",
+              "createdAt": "2024-11-11T13:41:22Z",
+              "updatedAt": "2024-11-11T13:41:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Qrg6M",
+          "commit": {
+            "abbreviatedOid": "64fc111"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-11T13:41:36Z",
+          "updatedAt": "2024-11-11T13:41:36Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\r\nsimilarly to OCSP Stapling ([RFC6066]), allowing Holders\r\n```",
+              "createdAt": "2024-11-11T13:41:36Z",
+              "updatedAt": "2024-11-11T13:41:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Qrg_u",
+          "commit": {
+            "abbreviatedOid": "64fc111"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-11T13:41:46Z",
+          "updatedAt": "2024-11-11T13:41:46Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "```suggestion\r\ntime-stamped assertions provided by the Issuer.\r\n```",
+              "createdAt": "2024-11-11T13:41:46Z",
+              "updatedAt": "2024-11-11T14:57:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6QrhIQ",
+          "commit": {
+            "abbreviatedOid": "64fc111"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-11T13:42:01Z",
+          "updatedAt": "2024-11-11T13:42:02Z",
+          "comments": [
+            {
+              "originalPosition": 30,
+              "body": "```suggestion\r\nThe figure below illustrates the process by which a Holder,\r\n```",
+              "createdAt": "2024-11-11T13:42:02Z",
+              "updatedAt": "2024-11-11T13:42:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6QrhO5",
+          "commit": {
+            "abbreviatedOid": "64fc111"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-11T13:42:14Z",
+          "updatedAt": "2024-11-11T13:42:14Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "```suggestion\r\nrequests and obtains a Status Assertion from the Issuer.\r\n```",
+              "createdAt": "2024-11-11T13:42:14Z",
+              "updatedAt": "2024-11-11T14:57:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6QrhXU",
+          "commit": {
+            "abbreviatedOid": "64fc111"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-11T13:42:30Z",
+          "updatedAt": "2024-11-11T13:42:30Z",
+          "comments": [
+            {
+              "originalPosition": 47,
+              "body": "```suggestion\r\nThe figure below illustrates the process by which a Holder\r\n```",
+              "createdAt": "2024-11-11T13:42:30Z",
+              "updatedAt": "2024-11-11T13:42:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Qrhc3",
+          "commit": {
+            "abbreviatedOid": "64fc111"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-11T13:42:41Z",
+          "updatedAt": "2024-11-11T13:42:41Z",
+          "comments": [
+            {
+              "originalPosition": 64,
+              "body": "```suggestion\r\nIn summary, the Issuer provides the Holder with a\r\n```",
+              "createdAt": "2024-11-11T13:42:41Z",
+              "updatedAt": "2024-11-11T14:58:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6QrhhF",
+          "commit": {
+            "abbreviatedOid": "64fc111"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-11T13:42:49Z",
+          "updatedAt": "2024-11-11T13:42:49Z",
+          "comments": [
+            {
+              "originalPosition": 65,
+              "body": "```suggestion\r\nStatus Assertion, which is linked to a Digital Credential. This enables\r\n```",
+              "createdAt": "2024-11-11T13:42:49Z",
+              "updatedAt": "2024-11-11T13:42:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Qrhqu",
+          "commit": {
+            "abbreviatedOid": "64fc111"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-11T13:43:07Z",
+          "updatedAt": "2024-11-11T13:43:08Z",
+          "comments": [
+            {
+              "originalPosition": 67,
+              "body": "```suggestion\r\nthe Holder to present both the Digital Credential and its\r\nStatus Assertion to a Credential Verifier as proof of the Digital Credential's\r\n```",
+              "createdAt": "2024-11-11T13:43:07Z",
+              "updatedAt": "2024-11-11T13:43:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Qrh9_",
+          "commit": {
+            "abbreviatedOid": "64fc111"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-11T13:43:44Z",
+          "updatedAt": "2024-11-11T13:43:44Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I prefer \"Verifier/Relying Party\"",
+              "createdAt": "2024-11-11T13:43:44Z",
+              "updatedAt": "2024-11-11T13:43:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6QriIS",
+          "commit": {
+            "abbreviatedOid": "64fc111"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-11T13:44:03Z",
+          "updatedAt": "2024-11-11T13:44:03Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "I prefer \"Issuer\"",
+              "createdAt": "2024-11-11T13:44:03Z",
+              "updatedAt": "2024-11-11T13:44:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6QsN-c",
+          "commit": {
+            "abbreviatedOid": "9e1b1ac"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-11T14:56:48Z",
+          "updatedAt": "2024-11-11T14:56:48Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6QsO2G",
+          "commit": {
+            "abbreviatedOid": "9e1b1ac"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-11T14:58:22Z",
+          "updatedAt": "2024-11-11T14:58:23Z",
+          "comments": [
+            {
+              "originalPosition": 80,
+              "body": "```suggestion\r\n: A set of one or more claims about a subject issued by an Issuer.\r\n```",
+              "createdAt": "2024-11-11T14:58:22Z",
+              "updatedAt": "2024-11-11T14:58:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6QsQjv",
+          "commit": {
+            "abbreviatedOid": "7082b2f"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-11T15:01:33Z",
+          "updatedAt": "2024-11-11T15:01:33Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "```suggestion\r\nto present to the Relying Parties\r\n```",
+              "createdAt": "2024-11-11T15:01:33Z",
+              "updatedAt": "2024-11-11T15:01:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6QsQ0v",
+          "commit": {
+            "abbreviatedOid": "7082b2f"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-11T15:02:02Z",
+          "updatedAt": "2024-11-11T15:02:02Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\nverification of Credentials against revocation without\r\n```",
+              "createdAt": "2024-11-11T15:02:02Z",
+              "updatedAt": "2024-11-11T15:02:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6QsQ7n",
+          "commit": {
+            "abbreviatedOid": "7082b2f"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-11T15:02:13Z",
+          "updatedAt": "2024-11-11T15:02:14Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "```suggestion\r\npresents the Status Assertion along with the corresponding Digital Credential.\r\n```",
+              "createdAt": "2024-11-11T15:02:13Z",
+              "updatedAt": "2024-11-11T15:02:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6QsryP",
+          "commit": {
+            "abbreviatedOid": "329c68b"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-11T15:53:13Z",
+          "updatedAt": "2024-11-11T15:53:13Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 97,
+      "id": "PR_kwDOK4XJ0s6BfD2u",
+      "title": "added the requirement to keep the Holder informed about status changes",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/97",
+      "state": "OPEN",
+      "author": "peppelinux",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR adds the requirement about inform the Holder when the status of a credentials changes\r\n\r\nThis is a feature made for granted using status assertions",
+      "createdAt": "2024-11-11T09:58:45Z",
+      "updatedAt": "2024-11-11T14:56:17Z",
+      "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "baseRefName": "main",
+      "baseRefOid": "96338f8734552e2ac7cb31b445fc659549c00195",
+      "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "headRefName": "inform-holder",
+      "headRefOid": "d17da4de4e3ea35f65eb8feb75bd0bcafb0e8ff4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOK4XJ0s6QsNrE",
+          "commit": {
+            "abbreviatedOid": "d17da4d"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-11T14:56:17Z",
+          "updatedAt": "2024-11-11T14:56:17Z",
           "comments": []
         }
       ]
