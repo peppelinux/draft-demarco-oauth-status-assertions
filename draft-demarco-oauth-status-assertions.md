@@ -338,10 +338,10 @@ in the following table.
 | **aud** | It MUST be set with the Issuer Status Assertion endpoint URL as value that identify the intended audience. | {{RFC9126}}, {{RFC7519}} |
 | **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be superior to the value set for `iat` . | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **iat** | UNIX Timestamp with the time of JWT/CWT issuance. | {{RFC9126}}, {{RFC7519}} |
-| **jti** | Unique identifier for the JWT. REQUIRED only if `typ` is `status-assertion-request+jwt`. | {{RFC7519}} Section 4.1.7 |
-| **cti** | Unique identifier for the CWT. REQUIRED only if `typ` is `status-assertion-request+cwt`. | {{RFC7519}} Section 4.1.7 |
+| **jti** | Unique identifier when the Status Assertion Request is in JWT format, using the `typ` parameter set to `status-assertion-request+jwt`. | {{RFC7519}} Section 4.1.7 |
+| **cti** | Unique identifier when the Status Assertion Request is in CWT format, using the `typ` parameter set to `status-assertion-request+cwt`. | {{RFC7519}} Section 4.1.7 |
 | **credential_hash** | Hash value of the Digital Credential's Issuer signed part the Status Assertion is bound to. | this specification |
-| **credential_hash_alg** | The hash algorithm MUST match the one specified in the `status.status_assertion.credential_hash_alg` claim of the Digital Credential for which the Status Assertion is requested. | this specification |
+| **credential_hash_alg** | The hash algorithm MUST match the one specified in the `status.status_assertion.credential_hash_alg` parameter of the Digital Credential for which the Status Assertion is requested. | this specification |
 
 Below is a non-normative example of a Status Assertion Request with
 the JWT headers and payload represented without applying signature and
