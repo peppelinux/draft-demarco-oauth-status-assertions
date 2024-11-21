@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-19T01:04:45.654647+00:00",
+  "timestamp": "2024-11-21T01:04:04.981596+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -1461,9 +1461,17 @@
       "labels": [],
       "body": "Since we are modeling both CBOR and JSON, CDDL could be useful, especially the controls for `.b64u` , `.json` and `.cbor`",
       "createdAt": "2024-10-29T21:59:25Z",
-      "updatedAt": "2024-10-29T21:59:26Z",
+      "updatedAt": "2024-11-20T16:18:33Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We also need to make sure that EDN strings are quoted",
+          "createdAt": "2024-11-20T16:18:32Z",
+          "updatedAt": "2024-11-20T16:18:32Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -11952,7 +11960,7 @@
       "labels": [],
       "body": "This PR adds the requirement about inform the Holder when the status of a credentials changes\r\n\r\nThis is a feature made for granted using status assertions",
       "createdAt": "2024-11-11T09:58:45Z",
-      "updatedAt": "2024-11-11T14:56:17Z",
+      "updatedAt": "2024-11-20T16:05:33Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "96338f8734552e2ac7cb31b445fc659549c00195",
@@ -11977,6 +11985,72 @@
           "createdAt": "2024-11-11T14:56:17Z",
           "updatedAt": "2024-11-11T14:56:17Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6R9b22",
+          "commit": {
+            "abbreviatedOid": "d17da4d"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-20T14:33:44Z",
+          "updatedAt": "2024-11-20T14:33:45Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "this BCP14 keyword would probably be better in a section describing how the issuer conforms to the spec, and not in general requirements, but its ok here.",
+              "createdAt": "2024-11-20T14:33:44Z",
+              "updatedAt": "2024-11-20T14:33:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6R9b4f",
+          "commit": {
+            "abbreviatedOid": "d17da4d"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-20T14:33:47Z",
+          "updatedAt": "2024-11-20T14:33:47Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6R9j6C",
+          "commit": {
+            "abbreviatedOid": "d17da4d"
+          },
+          "author": "fmarino-ipzs",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-20T14:45:19Z",
+          "updatedAt": "2024-11-20T14:45:19Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6R-exu",
+          "commit": {
+            "abbreviatedOid": "d17da4d"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-20T16:05:33Z",
+          "updatedAt": "2024-11-20T16:05:33Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "something like: X MUST Y because blah blah\r\n\r\nok, I can do this.",
+              "createdAt": "2024-11-20T16:05:33Z",
+              "updatedAt": "2024-11-20T16:05:33Z"
+            }
+          ]
         }
       ]
     },
@@ -11992,19 +12066,90 @@
       "labels": [],
       "body": "This PR:\r\n\r\n- specifies that jti and cti are conditional to each other\r\n- changes the description of credential_hash_alg\r\n- specifies that the hash is of the Digital Credential's Issuer signed part\r\n- removes the boolean detail status example\r\n-  corrects some typos: Credential ->Digital Credential, title styles",
       "createdAt": "2024-11-13T17:47:12Z",
-      "updatedAt": "2024-11-13T17:47:12Z",
+      "updatedAt": "2024-11-20T16:49:33Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "3aabe8002899388ee3e79b20f16fa90de33433ba",
       "headRepository": "giadas/draft-demarco-oauth-status-assertions",
       "headRefName": "minor-fix",
-      "headRefOid": "c150d3588a3093648ede1c133a25e9c33e96a9aa",
+      "headRefOid": "a90e6b6765ee38e288e6d54e6556b3b53f61fe9c",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOK4XJ0s6R9X8u",
+          "commit": {
+            "abbreviatedOid": "c150d35"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-11-20T14:28:05Z",
+          "updatedAt": "2024-11-20T14:31:51Z",
+          "comments": [
+            {
+              "originalPosition": 123,
+              "body": "```suggestion\r\n| **jti** | Unique identifier when the Status Assertion Request is in JWT format, using the `typ` parameter set to `status-assertion-request+jwt`. | {{RFC7519}} Section 4.1.7 |\r\n| **cti** | Unique identifier when the Status Assertion Request is in CWT format, using the `typ` parameter set to `status-assertion-request+cwt`. | {{RFC7519}} Section 4.1.7 |\r\n```\r\n\r\nWe already say that these are the parameter for the status assertion request. It would be beneficial say why jti and cti are useful against replay attacks",
+              "createdAt": "2024-11-20T14:28:05Z",
+              "updatedAt": "2024-11-20T16:10:45Z"
+            },
+            {
+              "originalPosition": 134,
+              "body": "`status` alone is not auto explicative as I'd liek to have in this non-normative example\r\n\r\nstatus alone is too much generic",
+              "createdAt": "2024-11-20T14:28:54Z",
+              "updatedAt": "2024-11-20T14:31:51Z"
+            },
+            {
+              "originalPosition": 125,
+              "body": "```suggestion\r\n| **credential_hash_alg** | The hash algorithm MUST match the one specified in the `status.status_assertion.credential_hash_alg` parameter of the Digital Credential for which the Status Assertion is requested. | this specification |\r\n```\r\n\r\nin this case it is a parameter and not a claim from my perspective",
+              "createdAt": "2024-11-20T14:29:39Z",
+              "updatedAt": "2024-11-20T14:31:51Z"
+            },
+            {
+              "originalPosition": 143,
+              "body": "as my previous comment",
+              "createdAt": "2024-11-20T14:29:54Z",
+              "updatedAt": "2024-11-20T14:31:51Z"
+            },
+            {
+              "originalPosition": 169,
+              "body": "not sure about this, headings should have the first letter of each word capitalized\r\n\r\n@OR13 wdyt? ^",
+              "createdAt": "2024-11-20T14:30:32Z",
+              "updatedAt": "2024-11-20T14:31:51Z"
+            },
+            {
+              "originalPosition": 264,
+              "body": "see my previous comment about wording in headings",
+              "createdAt": "2024-11-20T14:31:22Z",
+              "updatedAt": "2024-11-20T14:31:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6R9bvJ",
+          "commit": {
+            "abbreviatedOid": "c150d35"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-20T14:33:33Z",
+          "updatedAt": "2024-11-20T14:33:33Z",
+          "comments": [
+            {
+              "originalPosition": 125,
+              "body": "Claims are assertions about a subject (such as a user) that can be verified. They are often used in security tokens, like JSON Web Tokens (JWT), to convey information about the user.\r\n\r\nParameters in JWTs and metadata help define how the data should be processed or how a service should be accessed.",
+              "createdAt": "2024-11-20T14:33:33Z",
+              "updatedAt": "2024-11-20T16:11:57Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
