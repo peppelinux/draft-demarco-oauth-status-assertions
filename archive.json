@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-21T01:04:04.981596+00:00",
+  "timestamp": "2024-11-24T01:08:59.909333+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -11960,7 +11960,7 @@
       "labels": [],
       "body": "This PR adds the requirement about inform the Holder when the status of a credentials changes\r\n\r\nThis is a feature made for granted using status assertions",
       "createdAt": "2024-11-11T09:58:45Z",
-      "updatedAt": "2024-11-20T16:05:33Z",
+      "updatedAt": "2024-11-22T07:49:33Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "96338f8734552e2ac7cb31b445fc659549c00195",
@@ -12049,6 +12049,66 @@
               "body": "something like: X MUST Y because blah blah\r\n\r\nok, I can do this.",
               "createdAt": "2024-11-20T16:05:33Z",
               "updatedAt": "2024-11-20T16:05:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6SEntQ",
+          "commit": {
+            "abbreviatedOid": "d17da4d"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-21T09:05:12Z",
+          "updatedAt": "2024-11-21T09:05:12Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n- notifies the Holder about the status of their Digital Credential. Issuers MUST notify the Holder about the status of their Digital Credential because the Holder needs to be informed of any changes.\r\n```",
+              "createdAt": "2024-11-21T09:05:12Z",
+              "updatedAt": "2024-11-21T09:05:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6SEn4k",
+          "commit": {
+            "abbreviatedOid": "d17da4d"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-21T09:05:29Z",
+          "updatedAt": "2024-11-21T09:05:30Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "@marinaado wdyt? ^",
+              "createdAt": "2024-11-21T09:05:29Z",
+              "updatedAt": "2024-11-21T09:05:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6SPgSM",
+          "commit": {
+            "abbreviatedOid": "d17da4d"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-22T07:49:32Z",
+          "updatedAt": "2024-11-22T07:49:33Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "done",
+              "createdAt": "2024-11-22T07:49:33Z",
+              "updatedAt": "2024-11-22T07:49:33Z"
             }
           ]
         }
