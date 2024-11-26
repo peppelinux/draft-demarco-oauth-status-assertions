@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-24T01:08:59.909333+00:00",
+  "timestamp": "2024-11-26T01:05:16.830044+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -11960,7 +11960,7 @@
       "labels": [],
       "body": "This PR adds the requirement about inform the Holder when the status of a credentials changes\r\n\r\nThis is a feature made for granted using status assertions",
       "createdAt": "2024-11-11T09:58:45Z",
-      "updatedAt": "2024-11-22T07:49:33Z",
+      "updatedAt": "2024-11-25T12:52:24Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "96338f8734552e2ac7cb31b445fc659549c00195",
@@ -12111,6 +12111,26 @@
               "updatedAt": "2024-11-22T07:49:33Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Sh4Vn",
+          "commit": {
+            "abbreviatedOid": "d17da4d"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-25T12:52:24Z",
+          "updatedAt": "2024-11-25T12:52:24Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I think it would be slightly nicer if it says: \"The Issuer MUST notify\" instead \"Issuers MUST notify.\" \r\n\r\nI searched through the specification and i found the we use singular with definite article for BCP 14 words. \r\n\r\nOtherwise is good.",
+              "createdAt": "2024-11-25T12:52:24Z",
+              "updatedAt": "2024-11-25T12:52:24Z"
+            }
+          ]
         }
       ]
     },
@@ -12126,7 +12146,7 @@
       "labels": [],
       "body": "This PR:\r\n\r\n- specifies that jti and cti are conditional to each other\r\n- changes the description of credential_hash_alg\r\n- specifies that the hash is of the Digital Credential's Issuer signed part\r\n- removes the boolean detail status example\r\n-  corrects some typos: Credential ->Digital Credential, title styles",
       "createdAt": "2024-11-13T17:47:12Z",
-      "updatedAt": "2024-11-20T16:49:33Z",
+      "updatedAt": "2024-11-25T09:28:45Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "3aabe8002899388ee3e79b20f16fa90de33433ba",
@@ -12208,6 +12228,19 @@
               "updatedAt": "2024-11-20T16:11:57Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6Sf0gu",
+          "commit": {
+            "abbreviatedOid": "a90e6b6"
+          },
+          "author": "fmarino-ipzs",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-25T09:28:45Z",
+          "updatedAt": "2024-11-25T09:28:45Z",
+          "comments": []
         }
       ]
     }
