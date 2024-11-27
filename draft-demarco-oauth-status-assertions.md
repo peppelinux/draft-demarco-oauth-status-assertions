@@ -108,27 +108,27 @@ informative:
 --- abstract
 
 Status Assertion is a signed object that demonstrates the validity status of a
-digital credential.
+Digital Credential.
 These assertions are periodically provided
 to Holders, who can present these to Credential Verifier along
-with the corresponding digital credentials.
+with the corresponding Digital Credentials.
 The approach outlined in this document
 makes the Credential Verifier able to check the status,
-such as the non-revocation, of a digital credential
+such as the non-revocation, of a Digital Credential
 without requiring to query any third-party entities.
 
 --- middle
 
 # Introduction
 
-Status Assertions show the status of digital
-credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT)
+Status Assertions show the status of Digital
+Credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT)
 format. Status Assertions function
 similarly to OCSP Stapling ([RFC6066]), allowing Holders
 to present to the Relying Parties
 time-stamped assertions provided by the Issuer.
 The approach outlined in this specification enables the
-verification of Credentials against revocation without
+verification of Digital Credentials against revocation without
 direct queries to third-party systems,
 enhancing privacy, reducing latency, and
 faciliting offline verification.
@@ -238,17 +238,17 @@ because the Holder MUST be informed by the Issuers of any changes
 in the status of their Digital Credentials.
 - SHOULD be presented in conjunction with the Digital Credential.
 - MUST include information that links it to the
-referenced Digital Credential;
+referenced Digital Credential.
 - MUST be timestamped with its issuance datetime,
 using a timestamp which is at or after the time of
-Digital Credential issuance which it refers;
+Digital Credential issuance which it refers.
 - MUST contain the expiration datetime after which
 the Status Assertion MUST NOT be considered valid anymore,
 and the Digital Credential referred to SHOULD NOT
 be considered as having a valid status, unless there exists some specific Verifier policy that provides stronger guidance.
 The expiration datetime MUST be
 superior to the Status Assertion issuance datetime and it MUST end before
-the expiration datetime of the Digital Credential;
+the expiration datetime of the Digital Credential.
 - MAY contain the _not before time_ parameter, specifying the time
 from which the Status Assertion MUST be considered valid and evaluable.
 - MUST enable the offline use cases by employing validation using
@@ -259,51 +259,51 @@ the Digital Credential to which the Status Assertion refers.
 - MUST NOT contain any information regarding the Verifier to whom it may
 be presented, such as disclose the Verifier identifier to specify the intended audience.
 
-# Proof of Possession of a Credential
+# Proof of Possession of a Digital Credential
 
-The concept of Proof of Possession (PoP) of a Credential within the
+The concept of Proof of Possession (PoP) of a Digital Credential within the
 framework of the Status Assertion specification encompasses a broader
-perspective than merely possessing the digital bytes of the Credential.
+perspective than merely possessing the digital bytes of the Digital Credential.
 
 It involves demonstrating rightful control or ownership over the
-Credential, which can manifest in various forms depending on the
+Digital Credential, which can manifest in various forms depending on the
 technology employed and the nature of the Digital Credential itself.
 For instance, a Digital Credential could be presented visually (de-visu)
 with a personal portrait serving as a binding element.
 
 While this specification does not prescribe any additional methods
-for the proof of possession of the Credential, it aims to offer
+for the proof of possession of the Digital Credential, it aims to offer
 guidance for concrete implementations utilizing common proof of
 possession mechanisms. This includes, but is not limited to:
 
 1. Having the digital representation of the Digital Credential (the bytes).
-2. Controlling the confirmation method of the Credential,
-using the Credential's `cnf` parameter.
+2. Controlling the confirmation method of the Digital Credential,
+using the Digital Credential's `cnf` claim.
 
-The essence of requiring proof of possession over the Credential
+The essence of requiring proof of possession over the Digital Credential
 through the confirmation method, such has proving the control of the
-cryptographic material related to a Credential, is
-to ensure that the entity in possession of the Credential can execute
+cryptographic material related to a Digital Credential, is
+to ensure that the entity in possession of the Digital Credential can execute
 actions exclusively reserved to the legitimate Holder.
 The dual-layered approach of requiring both possession of the
-Credential and control over it, reinforces the security and integrity
+Digital Credential and control over it, reinforces the security and integrity
 of the Status Assertion process.
 This ensures that the Holder requesting a Status Assertion is indeed
-the same Holder to which the Credential was originally issued,
-affirming the authenticity and rightful possession of the Credential.
+the same Holder to which the Digital Credential was originally issued,
+affirming the authenticity and rightful possession of the Digital Credential.
 
 # Status Assertion Request
 
 The following diagram shows the Wallet Instance requesting a
 Status Assertion to an Issuer,
-related to a specific Credential issued by the same Issuer.
+related to a specific Digital Credential issued by the same Issuer.
 
 ~~~ ascii-art
 +-------------------+                                  +-------------------+
 |  Wallet Instance  |                                  |      Issuer       |
 +--------+----------+                                  +----------+--------+
          |                                                        |
-         | HTTP POST /status                                      |
+         | HTTP POST /status-assertion-endpoint                                      |
          |  status_assertion_requests = [$StatusAssertionRequest] |
          +-------------------------------------------------------->
          |                                                        |
@@ -327,7 +327,7 @@ Status Assertion Request object.
 to the confirmation claim assigned by the Issuer and contained within
 the Digital Credential.
 
-The Status Assertion Request object MUST contain the parameters defined
+The Status Assertion Request object MUST contain the parameters and claims defined
 in the following table.
 
 | Header | Description | Reference |
@@ -341,10 +341,10 @@ in the following table.
 | **aud** | It MUST be set with the Issuer Status Assertion endpoint URL as value that identify the intended audience. | {{RFC9126}}, {{RFC7519}} |
 | **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be superior to the value set for `iat` . | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
 | **iat** | UNIX Timestamp with the time of JWT/CWT issuance. | {{RFC9126}}, {{RFC7519}} |
-| **jti** | Unique identifier for the JWT.  | {{RFC7519}} Section 4.1.7 |
-| **cti** | Unique identifier for the CWT.  | {{RFC7519}} Section 4.1.7 |
-| **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
-| **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. The value SHOULD be set to `sha-256`. | this specification |
+| **jti** | Unique identifier when the Status Assertion Request is in JWT format, using the `typ` parameter set to `status-assertion-request+jwt`. | {{RFC7519}} Section 4.1.7 |
+| **cti** | Unique identifier when the Status Assertion Request is in CWT format, using the `typ` parameter set to `status-assertion-request+cwt`. | {{RFC7519}} Section 4.1.7 |
+| **credential_hash** | Hash value of the Digital Credential's Issuer signed part the Status Assertion is bound to. | this specification |
+| **credential_hash_alg** | The hash algorithm MUST match the one specified in the `status.status_assertion.credential_hash_alg` claim of the Digital Credential for which the Status Assertion is requested. | this specification |
 
 Below is a non-normative example of a Status Assertion Request with
 the JWT headers and payload represented without applying signature and
@@ -395,7 +395,7 @@ Below a non-normative example representing a Status Assertion Request array with
 single Status Assertion Request object in JWT format.
 
 ~~~
-POST /status HTTP/1.1
+POST /status-assertion-endpoint HTTP/1.1
 Host: issuer.example.org
 Content-Type: application/json
 
@@ -456,6 +456,7 @@ as defined in
 as defined in [the section Status Error](#status-assertion-error).
 
 For each entry in the `status_assertion_responses` array, the following requirements are met:
+
 - Each element in the array MUST match the corresponding element in the request array at
 the same position index to which it is related, eg: _\[requestAboutA, requestAboutB\]_ may produce _\[responseAboutA, responseErrorAboutB\]_.
 - Each element MUST contain the error or the status of the assertion, using the `typ` member
@@ -469,11 +470,11 @@ such as the Verifier identifier as the intended audience.
 # Status Assertion Error
 
 The Status Assertion Error MUST NOT be presented or provided to a Verifier,
-the only audience of the Status Assertion Error is the Holder of the Credential
+the only audience of the Status Assertion Error is the Holder of the Digital Credential
 that has requested the Status Assertion. Therefore,
 it is not necessary that the Status Assertion Error
-contains the parameter `aud`; if present, it MUST be set to the same
-value as the `iss` parameter used by the Wallet in the corresponding
+contains the claim `aud`; if present, it MUST be set to the same
+value as the `iss` claim used by the Wallet in the corresponding
 Status Assertion Request object.
 
 Below a non-normative example of a Status Assertion Error object in JWT format,
@@ -497,7 +498,7 @@ with the headers and payload represented in JSON and without applying the signat
 }
 ~~~
 
-The Status Assertion Error object MUST contain the parameters described in the
+The Status Assertion Error object MUST contain the parameters and claims described in the
 table below:
 
 | Header | Description | Reference |
@@ -514,15 +515,15 @@ table below:
 | **error** | REQUIRED. The value SHOULD be assigned with one of the error types defined in {{RFC6749}}[Section 5.2](https://tools.ietf.org/html/rfc6749#section-5.2) or defined in the Section [Status Assertion Error Values](status-assertion-error-values). | {{RFC7519}} Section 4.1.7 |
 | **error_description** | OPTIONAL. Text that clarifies the nature of the error in relation to the `error` value.  | {{RFC7519}} Section 4.1.7 |
 
-## Rationale About The Unsigned Status Assertion Errors
+## Rationale about the Unsigned Status Assertion Errors
 
-To mitigate potential resource exhaustion attacks where an adversary could issue hundreds of fake Status Assertion Requests to force an Issuer to sign numerous Status Assertion Errors, it is advisable to set the header parameter`alg` value to `none` for Status Assertion Errors that do not require signatures. This approach conserves computational resources and prevents abuse, especially in scenarios where the Issuer's implementation could be vulnerable to resource exhaustion attacks. However, even if it is out of the scopes of this specification determine in which the Status Error Assertion signatures are necessary, when the Issuer signs the Status Assertion Errors the Holder that received them MUST validate the signature.
+To mitigate potential resource exhaustion attacks where an adversary could issue hundreds of fake Status Assertion Requests to force an Issuer to sign numerous Status Assertion Errors, it is advisable to set the header parameter `alg` value to `none` for Status Assertion Errors that do not require signatures. This approach conserves computational resources and prevents abuse, especially in scenarios where the Issuer's implementation could be vulnerable to resource exhaustion attacks. However, even if it is out of the scopes of this specification determine in which the Status Error Assertion signatures are necessary, when the Issuer signs the Status Assertion Errors the Holder that received them MUST validate the signature.
 
 ## Status Assertion Error Values
 
-The `error` parameter for the Status Assertion Error object MUST be set with one of the values defined in the table below, in addition to the values specified in {{RFC6749}}:
+The `error` claim for the Status Assertion Error object MUST be set with one of the values defined in the table below, in addition to the values specified in {{RFC6749}}:
 
-| Error Parameter Value | Description | Reference |
+| Error Value | Description | Reference |
 | --- | --- | --- |
 | **invalid_request_signature** | The Status Assertion Request signature validation has failed. This error type is used when the proof of possession of the Digital Credential is found not valid within the Status Assertion Request. | this specification |
 | **credential_not_found** | The `credential_hash` value provided in the Status Assertion Request doesn't match with any active Digital Credential. | this specification |
@@ -534,9 +535,7 @@ When a Status Assertion is requested to an Issuer, the
 Issuer checks the status of the Digital Credential and creates a
 Status Assertion bound to it.
 
-If the Digital Credential is valid, the Issuer
-creates a new Status Assertion,
-which a non-normative example is given below
+A non-normative example is given below
 where the format is JWT.
 
 ~~~
@@ -559,7 +558,7 @@ where the format is JWT.
 }
 ~~~
 
-The Status Assertion MUST contain the parameters defined below.
+The Status Assertion MUST contain the parameters and claims defined below.
 
 | Header Parameter Name | Description | Reference |
 | --- | --- | --- |
@@ -568,14 +567,14 @@ The Status Assertion MUST contain the parameters defined below.
 | **kid** | Unique identifier of the Issuer JWK. It is required when `x5c` or other cryptographic public key resolution identifiers are not used. | {{RFC7515}} |
 | **x5c** | X.509 certificate chain about the Issuer. It is required when `kid` or other parameter are not used. | {{RFC7515}} |
 
-| Payload Parameter Name | Description | Reference |
+| Payload Claim Name | Description | Reference |
 | --- | --- | --- |
 | **iss** | It MUST be set to the identifier of the Issuer. | {{RFC9126}}, {{RFC7519}} |
 | **iat** | UNIX Timestamp with the time of the Status Assertion issuance. | {{RFC9126}}, {{RFC7519}} |
 | **exp** | UNIX Timestamp with the expiration time of the JWT. It MUST be greater than the value set for `iat`. | {{RFC9126}}, {{RFC7519}}, {{RFC7515}} |
-| **credential_hash** | Hash value of the Digital Credential the Status Assertion is bound to. | this specification |
-| **credential_hash_alg** | The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. The value SHOULD be set to `sha-256`. | this specification |
-| **credential_status_validity**| Numerical value indicating the validity of the Credential linked to the Status Assertion, describing its state, mode, condition or stage. The value MUST be from the IANA registry (as described in Section 7.1 of draft-ietf-oauth-status-list). Status validity parameter is REQUIRED, and the Verifier MUST verify its presence and value to assess the Credential's validity. | this specification |
+| **credential_hash** | Hash value of the Digital Credential's Issuer signed part the Status Assertion is bound to. | this specification |
+| **credential_hash_alg** | The hash algorithm MUST match the one contained in the Status Assertion Request to which the Status Assertion is related. | this specification |
+| **credential_status_validity**| Numerical value indicating the validity of the Digital Credential linked to the Status Assertion, describing its state, mode, condition or stage. The value MUST be from the IANA registry (as described in Section 7.1 of draft-ietf-oauth-status-list). Status validity parameter is REQUIRED, and the Verifier MUST verify its presence and value to assess the Digital Credential's validity. | this specification |
 | **cnf** | JSON object containing confirmation methods. The sub-member contained within `cnf` member, such as `jwk` for JWT and `Cose_Key` for CWT, MUST match with the one provided within the related Digital Credential. Other confirmation methods can be utilized when the referenced Digital Credential supports them, in accordance with the relevant standards. | {{RFC7800}} Section 3.1, {{RFC8747}} Section 3.1 |
 
 
@@ -587,18 +586,18 @@ detailing the necessary metadata and practices to integrate into their systems.
 ## Issuer Metadata
 
 Issuers using Status Assertions MUST include in their
-metadata the following parameters:
+metadata the following values:
 
 - `status_assertion_endpoint`. REQUIRED. It MUST be an HTTPs URL indicating
 the endpoint where the Wallet Instances can request Status Assertions.
-- `credential_hash_alg_supported`. REQUIRED. The supported Algorithm used by
-the Wallet Instance to hash the Digital Credential for which the
+- `credential_hash_alg_supported`. REQUIRED. The supported algorithm used by
+the Wallet Instance to hash the Digital Credential's Issuer signed part for which the
 Status Assertion is requested,  using one of the hash algorithms listed
 in the [IANA-HASH-REG].
-- `credential_status_detail_supported`. OPTIONAL. JSON array that outlines the details of each Credential's validity status supported by the Credential Issuer. This parameter MAY be used to extend the values defined in Section [Status Assertion](#status-assertion). Each entry MUST contain the following parameters:
+- `credential_status_detail_supported`. OPTIONAL. JSON array that outlines the details of each Digital Credential's validity status supported by the Credential Issuer. This metadata MAY be used to extend the values defined in Section [Status Assertion](#status-assertion). Each entry MUST contain the following values:
 
-    - `credential_status_validity`. Numerical value indicating the validity of the Credential.
-    - `state`. String value of a Credential status supported.
+    - `credential_status_validity`. Numerical value indicating the validity of the Digital Credential.
+    - `state`. String value of a Digital Credential status supported.
     - `description`. String containing the human-readable description of the status related to this object.
 
 ## Issued Digital Credentials
@@ -608,8 +607,8 @@ issued Digital Credentials the object `status` with the
 JSON member `status_assertion` set to a JSON Object containing the following
 member:
 
-- `credential_hash_alg`. REQUIRED. The Algorithm used of hashing the
-Digital Credential to which the Status Assertion is bound, using one of the
+- `credential_hash_alg`. REQUIRED. The algorithm used of hashing the
+Digital Credential's Issuer signed part to which the Status Assertion is bound, using one of the
 hash algorithms listed in the [IANA-HASH-REG].
 Among the hash algorithms, `sha-256` is recommended and
 SHOULD be implemented by all systems.
@@ -646,7 +645,7 @@ an [SD-JWT.VC] is shown below.
 ### Issuer Implementation Considerations
 
 When the Digital Credential is issued, the Issuer should
-calculate the hash value using the algorithm specified in
+calculate the hash value of the Digital Credential's Issuer signed part using the algorithm specified in
 `status.status_assertion.credential_hash_alg` and store this information
 in its database. This practice enhances efficiency by allowing the
 Issuer to quickly compare the requested
@@ -665,21 +664,21 @@ SHOULD:
 - Decode and validate the Digital Credential;
 - Check the presence of `status.status_assertion` in the
 Digital Credential. If true, the Verifier SHOULD:
-  - produce the hash of the Digital Credential using the
+  - produce the hash of the Digital Credential's Issuer signed part using the
   hashing algorithm configured in `status.status_assertion.credential_hash_alg`;
   - decode all the Status Assertions provided in the presentation,
   by matching the JWS Header parameter `typ` set to `status-assertion+jwt`
   and looking for the `credential_hash` value that matches with the
   hash produced at the previous point;
   - evaluate the validity of the Status Assertion within the `vp_token` parameter, by checking the following items:
-    - the Issuer parameter value MUST match the one in the Credential;
-    - the Issued at time parameter value MUST be equal to or later than the Issued at time parameter value in the Credential;
-    - the Expiration time parameter value MUST be later than the current time;
-    - the Not before time parameter value, if present, MUST be less than or equal to the current time;
-    - the confirmation method MUST be used for the validation (eg: if it uses cryptographic material, this material must be used for the signature validation)
-    - The hash of the Credential MUST be produced as described in [Section 7](#status-assertion-request) and MUST match the hash contained in the Status Assertion.
+    - the Issuer claim value MUST match the one in the Digital Credential;
+    - the Issued at time claim value MUST be equal to or later than the Issued at time claim value in the Digital Credential;
+    - the Expiration time claim value MUST be later than the current time;
+    - the Not before time claim value, if present, MUST be less than or equal to the current time;
+    - the confirmation method MUST be used for the validation (eg: if it uses cryptographic material, this material must be used for the signature validation);
+    - the hash of the Digital Credential MUST be produced as described in [Section 7](#status-assertion-request) and MUST match the hash contained in the Status Assertion.
 
-# Considerations On Revocation Verification
+# Considerations on Revocation Verification
 
 The recommendation for Verifiers to check the revocation status
 of Digital Credentials as a 'SHOULD' instead of a 'MUST' acknowledges
@@ -694,43 +693,12 @@ variety of scenarios.
 
 # Detailed Status Assertions
 
-Status Assertions can introduce a more accurate level of detail about the Credential status.
+Status Assertions can introduce a more accurate level of detail about the Digital Credential status.
 This enables Verifier policies to be conditioned on the presence of authorative information.
 This section proposes syntax to support detailed assertions.
 The `credential_status_validity` claim MUST be present.
 The `credential_status_detail` claim MAY be present and if present MUST be an object.
 The semantics of the claims within the `credential_status_detail` object are determined by the Issuer.
-
-An example of boolean detail status is:
-
-~~~
-{
-    "alg": "ES256",
-    "typ": "status-assertion+jwt",
-    "kid": "w8ZOZRcx21Zpry7H-0VLBsH7Wf7WXb6TeK3qVMCpY44"
-}
-.
-{
-    "iss": "https://issuer.example.org",
-    "iat": 1504699136,
-    "exp": 1504785536,
-    "credential_hash": "xnlAq6Ma8fgu1z4hdGphJnKLulaVHpLCFeZFUGpQ2dA",
-    "credential_hash_alg": "sha-256",
-    "credential_status_validity": 3,
-    "credential_status_detail": {
-      ...
-    },
-    "cnf": {
-      "jwk": {
-        "alg": "ES256",
-        "kty": "EC",
-        "crv": "P-256",
-        "x": "_2ySUmWFjwmraNlo15r6dIBXerVdy_NpJuwAKJMFdoc",
-        "y": "MV3C88MhhEMba6oyMBWuGeB3dKHP4YADJmGyJwwILsk"
-      }
-    }
-}
-~~~
 
 An example of an enumeration detail status is:
 
@@ -916,9 +884,9 @@ Digital Credential ecosystem.
 
 ## Validity Reasons
 
-Depending by the scopes of how the detailed Status Assertions are implemented, these may disclose details about the Holder or subject that were not initially committed to during the original Credential issuance. This can potentially expose additional information that was not part of the original credentialing process.
-Providing a reason that a Digital Credential is no longer valid can be essential to certain use cases, and unacceptable for others
-For example, in a healthcare setting, a patient should not have medical reasons for a suspended credential disclosed in assertions of suspension.
+Depending by the scopes of how the detailed Status Assertions are implemented, these may disclose details about the Holder or subject that were not initially committed to during the original Digital Credential issuance. This can potentially expose additional information that was not part of the original credentialing process.
+Providing a reason that a Digital Credential is no longer valid can be essential to certain use cases, and unacceptable for others.
+For example, in a healthcare setting, a patient should not have medical reasons for a suspended Digital Credential disclosed in assertions of suspension.
 However, in a supply chain context, a product suspension might benefit from additional information, such as batch or lot information.
 
 # IANA Considerations
@@ -930,14 +898,14 @@ IANA "JSON Web Token Claims" registry [IANA.JWT] established by {{RFC7519}}.
 
 
 *  Claim Name: `credential_hash`
-*  Claim Description: Hash value of the Digital Credential the Status Assertion is bound to.
+*  Claim Description: Hash value of the Digital Credential's Issuer signed part the Status Assertion is bound to.
 *  Change Controller: IETF
 *  Specification Document(s): [this specification](#status-assertion)
 
 <br/>
 
 *  Claim Name: `credential_hash_alg`
-*  Claim Description: The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound.
+*  Claim Description: The Algorithm used of hashing the Digital Credential's Issuer signed part to which the Status Assertion is bound.
 *  Change Controller: IETF
 *  Specification Document(s): [this specification](#status-assertion)
 
