@@ -5,12 +5,12 @@
 Network Working Group                                        G. D. Marco
 Internet-Draft               Dipartimento per la trasformazione digitale
 Intended status: Informational                                 O. Steele
-Expires: 15 May 2025                                           Transmute
+Expires: 31 May 2025                                           Transmute
                                                                F. Marino
                                 Istituto Poligrafico e Zecca dello Stato
                                                               M. Adomeit
                                                                    SUNET
-                                                        11 November 2024
+                                                        27 November 2024
 
 
                         OAuth Status Assertions
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 May 2025.
+   This Internet-Draft will expire on 31 May 2025.
 
 Copyright Notice
 
@@ -216,6 +216,10 @@ Table of Contents
 
    The general requirements for the implementation of Status Assertion
    are listed in this section.  The Status Assertion:
+
+   *  notifies the Holder about the status of their Digital Credential,
+      because the Holder MUST be informed by the Issuers of any changes
+      in the status of their Digital Credentials.
 
    *  SHOULD be presented in conjunction with the Digital Credential.
 
