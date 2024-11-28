@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-26T01:05:16.830044+00:00",
+  "timestamp": "2024-11-28T01:05:58.330678+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -11953,24 +11953,26 @@
       "id": "PR_kwDOK4XJ0s6BfD2u",
       "title": "added the requirement to keep the Holder informed about status changes",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/97",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "peppelinux",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "This PR adds the requirement about inform the Holder when the status of a credentials changes\r\n\r\nThis is a feature made for granted using status assertions",
       "createdAt": "2024-11-11T09:58:45Z",
-      "updatedAt": "2024-11-25T12:52:24Z",
+      "updatedAt": "2024-11-27T14:29:25Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "96338f8734552e2ac7cb31b445fc659549c00195",
       "headRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "headRefName": "inform-holder",
       "headRefOid": "d17da4de4e3ea35f65eb8feb75bd0bcafb0e8ff4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-11-27T14:29:25Z",
+      "mergedAt": "2024-11-27T14:29:25Z",
+      "mergedBy": "peppelinux",
+      "mergeCommit": {
+        "oid": "1c4c53657a706b4aca82c3d6a7a8bc3fce039870"
+      },
       "comments": [],
       "reviews": [
         {
@@ -12066,9 +12068,9 @@
           "comments": [
             {
               "originalPosition": 5,
-              "body": "```suggestion\r\n- notifies the Holder about the status of their Digital Credential. Issuers MUST notify the Holder about the status of their Digital Credential because the Holder needs to be informed of any changes.\r\n```",
+              "body": "```suggestion\r\n- notifies the Holder about the status of their Digital Credential. The Issuer MUST notify the Holder about the status of their Digital Credential because the Holder needs to be informed of any changes.\r\n```",
               "createdAt": "2024-11-21T09:05:12Z",
-              "updatedAt": "2024-11-21T09:05:12Z"
+              "updatedAt": "2024-11-27T13:52:05Z"
             }
           ]
         },
@@ -12131,6 +12133,39 @@
               "updatedAt": "2024-11-25T12:52:24Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6S7kct",
+          "commit": {
+            "abbreviatedOid": "d17da4d"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-27T13:52:14Z",
+          "updatedAt": "2024-11-27T13:52:14Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "done, thank you",
+              "createdAt": "2024-11-27T13:52:14Z",
+              "updatedAt": "2024-11-27T13:52:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6S75V-",
+          "commit": {
+            "abbreviatedOid": "d17da4d"
+          },
+          "author": "marinaado",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-27T14:21:54Z",
+          "updatedAt": "2024-11-27T14:21:54Z",
+          "comments": []
         }
       ]
     },
@@ -12146,7 +12181,7 @@
       "labels": [],
       "body": "This PR:\r\n\r\n- specifies that jti and cti are conditional to each other\r\n- changes the description of credential_hash_alg\r\n- specifies that the hash is of the Digital Credential's Issuer signed part\r\n- removes the boolean detail status example\r\n-  corrects some typos: Credential ->Digital Credential, title styles",
       "createdAt": "2024-11-13T17:47:12Z",
-      "updatedAt": "2024-11-25T09:28:45Z",
+      "updatedAt": "2024-11-27T14:00:33Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "3aabe8002899388ee3e79b20f16fa90de33433ba",
@@ -12240,6 +12275,32 @@
           "body": "",
           "createdAt": "2024-11-25T09:28:45Z",
           "updatedAt": "2024-11-25T09:28:45Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6S7l8s",
+          "commit": {
+            "abbreviatedOid": "a90e6b6"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-27T13:54:40Z",
+          "updatedAt": "2024-11-27T13:54:40Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6S7p83",
+          "commit": {
+            "abbreviatedOid": "a90e6b6"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-27T14:00:33Z",
+          "updatedAt": "2024-11-27T14:00:33Z",
           "comments": []
         }
       ]
