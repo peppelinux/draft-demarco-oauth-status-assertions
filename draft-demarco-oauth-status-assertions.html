@@ -11,21 +11,21 @@
 <meta content="Marina Adomeit" name="author">
 <meta content="
        Status Assertion is a signed object that demonstrates the validity status of a
-digital credential.
+Digital Credential.
 These assertions are periodically provided
 to Holders, who can present these to Credential Verifier along
-with the corresponding digital credentials.
+with the corresponding Digital Credentials.
 The approach outlined in this document
 makes the Credential Verifier able to check the status,
-such as the non-revocation, of a digital credential
+such as the non-revocation, of a Digital Credential
 without requiring to query any third-party entities. 
     " name="description">
-<meta content="xml2rfc 3.24.0" name="generator">
+<meta content="xml2rfc 3.25.0" name="generator">
 <meta content="digital credentials" name="keyword">
 <meta content="revocation" name="keyword">
 <meta content="draft-demarco-oauth-status-assertions-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.24.0
+  xml2rfc 3.25.0
     Python 3.12.7
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
@@ -546,7 +546,11 @@ figcaption, caption {
   }
   pre, svg {
     display: inline-block;
-    overflow-x: auto;
+    /* In the horizontal direction, sometimes people make over-sized figures.
+       Scrollbars for those is therefore necessary: auto adds them as necessary..
+       In the vertical direction, the line-height can combine with the font
+       asender/descender height to produce scrollbars: hidden avoids that. */
+    overflow: auto hidden;
   }
   pre {
     max-width: 100%;
@@ -1052,11 +1056,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">OAuth Status Assertions</td>
-<td class="right">November 2024</td>
+<td class="right">December 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Marco, et al.</td>
-<td class="center">Expires 31 May 2025</td>
+<td class="center">Expires 15 June 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1073,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-demarco-oauth-status-assertions-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-11-27" class="published">27 November 2024</time>
+<time datetime="2024-12-12" class="published">12 December 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-05-31">31 May 2025</time></dd>
+<dd class="expires"><time datetime="2025-06-15">15 June 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1100,13 +1104,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">Status Assertion is a signed object that demonstrates the validity status of a
-digital credential.
+Digital Credential.
 These assertions are periodically provided
 to Holders, who can present these to Credential Verifier along
-with the corresponding digital credentials.
+with the corresponding Digital Credentials.
 The approach outlined in this document
 makes the Credential Verifier able to check the status,
-such as the non-revocation, of a digital credential
+such as the non-revocation, of a Digital Credential
 without requiring to query any third-party entities.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
@@ -1139,7 +1143,7 @@ without requiring to query any third-party entities.<a href="#section-abstract-1
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 31 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 15 June 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1184,7 +1188,7 @@ without requiring to query any third-party entities.<a href="#section-abstract-1
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-requirements" class="internal xref">Requirements</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-proof-of-possession-of-a-cr" class="internal xref">Proof of Possession of a Credential</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-proof-of-possession-of-a-di" class="internal xref">Proof of Possession of a Digital Credential</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-status-assertion-request" class="internal xref">Status Assertion Request</a></p>
@@ -1196,7 +1200,7 @@ without requiring to query any third-party entities.<a href="#section-abstract-1
             <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-status-assertion-error" class="internal xref">Status Assertion Error</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-rationale-about-the-unsigne" class="internal xref">Rationale About The Unsigned Status Assertion Errors</a></p>
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-rationale-about-the-unsigne" class="internal xref">Rationale about the Unsigned Status Assertion Errors</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
                 <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-status-assertion-error-valu" class="internal xref">Status Assertion Error Values</a></p>
@@ -1226,7 +1230,7 @@ without requiring to query any third-party entities.<a href="#section-abstract-1
             <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-presenting-status-assertion" class="internal xref">Presenting Status Assertions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#section-13" class="auto internal xref">13</a>. <a href="#name-considerations-on-revocatio" class="internal xref">Considerations On Revocation Verification</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#section-13" class="auto internal xref">13</a>. <a href="#name-considerations-on-revocatio" class="internal xref">Considerations on Revocation Verification</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
             <p id="section-toc.1-1.14.1"><a href="#section-14" class="auto internal xref">14</a>. <a href="#name-detailed-status-assertions" class="internal xref">Detailed Status Assertions</a></p>
@@ -1300,14 +1304,14 @@ without requiring to query any third-party entities.<a href="#section-abstract-1
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Status Assertions show the status of digital
-credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT)
+<p id="section-1-1">Status Assertions show the status of Digital
+Credentials, whether in JSON Web Tokens (JWT) or CBOR Web Tokens (CWT)
 format. Status Assertions function
 similarly to OCSP Stapling (<span>[<a href="#RFC6066" class="cite xref">RFC6066</a>]</span>), allowing Holders
 to present to the Relying Parties
 time-stamped assertions provided by the Issuer.
 The approach outlined in this specification enables the
-verification of Credentials against revocation without
+verification of Digital Credentials against revocation without
 direct queries to third-party systems,
 enhancing privacy, reducing latency, and
 faciliting offline verification.<a href="#section-1-1" class="pilcrow">¶</a></p>
@@ -1447,12 +1451,12 @@ in the status of their Digital Credentials.<a href="#section-5-2.1.1" class="pil
 </li>
         <li class="normal" id="section-5-2.3">
           <p id="section-5-2.3.1"><span class="bcp14">MUST</span> include information that links it to the
-referenced Digital Credential;<a href="#section-5-2.3.1" class="pilcrow">¶</a></p>
+referenced Digital Credential.<a href="#section-5-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-5-2.4">
           <p id="section-5-2.4.1"><span class="bcp14">MUST</span> be timestamped with its issuance datetime,
 using a timestamp which is at or after the time of
-Digital Credential issuance which it refers;<a href="#section-5-2.4.1" class="pilcrow">¶</a></p>
+Digital Credential issuance which it refers.<a href="#section-5-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-5-2.5">
           <p id="section-5-2.5.1"><span class="bcp14">MUST</span> contain the expiration datetime after which
@@ -1461,7 +1465,7 @@ and the Digital Credential referred to <span class="bcp14">SHOULD NOT</span>
 be considered as having a valid status, unless there exists some specific Verifier policy that provides stronger guidance.
 The expiration datetime <span class="bcp14">MUST</span> be
 superior to the Status Assertion issuance datetime and it <span class="bcp14">MUST</span> end before
-the expiration datetime of the Digital Credential;<a href="#section-5-2.5.1" class="pilcrow">¶</a></p>
+the expiration datetime of the Digital Credential.<a href="#section-5-2.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-5-2.6">
           <p id="section-5-2.6.1"><span class="bcp14">MAY</span> contain the <em>not before time</em> parameter, specifying the time
@@ -1483,21 +1487,21 @@ be presented, such as disclose the Verifier identifier to specify the intended a
       </ul>
 </section>
 </div>
-<div id="proof-of-possession-of-a-credential">
+<div id="proof-of-possession-of-a-digital-credential">
 <section id="section-6">
-      <h2 id="name-proof-of-possession-of-a-cr">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-proof-of-possession-of-a-cr" class="section-name selfRef">Proof of Possession of a Credential</a>
+      <h2 id="name-proof-of-possession-of-a-di">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-proof-of-possession-of-a-di" class="section-name selfRef">Proof of Possession of a Digital Credential</a>
       </h2>
-<p id="section-6-1">The concept of Proof of Possession (PoP) of a Credential within the
+<p id="section-6-1">The concept of Proof of Possession (PoP) of a Digital Credential within the
 framework of the Status Assertion specification encompasses a broader
-perspective than merely possessing the digital bytes of the Credential.<a href="#section-6-1" class="pilcrow">¶</a></p>
+perspective than merely possessing the digital bytes of the Digital Credential.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">It involves demonstrating rightful control or ownership over the
-Credential, which can manifest in various forms depending on the
+Digital Credential, which can manifest in various forms depending on the
 technology employed and the nature of the Digital Credential itself.
 For instance, a Digital Credential could be presented visually (de-visu)
 with a personal portrait serving as a binding element.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <p id="section-6-3">While this specification does not prescribe any additional methods
-for the proof of possession of the Credential, it aims to offer
+for the proof of possession of the Digital Credential, it aims to offer
 guidance for concrete implementations utilizing common proof of
 possession mechanisms. This includes, but is not limited to:<a href="#section-6-3" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-6-4">
@@ -1505,21 +1509,21 @@ possession mechanisms. This includes, but is not limited to:<a href="#section-6-
           <p id="section-6-4.1.1">Having the digital representation of the Digital Credential (the bytes).<a href="#section-6-4.1.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-6-4.2">
-          <p id="section-6-4.2.1">Controlling the confirmation method of the Credential,
-using the Credential's <code>cnf</code> parameter.<a href="#section-6-4.2.1" class="pilcrow">¶</a></p>
+          <p id="section-6-4.2.1">Controlling the confirmation method of the Digital Credential,
+using the Digital Credential's <code>cnf</code> claim.<a href="#section-6-4.2.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
-<p id="section-6-5">The essence of requiring proof of possession over the Credential
+<p id="section-6-5">The essence of requiring proof of possession over the Digital Credential
 through the confirmation method, such has proving the control of the
-cryptographic material related to a Credential, is
-to ensure that the entity in possession of the Credential can execute
+cryptographic material related to a Digital Credential, is
+to ensure that the entity in possession of the Digital Credential can execute
 actions exclusively reserved to the legitimate Holder.
 The dual-layered approach of requiring both possession of the
-Credential and control over it, reinforces the security and integrity
+Digital Credential and control over it, reinforces the security and integrity
 of the Status Assertion process.
 This ensures that the Holder requesting a Status Assertion is indeed
-the same Holder to which the Credential was originally issued,
-affirming the authenticity and rightful possession of the Credential.<a href="#section-6-5" class="pilcrow">¶</a></p>
+the same Holder to which the Digital Credential was originally issued,
+affirming the authenticity and rightful possession of the Digital Credential.<a href="#section-6-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="status-assertion-request">
@@ -1529,14 +1533,14 @@ affirming the authenticity and rightful possession of the Credential.<a href="#s
       </h2>
 <p id="section-7-1">The following diagram shows the Wallet Instance requesting a
 Status Assertion to an Issuer,
-related to a specific Credential issued by the same Issuer.<a href="#section-7-1" class="pilcrow">¶</a></p>
+related to a specific Digital Credential issued by the same Issuer.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-ascii-art art-text artwork" id="section-7-2">
 <pre>
 +-------------------+                                  +-------------------+
 |  Wallet Instance  |                                  |      Issuer       |
 +--------+----------+                                  +----------+--------+
          |                                                        |
-         | HTTP POST /status                                      |
+         | HTTP POST /status-assertion-endpoint                                      |
          |  status_assertion_requests = [$StatusAssertionRequest] |
          +--------------------------------------------------------&gt;
          |                                                        |
@@ -1564,7 +1568,7 @@ to the confirmation claim assigned by the Issuer and contained within
 the Digital Credential.<a href="#section-7-4.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-7-5">The Status Assertion Request object <span class="bcp14">MUST</span> contain the parameters defined
+<p id="section-7-5">The Status Assertion Request object <span class="bcp14">MUST</span> contain the parameters and claims defined
 in the following table.<a href="#section-7-5" class="pilcrow">¶</a></p>
 <table class="center" id="table-1">
         <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
@@ -1645,7 +1649,7 @@ in the following table.<a href="#section-7-5" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>jti</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Unique identifier for the JWT.</td>
+            <td class="text-left" rowspan="1" colspan="1">Unique identifier when the Status Assertion Request is in JWT format, using the <code>typ</code> parameter set to <code>status-assertion-request+jwt</code>.</td>
             <td class="text-left" rowspan="1" colspan="1">
               <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> Section 4.1.7</td>
           </tr>
@@ -1653,7 +1657,7 @@ in the following table.<a href="#section-7-5" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>cti</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Unique identifier for the CWT.</td>
+            <td class="text-left" rowspan="1" colspan="1">Unique identifier when the Status Assertion Request is in CWT format, using the <code>typ</code> parameter set to <code>status-assertion-request+cwt</code>.</td>
             <td class="text-left" rowspan="1" colspan="1">
               <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> Section 4.1.7</td>
           </tr>
@@ -1661,14 +1665,14 @@ in the following table.<a href="#section-7-5" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>credential_hash</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Hash value of the Digital Credential the Status Assertion is bound to.</td>
+            <td class="text-left" rowspan="1" colspan="1">Hash value of the Digital Credential's Issuer signed part the Status Assertion is bound to.</td>
             <td class="text-left" rowspan="1" colspan="1">this specification</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>credential_hash_alg</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. The value <span class="bcp14">SHOULD</span> be set to <code>sha-256</code>.</td>
+            <td class="text-left" rowspan="1" colspan="1">The hash algorithm <span class="bcp14">MUST</span> match the one specified in the <code>status.status_assertion.credential_hash_alg</code> claim of the Digital Credential for which the Status Assertion is requested.</td>
             <td class="text-left" rowspan="1" colspan="1">this specification</td>
           </tr>
         </tbody>
@@ -1722,7 +1726,7 @@ and payload are presented without applying signature and encoding for better rea
 single Status Assertion Request object in JWT format.<a href="#section-7-12" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-7-13">
 <pre>
-POST /status HTTP/1.1
+POST /status-assertion-endpoint HTTP/1.1
 Host: issuer.example.org
 Content-Type: application/json
 
@@ -1787,16 +1791,26 @@ where each of them represent a Status Assertion Response object,
 as defined in
 <span><a href="#status-assertion" class="internal xref">the section Status Assertion</a> (<a href="#status-assertion" class="auto internal xref">Section 10</a>)</span> or a Status Assertion Error object,
 as defined in <span><a href="#status-assertion-error" class="internal xref">the section Status Error</a> (<a href="#status-assertion-error" class="auto internal xref">Section 9</a>)</span>.<a href="#section-8-3" class="pilcrow">¶</a></p>
-<p id="section-8-4">For each entry in the <code>status_assertion_responses</code> array, the following requirements are met:
-- Each element in the array <span class="bcp14">MUST</span> match the corresponding element in the request array at
-the same position index to which it is related, eg: <em>[requestAboutA, requestAboutB]</em> may produce <em>[responseAboutA, responseErrorAboutB]</em>.
-- Each element <span class="bcp14">MUST</span> contain the error or the status of the assertion, using the <code>typ</code> member
-set to "status-assertion+{jwt,cwt}" or "status-assertion-error+{jwt,cwt}", depending by the object type.
-- The corresponding entry in the response <span class="bcp14">MUST</span> be of the same data format as requested. For example,
-if the entry in the request is "jwt", then the entry at the same position in the response <span class="bcp14">MUST</span> also be "jwt".
-- The corresponding entry in the response <span class="bcp14">MUST NOT</span> contain any
+<p id="section-8-4">For each entry in the <code>status_assertion_responses</code> array, the following requirements are met:<a href="#section-8-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8-5.1">
+          <p id="section-8-5.1.1">Each element in the array <span class="bcp14">MUST</span> match the corresponding element in the request array at
+the same position index to which it is related, eg: <em>[requestAboutA, requestAboutB]</em> may produce <em>[responseAboutA, responseErrorAboutB]</em>.<a href="#section-8-5.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-8-5.2">
+          <p id="section-8-5.2.1">Each element <span class="bcp14">MUST</span> contain the error or the status of the assertion, using the <code>typ</code> member
+set to "status-assertion+{jwt,cwt}" or "status-assertion-error+{jwt,cwt}", depending by the object type.<a href="#section-8-5.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-8-5.3">
+          <p id="section-8-5.3.1">The corresponding entry in the response <span class="bcp14">MUST</span> be of the same data format as requested. For example,
+if the entry in the request is "jwt", then the entry at the same position in the response <span class="bcp14">MUST</span> also be "jwt".<a href="#section-8-5.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-8-5.4">
+          <p id="section-8-5.4.1">The corresponding entry in the response <span class="bcp14">MUST NOT</span> contain any
 information regarding the Verifier to whom it may be presented,
-such as the Verifier identifier as the intended audience.<a href="#section-8-4" class="pilcrow">¶</a></p>
+such as the Verifier identifier as the intended audience.<a href="#section-8-5.4.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
 </section>
 </div>
 <div id="status-assertion-error">
@@ -1805,11 +1819,11 @@ such as the Verifier identifier as the intended audience.<a href="#section-8-4" 
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-status-assertion-error" class="section-name selfRef">Status Assertion Error</a>
       </h2>
 <p id="section-9-1">The Status Assertion Error <span class="bcp14">MUST NOT</span> be presented or provided to a Verifier,
-the only audience of the Status Assertion Error is the Holder of the Credential
+the only audience of the Status Assertion Error is the Holder of the Digital Credential
 that has requested the Status Assertion. Therefore,
 it is not necessary that the Status Assertion Error
-contains the parameter <code>aud</code>; if present, it <span class="bcp14">MUST</span> be set to the same
-value as the <code>iss</code> parameter used by the Wallet in the corresponding
+contains the claim <code>aud</code>; if present, it <span class="bcp14">MUST</span> be set to the same
+value as the <code>iss</code> claim used by the Wallet in the corresponding
 Status Assertion Request object.<a href="#section-9-1" class="pilcrow">¶</a></p>
 <p id="section-9-2">Below a non-normative example of a Status Assertion Error object in JWT format,
 with the headers and payload represented in JSON and without applying the signature.<a href="#section-9-2" class="pilcrow">¶</a></p>
@@ -1832,7 +1846,7 @@ with the headers and payload represented in JSON and without applying the signat
 }
 </pre><a href="#section-9-3" class="pilcrow">¶</a>
 </div>
-<p id="section-9-4">The Status Assertion Error object <span class="bcp14">MUST</span> contain the parameters described in the
+<p id="section-9-4">The Status Assertion Error object <span class="bcp14">MUST</span> contain the parameters and claims described in the
 table below:<a href="#section-9-4" class="pilcrow">¶</a></p>
 <table class="center" id="table-3">
         <caption><a href="#table-3" class="selfRef">Table 3</a></caption>
@@ -1932,9 +1946,9 @@ table below:<a href="#section-9-4" class="pilcrow">¶</a></p>
 <div id="rationale-about-the-unsigned-status-assertion-errors">
 <section id="section-9.1">
         <h3 id="name-rationale-about-the-unsigne">
-<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-rationale-about-the-unsigne" class="section-name selfRef">Rationale About The Unsigned Status Assertion Errors</a>
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-rationale-about-the-unsigne" class="section-name selfRef">Rationale about the Unsigned Status Assertion Errors</a>
         </h3>
-<p id="section-9.1-1">To mitigate potential resource exhaustion attacks where an adversary could issue hundreds of fake Status Assertion Requests to force an Issuer to sign numerous Status Assertion Errors, it is advisable to set the header parameter<code>alg</code> value to <code>none</code> for Status Assertion Errors that do not require signatures. This approach conserves computational resources and prevents abuse, especially in scenarios where the Issuer's implementation could be vulnerable to resource exhaustion attacks. However, even if it is out of the scopes of this specification determine in which the Status Error Assertion signatures are necessary, when the Issuer signs the Status Assertion Errors the Holder that received them <span class="bcp14">MUST</span> validate the signature.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
+<p id="section-9.1-1">To mitigate potential resource exhaustion attacks where an adversary could issue hundreds of fake Status Assertion Requests to force an Issuer to sign numerous Status Assertion Errors, it is advisable to set the header parameter <code>alg</code> value to <code>none</code> for Status Assertion Errors that do not require signatures. This approach conserves computational resources and prevents abuse, especially in scenarios where the Issuer's implementation could be vulnerable to resource exhaustion attacks. However, even if it is out of the scopes of this specification determine in which the Status Error Assertion signatures are necessary, when the Issuer signs the Status Assertion Errors the Holder that received them <span class="bcp14">MUST</span> validate the signature.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="status-assertion-error-values">
@@ -1942,12 +1956,12 @@ table below:<a href="#section-9-4" class="pilcrow">¶</a></p>
         <h3 id="name-status-assertion-error-valu">
 <a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-status-assertion-error-valu" class="section-name selfRef">Status Assertion Error Values</a>
         </h3>
-<p id="section-9.2-1">The <code>error</code> parameter for the Status Assertion Error object <span class="bcp14">MUST</span> be set with one of the values defined in the table below, in addition to the values specified in <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>:<a href="#section-9.2-1" class="pilcrow">¶</a></p>
+<p id="section-9.2-1">The <code>error</code> claim for the Status Assertion Error object <span class="bcp14">MUST</span> be set with one of the values defined in the table below, in addition to the values specified in <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>:<a href="#section-9.2-1" class="pilcrow">¶</a></p>
 <table class="center" id="table-5">
           <caption><a href="#table-5" class="selfRef">Table 5</a></caption>
 <thead>
             <tr>
-              <th class="text-left" rowspan="1" colspan="1">Error Parameter Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Error Value</th>
               <th class="text-left" rowspan="1" colspan="1">Description</th>
               <th class="text-left" rowspan="1" colspan="1">Reference</th>
             </tr>
@@ -1988,9 +2002,7 @@ table below:<a href="#section-9-4" class="pilcrow">¶</a></p>
 <p id="section-10-1">When a Status Assertion is requested to an Issuer, the
 Issuer checks the status of the Digital Credential and creates a
 Status Assertion bound to it.<a href="#section-10-1" class="pilcrow">¶</a></p>
-<p id="section-10-2">If the Digital Credential is valid, the Issuer
-creates a new Status Assertion,
-which a non-normative example is given below
+<p id="section-10-2">A non-normative example is given below
 where the format is JWT.<a href="#section-10-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-10-3">
 <pre>
@@ -2013,7 +2025,7 @@ where the format is JWT.<a href="#section-10-2" class="pilcrow">¶</a></p>
 }
 </pre><a href="#section-10-3" class="pilcrow">¶</a>
 </div>
-<p id="section-10-4">The Status Assertion <span class="bcp14">MUST</span> contain the parameters defined below.<a href="#section-10-4" class="pilcrow">¶</a></p>
+<p id="section-10-4">The Status Assertion <span class="bcp14">MUST</span> contain the parameters and claims defined below.<a href="#section-10-4" class="pilcrow">¶</a></p>
 <table class="center" id="table-6">
         <caption><a href="#table-6" class="selfRef">Table 6</a></caption>
 <thead>
@@ -2065,7 +2077,7 @@ where the format is JWT.<a href="#section-10-2" class="pilcrow">¶</a></p>
         <caption><a href="#table-7" class="selfRef">Table 7</a></caption>
 <thead>
           <tr>
-            <th class="text-left" rowspan="1" colspan="1">Payload Parameter Name</th>
+            <th class="text-left" rowspan="1" colspan="1">Payload Claim Name</th>
             <th class="text-left" rowspan="1" colspan="1">Description</th>
             <th class="text-left" rowspan="1" colspan="1">Reference</th>
           </tr>
@@ -2102,21 +2114,21 @@ where the format is JWT.<a href="#section-10-2" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>credential_hash</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Hash value of the Digital Credential the Status Assertion is bound to.</td>
+            <td class="text-left" rowspan="1" colspan="1">Hash value of the Digital Credential's Issuer signed part the Status Assertion is bound to.</td>
             <td class="text-left" rowspan="1" colspan="1">this specification</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>credential_hash_alg</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound. The value <span class="bcp14">SHOULD</span> be set to <code>sha-256</code>.</td>
+            <td class="text-left" rowspan="1" colspan="1">The hash algorithm <span class="bcp14">MUST</span> match the one contained in the Status Assertion Request to which the Status Assertion is related.</td>
             <td class="text-left" rowspan="1" colspan="1">this specification</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>credential_status_validity</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Numerical value indicating the validity of the Credential linked to the Status Assertion, describing its state, mode, condition or stage. The value <span class="bcp14">MUST</span> be from the IANA registry (as described in Section 7.1 of draft-ietf-oauth-status-list). Status validity parameter is <span class="bcp14">REQUIRED</span>, and the Verifier <span class="bcp14">MUST</span> verify its presence and value to assess the Credential's validity.</td>
+            <td class="text-left" rowspan="1" colspan="1">Numerical value indicating the validity of the Digital Credential linked to the Status Assertion, describing its state, mode, condition or stage. The value <span class="bcp14">MUST</span> be from the IANA registry (as described in Section 7.1 of draft-ietf-oauth-status-list). Status validity parameter is <span class="bcp14">REQUIRED</span>, and the Verifier <span class="bcp14">MUST</span> verify its presence and value to assess the Digital Credential's validity.</td>
             <td class="text-left" rowspan="1" colspan="1">this specification</td>
           </tr>
           <tr>
@@ -2144,26 +2156,26 @@ detailing the necessary metadata and practices to integrate into their systems.<
 <a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-issuer-metadata" class="section-name selfRef">Issuer Metadata</a>
         </h3>
 <p id="section-11.1-1">Issuers using Status Assertions <span class="bcp14">MUST</span> include in their
-metadata the following parameters:<a href="#section-11.1-1" class="pilcrow">¶</a></p>
+metadata the following values:<a href="#section-11.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-11.1-2.1">
             <p id="section-11.1-2.1.1"><code>status_assertion_endpoint</code>. <span class="bcp14">REQUIRED</span>. It <span class="bcp14">MUST</span> be an HTTPs URL indicating
 the endpoint where the Wallet Instances can request Status Assertions.<a href="#section-11.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.1-2.2">
-            <p id="section-11.1-2.2.1"><code>credential_hash_alg_supported</code>. <span class="bcp14">REQUIRED</span>. The supported Algorithm used by
-the Wallet Instance to hash the Digital Credential for which the
+            <p id="section-11.1-2.2.1"><code>credential_hash_alg_supported</code>. <span class="bcp14">REQUIRED</span>. The supported algorithm used by
+the Wallet Instance to hash the Digital Credential's Issuer signed part for which the
 Status Assertion is requested,  using one of the hash algorithms listed
 in the <span>[<a href="#IANA-HASH-REG" class="cite xref">IANA-HASH-REG</a>]</span>.<a href="#section-11.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.1-2.3">
-            <p id="section-11.1-2.3.1"><code>credential_status_detail_supported</code>. <span class="bcp14">OPTIONAL</span>. JSON array that outlines the details of each Credential's validity status supported by the Credential Issuer. This parameter <span class="bcp14">MAY</span> be used to extend the values defined in Section <span><a href="#status-assertion" class="internal xref">Status Assertion</a> (<a href="#status-assertion" class="auto internal xref">Section 10</a>)</span>. Each entry <span class="bcp14">MUST</span> contain the following parameters:<a href="#section-11.1-2.3.1" class="pilcrow">¶</a></p>
+            <p id="section-11.1-2.3.1"><code>credential_status_detail_supported</code>. <span class="bcp14">OPTIONAL</span>. JSON array that outlines the details of each Digital Credential's validity status supported by the Credential Issuer. This metadata <span class="bcp14">MAY</span> be used to extend the values defined in Section <span><a href="#status-assertion" class="internal xref">Status Assertion</a> (<a href="#status-assertion" class="auto internal xref">Section 10</a>)</span>. Each entry <span class="bcp14">MUST</span> contain the following values:<a href="#section-11.1-2.3.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-11.1-2.3.2.1">
-                <p id="section-11.1-2.3.2.1.1"><code>credential_status_validity</code>. Numerical value indicating the validity of the Credential.<a href="#section-11.1-2.3.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-11.1-2.3.2.1.1"><code>credential_status_validity</code>. Numerical value indicating the validity of the Digital Credential.<a href="#section-11.1-2.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-11.1-2.3.2.2">
-                <p id="section-11.1-2.3.2.2.1"><code>state</code>. String value of a Credential status supported.<a href="#section-11.1-2.3.2.2.1" class="pilcrow">¶</a></p>
+                <p id="section-11.1-2.3.2.2.1"><code>state</code>. String value of a Digital Credential status supported.<a href="#section-11.1-2.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-11.1-2.3.2.3">
                 <p id="section-11.1-2.3.2.3.1"><code>description</code>. String containing the human-readable description of the status related to this object.<a href="#section-11.1-2.3.2.3.1" class="pilcrow">¶</a></p>
@@ -2184,8 +2196,8 @@ JSON member <code>status_assertion</code> set to a JSON Object containing the fo
 member:<a href="#section-11.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-11.2-2.1">
-            <p id="section-11.2-2.1.1"><code>credential_hash_alg</code>. <span class="bcp14">REQUIRED</span>. The Algorithm used of hashing the
-Digital Credential to which the Status Assertion is bound, using one of the
+            <p id="section-11.2-2.1.1"><code>credential_hash_alg</code>. <span class="bcp14">REQUIRED</span>. The algorithm used of hashing the
+Digital Credential's Issuer signed part to which the Status Assertion is bound, using one of the
 hash algorithms listed in the <span>[<a href="#IANA-HASH-REG" class="cite xref">IANA-HASH-REG</a>]</span>.
 Among the hash algorithms, <code>sha-256</code> is recommended and
 <span class="bcp14">SHOULD</span> be implemented by all systems.<a href="#section-11.2-2.1.1" class="pilcrow">¶</a></p>
@@ -2225,7 +2237,7 @@ an <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span> is shown 
 <a href="#section-11.2.1" class="section-number selfRef">11.2.1. </a><a href="#name-issuer-implementation-consi" class="section-name selfRef">Issuer Implementation Considerations</a>
           </h4>
 <p id="section-11.2.1-1">When the Digital Credential is issued, the Issuer should
-calculate the hash value using the algorithm specified in
+calculate the hash value of the Digital Credential's Issuer signed part using the algorithm specified in
 <code>status.status_assertion.credential_hash_alg</code> and store this information
 in its database. This practice enhances efficiency by allowing the
 Issuer to quickly compare the requested
@@ -2256,7 +2268,7 @@ related Digital Credential.<a href="#section-12-1" class="pilcrow">¶</a></p>
 Digital Credential. If true, the Verifier <span class="bcp14">SHOULD</span>:<a href="#section-12-3.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-12-3.2.2.1">
-              <p id="section-12-3.2.2.1.1">produce the hash of the Digital Credential using the
+              <p id="section-12-3.2.2.1.1">produce the hash of the Digital Credential's Issuer signed part using the
 hashing algorithm configured in <code>status.status_assertion.credential_hash_alg</code>;<a href="#section-12-3.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-12-3.2.2.2">
@@ -2269,22 +2281,22 @@ hash produced at the previous point;<a href="#section-12-3.2.2.2.1" class="pilcr
               <p id="section-12-3.2.2.3.1">evaluate the validity of the Status Assertion within the <code>vp_token</code> parameter, by checking the following items:<a href="#section-12-3.2.2.3.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-12-3.2.2.3.2.1">
-                  <p id="section-12-3.2.2.3.2.1.1">the Issuer parameter value <span class="bcp14">MUST</span> match the one in the Credential;<a href="#section-12-3.2.2.3.2.1.1" class="pilcrow">¶</a></p>
+                  <p id="section-12-3.2.2.3.2.1.1">the Issuer claim value <span class="bcp14">MUST</span> match the one in the Digital Credential;<a href="#section-12-3.2.2.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
                 <li class="normal" id="section-12-3.2.2.3.2.2">
-                  <p id="section-12-3.2.2.3.2.2.1">the Issued at time parameter value <span class="bcp14">MUST</span> be equal to or later than the Issued at time parameter value in the Credential;<a href="#section-12-3.2.2.3.2.2.1" class="pilcrow">¶</a></p>
+                  <p id="section-12-3.2.2.3.2.2.1">the Issued at time claim value <span class="bcp14">MUST</span> be equal to or later than the Issued at time claim value in the Digital Credential;<a href="#section-12-3.2.2.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
                 <li class="normal" id="section-12-3.2.2.3.2.3">
-                  <p id="section-12-3.2.2.3.2.3.1">the Expiration time parameter value <span class="bcp14">MUST</span> be later than the current time;<a href="#section-12-3.2.2.3.2.3.1" class="pilcrow">¶</a></p>
+                  <p id="section-12-3.2.2.3.2.3.1">the Expiration time claim value <span class="bcp14">MUST</span> be later than the current time;<a href="#section-12-3.2.2.3.2.3.1" class="pilcrow">¶</a></p>
 </li>
                 <li class="normal" id="section-12-3.2.2.3.2.4">
-                  <p id="section-12-3.2.2.3.2.4.1">the Not before time parameter value, if present, <span class="bcp14">MUST</span> be less than or equal to the current time;<a href="#section-12-3.2.2.3.2.4.1" class="pilcrow">¶</a></p>
+                  <p id="section-12-3.2.2.3.2.4.1">the Not before time claim value, if present, <span class="bcp14">MUST</span> be less than or equal to the current time;<a href="#section-12-3.2.2.3.2.4.1" class="pilcrow">¶</a></p>
 </li>
                 <li class="normal" id="section-12-3.2.2.3.2.5">
-                  <p id="section-12-3.2.2.3.2.5.1">the confirmation method <span class="bcp14">MUST</span> be used for the validation (eg: if it uses cryptographic material, this material must be used for the signature validation)<a href="#section-12-3.2.2.3.2.5.1" class="pilcrow">¶</a></p>
+                  <p id="section-12-3.2.2.3.2.5.1">the confirmation method <span class="bcp14">MUST</span> be used for the validation (eg: if it uses cryptographic material, this material must be used for the signature validation);<a href="#section-12-3.2.2.3.2.5.1" class="pilcrow">¶</a></p>
 </li>
                 <li class="normal" id="section-12-3.2.2.3.2.6">
-                  <p id="section-12-3.2.2.3.2.6.1">The hash of the Credential <span class="bcp14">MUST</span> be produced as described in <span><a href="#status-assertion-request" class="internal xref">Section 7</a> (<a href="#status-assertion-request" class="auto internal xref">Section 7</a>)</span> and <span class="bcp14">MUST</span> match the hash contained in the Status Assertion.<a href="#section-12-3.2.2.3.2.6.1" class="pilcrow">¶</a></p>
+                  <p id="section-12-3.2.2.3.2.6.1">the hash of the Digital Credential <span class="bcp14">MUST</span> be produced as described in <span><a href="#status-assertion-request" class="internal xref">Section 7</a> (<a href="#status-assertion-request" class="auto internal xref">Section 7</a>)</span> and <span class="bcp14">MUST</span> match the hash contained in the Status Assertion.<a href="#section-12-3.2.2.3.2.6.1" class="pilcrow">¶</a></p>
 </li>
               </ul>
 </li>
@@ -2296,7 +2308,7 @@ hash produced at the previous point;<a href="#section-12-3.2.2.2.1" class="pilcr
 <div id="considerations-on-revocation-verification">
 <section id="section-13">
       <h2 id="name-considerations-on-revocatio">
-<a href="#section-13" class="section-number selfRef">13. </a><a href="#name-considerations-on-revocatio" class="section-name selfRef">Considerations On Revocation Verification</a>
+<a href="#section-13" class="section-number selfRef">13. </a><a href="#name-considerations-on-revocatio" class="section-name selfRef">Considerations on Revocation Verification</a>
       </h2>
 <p id="section-13-1">The recommendation for Verifiers to check the revocation status
 of Digital Credentials as a '<span class="bcp14">SHOULD</span>' instead of a '<span class="bcp14">MUST</span>' acknowledges
@@ -2315,13 +2327,13 @@ variety of scenarios.<a href="#section-13-1" class="pilcrow">¶</a></p>
       <h2 id="name-detailed-status-assertions">
 <a href="#section-14" class="section-number selfRef">14. </a><a href="#name-detailed-status-assertions" class="section-name selfRef">Detailed Status Assertions</a>
       </h2>
-<p id="section-14-1">Status Assertions can introduce a more accurate level of detail about the Credential status.
+<p id="section-14-1">Status Assertions can introduce a more accurate level of detail about the Digital Credential status.
 This enables Verifier policies to be conditioned on the presence of authorative information.
 This section proposes syntax to support detailed assertions.
 The <code>credential_status_validity</code> claim <span class="bcp14">MUST</span> be present.
 The <code>credential_status_detail</code> claim <span class="bcp14">MAY</span> be present and if present <span class="bcp14">MUST</span> be an object.
 The semantics of the claims within the <code>credential_status_detail</code> object are determined by the Issuer.<a href="#section-14-1" class="pilcrow">¶</a></p>
-<p id="section-14-2">An example of boolean detail status is:<a href="#section-14-2" class="pilcrow">¶</a></p>
+<p id="section-14-2">An example of an enumeration detail status is:<a href="#section-14-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-14-3">
 <pre>
 {
@@ -2352,39 +2364,8 @@ The semantics of the claims within the <code>credential_status_detail</code> obj
 }
 </pre><a href="#section-14-3" class="pilcrow">¶</a>
 </div>
-<p id="section-14-4">An example of an enumeration detail status is:<a href="#section-14-4" class="pilcrow">¶</a></p>
+<p id="section-14-4">An example of dynamic status using a small matrix for detail status:<a href="#section-14-4" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-14-5">
-<pre>
-{
-    "alg": "ES256",
-    "typ": "status-assertion+jwt",
-    "kid": "w8ZOZRcx21Zpry7H-0VLBsH7Wf7WXb6TeK3qVMCpY44"
-}
-.
-{
-    "iss": "https://issuer.example.org",
-    "iat": 1504699136,
-    "exp": 1504785536,
-    "credential_hash": "xnlAq6Ma8fgu1z4hdGphJnKLulaVHpLCFeZFUGpQ2dA",
-    "credential_hash_alg": "sha-256",
-    "credential_status_validity": 3,
-    "credential_status_detail": {
-      ...
-    },
-    "cnf": {
-      "jwk": {
-        "alg": "ES256",
-        "kty": "EC",
-        "crv": "P-256",
-        "x": "_2ySUmWFjwmraNlo15r6dIBXerVdy_NpJuwAKJMFdoc",
-        "y": "MV3C88MhhEMba6oyMBWuGeB3dKHP4YADJmGyJwwILsk"
-      }
-    }
-}
-</pre><a href="#section-14-5" class="pilcrow">¶</a>
-</div>
-<p id="section-14-6">An example of dynamic status using a small matrix for detail status:<a href="#section-14-6" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-14-7">
 <pre>
 {
     "alg": "ES256",
@@ -2412,10 +2393,10 @@ The semantics of the claims within the <code>credential_status_detail</code> obj
       }
     }
 }
-</pre><a href="#section-14-7" class="pilcrow">¶</a>
+</pre><a href="#section-14-5" class="pilcrow">¶</a>
 </div>
-<p id="section-14-8">An example of multiple assertions:<a href="#section-14-8" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-14-9">
+<p id="section-14-6">An example of multiple assertions:<a href="#section-14-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-14-7">
 <pre>
 HTTP/1.1 200 Created
 Content-Type: application/json
@@ -2427,7 +2408,7 @@ Content-Type: application/json
       $JWT_3, // Preferences matrix assertion
     ]
 }
-</pre><a href="#section-14-9" class="pilcrow">¶</a>
+</pre><a href="#section-14-7" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2569,9 +2550,9 @@ Digital Credential ecosystem.<a href="#section-16.6-2" class="pilcrow">¶</a></p
         <h3 id="name-validity-reasons">
 <a href="#section-16.7" class="section-number selfRef">16.7. </a><a href="#name-validity-reasons" class="section-name selfRef">Validity Reasons</a>
         </h3>
-<p id="section-16.7-1">Depending by the scopes of how the detailed Status Assertions are implemented, these may disclose details about the Holder or subject that were not initially committed to during the original Credential issuance. This can potentially expose additional information that was not part of the original credentialing process.
-Providing a reason that a Digital Credential is no longer valid can be essential to certain use cases, and unacceptable for others
-For example, in a healthcare setting, a patient should not have medical reasons for a suspended credential disclosed in assertions of suspension.
+<p id="section-16.7-1">Depending by the scopes of how the detailed Status Assertions are implemented, these may disclose details about the Holder or subject that were not initially committed to during the original Digital Credential issuance. This can potentially expose additional information that was not part of the original credentialing process.
+Providing a reason that a Digital Credential is no longer valid can be essential to certain use cases, and unacceptable for others.
+For example, in a healthcare setting, a patient should not have medical reasons for a suspended Digital Credential disclosed in assertions of suspension.
 However, in a supply chain context, a product suspension might benefit from additional information, such as batch or lot information.<a href="#section-16.7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2594,7 +2575,7 @@ IANA "JSON Web Token Claims" registry <span>[<a href="#IANA.JWT" class="cite xre
             <p id="section-17.1-2.1.1">Claim Name: <code>credential_hash</code><a href="#section-17.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-17.1-2.2">
-            <p id="section-17.1-2.2.1">Claim Description: Hash value of the Digital Credential the Status Assertion is bound to.<a href="#section-17.1-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-17.1-2.2.1">Claim Description: Hash value of the Digital Credential's Issuer signed part the Status Assertion is bound to.<a href="#section-17.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-17.1-2.3">
             <p id="section-17.1-2.3.1">Change Controller: IETF<a href="#section-17.1-2.3.1" class="pilcrow">¶</a></p>
@@ -2609,7 +2590,7 @@ IANA "JSON Web Token Claims" registry <span>[<a href="#IANA.JWT" class="cite xre
             <p id="section-17.1-4.1.1">Claim Name: <code>credential_hash_alg</code><a href="#section-17.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-17.1-4.2">
-            <p id="section-17.1-4.2.1">Claim Description: The Algorithm used of hashing the Digital Credential to which the Status Assertion is bound.<a href="#section-17.1-4.2.1" class="pilcrow">¶</a></p>
+            <p id="section-17.1-4.2.1">Claim Description: The Algorithm used of hashing the Digital Credential's Issuer signed part to which the Status Assertion is bound.<a href="#section-17.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-17.1-4.3">
             <p id="section-17.1-4.3.1">Change Controller: IETF<a href="#section-17.1-4.3.1" class="pilcrow">¶</a></p>
