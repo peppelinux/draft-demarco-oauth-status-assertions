@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-12T01:07:01.774406+00:00",
+  "timestamp": "2024-12-15T01:12:31.176401+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -12174,24 +12174,26 @@
       "id": "PR_kwDOK4XJ0s6B0cBh",
       "title": "Fix:  Digital Credential, credential_hash_alg, titles",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/98",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "giadas",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This PR:\r\n\r\n- specifies that jti and cti are conditional to each other\r\n- changes the description of credential_hash_alg\r\n- specifies that the hash is of the Digital Credential's Issuer signed part\r\n- removes the boolean detail status example\r\n-  corrects some typos: Credential ->Digital Credential, title styles",
       "createdAt": "2024-11-13T17:47:12Z",
-      "updatedAt": "2024-11-27T14:00:33Z",
+      "updatedAt": "2024-12-12T11:31:31Z",
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "3aabe8002899388ee3e79b20f16fa90de33433ba",
       "headRepository": "giadas/draft-demarco-oauth-status-assertions",
       "headRefName": "minor-fix",
       "headRefOid": "a90e6b6765ee38e288e6d54e6556b3b53f61fe9c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-12-12T11:31:31Z",
+      "mergedAt": "2024-12-12T11:31:31Z",
+      "mergedBy": "peppelinux",
+      "mergeCommit": {
+        "oid": "7c5377de70372e0c3398c1b56af096902057147a"
+      },
       "comments": [],
       "reviews": [
         {
