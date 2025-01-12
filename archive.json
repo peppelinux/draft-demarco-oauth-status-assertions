@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-09T01:01:45.173010+00:00",
+  "timestamp": "2025-01-12T01:07:55.846187+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -1470,6 +1470,34 @@
           "body": "We also need to make sure that EDN strings are quoted",
           "createdAt": "2024-11-20T16:18:32Z",
           "updatedAt": "2024-11-20T16:18:32Z"
+        }
+      ]
+    },
+    {
+      "number": 99,
+      "id": "I_kwDOK4XJ0s6ls1s8",
+      "title": "credential_status_validity and state parameters",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/99",
+      "state": "OPEN",
+      "author": "fmarino-ipzs",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "fmarino-ipzs"
+      ],
+      "labels": [
+        "enhancement"
+      ],
+      "body": "In the current version, `credential_status_validity` refers to the IANA registry as described in  Section 7.1 of draft-ietf-oauth-status-list which refers to the status type of a token/credential. This seems to be more in line with the `state` parameter (https://peppelinux.github.io/draft-demarco-oauth-status-assertions/draft-demarco-oauth-status-assertions.html#name-issuer-metadata), whereas `credential_status_validity` seems to be more like a boolean type. \r\n\r\nI suggest the following change:\r\n\r\n```\r\n    \"credential_status_validity\": false,\r\n    \"credential_status_detail\": {\r\n       \"state\":2,\r\n       \"description\": \"The status of the Credential is temporarily invalid, hanging, debarred from privilege.\"\r\n    }\r\n```\r\n",
+      "createdAt": "2025-01-10T11:47:47Z",
+      "updatedAt": "2025-01-10T13:27:54Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "body": "it looks reasonable to have this alignment, if @marinaado and @OR13 agree, I would ask you to proceed with a PR\r\n\r\nI have configured this task in the milestone 04",
+          "createdAt": "2025-01-10T13:27:53Z",
+          "updatedAt": "2025-01-10T13:27:53Z"
         }
       ]
     }
