@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-13T01:01:55.385306+00:00",
+  "timestamp": "2025-02-16T01:06:42.415212+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -12338,6 +12338,59 @@
           "body": "",
           "createdAt": "2024-11-27T14:00:33Z",
           "updatedAt": "2024-11-27T14:00:33Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 100,
+      "id": "PR_kwDOK4XJ0s6LGMcq",
+      "title": "fix: credential_status_type <-- credenfial_status_validity",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/100",
+      "state": "OPEN",
+      "author": "fmarino-ipzs",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR resolves #99 .\r\nIt also add a new optional parameter in the Issuer metadata which is `credential_status_type_supported` as a JSON Array of supported status types by the Issuer.",
+      "createdAt": "2025-02-13T12:22:10Z",
+      "updatedAt": "2025-02-13T17:39:49Z",
+      "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "baseRefName": "main",
+      "baseRefOid": "7c5377de70372e0c3398c1b56af096902057147a",
+      "headRepository": "fmarino-ipzs/draft-demarco-oauth-status-attestations",
+      "headRefName": "status-type",
+      "headRefOid": "ccbe08c1d1b630af86f98ee82ba9ebd10a487d98",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOK4XJ0s6b3mGm",
+          "commit": {
+            "abbreviatedOid": "ccbe08c"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-13T13:45:58Z",
+          "updatedAt": "2025-02-13T13:45:58Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOK4XJ0s6b6dez",
+          "commit": {
+            "abbreviatedOid": "ccbe08c"
+          },
+          "author": "peppelinux",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-13T17:39:49Z",
+          "updatedAt": "2025-02-13T17:39:49Z",
           "comments": []
         }
       ]
