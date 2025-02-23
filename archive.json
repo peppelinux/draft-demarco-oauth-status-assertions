@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-20T01:02:20.688793+00:00",
+  "timestamp": "2025-02-23T01:06:40.524898+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -1516,7 +1516,7 @@
       "title": "Editorial Revision",
       "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/1",
       "state": "MERGED",
-      "author": "asharif1990",
+      "author": "Sh-Amir",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
@@ -1526,7 +1526,7 @@
       "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
       "baseRefName": "main",
       "baseRefOid": "7d5de6ace0457c8275377a97406550aa5ddc88c5",
-      "headRepository": "asharif1990/draft-demarco-status-attestations",
+      "headRepository": "Sh-Amir/draft-demarco-status-attestations",
       "headRefName": "revision",
       "headRefOid": "c88a6f0e1b7056ac6aaeea596377f709a490c1f2",
       "closedAt": "2023-12-12T15:42:31Z",
@@ -1612,7 +1612,7 @@
           "commit": {
             "abbreviatedOid": "9059880"
           },
-          "author": "asharif1990",
+          "author": "Sh-Amir",
           "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
@@ -1632,7 +1632,7 @@
           "commit": {
             "abbreviatedOid": "9059880"
           },
-          "author": "asharif1990",
+          "author": "Sh-Amir",
           "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
@@ -1652,7 +1652,7 @@
           "commit": {
             "abbreviatedOid": "9059880"
           },
-          "author": "asharif1990",
+          "author": "Sh-Amir",
           "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
