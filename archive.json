@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-13T01:05:16.494915+00:00",
+  "timestamp": "2025-03-16T01:09:56.681460+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -1507,6 +1507,22 @@
           "updatedAt": "2025-01-14T15:54:14Z"
         }
       ]
+    },
+    {
+      "number": 101,
+      "id": "I_kwDOK4XJ0s6t3Fro",
+      "title": "Consider draft-ietf-stir-certificates-ocsp",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/issues/101",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://datatracker.ietf.org/doc/draft-ietf-stir-certificates-ocsp/\n\nMight have some useful context for us to consider",
+      "createdAt": "2025-03-13T11:56:03Z",
+      "updatedAt": "2025-03-13T11:56:03Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
