@@ -5,12 +5,12 @@
 Network Working Group                                        G. D. Marco
 Internet-Draft               Dipartimento per la trasformazione digitale
 Intended status: Informational                                 O. Steele
-Expires: 15 June 2025                                          Transmute
+Expires: 19 September 2025                                     Transmute
                                                                F. Marino
                                 Istituto Poligrafico e Zecca dello Stato
                                                               M. Adomeit
                                                                    SUNET
-                                                        12 December 2024
+                                                           18 March 2025
 
 
                         OAuth Status Assertions
@@ -54,11 +54,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 June 2025.
+   This Internet-Draft will expire on 19 September 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -678,7 +678,7 @@ Table of Contents
        "exp": 1504785536,
        "credential_hash": $hash-about-Issuer-Signed-JWT,
        "credential_hash_alg": "sha-256",
-       "credential_status_validity": 0,
+       "credential_status_type": 0,
        "cnf": {
            "jwk": {...}
        }
@@ -718,100 +718,78 @@ Table of Contents
 
                                  Table 6
 
-   +==============================+====================+===============+
-   | Payload Claim Name           | Description        | Reference     |
-   +==============================+====================+===============+
-   | *iss*                        | It MUST be set to  | [RFC9126],    |
-   |                              | the identifier of  | [RFC7519]     |
-   |                              | the Issuer.        |               |
-   +------------------------------+--------------------+---------------+
-   | *iat*                        | UNIX Timestamp     | [RFC9126],    |
-   |                              | with the time of   | [RFC7519]     |
-   |                              | the Status         |               |
-   |                              | Assertion          |               |
-   |                              | issuance.          |               |
-   +------------------------------+--------------------+---------------+
-   | *exp*                        | UNIX Timestamp     | [RFC9126],    |
-   |                              | with the           | [RFC7519],    |
-   |                              | expiration time    | [RFC7515]     |
-   |                              | of the JWT.  It    |               |
-   |                              | MUST be greater    |               |
-   |                              | than the value     |               |
-   |                              | set for iat.       |               |
-   +------------------------------+--------------------+---------------+
-   | *credential_hash*            | Hash value of the  | this          |
-   |                              | Digital            | specification |
-   |                              | Credential's       |               |
-   |                              | Issuer signed      |               |
-   |                              | part the Status    |               |
-   |                              | Assertion is       |               |
-   |                              | bound to.          |               |
-   +------------------------------+--------------------+---------------+
-   | *credential_hash_alg*        | The hash           | this          |
-   |                              | algorithm MUST     | specification |
-   |                              | match the one      |               |
-   |                              | contained in the   |               |
-   |                              | Status Assertion   |               |
-   |                              | Request to which   |               |
-   |                              | the Status         |               |
-   |                              | Assertion is       |               |
-   |                              | related.           |               |
-   +------------------------------+--------------------+---------------+
-   | *credential_status_validity* | Numerical value    | this          |
-   |                              | indicating the     | specification |
-   |                              | validity of the    |               |
-   |                              | Digital            |               |
-   |                              | Credential linked  |               |
-   |                              | to the Status      |               |
-   |                              | Assertion,         |               |
-   |                              | describing its     |               |
-   |                              | state, mode,       |               |
-   |                              | condition or       |               |
-   |                              | stage.  The value  |               |
-   |                              | MUST be from the   |               |
-   |                              | IANA registry (as  |               |
-   |                              | described in       |               |
-   |                              | Section 7.1 of     |               |
-   |                              | draft-ietf-oauth-  |               |
-   |                              | status-list).      |               |
-   |                              | Status validity    |               |
-   |                              | parameter is       |               |
-   |                              | REQUIRED, and the  |               |
-   |                              | Verifier MUST      |               |
-   |                              | verify its         |               |
-   |                              | presence and       |               |
-   |                              | value to assess    |               |
-   |                              | the Digital        |               |
-   |                              | Credential's       |               |
-   |                              | validity.          |               |
-   +------------------------------+--------------------+---------------+
-   | *cnf*                        | JSON object        | [RFC7800]     |
-   |                              | containing         | Section 3.1,  |
-   |                              | confirmation       | [RFC8747]     |
-   |                              | methods.  The      | Section 3.1   |
-   |                              | sub-member         |               |
-   |                              | contained within   |               |
-   |                              | cnf member, such   |               |
-   |                              | as jwk for JWT     |               |
-   |                              | and Cose_Key for   |               |
-   |                              | CWT, MUST match    |               |
-   |                              | with the one       |               |
-   |                              | provided within    |               |
-   |                              | the related        |               |
-   |                              | Digital            |               |
-   |                              | Credential.        |               |
-   |                              | Other              |               |
-   |                              | confirmation       |               |
-   |                              | methods can be     |               |
-   |                              | utilized when the  |               |
-   |                              | referenced         |               |
-   |                              | Digital            |               |
-   |                              | Credential         |               |
-   |                              | supports them, in  |               |
-   |                              | accordance with    |               |
-   |                              | the relevant       |               |
-   |                              | standards.         |               |
-   +------------------------------+--------------------+---------------+
+   +==========================+========================+===============+
+   | Payload Claim Name       | Description            | Reference     |
+   +==========================+========================+===============+
+   | *iss*                    | It MUST be set to the  | [RFC9126],    |
+   |                          | identifier of the      | [RFC7519]     |
+   |                          | Issuer.                |               |
+   +--------------------------+------------------------+---------------+
+   | *iat*                    | UNIX Timestamp with    | [RFC9126],    |
+   |                          | the time of the        | [RFC7519]     |
+   |                          | Status Assertion       |               |
+   |                          | issuance.              |               |
+   +--------------------------+------------------------+---------------+
+   | *exp*                    | UNIX Timestamp with    | [RFC9126],    |
+   |                          | the expiration time    | [RFC7519],    |
+   |                          | of the JWT.  It MUST   | [RFC7515]     |
+   |                          | be greater than the    |               |
+   |                          | value set for iat.     |               |
+   +--------------------------+------------------------+---------------+
+   | *credential_hash*        | Hash value of the      | this          |
+   |                          | Digital Credential's   | specification |
+   |                          | Issuer signed part     |               |
+   |                          | the Status Assertion   |               |
+   |                          | is bound to.           |               |
+   +--------------------------+------------------------+---------------+
+   | *credential_hash_alg*    | The hash algorithm     | this          |
+   |                          | MUST match the one     | specification |
+   |                          | contained in the       |               |
+   |                          | Status Assertion       |               |
+   |                          | Request to which the   |               |
+   |                          | Status Assertion is    |               |
+   |                          | related.               |               |
+   +--------------------------+------------------------+---------------+
+   | *credential_status_type* | Numerical value        | this          |
+   |                          | indicating the status  | specification |
+   |                          | of the Digital         |               |
+   |                          | Credential linked to   |               |
+   |                          | the Status Assertion,  |               |
+   |                          | describing its state,  |               |
+   |                          | mode, condition or     |               |
+   |                          | stage.  The value      |               |
+   |                          | MUST be from the IANA  |               |
+   |                          | registry (as           |               |
+   |                          | described in           |               |
+   |                          | Section 7.1 of draft-  |               |
+   |                          | ietf-oauth-status-     |               |
+   |                          | list).  Verifiers      |               |
+   |                          | MUST verify this       |               |
+   |                          | parameter value to     |               |
+   |                          | assess the Digital     |               |
+   |                          | Credential's status    |               |
+   |                          | type.                  |               |
+   +--------------------------+------------------------+---------------+
+   | *cnf*                    | JSON object            | [RFC7800]     |
+   |                          | containing             | Section 3.1,  |
+   |                          | confirmation methods.  | [RFC8747]     |
+   |                          | The sub-member         | Section 3.1   |
+   |                          | contained within cnf   |               |
+   |                          | member, such as jwk    |               |
+   |                          | for JWT and Cose_Key   |               |
+   |                          | for CWT, MUST match    |               |
+   |                          | with the one provided  |               |
+   |                          | within the related     |               |
+   |                          | Digital Credential.    |               |
+   |                          | Other confirmation     |               |
+   |                          | methods can be         |               |
+   |                          | utilized when the      |               |
+   |                          | referenced Digital     |               |
+   |                          | Credential supports    |               |
+   |                          | them, in accordance    |               |
+   |                          | with the relevant      |               |
+   |                          | standards.             |               |
+   +--------------------------+------------------------+---------------+
 
                                   Table 7
 
@@ -823,7 +801,7 @@ Table of Contents
 
 11.1.  Issuer Metadata
 
-   Issuers using Status Assertions MUST include in their metadata the
+   Issuers using Status Assertions include in their metadata the
    following values:
 
    *  status_assertion_endpoint.  REQUIRED.  It MUST be an HTTPs URL
@@ -835,14 +813,14 @@ Table of Contents
       Issuer signed part for which the Status Assertion is requested,
       using one of the hash algorithms listed in the [IANA-HASH-REG].
 
+   *  credential_status_type_supported.  OPTIONAL.  Digital Credential
+      status type supported by the Issuer as a JSON array.
+
    *  credential_status_detail_supported.  OPTIONAL.  JSON array that
       outlines the details of each Digital Credential's validity status
       supported by the Credential Issuer.  This metadata MAY be used to
       extend the values defined in Section Status Assertion
       (Section 10).  Each entry MUST contain the following values:
-
-      -  credential_status_validity.  Numerical value indicating the
-         validity of the Digital Credential.
 
       -  state.  String value of a Digital Credential status supported.
 
@@ -966,7 +944,7 @@ Table of Contents
    the Digital Credential status.  This enables Verifier policies to be
    conditioned on the presence of authorative information.  This section
    proposes syntax to support detailed assertions.  The
-   credential_status_validity claim MUST be present.  The
+   credential_status_type claim MUST be present.  The
    credential_status_detail claim MAY be present and if present MUST be
    an object.  The semantics of the claims within the
    credential_status_detail object are determined by the Issuer.
@@ -985,7 +963,7 @@ Table of Contents
        "exp": 1504785536,
        "credential_hash": "xnlAq6Ma8fgu1z4hdGphJnKLulaVHpLCFeZFUGpQ2dA",
        "credential_hash_alg": "sha-256",
-       "credential_status_validity": 3,
+       "credential_status_type": 3,
        "credential_status_detail": {
          ...
        },
@@ -1014,7 +992,7 @@ Table of Contents
        "exp": 1504785536,
        "credential_hash": "xnlAq6Ma8fgu1z4hdGphJnKLulaVHpLCFeZFUGpQ2dA",
        "credential_hash_alg": "sha-256",
-       "credential_status_validity": 0,
+       "credential_status_type": 0,
        "credential_status_detail": {
          "preferences": [[1, 0.25, 0.76 ...] ...]
        },
