@@ -765,7 +765,7 @@ An example of dynamic status using a small matrix for detail status:
 An example of multiple assertions:
 
 ~~~
-HTTP/1.1 200 Created
+HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
