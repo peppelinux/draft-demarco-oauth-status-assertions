@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-01T01:14:47.964063+00:00",
+  "timestamp": "2025-05-08T01:11:14.314129+00:00",
   "repo": "peppelinux/draft-demarco-oauth-status-assertions",
   "labels": [
     {
@@ -12472,6 +12472,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 102,
+      "id": "PR_kwDOK4XJ0s6VIzOD",
+      "title": "fix a typo in http status",
+      "url": "https://github.com/peppelinux/draft-demarco-oauth-status-assertions/pull/102",
+      "state": "OPEN",
+      "author": "xego",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-06T16:27:06Z",
+      "updatedAt": "2025-05-06T16:27:06Z",
+      "baseRepository": "peppelinux/draft-demarco-oauth-status-assertions",
+      "baseRefName": "main",
+      "baseRefOid": "5793e0fc3c005667da15eb29618ee94d6a7f629c",
+      "headRepository": "xego/draft-demarco-oauth-status-assertions",
+      "headRefName": "patch-1",
+      "headRefOid": "dbd84da0f52afa95deb9666673186c935809b17d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
